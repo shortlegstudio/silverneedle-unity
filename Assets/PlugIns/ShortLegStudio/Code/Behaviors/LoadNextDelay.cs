@@ -9,6 +9,6 @@ public class LoadNextDelay : MonoBehaviour {
 	}
 
 	void LoadLevel() {
-		SceneManager.GetInstance ().LoadNextLevel ();
+		LevelManager.GetInstance ().LoadNextLevel ();
 	}
 }

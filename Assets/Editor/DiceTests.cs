@@ -2,7 +2,7 @@
 using UnityEditor;
 using NUnit.Framework;
 
-public class NewEditorTest {
+public class DiceTests {
 
     [Test]
     public void EditorTest()
