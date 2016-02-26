@@ -1,21 +1,27 @@
-﻿using System.Collections;
+﻿using UnityEngine;
+using System.Collections;
 
 namespace ShortLegStudio.Dice {
 	public class Die  {
-		private DiceSides _sides;
+		public DiceSides Sides { get; private set; }
 		private int _lastRoll = -1;
 		private int _dieMaxValue = 0;
 
 		public Die(DiceSides sides) {
-			_sides = sides;
-			_dieMaxValue = (int)_sides + 1; //Max value is exclusive
+			Sides = sides;
+			_dieMaxValue = (int)Sides + 1; //Max value is exclusive
 		}
 
 		public int LastRoll { get { return _lastRoll; } }
 		public int Roll() {
-			_lastRoll = UnityEngine.Random.Range(1, _dieMaxValue); 
+			_lastRoll = Random.Range(1, _dieMaxValue); 
 			return _lastRoll;
 		}
+
+		public int SideCount() {
+			return (int)Sides;
+		}
+
 
 		public static Die d4() {
 			return new Die (DiceSides.d4);
