@@ -5,16 +5,24 @@ using System.Linq;
 
 namespace ShortLegStudio.Dice {
 	public class Cup {
-		private IList<Die> _dice;
+		private List<Die> _dice;
 
 		public Cup() {
 			_dice = new List<Die> ();
+		}
+
+		public Cup(IList<Die> dice) : this() {
+			_dice.AddRange (dice);
 		}
 
 		public IList<Die> Dice { get { return _dice; } }
 
 		public void AddDie(Die die) {
 			_dice.Add (die);
+		}
+
+		public void AddDice(IList<Die> dice) {
+			_dice.AddRange (dice);
 		}
 
 		public int Roll() {
@@ -25,7 +33,7 @@ namespace ShortLegStudio.Dice {
 			return total;
 		}
 
-		public int TakeTop(int number) {
+		public int CountTop(int number) {
 			return _dice
 				.OrderByDescending (d => { return d.LastRoll; })
 				.Take(number)

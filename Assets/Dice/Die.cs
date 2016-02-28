@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 
 namespace ShortLegStudio.Dice {
@@ -22,6 +23,12 @@ namespace ShortLegStudio.Dice {
 			return (int)Sides;
 		}
 
+		public static Die[] GetDice(DiceSides sides, int count) {
+			var result = new Die[count];
+			for (int i = 0; i < count; i++)
+				result [i] = new Die (sides);
+			return result;
+		}
 
 		public static Die d4() {
 			return new Die (DiceSides.d4);
@@ -51,6 +58,26 @@ namespace ShortLegStudio.Dice {
 			return new Die (DiceSides.d100);
 		}
 
+		public override string ToString ()
+		{
+			return string.Format ("[Die: Sides={0}, LastRoll={1}]", Sides, LastRoll);
+		}
 
+		public override bool Equals (object obj)
+		{
+			var die = obj as Die;
+			if (die == null)
+				return false;
+
+			if (die.Sides != this.Sides)
+				return false;
+
+			return die.LastRoll == this.LastRoll;
+		}
+
+		public override int GetHashCode ()
+		{
+			return base.GetHashCode ();
+		}
 	}
 }
