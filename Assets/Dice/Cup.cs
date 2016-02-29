@@ -33,7 +33,7 @@ namespace ShortLegStudio.Dice {
 			return total;
 		}
 
-		public int CountTop(int number) {
+		public int SumTop(int number) {
 			return _dice
 				.OrderByDescending (d => { return d.LastRoll; })
 				.Take(number)

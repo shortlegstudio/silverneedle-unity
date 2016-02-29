@@ -6,7 +6,7 @@ using ShortLegStudio.Dice;
 
 
 [TestFixture]
-public class DiceCupTests {
+public class CupTests {
 
     [Test]
     public void AnyTypeOfDieMayBeAddedToTheCup()
@@ -57,7 +57,7 @@ public class DiceCupTests {
 		//For stats we frequently roll 4d6 and want the top 3...
 		var cup = new Cup (Die.GetDice(DiceSides.d6, 4));
 		cup.Roll ();
-		var sumTop3 = cup.CountTop (3);
+		var sumTop3 = cup.SumTop (3);
 
 		var manualSum = 0;
 		var lowest = 100;
