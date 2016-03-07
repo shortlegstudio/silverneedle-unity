@@ -20,6 +20,22 @@ namespace ShortLegStudio
 			var index = UnityEngine.Random.Range (0, source.Length);
 			return source[index];
 		}
+
+		public static T ChooseOne<T>(this IList<T> source) {
+			var index = UnityEngine.Random.Range (0, source.Count);
+			return source [index];
+		}
+
+
+		/// UI Extensions TODO: Move them around
+
+		public static void SelectOption(this UnityEngine.UI.Dropdown dropdown, string value) {
+			for (var i = 0; i < dropdown.options.Count; i++) {
+				if (dropdown.options [i].text == value) {
+					dropdown.value = i;
+				}
+			}
+		}
 	}
 }
 

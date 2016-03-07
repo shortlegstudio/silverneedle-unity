@@ -1,0 +1,36 @@
+- race:
+  name: Dwarf
+  abilities:
+    strength: 2
+    wisdom: 2
+    charisma: -2
+- race:
+  name: Elf
+  abilities:
+    dexterity: 2
+    intelligence: 2
+    constitution: -2
+- race:
+  name: Gnome
+  abilities:
+    strength: -2
+    dexterity: 2
+    charisma: 2
+- race:
+  name: Half-Elf
+  abilities:
+    any: 2
+- race:
+  name: Half-Orc
+  abilities:
+    any: 2
+- race:
+  name: Halfling
+  abilities:
+    strength: -2
+    dexterity: 2
+    constitution: 2
+- race:
+  name: Human
+  abilities:
+    any: 2

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Linq;
 using ShortLegStudio;
 
-namespace ShortLegStudio.RPG.Generators {
+namespace ShortLegStudio.RPG.Characters.Generators {
 	public static class NameGenerator {
 		public static string CreateFullName() {
 			return string.Format ("{0} {1}", CreateFirstName (), CreateLastName ());
