@@ -11,6 +11,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public int Weight { get; set; }
 		public IDictionary<AbilityScoreTypes, AbilityScore> AbilityScores { get; set; }
 		public Race Race { get; set; }
+		public Class Class { get; set; }
 
 		public void SetAbilityScores(IList<AbilityScore> scores) {
 			AbilityScores = new Dictionary<AbilityScoreTypes, AbilityScore> ();

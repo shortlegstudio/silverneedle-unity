@@ -29,26 +29,37 @@ namespace ShortLegStudio.RPG.Characters.Generators {
 
 		public static string[] GetFirstNameSyllables() {
 			return new string[] {
-				"zag",
-				"shi",
-				"flo",
-				"sklar",
-				"mon",
-				"iven",
-				"clar"
+				"li",
+				"pe",
+				"le",
+				"la",
+				"hi",
+				"wi",
+				"ha",
+				"hai",
+				"'i",
+				"na",
+				"ne",
+				"hei",
+				"lei"
 			};
 		}
 
 		public static string[] GetLastNameSyllables() {
 			return new string[] {
-				"lor",
-				"cho",
-				"mog",
-				"ogg",
-				"lok",
-				"fix",
-				"vet",
-				"hent"
+				"li",
+				"pe",
+				"le",
+				"la",
+				"hi",
+				"wi",
+				"ha",
+				"hai",
+				"'i",
+				"na",
+				"ne",
+				"hei",
+				"lei"
 			};
 		}
 	}

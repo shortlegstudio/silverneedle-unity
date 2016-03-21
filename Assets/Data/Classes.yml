@@ -1,0 +1,22 @@
+- class:
+  name: Barbarian
+- class:
+  name: Bard
+- class:
+  name: Cleric
+- class:
+  name: Druid
+- class:
+  name: Fighter
+- class:
+  name: Monk
+- class:
+  name: Paladin
+- class:
+  name: Ranger
+- class:
+  name: Rogue
+- class:
+  name: Sorcerer
+- class:
+  name: Wizard
