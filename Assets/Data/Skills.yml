@@ -1,0 +1,76 @@
+- skill:
+  name: Acrobatics
+  ability: Dexterity
+  trained: no
+- skill:
+  name: Bluff
+  ability: Charisma
+  trained: no
+- skill:
+  name: Climb
+  ability: Strength
+  trained: no
+- skill:
+  name: Diplomacy
+  ability: Charisma
+  trained: no
+- skill:
+  name: Disable Device
+  ability: Dexterity
+  trained: yes
+- skill:
+  name: Heal
+  ability: Wisdom
+  trained: no
+- skill:
+  name: Knowledge Arcana
+  ability: Intelligence
+  trained: yes
+- skill:
+  name: Knowledge Dungeoneering
+  ability: Intelligence
+  trained: yes
+- skill:
+  name: Knowledge Geography
+  ability: Intelligence
+  trained: yes
+- skill:
+  name: Knowledge History
+  ability: Intelligence
+  trained: yes
+- skill:
+  name: Knowledge Local
+  ability: Intelligence
+  trained: yes
+- skill:
+  name: Knowledge Nature
+  ability: Intelligence
+  trained: yes
+- skill:
+  name: Knowledge Religion
+  ability: Intelligence
+  trained: yes
+- skill:
+  name: Perception
+  ability: Wisdom
+  trained: no
+- skill:
+  name: Ride
+  ability: Dexterity
+  trained: no
+- skill:
+  name: Sense Motive
+  ability: Wisdom
+  trained: no
+- skill:
+  name: Spellcraft
+  ability: Intelligence
+  trained: yes
+- skill:
+  name: Stealth
+  ability: Dexterity
+  trained: no
+- skill:
+  name: Swim
+  ability: Strength
+  trained: no

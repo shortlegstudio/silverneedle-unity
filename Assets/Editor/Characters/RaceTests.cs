@@ -14,7 +14,7 @@ public class RaceTests {
 
 	[SetUp]
 	public void SetUp() {
-		var input = new StringReader(RaceYamlFile);
+		var input = new StringReader(SkillsYamlFile);
 
 		yaml = new YamlStream();
 		yaml.Load(input);
@@ -32,7 +32,7 @@ public class RaceTests {
 
     }
 
-	private const string RaceYamlFile = @"--- 
+	private const string SkillsYamlFile = @"--- 
 - race: 
   name: Dwarf
   abilities: 

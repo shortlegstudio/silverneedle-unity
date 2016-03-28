@@ -1,22 +1,70 @@
 - class:
   name: Barbarian
+  skills:
+    - Climb
 - class:
   name: Bard
+  skills:
+    - Bluff
 - class:
   name: Cleric
+  skills:
+    - Diplomacy
+    - Heal
+    - Knowledge Arcana
+    - Knowledge History
+    - Knowledge Religion
+    - Sense Motive
+    - Spellcraft
 - class:
   name: Druid
+  skills:
+    - Spellcraft
 - class:
   name: Fighter
+  skills: 
+    - Climb
+    - Knowledge Dungeoneering
+    - Ride
+    - Swim
 - class:
   name: Monk
+  skills:
+    - Acrobatics
 - class:
   name: Paladin
+  skills:
+    - Diplomacy
 - class:
   name: Ranger
+  skills:
+    - Swim
 - class:
   name: Rogue
+  skills:
+    - Acrobatics
+    - Bluff
+    - Climb
+    - Diplomacy
+    - Disable Device
+    - Knowledge Dungeoneering
+    - Knowledge Local
+    - Perception
+    - Sense Motive
+    - Stealth
+    - Swim
 - class:
   name: Sorcerer
+  skills:
+    - Spellcraft
 - class:
   name: Wizard
+  skills:
+    - Knowledge Arcana
+    - Knowledge Dungeoneering
+    - Knowledge Geography
+    - Knowledge History
+    - Knowledge Local
+    - Knowledge Nature
+    - Knowledge Religion
+    - Spellcraft
