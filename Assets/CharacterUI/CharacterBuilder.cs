@@ -16,17 +16,22 @@ public class CharacterBuilder : MonoBehaviour {
 	public Text Charisma;
 	public Dropdown Races;
 	public Dropdown Classes;
+	public GameObject SkillPanel;
+	public GameObject SkillUIPrefab;
 
 	private CharacterSheet _sheet;
 	private IList<Race> _races;
 	private IList<Class> _classes;
+	private IList<Skill> _skills;
 
 	// Use this for initialization
 	void Start () {
 		_races = Race.GetRaces();
 		_classes = Class.GetClasses ();
+		_skills = Skill.GetSkills ();
 		BuildRaceDropdown ();
 		BuildClassDropdown ();
+		BuildSkillList ();
 		Generate ();
 	}
 	
@@ -68,4 +73,18 @@ public class CharacterBuilder : MonoBehaviour {
 		}
 	}
 
+	void BuildSkillList() {
+		float currentY = 0;
+		float paddingY = 1;
+		foreach (var skill in _skills) {
+			var skillScore = (GameObject)Instantiate (SkillUIPrefab);
+			skillScore.transform.SetParent (SkillPanel.GetComponent<RectTransform>(), false);
+
+			var transform = skillScore.GetComponent<RectTransform> ();
+			transform.Translate (new Vector3 (0, currentY, 0));
+			currentY -= transform.rect.height + paddingY;
+			var skillUI = skillScore.GetComponent<SkillScoreUI> ();
+			skillUI.UpdateUI (skill);
+		}
+	}
 }
