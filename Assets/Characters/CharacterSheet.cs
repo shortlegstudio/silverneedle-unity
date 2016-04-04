@@ -20,12 +20,21 @@ namespace ShortLegStudio.RPG.Characters {
 			Skills = new Dictionary<string, CharacterSkill> ();
 		}
 
+
+		/// <summary>
+		/// Sets the ability scores.
+		/// </summary>
+		/// <param name="scores">Scores.</param>
 		public void SetAbilityScores(IList<AbilityScore> scores) {
 			foreach (var ab in scores) {
 				SetAbility (ab);
 			}
 		}
 
+		/// <summary>
+		/// Sets the ability.
+		/// </summary>
+		/// <param name="score">Score.</param>
 		public void SetAbility(AbilityScore score) {
 			if (AbilityScores.ContainsKey (score.Name)) {
 				AbilityScores [score.Name] = score;
@@ -34,13 +43,40 @@ namespace ShortLegStudio.RPG.Characters {
 			}
 		}
 
-		public AbilityScore GetAbilityScore(AbilityScoreTypes name) {
+		/// <summary>
+		/// Sets the ability.
+		/// </summary>
+		/// <param name="ability">Ability.</param>
+		/// <param name="score">Score.</param>
+		public void SetAbility(AbilityScoreTypes ability, int score) {
+			SetAbility (new AbilityScore (ability, score));
+		}
+
+		/// <summary>
+		/// Gets the ability score.
+		/// </summary>
+		/// <returns>The ability score.</returns>
+		/// <param name="name">Name.</param>
+		public AbilityScore GetAbility(AbilityScoreTypes name) {
 			return AbilityScores [name];
 		}
 
+		public int GetAbilityScore(AbilityScoreTypes ability) {
+			return AbilityScores [ability].TotalValue;
+		}
+
+		/// <summary>
+		/// Gets the ability modifier.
+		/// </summary>
+		/// <returns>The ability modifier.</returns>
+		/// <param name="ability">Ability.</param>
 		public int GetAbilityModifier(AbilityScoreTypes ability) {
 			return AbilityScores [ability].BaseModifier;
 		}
+
+
+
+
 
 		public void SetSkills(IList<Skill> skills) {
 			foreach (var s in skills) {

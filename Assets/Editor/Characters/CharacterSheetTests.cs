@@ -26,9 +26,9 @@ public class CharacterSheetTests {
 		var sheet = new CharacterSheet ();
 
 		sheet.SetAbilityScores(AbilityScoreGenerator.RandomStandardHeroScores());
-		Assert.IsNotNull (sheet.GetAbilityScore (AbilityScoreTypes.Strength));
-		Assert.IsNotNull (sheet.GetAbilityScore (AbilityScoreTypes.Charisma));
-		Assert.IsNotNull (sheet.GetAbilityScore (AbilityScoreTypes.Intelligence));
+		Assert.IsNotNull (sheet.GetAbility (AbilityScoreTypes.Strength));
+		Assert.IsNotNull (sheet.GetAbility (AbilityScoreTypes.Charisma));
+		Assert.IsNotNull (sheet.GetAbility (AbilityScoreTypes.Intelligence));
 
 	}
 
@@ -37,7 +37,7 @@ public class CharacterSheetTests {
 		var sheet = new CharacterSheet ();
 		var abilityScore = new AbilityScore (AbilityScoreTypes.Strength, 15);
 		sheet.SetAbility (abilityScore);
-		Assert.AreEqual (sheet.GetAbilityScore (AbilityScoreTypes.Strength), abilityScore);
+		Assert.AreEqual (sheet.GetAbility(AbilityScoreTypes.Strength), abilityScore);
 	}
 
 	[Test]
@@ -48,7 +48,7 @@ public class CharacterSheetTests {
 
 		sheet.SetAbility (score1);
 		sheet.SetAbility (score2);
-		Assert.AreEqual(score2, sheet.GetAbilityScore(AbilityScoreTypes.Strength));
+		Assert.AreEqual(score2, sheet.GetAbility(AbilityScoreTypes.Strength));
 	}
 
 	[Test]
@@ -58,6 +58,13 @@ public class CharacterSheetTests {
 		sheet.SetAbility (score);
 
 		Assert.AreEqual (score.BaseModifier, sheet.GetAbilityModifier (AbilityScoreTypes.Charisma));
+	}
+
+	[Test]
+	public void YouMaySetAbilityScores() {
+		var sheet = new CharacterSheet ();
+		sheet.SetAbility (AbilityScoreTypes.Charisma, 12);
+		Assert.AreEqual (12, sheet.GetAbilityScore (AbilityScoreTypes.Charisma));
 	}
 
 	[Test]

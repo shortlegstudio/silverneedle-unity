@@ -51,4 +51,35 @@ public class CharacterSkillTests {
 		Assert.IsFalse (charSkill.AbleToUse);
 	}
 
+	[Test]
+	public void AddingPointsToSkillsIncreasesTheirScore() {
+		var skill = new Skill (
+			            "Swim",
+			            AbilityScoreTypes.Strength,
+			            false
+		);
+		var character = new CharacterSheet ();
+		character.SetAbility (AbilityScoreTypes.Strength, 15);
+		var charSkill = new CharacterSkill (skill, character);
+		var baseValue = charSkill.Score;
+		charSkill.AddRank ();
+		Assert.AreEqual (1, charSkill.Ranks);
+		Assert.AreEqual (baseValue + 1, charSkill.Score);
+	}
+
+	[Test]
+	public void AddingARankAllowsToUseTrainingSkill() {
+		var skill = new Skill (
+			            "Spellcraft",
+			            AbilityScoreTypes.Intelligence,
+			            true
+		            );
+		var character = new CharacterSheet ();
+		character.SetAbility (AbilityScoreTypes.Intelligence, 15);
+		var charSkill = new CharacterSkill (skill, character);
+		Assert.IsFalse (charSkill.AbleToUse);
+		charSkill.AddRank ();
+		Assert.IsTrue (charSkill.AbleToUse);
+		Assert.AreEqual (3, charSkill.Score);
+	}
 }
