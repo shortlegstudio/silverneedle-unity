@@ -34,11 +34,11 @@ public class SkillTests {
 		//validate each Skill
 		var acro = skills.First(x => x.Name == "Acrobatics");
 		Assert.AreEqual (AbilityScoreTypes.Dexterity, acro.Ability);
-		Assert.IsFalse (acro.Trained);
+		Assert.IsFalse (acro.TrainingRequired);
 
 		var device = skills.First(x => x.Name == "Disable Device");
 		Assert.AreEqual (AbilityScoreTypes.Dexterity, device.Ability);
-		Assert.IsTrue (device.Trained);
+		Assert.IsTrue (device.TrainingRequired);
 
 
 

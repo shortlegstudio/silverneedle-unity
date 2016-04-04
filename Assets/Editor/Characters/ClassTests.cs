@@ -21,7 +21,7 @@ public class ClassTests {
 	}
 		
     [Test]
-    public void LoadRaceYamlFile() {
+    public void LoadClassYamlFile() {
 		var yamlNode = new YamlNodeWrapper(yaml.Documents [0].RootNode);
 		var classes = Class.LoadFromYaml (yamlNode);
 
