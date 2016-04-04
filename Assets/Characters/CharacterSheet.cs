@@ -13,7 +13,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public IDictionary<AbilityScoreTypes, AbilityScore> AbilityScores { get; set; }
 		public Race Race { get; set; }
 		public Class Class { get; set; }
-		public IDictionary<string, CharacterSkill> Skills { get; set; }
+		private IDictionary<string, CharacterSkill> Skills { get; set; }
 
 		public CharacterSheet() {
 			AbilityScores = new Dictionary<AbilityScoreTypes, AbilityScore> ();
@@ -87,8 +87,16 @@ namespace ShortLegStudio.RPG.Characters {
 			}
 		}
 
+		public CharacterSkill GetSkill(Skill skill) {
+			return Skills [skill.Name];
+		}
+
 		public int GetSkillValue(string name) {
 			return Skills [name].Score;
+		}
+
+		public IList<CharacterSkill> GetSkillList() {
+			return Skills.Values.ToList ();
 		}
 	}
 

@@ -82,4 +82,22 @@ public class CharacterSkillTests {
 		Assert.IsTrue (charSkill.AbleToUse);
 		Assert.AreEqual (3, charSkill.Score);
 	}
+
+	[Test]
+	public void ClassSkillsGetOneTimeBonus() {
+		var skill = new Skill (
+			            "Climb",
+			            AbilityScoreTypes.Strength,
+			            false
+		            );
+		var character = new CharacterSheet ();
+		character.SetAbility (AbilityScoreTypes.Strength, 10);
+		var charSkill = new CharacterSkill (skill, character);
+		charSkill.ClassSkill = true;
+		charSkill.AddRank ();
+		Assert.AreEqual (4, charSkill.Score);
+		charSkill.AddRank ();
+		Assert.AreEqual (5, charSkill.Score);
+
+	}
 }

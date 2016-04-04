@@ -8,6 +8,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public int Score { get; private set; }
 		public bool AbleToUse { get; private set; }
 		public int Ranks { get; private set; }
+		public bool ClassSkill { get; set; }
 
 		public CharacterSkill(Skill baseSkill, CharacterSheet charSheet) {
 			skill = baseSkill;
@@ -23,6 +24,8 @@ namespace ShortLegStudio.RPG.Characters {
 			} else {
 				val += character.GetAbilityModifier (skill.Ability);
 				val += Ranks;
+				if (Ranks > 0 && ClassSkill)
+					val += 3;
 				AbleToUse = true;
 			}
 
@@ -33,6 +36,10 @@ namespace ShortLegStudio.RPG.Characters {
 		public void AddRank() {
 			Ranks++;
 			CalculateScore ();
+		}
+
+		public string Name { 
+			get { return skill.Name; }
 		}
 	}
 }

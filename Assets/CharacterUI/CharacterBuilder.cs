@@ -46,6 +46,7 @@ public class CharacterBuilder : MonoBehaviour {
 		_sheet.SetAbilityScores (AbilityScoreGenerator.RandomStandardHeroScores ());
 		_sheet.Race = Race.GetRaces ().ChooseOne ();
 		_sheet.Class = Class.GetClasses ().ChooseOne ();
+		_sheet.SetSkills (_skills);
 		UpdateInterface ();
 	}
 
@@ -59,6 +60,7 @@ public class CharacterBuilder : MonoBehaviour {
 		Charisma.text = _sheet.AbilityScores [AbilityScoreTypes.Charisma].TotalValue.ToString();
 		Races.SelectOption (_sheet.Race.Name);
 		Classes.SelectOption (_sheet.Class.Name);
+		UpdateSkillList ();
 	}
 
 	void BuildRaceDropdown() {
@@ -84,7 +86,16 @@ public class CharacterBuilder : MonoBehaviour {
 			transform.Translate (new Vector3 (0, currentY, 0));
 			currentY -= transform.rect.height + paddingY;
 			var skillUI = skillScore.GetComponent<SkillScoreUI> ();
-			skillUI.UpdateUI (skill);
+			skillUI.SetSkill (skill);
+		}
+	}
+
+	void UpdateSkillList() {
+		var skillView = SkillPanel.GetComponentsInChildren<SkillScoreUI> ();
+
+		foreach (var s in skillView) {
+			var skill = _sheet.GetSkill (s.Skill);
+			s.UpdateUI (skill);
 		}
 	}
 }
