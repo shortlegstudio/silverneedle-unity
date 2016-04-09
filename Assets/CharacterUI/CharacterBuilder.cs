@@ -16,6 +16,7 @@ public class CharacterBuilder : MonoBehaviour {
 	public Text Charisma;
 	public Dropdown Races;
 	public Dropdown Classes;
+	public AlignmentsDropdown AlignmentsUI;
 	public GameObject SkillPanel;
 	public GameObject SkillUIPrefab;
 
@@ -26,6 +27,7 @@ public class CharacterBuilder : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		AlignmentsUI = FindObjectOfType<AlignmentsDropdown> ();
 		_races = Race.GetRaces();
 		_classes = Class.GetClasses ();
 		_skills = Skill.GetSkills ();
@@ -46,6 +48,7 @@ public class CharacterBuilder : MonoBehaviour {
 		_sheet.SetAbilityScores (AbilityScoreGenerator.RandomStandardHeroScores ());
 		_sheet.Race = Race.GetRaces ().ChooseOne ();
 		_sheet.Class = Class.GetClasses ().ChooseOne ();
+		_sheet.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
 		_sheet.SetSkills (_skills);
 		UpdateInterface ();
 	}
@@ -60,6 +63,7 @@ public class CharacterBuilder : MonoBehaviour {
 		Charisma.text = _sheet.AbilityScores [AbilityScoreTypes.Charisma].TotalValue.ToString();
 		Races.SelectOption (_sheet.Race.Name);
 		Classes.SelectOption (_sheet.Class.Name);
+		AlignmentsUI.list.SelectOption (_sheet.Alignment.ToString());
 		UpdateSkillList ();
 	}
 
