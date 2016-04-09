@@ -98,6 +98,6 @@ public class CharacterSkillTests {
 		Assert.AreEqual (4, charSkill.Score);
 		charSkill.AddRank ();
 		Assert.AreEqual (5, charSkill.Score);
-
 	}
+
 }

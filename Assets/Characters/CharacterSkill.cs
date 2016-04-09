@@ -13,6 +13,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public CharacterSkill(Skill baseSkill, CharacterSheet charSheet) {
 			skill = baseSkill;
 			character = charSheet;
+			ClassSkill = charSheet.IsClassSkill(skill.Name);
 			CalculateScore ();
 		}
 

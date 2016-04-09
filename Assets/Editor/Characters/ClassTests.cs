@@ -30,14 +30,29 @@ public class ClassTests {
 		Assert.IsTrue(classes.Any (x => x.Name == "Monk"));
 		Assert.IsTrue(classes.Any (x => x.Name == "Wizard"));
 
+		//Validate that the class skills are tracked
+		var c = classes.First(x => x.Name == "Fighter");
+		Assert.IsTrue (c.IsClassSkill ("Climb"));
+		Assert.IsTrue (c.IsClassSkill ("Swim"));
+		Assert.IsFalse (c.IsClassSkill ("Spellcraft"));
+
     }
 
 	private const string ClassYamlFile = @"--- 
 - class: 
   name: Fighter
+  skills: 
+    - Climb
+    - Swim
 - class: 
   name: Monk
+  skills:
+    - Acrobatics
+    - Climb
 - class: 
   name: Wizard
+  skills:
+    - Knowledge Arcana
+    - Spellcraft
 ...";
 }

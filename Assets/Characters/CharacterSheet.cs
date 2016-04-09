@@ -74,10 +74,6 @@ namespace ShortLegStudio.RPG.Characters {
 			return AbilityScores [ability].BaseModifier;
 		}
 
-
-
-
-
 		public void SetSkills(IList<Skill> skills) {
 			foreach (var s in skills) {
 				Skills.Add (
@@ -97,6 +93,13 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public IList<CharacterSkill> GetSkillList() {
 			return Skills.Values.ToList ();
+		}
+
+		public bool IsClassSkill(string name) {
+			if (Class == null)
+				return false;
+
+			return Class.IsClassSkill (name);
 		}
 	}
 

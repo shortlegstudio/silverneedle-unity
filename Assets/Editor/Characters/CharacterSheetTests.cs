@@ -81,4 +81,5 @@ public class CharacterSheetTests {
 		Assert.AreEqual (strength, sheet.GetSkillValue ("Climb"));
 		Assert.AreEqual (int.MinValue, sheet.GetSkillValue ("Disable Device"));
 	}
+
 }

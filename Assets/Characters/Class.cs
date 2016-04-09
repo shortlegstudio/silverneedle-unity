@@ -1,12 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ShortLegStudio.RPG.Characters {
 	public class Class {
 		public string Name { get; set; }
+		public IList<string> Skills { get; set; }
 
+		public Class() {
+			Skills = new List<string> ();
+		}
 
+		public bool IsClassSkill(string name) {
+			return Skills.Any (x => x == name);
+		}
+
+		public void AddClassSkill(string name) {
+			if (!IsClassSkill(name)) 
+				Skills.Add (name);
+		}
 
 		public static IList<Class> LoadFromYaml(YamlNodeWrapper yaml) {
 			var classes = new List<Class> ();
@@ -14,6 +27,11 @@ namespace ShortLegStudio.RPG.Characters {
 			foreach (var node in yaml.Children()) {
 				var cls = new Class ();
 				cls.Name = node.GetValue ("name"); 
+
+				var skills = node.GetNode ("skills").Children();
+				foreach (var s in skills) {
+					cls.AddClassSkill (s.Value);
+				}
 
 				classes.Add (cls);
 			}
