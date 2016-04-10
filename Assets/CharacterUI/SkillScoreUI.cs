@@ -38,4 +38,13 @@ public class SkillScoreUI : MonoBehaviour {
 			characterBuilder.CurrentCharacter.GetSkill (Skill)
 		);
 	}
+
+	public void OnMouseOver() {
+		Tooltip.ShowTip (Skill.Description);
+	}
+
+	public void OnMouseExit() {
+		Tooltip.HideTip ();
+	}
+
 }
