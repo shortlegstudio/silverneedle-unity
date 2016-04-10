@@ -25,12 +25,12 @@ namespace ShortLegStudio.RPG.Characters {
 
 			foreach (var skillNode in yaml.Children()) {
 				var skill = new Skill (
-					skillNode.GetValue ("name"),
+					skillNode.GetString ("name"),
 					(AbilityScoreTypes) System.Enum.Parse(
 						typeof(AbilityScoreTypes), 
-						skillNode.GetValue ("ability"), 
+						skillNode.GetString ("ability"), 
 						true),
-					skillNode.GetValue ("trained") == "yes"
+					skillNode.GetString ("trained") == "yes"
 				);
 				Debug.Log (skill.ToString ());
 				skills.Add (skill);

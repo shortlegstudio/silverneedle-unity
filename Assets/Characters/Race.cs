@@ -17,7 +17,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 			foreach (var raceNode in yaml.Children()) {
 				var race = new Race ();
-				race.Name = raceNode.GetValue ("name"); 
+				race.Name = raceNode.GetString ("name"); 
 				var abilityModifiers = raceNode.GetNode ("abilities");
 
 				foreach (var ability in abilityModifiers.ChildrenToDictionary()) {

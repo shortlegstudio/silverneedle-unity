@@ -1,13 +1,16 @@
 - class:
   name: Barbarian
+  skillpoints: 4
   skills:
     - Climb
 - class:
   name: Bard
+  skillpoints: 6
   skills:
     - Bluff
 - class:
   name: Cleric
+  skillpoints: 2
   skills:
     - Diplomacy
     - Heal
@@ -18,29 +21,35 @@
     - Spellcraft
 - class:
   name: Druid
+  skillpoints: 4
   skills:
     - Spellcraft
 - class:
   name: Fighter
-  skills: 
+  skillpoints: 2
+  skills:
     - Climb
     - Knowledge Dungeoneering
     - Ride
     - Swim
 - class:
   name: Monk
+  skillpoints: 4
   skills:
     - Acrobatics
 - class:
   name: Paladin
+  skillpoints: 4
   skills:
     - Diplomacy
 - class:
   name: Ranger
+  skillpoints: 6
   skills:
     - Swim
 - class:
   name: Rogue
+  skillpoints: 8
   skills:
     - Acrobatics
     - Bluff
@@ -55,10 +64,12 @@
     - Swim
 - class:
   name: Sorcerer
+  skillpoints: 2
   skills:
     - Spellcraft
 - class:
   name: Wizard
+  skillpoints: 4
   skills:
     - Knowledge Arcana
     - Knowledge Dungeoneering

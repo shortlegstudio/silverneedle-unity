@@ -82,4 +82,13 @@ public class CharacterSheetTests {
 		Assert.AreEqual (int.MinValue, sheet.GetSkillValue ("Disable Device"));
 	}
 
+	[Test]
+	public void CalculatesSkillPointsBasedOnClassAndIntelligence() {
+		var sheet = new CharacterSheet ();
+		var fighter = new Class ();
+		fighter.SkillPoints = 2;
+		sheet.SetAbility (AbilityScoreTypes.Intelligence, 14);
+		sheet.Class = fighter;
+		Assert.AreEqual (4, sheet.GetSkillPointsPerLevel());
+	}
 }

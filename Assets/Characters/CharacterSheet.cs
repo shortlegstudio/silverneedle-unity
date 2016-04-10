@@ -101,6 +101,10 @@ namespace ShortLegStudio.RPG.Characters {
 
 			return Class.IsClassSkill (name);
 		}
+
+		public int GetSkillPointsPerLevel() {
+			return Class.SkillPoints + GetAbilityModifier (AbilityScoreTypes.Intelligence);
+		}
 	}
 
 }

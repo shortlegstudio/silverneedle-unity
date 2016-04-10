@@ -1,10 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Characters.Generators;
+
 
 public class CharacterBuilder : MonoBehaviour {
 	public Text Name;
@@ -20,10 +23,12 @@ public class CharacterBuilder : MonoBehaviour {
 	public GameObject SkillPanel;
 	public GameObject SkillUIPrefab;
 
-	private CharacterSheet _sheet;
+	public CharacterSheet CurrentCharacter { get; private set; }
 	private IList<Race> _races;
 	private IList<Class> _classes;
 	private IList<Skill> _skills;
+
+	public event EventHandler CharacterChanged;
 
 	// Use this for initialization
 	void Start () {
@@ -43,28 +48,29 @@ public class CharacterBuilder : MonoBehaviour {
 	}
 
 	public void Generate() {
-		_sheet = new CharacterSheet ();
-		_sheet.Name = NameGenerator.CreateFullName ();
-		_sheet.SetAbilityScores (AbilityScoreGenerator.RandomStandardHeroScores ());
-		_sheet.Race = Race.GetRaces ().ChooseOne ();
-		_sheet.Class = Class.GetClasses ().ChooseOne ();
-		_sheet.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
-		_sheet.SetSkills (_skills);
+		CurrentCharacter = new CharacterSheet ();
+		CurrentCharacter.Name = NameGenerator.CreateFullName ();
+		CurrentCharacter.SetAbilityScores (AbilityScoreGenerator.RandomStandardHeroScores ());
+		CurrentCharacter.Race = Race.GetRaces ().ChooseOne ();
+		CurrentCharacter.Class = Class.GetClasses ().ChooseOne ();
+		CurrentCharacter.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
+		CurrentCharacter.SetSkills (_skills);
 		UpdateInterface ();
 	}
 
 	private void UpdateInterface() {
-		Name.text = _sheet.Name;
-		Strength.text = _sheet.AbilityScores [AbilityScoreTypes.Strength].TotalValue.ToString();
-		Dexterity.text = _sheet.AbilityScores [AbilityScoreTypes.Dexterity].TotalValue.ToString();
-		Constitution.text = _sheet.AbilityScores [AbilityScoreTypes.Constitution].TotalValue.ToString();
-		Intelligence.text = _sheet.AbilityScores [AbilityScoreTypes.Intelligence].TotalValue.ToString();
-		Wisdom.text = _sheet.AbilityScores [AbilityScoreTypes.Wisdom].TotalValue.ToString();
-		Charisma.text = _sheet.AbilityScores [AbilityScoreTypes.Charisma].TotalValue.ToString();
-		Races.SelectOption (_sheet.Race.Name);
-		Classes.SelectOption (_sheet.Class.Name);
-		AlignmentsUI.list.SelectOption (_sheet.Alignment.ToString());
+		Name.text = CurrentCharacter.Name;
+		Strength.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Strength].TotalValue.ToString();
+		Dexterity.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Dexterity].TotalValue.ToString();
+		Constitution.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Constitution].TotalValue.ToString();
+		Intelligence.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Intelligence].TotalValue.ToString();
+		Wisdom.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Wisdom].TotalValue.ToString();
+		Charisma.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Charisma].TotalValue.ToString();
+		Races.SelectOption (CurrentCharacter.Race.Name);
+		Classes.SelectOption (CurrentCharacter.Class.Name);
+		AlignmentsUI.list.SelectOption (CurrentCharacter.Alignment.ToString());
 		UpdateSkillList ();
+		OnCharacterChanged (new EventArgs ());
 	}
 
 	void BuildRaceDropdown() {
@@ -98,8 +104,15 @@ public class CharacterBuilder : MonoBehaviour {
 		var skillView = SkillPanel.GetComponentsInChildren<SkillScoreUI> ();
 
 		foreach (var s in skillView) {
-			var skill = _sheet.GetSkill (s.Skill);
+			var skill = CurrentCharacter.GetSkill (s.Skill);
 			s.UpdateUI (skill);
+		}
+	}
+
+	protected void OnCharacterChanged(EventArgs e) {
+		EventHandler handler = CharacterChanged;
+		if (handler != null) {
+			handler (this, e);
 		}
 	}
 }

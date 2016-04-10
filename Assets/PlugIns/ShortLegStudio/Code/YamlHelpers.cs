@@ -32,9 +32,13 @@ namespace ShortLegStudio {
 			return _seqNode.Children.Select (x => new YamlNodeWrapper (x)).ToList();
 		}
 
-		public string GetValue(string key) {
+		public string GetString(string key) {
 			var item = GetNode (key);
 			return item.Value;
+		}
+
+		public int GetInteger(string key) {
+			return int.Parse (GetString (key));
 		}
 
 		public YamlNodeWrapper GetNode(string key) {

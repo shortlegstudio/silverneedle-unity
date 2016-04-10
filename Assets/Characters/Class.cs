@@ -7,6 +7,7 @@ namespace ShortLegStudio.RPG.Characters {
 	public class Class {
 		public string Name { get; set; }
 		public IList<string> Skills { get; set; }
+		public int SkillPoints { get; set; }
 
 		public Class() {
 			Skills = new List<string> ();
@@ -26,8 +27,10 @@ namespace ShortLegStudio.RPG.Characters {
 
 			foreach (var node in yaml.Children()) {
 				var cls = new Class ();
-				cls.Name = node.GetValue ("name"); 
+				cls.Name = node.GetString ("name"); 
+				cls.SkillPoints = node.GetInteger ("skillpoints");
 
+				//Get the Skills for this class
 				var skills = node.GetNode ("skills").Children();
 				foreach (var s in skills) {
 					cls.AddClassSkill (s.Value);
