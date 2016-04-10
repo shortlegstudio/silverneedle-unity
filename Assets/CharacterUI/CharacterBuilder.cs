@@ -51,6 +51,9 @@ public class CharacterBuilder : MonoBehaviour {
 		CurrentCharacter.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
 		CurrentCharacter.SetSkills (_skills);
 		CurrentCharacter.SetHitPoints (HitPointGenerator.RollHitPoints (CurrentCharacter));
+
+		//Assign Skill Points
+		SkillPointGenerator.AssignSkillPointsRandomly(CurrentCharacter);
 		UpdateInterface ();
 	}
 
