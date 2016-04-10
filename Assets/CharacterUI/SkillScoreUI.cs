@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using ShortLegStudio.RPG.Characters;
 
@@ -8,6 +9,12 @@ public class SkillScoreUI : MonoBehaviour {
 	public Text score;
 	public Text classSkill;
 	public Skill Skill;
+	private CharacterBuilder characterBuilder;
+
+	void Start() {
+		characterBuilder = FindObjectOfType<CharacterBuilder> ();
+		characterBuilder.CharacterChanged += CharacterUpdated;
+	}
 
 	public void SetSkill(Skill skill) {
 		Skill = skill;
@@ -24,5 +31,11 @@ public class SkillScoreUI : MonoBehaviour {
 			skillName.color = Color.gray;
 			score.text = "-";
 		}
+	}
+
+	void CharacterUpdated(object sender, EventArgs args) {
+		UpdateUI (
+			characterBuilder.CurrentCharacter.GetSkill (Skill)
+		);
 	}
 }

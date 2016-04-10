@@ -13,6 +13,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public string Name { get; set; }
 		public AbilityScoreTypes Ability { get; set; }
 		public bool TrainingRequired { get; set; }
+		public string Description { get; set; }
 
 		public Skill(string name, AbilityScoreTypes baseAbility, bool trainingRequired) {
 			Name = name;
@@ -32,6 +33,7 @@ namespace ShortLegStudio.RPG.Characters {
 						true),
 					skillNode.GetString ("trained") == "yes"
 				);
+				skill.Description = skillNode.GetString ("description");
 				Debug.Log (skill.ToString ());
 				skills.Add (skill);
 			}

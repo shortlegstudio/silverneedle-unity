@@ -21,7 +21,6 @@ public class CharacterBuilder : MonoBehaviour {
 	public Dropdown Classes;
 	public AlignmentsDropdown AlignmentsUI;
 	public GameObject SkillPanel;
-	public GameObject SkillUIPrefab;
 
 	public CharacterSheet CurrentCharacter { get; private set; }
 	private IList<Race> _races;
@@ -38,8 +37,6 @@ public class CharacterBuilder : MonoBehaviour {
 		_skills = Skill.GetSkills ();
 		BuildRaceDropdown ();
 		BuildClassDropdown ();
-		BuildSkillList ();
-		Generate ();
 	}
 
 	public void Generate() {
@@ -68,7 +65,6 @@ public class CharacterBuilder : MonoBehaviour {
 		Races.SelectOption (CurrentCharacter.Race.Name);
 		Classes.SelectOption (CurrentCharacter.Class.Name);
 		AlignmentsUI.list.SelectOption (CurrentCharacter.Alignment.ToString());
-		UpdateSkillList ();
 		OnCharacterChanged (new EventArgs ());
 	}
 
@@ -81,30 +77,6 @@ public class CharacterBuilder : MonoBehaviour {
 	void BuildClassDropdown() {
 		foreach (var cls in _classes) {
 			Classes.options.Add(new Dropdown.OptionData(cls.Name));
-		}
-	}
-
-	void BuildSkillList() {
-		float currentY = 0;
-		float paddingY = 1;
-		foreach (var skill in _skills) {
-			var skillScore = (GameObject)Instantiate (SkillUIPrefab);
-			skillScore.transform.SetParent (SkillPanel.GetComponent<RectTransform>(), false);
-
-			var transform = skillScore.GetComponent<RectTransform> ();
-			transform.Translate (new Vector3 (0, currentY, 0));
-			currentY -= transform.rect.height + paddingY;
-			var skillUI = skillScore.GetComponent<SkillScoreUI> ();
-			skillUI.SetSkill (skill);
-		}
-	}
-
-	void UpdateSkillList() {
-		var skillView = SkillPanel.GetComponentsInChildren<SkillScoreUI> ();
-
-		foreach (var s in skillView) {
-			var skill = CurrentCharacter.GetSkill (s.Skill);
-			s.UpdateUI (skill);
 		}
 	}
 

@@ -11,6 +11,9 @@ using System.Text;
 [TestFixture]
 public class SkillTests {
 	YamlStream yaml;
+	Skill Acrobatics;
+	Skill Bluff;
+	Skill DisableDevice;
 
 	[SetUp]
 	public void SetUp() {
@@ -18,44 +21,60 @@ public class SkillTests {
 
 		yaml = new YamlStream();
 		yaml.Load(input);
+
+		var yamlNode = new YamlNodeWrapper(yaml.Documents [0].RootNode);
+		var skills = Skill.LoadFromYaml (yamlNode);
+
+		Acrobatics = skills.First (x => x.Name == "Acrobatics");
+		Bluff = skills.First (x => x.Name == "Bluff");
+		DisableDevice = skills.First (x => x.Name == "Disable Device");
 	}
 		
     [Test]
     public void LoadSkillsYamlFile() {
-		var yamlNode = new YamlNodeWrapper(yaml.Documents [0].RootNode);
-		var skills = Skill.LoadFromYaml (yamlNode);
-
-		Assert.AreEqual (3, skills.Count);
-		Assert.IsTrue(skills.Any (x => x.Name == "Acrobatics"));
-		Assert.IsTrue(skills.Any (x => x.Name == "Bluff"));
-		Assert.IsTrue(skills.Any (x => x.Name == "Disable Device"));
-
-
-		//validate each Skill
-		var acro = skills.First(x => x.Name == "Acrobatics");
-		Assert.AreEqual (AbilityScoreTypes.Dexterity, acro.Ability);
-		Assert.IsFalse (acro.TrainingRequired);
-
-		var device = skills.First(x => x.Name == "Disable Device");
-		Assert.AreEqual (AbilityScoreTypes.Dexterity, device.Ability);
-		Assert.IsTrue (device.TrainingRequired);
-
-
-
+		Assert.IsNotNull (Acrobatics);
+		Assert.IsNotNull (Bluff);
+		Assert.IsNotNull (DisableDevice);
     }
+
+	[Test]
+	public void SkillsHaveAnAbilityToBaseScoresFrom() {
+		Assert.AreEqual (AbilityScoreTypes.Dexterity, Acrobatics.Ability);
+		Assert.AreEqual (AbilityScoreTypes.Charisma, Bluff.Ability);
+		Assert.AreEqual (AbilityScoreTypes.Dexterity, DisableDevice.Ability);
+
+	}
+
+	[Test]
+	public void SomeSkillsRequireTraining() {
+		Assert.IsFalse (Acrobatics.TrainingRequired);
+		Assert.IsTrue (DisableDevice.TrainingRequired);
+	}
+
+	[Test]
+	public void SkillsCanHaveALongDescription() {
+		Assert.AreEqual ("A really long description.\n", Acrobatics.Description);
+	}
 
 	private const string SkillsYamlFile = @"--- 
 - skill: 
   name: Acrobatics
   ability: dexterity
   trained: no
+  description: >
+    A really long
+    description.
 - skill: 
   name: Bluff
   ability: charisma
   trained: no
+  description: >
+    A really long description.
 - skill: 
   name: Disable Device
   ability: dexterity
   trained: yes
+  description: >
+    A really long description.
 ...";
 }
