@@ -19,6 +19,7 @@ public class CharacterSheetTests {
 		Assert.AreEqual (CharacterAlignment.LawfulGood, sheet.Alignment);
 		Assert.AreEqual (72, sheet.Height);
 		Assert.AreEqual (150, sheet.Weight);
+		Assert.AreEqual (1, sheet.Level);
     }
 
 	[Test]

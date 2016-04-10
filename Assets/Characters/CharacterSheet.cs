@@ -13,13 +13,17 @@ namespace ShortLegStudio.RPG.Characters {
 		public IDictionary<AbilityScoreTypes, AbilityScore> AbilityScores { get; set; }
 		public Race Race { get; set; }
 		public Class Class { get; set; }
+		public int MaxHitPoints { get; set; }
+		public int CurrentHitPoints { get; set; } 
+		public int Level { get; private set; }
 		private IDictionary<string, CharacterSkill> Skills { get; set; }
+
 
 		public CharacterSheet() {
 			AbilityScores = new Dictionary<AbilityScoreTypes, AbilityScore> ();
 			Skills = new Dictionary<string, CharacterSkill> ();
+			Level = 1;
 		}
-
 
 		/// <summary>
 		/// Sets the ability scores.
@@ -105,6 +109,12 @@ namespace ShortLegStudio.RPG.Characters {
 		public int GetSkillPointsPerLevel() {
 			return Class.SkillPoints + GetAbilityModifier (AbilityScoreTypes.Intelligence);
 		}
+
+		public void SetHitPoints(int hp) {
+			MaxHitPoints = hp;
+			CurrentHitPoints = hp;
+		}
+
 	}
 
 }

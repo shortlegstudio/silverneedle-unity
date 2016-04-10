@@ -4,6 +4,7 @@ using System.Linq;
 using System.IO;
 using NUnit.Framework;
 using ShortLegStudio;
+using ShortLegStudio.Dice;
 using ShortLegStudio.RPG.Characters;
 using YamlDotNet.RepresentationModel;
 using System.Text;
@@ -52,6 +53,12 @@ public class ClassTests {
 		Assert.AreEqual (4, Monk.SkillPoints);
 	}
 
+	[Test]
+	public void YamlLoadedClassesShouldHaveHitDice() {
+		Assert.AreEqual (DiceSides.d10, Fighter.HitDice);
+		Assert.AreEqual (DiceSides.d8, Monk.HitDice);
+		Assert.AreEqual (DiceSides.d6, Wizard.HitDice);
+	}
 	private const string ClassYamlFile = @"--- 
 - class: 
   name: Fighter
@@ -59,17 +66,20 @@ public class ClassTests {
   skills: 
     - Climb
     - Swim
+  hitdice: d10
 - class: 
   name: Monk
   skillpoints: 4
   skills:
     - Acrobatics
     - Climb
+  hitdice: d8
 - class: 
   name: Wizard
   skillpoints: 4
   skills:
     - Knowledge Arcana
     - Spellcraft
+  hitdice: d6
 ...";
 }

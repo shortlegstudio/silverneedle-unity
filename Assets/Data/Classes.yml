@@ -3,11 +3,13 @@
   skillpoints: 4
   skills:
     - Climb
+  hitdice: d12
 - class:
   name: Bard
   skillpoints: 6
   skills:
     - Bluff
+  hitdice: d6
 - class:
   name: Cleric
   skillpoints: 2
@@ -19,11 +21,13 @@
     - Knowledge Religion
     - Sense Motive
     - Spellcraft
+  hitdice: d8
 - class:
   name: Druid
   skillpoints: 4
   skills:
     - Spellcraft
+  hitdice: d8
 - class:
   name: Fighter
   skillpoints: 2
@@ -32,21 +36,25 @@
     - Knowledge Dungeoneering
     - Ride
     - Swim
+  hitdice: d10
 - class:
   name: Monk
   skillpoints: 4
   skills:
     - Acrobatics
+  hitdice: d8
 - class:
   name: Paladin
   skillpoints: 4
   skills:
     - Diplomacy
+  hitdice: d10
 - class:
   name: Ranger
   skillpoints: 6
   skills:
     - Swim
+  hitdice: d10
 - class:
   name: Rogue
   skillpoints: 8
@@ -62,11 +70,13 @@
     - Sense Motive
     - Stealth
     - Swim
+  hitdice: d8
 - class:
   name: Sorcerer
   skillpoints: 2
   skills:
     - Spellcraft
+  hitdice: d6
 - class:
   name: Wizard
   skillpoints: 4
@@ -79,3 +89,4 @@
     - Knowledge Nature
     - Knowledge Religion
     - Spellcraft
+  hitdice: d6

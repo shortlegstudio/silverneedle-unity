@@ -2,12 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ShortLegStudio.Dice;
 
 namespace ShortLegStudio.RPG.Characters {
 	public class Class {
 		public string Name { get; set; }
 		public IList<string> Skills { get; set; }
 		public int SkillPoints { get; set; }
+		public DiceSides HitDice { get; set; }
 
 		public Class() {
 			Skills = new List<string> ();
@@ -29,6 +31,8 @@ namespace ShortLegStudio.RPG.Characters {
 				var cls = new Class ();
 				cls.Name = node.GetString ("name"); 
 				cls.SkillPoints = node.GetInteger ("skillpoints");
+
+				cls.HitDice = DiceStrings.ParseSides (node.GetString ("hitdice"));
 
 				//Get the Skills for this class
 				var skills = node.GetNode ("skills").Children();

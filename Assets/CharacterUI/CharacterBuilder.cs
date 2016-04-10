@@ -41,11 +41,6 @@ public class CharacterBuilder : MonoBehaviour {
 		BuildSkillList ();
 		Generate ();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void Generate() {
 		CurrentCharacter = new CharacterSheet ();
@@ -55,6 +50,7 @@ public class CharacterBuilder : MonoBehaviour {
 		CurrentCharacter.Class = Class.GetClasses ().ChooseOne ();
 		CurrentCharacter.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
 		CurrentCharacter.SetSkills (_skills);
+		CurrentCharacter.SetHitPoints (HitPointGenerator.RollHitPoints (CurrentCharacter));
 		UpdateInterface ();
 	}
 
