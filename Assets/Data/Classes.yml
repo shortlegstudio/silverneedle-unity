@@ -2,23 +2,65 @@
   name: Barbarian
   skillpoints: 4
   skills:
+    - Acrobatics
     - Climb
+    - Craft
+    - Handle Animal
+    - Intimidate
+    - Knowledge Nature
+    - Perception
+    - Ride
+    - Survival
+    - Swim
   hitdice: d12
 - class:
   name: Bard
   skillpoints: 6
   skills:
+    - Acrobatics
+    - Appraise
     - Bluff
+    - Climb
+    - Craft
+    - Diplomacy
+    - Disguise
+    - Escape Artist
+    - Intimidate
+    - Knowledge Arcana
+    - Knowledge Dungeoneering
+    - Knowledge Engineering
+    - Knowledge Geography
+    - Knowledge History
+    - Knowledge Local
+    - Knowledge Nature
+    - Knowledge Nobility
+    - Knowledge Planes
+    - Knowledge Religion
+    - Linguistics
+    - Perception
+    - Perform
+    - Profession
+    - Sense Motive
+    - Sleight of Hand
+    - Spellcraft
+    - Stealth
+    - Use Magical Device
   hitdice: d6
 - class:
   name: Cleric
   skillpoints: 2
   skills:
+    - Appraise
+    - Craft
     - Diplomacy
     - Heal
     - Knowledge Arcana
     - Knowledge History
+    - Knowledge Nobility
+    - Knowledge Planes
     - Knowledge Religion
+    - Linguistics
+    - Profession
     - Sense Motive
     - Spellcraft
   hitdice: d8
@@ -26,15 +68,33 @@
   name: Druid
   skillpoints: 4
   skills:
+    - Climb
+    - Craft
+    - Fly
+    - Handle Animal
+    - Heal
+    - Knowledge Geography
+    - Knowledge Nature
+    - Perception
+    - Profession
+    - Ride
     - Spellcraft
+    - Survival
+    - Swim
   hitdice: d8
 - class:
   name: Fighter
   skillpoints: 2
   skills:
     - Climb
+    - Craft
+    - Handle Animal
+    - Intimidate
     - Knowledge Dungeoneering
+    - Knowledge Engineering
+    - Profession
     - Ride
+    - Survival
     - Swim
   hitdice: d10
 - class:
@@ -42,17 +102,53 @@
   skillpoints: 4
   skills:
     - Acrobatics
+    - Climb
+    - Craft
+    - Escape Artist
+    - Intimidate
+    - Knowledge History
+    - Knowledge Religion
+    - Perception
+    - Perform
+    - Profession
+    - Ride
+    - Sense Motive
+    - Stealth
+    - Swim
   hitdice: d8
 - class:
   name: Paladin
-  skillpoints: 4
+  skillpoints: 2
   skills:
+    - Craft
     - Diplomacy
+    - Handle Animal
+    - Heal
+    - Knowledge Nobility
+    - Knowledge Religion
+    - Profession
+    - Ride
+    - Sense Motive
+    - Spellcraft
   hitdice: d10
 - class:
   name: Ranger
   skillpoints: 6
   skills:
+    - Climb
+    - Craft
+    - Handle Animal
+    - Heal
+    - Intimidate
+    - Knowledge Dungeoneering
+    - Knowledge Geography
+    - Knowledge Nature
+    - Perception
+    - Profession
+    - Ride
+    - Spellcraft
+    - Stealth
+    - Survival
     - Swim
   hitdice: d10
 - class:
@@ -60,33 +156,59 @@
   skillpoints: 8
   skills:
     - Acrobatics
+    - Appraise
     - Bluff
     - Climb
+    - Craft
     - Diplomacy
     - Disable Device
+    - Disguise
+    - Escape Artist
+    - Intimidate
     - Knowledge Dungeoneering
     - Knowledge Local
+    - Linguistics
     - Perception
+    - Perform
+    - Profession
     - Sense Motive
+    - Sleight of Hand
     - Stealth
     - Swim
+    - Use Magical Device
   hitdice: d8
 - class:
   name: Sorcerer
   skillpoints: 2
   skills:
+    - Appraise
+    - Bluff
+    - Craft
+    - Fly
+    - Intimidate
+    - Knowledge Arcana
+    - Profession
     - Spellcraft
+    - Use Magical Device
   hitdice: d6
 - class:
   name: Wizard
-  skillpoints: 4
+  skillpoints: 2
   skills:
+    - Appraise
+    - Craft
+    - Fly
     - Knowledge Arcana
     - Knowledge Dungeoneering
+    - Knowledge Engineering
     - Knowledge Geography
     - Knowledge History
     - Knowledge Local
     - Knowledge Nature
+    - Knowledge Nobility
+    - Knowledge Planes
     - Knowledge Religion
+    - Linguistics
+    - Profession
     - Spellcraft
   hitdice: d6

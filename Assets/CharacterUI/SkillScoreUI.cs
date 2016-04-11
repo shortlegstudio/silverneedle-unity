@@ -40,11 +40,11 @@ public class SkillScoreUI : MonoBehaviour {
 	}
 
 	public void OnMouseOver() {
-		Tooltip.ShowTip (Skill.Description);
+		Tooltip.ShowTip (Skill.Name, (Skill.TrainingRequired ? "Trained : " : "") + Skill.Ability.ToString(), Skill.Description);
 	}
 
 	public void OnMouseExit() {
-		Tooltip.HideTip ();
+		//Tooltip.HideTip ();
 	}
 
 }

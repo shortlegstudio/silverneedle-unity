@@ -38,7 +38,6 @@ public class ClassTests {
 		Assert.IsNotNull (Wizard);
 	}
 
-
 	[Test]
 	public void YamlLoadedClassesShouldHaveClassSkills() {
 		//Validate that the class skills are tracked
@@ -59,6 +58,21 @@ public class ClassTests {
 		Assert.AreEqual (DiceSides.d8, Monk.HitDice);
 		Assert.AreEqual (DiceSides.d6, Wizard.HitDice);
 	}
+
+	[Test]
+	public void ClassesGetAllCraftSkillsIfEnabled() {
+		Debug.Log ("Starting Test");
+		Assert.IsTrue (Fighter.IsClassSkill("Craft (Weapons)"));
+		Assert.IsTrue (Monk.IsClassSkill ("Perform (Dance)"));
+		Assert.IsFalse (Fighter.IsClassSkill ("Perform (Act)"));
+		Assert.IsTrue (Wizard.IsClassSkill ("Profession (Farmer)"));
+
+		//Making sure poor implementation is not used
+		Assert.IsFalse(Fighter.IsClassSkill("Spellcraft"));
+		Assert.IsFalse (Monk.IsClassSkill ("Performance Analysis"));
+		Assert.IsFalse (Wizard.IsClassSkill ("Professional Wrestler"));
+	}
+
 	private const string ClassYamlFile = @"--- 
 - class: 
   name: Fighter
@@ -66,6 +80,8 @@ public class ClassTests {
   skills: 
     - Climb
     - Swim
+    - Craft
+    - Profession
   hitdice: d10
 - class: 
   name: Monk
@@ -73,11 +89,16 @@ public class ClassTests {
   skills:
     - Acrobatics
     - Climb
+    - Craft
+    - Perform
+    - Profession
   hitdice: d8
 - class: 
   name: Wizard
   skillpoints: 4
   skills:
+    - Craft
+    - Profession
     - Knowledge Arcana
     - Spellcraft
   hitdice: d6

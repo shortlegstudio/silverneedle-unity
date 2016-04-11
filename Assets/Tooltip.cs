@@ -5,13 +5,13 @@ using System.Collections;
 public class Tooltip : MonoBehaviour {
 	public static Tooltip tipper;
 	public bool ShowingTip = true;
-	private Text toolTipText;
+	public Text DescriptionText;
+	public Text TopicText;
+	public Text SummaryText;
 
 	// Use this for initialization
 	void Start () {
 		tipper = this;
-		toolTipText = GetComponentInChildren<Text> ();
-		this.gameObject.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -22,13 +22,14 @@ public class Tooltip : MonoBehaviour {
 		}
 	}
 
-	public static void ShowTip(string text) {
-		tipper.toolTipText.text = text;
-		tipper.gameObject.SetActive (true);
+	public static void ShowTip(string topic, string summary, string text) {
+		tipper.DescriptionText.text = text;
+		tipper.TopicText.text = topic;
+		tipper.SummaryText.text = summary;
 	}
 
 	public static void HideTip() {
-		tipper.gameObject.SetActive (false);
+		
 	}
 
 }

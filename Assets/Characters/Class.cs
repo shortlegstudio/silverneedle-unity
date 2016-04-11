@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Linq;
 using ShortLegStudio.Dice;
 
@@ -16,12 +17,23 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public bool IsClassSkill(string name) {
-			return Skills.Any (x => x == name);
+			//Craft, Profession, and Perform are special cases 
+			//All skills in that group are considered class skills 
+			// in this case 
+			//
+			// Truncate any skill names like 'Craft (Food)' -> Craft
+			// Profession (Farmer) => Profession
+			// etc...
+			var pattern = "(\\(.*\\))";
+			var skillName = Regex.Replace (name, pattern, string.Empty).Trim();
+			return Skills.Any (x => x == skillName);
 		}
 
 		public void AddClassSkill(string name) {
-			if (!IsClassSkill(name)) 
+			if (!IsClassSkill (name))
 				Skills.Add (name);
+			else
+				Debug.Log ("Not adding class skill as it already is there: " + name);
 		}
 
 		public static IList<Class> LoadFromYaml(YamlNodeWrapper yaml) {
