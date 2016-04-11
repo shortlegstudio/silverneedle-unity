@@ -11,12 +11,6 @@ using ShortLegStudio.RPG.Characters.Generators;
 
 public class CharacterBuilder : MonoBehaviour {
 	public Text Name;
-	public Text Strength;
-	public Text Dexterity;
-	public Text Constitution;
-	public Text Intelligence;
-	public Text Wisdom;
-	public Text Charisma;
 	public Dropdown Races;
 	public Dropdown Classes;
 	public AlignmentsDropdown AlignmentsUI;
@@ -56,12 +50,6 @@ public class CharacterBuilder : MonoBehaviour {
 
 	private void UpdateInterface() {
 		Name.text = CurrentCharacter.Name;
-		Strength.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Strength].TotalValue.ToString();
-		Dexterity.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Dexterity].TotalValue.ToString();
-		Constitution.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Constitution].TotalValue.ToString();
-		Intelligence.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Intelligence].TotalValue.ToString();
-		Wisdom.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Wisdom].TotalValue.ToString();
-		Charisma.text = CurrentCharacter.AbilityScores [AbilityScoreTypes.Charisma].TotalValue.ToString();
 		Races.SelectOption (CurrentCharacter.Race.Name);
 		Classes.SelectOption (CurrentCharacter.Class.Name);
 		AlignmentsUI.list.SelectOption (CurrentCharacter.Alignment.ToString());
