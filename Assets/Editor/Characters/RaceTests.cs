@@ -11,6 +11,10 @@ using System.Text;
 [TestFixture]
 public class RaceTests {
 	YamlStream yaml;
+	Race dwarf;
+	Race elf;
+	Race halfling;
+	Race human;
 
 	[SetUp]
 	public void SetUp() {
@@ -18,19 +22,40 @@ public class RaceTests {
 
 		yaml = new YamlStream();
 		yaml.Load(input);
+		var yamlNode = new YamlNodeWrapper(yaml.Documents [0].RootNode);
+		var races = Race.LoadFromYaml (yamlNode);
+		dwarf = races.First (x => x.Name == "Dwarf");
+		elf = races.First (x => x.Name == "Elf");
+		halfling = races.First (x => x.Name == "Halfling");
+		human = races.First (x => x.Name == "Human");
 	}
 		
     [Test]
     public void LoadRaceYamlFile() {
-		var yamlNode = new YamlNodeWrapper(yaml.Documents [0].RootNode);
-		var races = Race.LoadFromYaml (yamlNode);
-
-		Assert.AreEqual (3, races.Count);
-		Assert.IsTrue(races.Any (x => x.Name == "Dwarf"));
-		Assert.IsTrue(races.Any (x => x.Name == "Elf"));
-		Assert.IsTrue(races.Any (x => x.Name == "Halfling"));
-
+		Assert.IsNotNull (dwarf);
+		Assert.IsNotNull (elf);
+		Assert.IsNotNull (halfling);
+		Assert.IsNotNull (human);
     }
+
+	[Test]
+	public void HumansCanChooseAbilityModifier() {
+		var mod = human.AbilityModifiers.First ();
+		Assert.IsTrue (mod.RacialChose);
+		Assert.AreEqual (2, mod.value);
+	}
+
+	[Test]
+	public void DwarvesHaveSpecificAbilitiesToModifier() {
+		var cons = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Constitution);
+		Assert.AreEqual (2, cons.value);
+
+		var wis = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Wisdom);
+		Assert.AreEqual (2, wis.value);
+
+		var cha = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Charisma);
+		Assert.AreEqual (-2, cha.value);
+	}
 
 	private const string SkillsYamlFile = @"--- 
 - race: 
@@ -45,6 +70,10 @@ public class RaceTests {
     constitution: 2
     wisdom: 2
     charisma: -2
+- race:
+  name: Human
+  abilities:
+    choose: 2
 - race: 
   name: Halfling
   abilities:

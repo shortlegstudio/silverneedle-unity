@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ShortLegStudio;
 
 
 namespace ShortLegStudio.RPG.Characters {
@@ -11,7 +12,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public float Height { get; set; }
 		public int Weight { get; set; }
 		public IDictionary<AbilityScoreTypes, AbilityScore> AbilityScores { get; set; }
-		public Race Race { get; set; }
+		public Race Race { get; protected set; }
 		public Class Class { get; set; }
 		public int MaxHitPoints { get; set; }
 		public int CurrentHitPoints { get; set; } 
@@ -76,6 +77,21 @@ namespace ShortLegStudio.RPG.Characters {
 		/// <param name="ability">Ability.</param>
 		public int GetAbilityModifier(AbilityScoreTypes ability) {
 			return AbilityScores [ability].BaseModifier;
+		}
+
+		public void SetRace(Race race) {
+			Race = race;
+
+			//Add Ability Modifiers
+			foreach (var adj in race.AbilityModifiers) {
+				if (adj.RacialChose) {
+					var rand = AbilityScores.Values.ToArray().ChooseOne();
+					rand.AddAdjustment (adj);
+				} else {
+					var abl = GetAbility (adj.ability);
+					abl.AddAdjustment (adj);
+				}
+			}
 		}
 
 		public void SetSkills(IList<Skill> skills) {

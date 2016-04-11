@@ -61,7 +61,6 @@ public class ClassTests {
 
 	[Test]
 	public void ClassesGetAllCraftSkillsIfEnabled() {
-		Debug.Log ("Starting Test");
 		Assert.IsTrue (Fighter.IsClassSkill("Craft (Weapons)"));
 		Assert.IsTrue (Monk.IsClassSkill ("Perform (Dance)"));
 		Assert.IsFalse (Fighter.IsClassSkill ("Perform (Act)"));

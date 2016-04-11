@@ -46,4 +46,16 @@ public class AbilityScoreTests {
 		var score = new AbilityScore (AbilityScoreTypes.Strength, 15);
 		Assert.AreEqual (15, score.TotalValue);
 	}
+
+	[Test]
+	public void YouCanAddAnAdjustmentToAdjustTheTotals() {
+		var score = new AbilityScore (AbilityScoreTypes.Strength, 15);
+		var adj = new AbilityScoreAdjustment ();
+		adj.ability = AbilityScoreTypes.Strength;
+		adj.value = 2;
+
+		score.AddAdjustment (adj);
+		Assert.AreEqual (17, score.TotalValue);
+		Assert.AreEqual (3, score.TotalModifier);
+	}
 }

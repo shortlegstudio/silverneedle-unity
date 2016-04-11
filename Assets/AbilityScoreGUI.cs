@@ -29,4 +29,17 @@ public class AbilityScoreGUI : MonoBehaviour {
 		if (c.GetAbilityModifier (Ability) < 0)
 			Modifier.color = Color.red;
 	}
+
+	public void MouseEnter() {
+		if (character.CurrentCharacter == null)
+			return;
+		
+		var ability = character.CurrentCharacter.GetAbility (Ability);
+		Tooltip.ShowTip(
+			Ability.ToString(),
+			Score.text + " (" + Modifier.text + ")",
+			ability.ToString()
+		);
+
+	}
 }

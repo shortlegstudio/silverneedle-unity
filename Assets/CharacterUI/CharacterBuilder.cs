@@ -37,7 +37,7 @@ public class CharacterBuilder : MonoBehaviour {
 		CurrentCharacter = new CharacterSheet ();
 		CurrentCharacter.Name = NameGenerator.CreateFullName ();
 		CurrentCharacter.SetAbilityScores (AbilityScoreGenerator.RandomStandardHeroScores ());
-		CurrentCharacter.Race = Race.GetRaces ().ChooseOne ();
+		CurrentCharacter.SetRace(Race.GetRaces ().ChooseOne ());
 		CurrentCharacter.Class = Class.GetClasses ().ChooseOne ();
 		CurrentCharacter.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
 		CurrentCharacter.SetSkills (_skills);

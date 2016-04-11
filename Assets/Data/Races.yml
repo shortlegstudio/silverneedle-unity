@@ -19,11 +19,11 @@
 - race:
   name: Half-Elf
   abilities:
-    any: 2
+    choose: 2
 - race:
   name: Half-Orc
   abilities:
-    any: 2
+    choose: 2
 - race:
   name: Halfling
   abilities:
@@ -33,4 +33,4 @@
 - race:
   name: Human
   abilities:
-    any: 2
+    choose: 2

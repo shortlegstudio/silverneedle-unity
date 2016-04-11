@@ -34,7 +34,6 @@ namespace ShortLegStudio.RPG.Characters {
 					skillNode.GetString ("trained") == "yes"
 				);
 				skill.Description = skillNode.GetString ("description");
-				Debug.Log (skill.ToString ());
 				skills.Add (skill);
 			}
 
