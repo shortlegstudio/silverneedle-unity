@@ -4,6 +4,8 @@
     strength: 2
     wisdom: 2
     charisma: -2
+  features:
+    - Darkvision
 - race:
   name: Elf
   abilities:
