@@ -57,6 +57,19 @@ public class RaceTests {
 		Assert.AreEqual (-2, cha.value);
 	}
 
+	[Test]
+	public void RacesHaveTraitsThatTheCanPullFrom() {
+		CollectionAssert.Contains (dwarf.Traits, "Darkvision");
+		CollectionAssert.Contains (dwarf.Traits, "Hardy");
+		CollectionAssert.Contains (halfling.Traits, "Halfling Luck");
+	}
+
+	[Test]
+	public void RacesHaveSizeInformation() {
+		Assert.AreEqual (CharacterSize.Medium, dwarf.Size);
+		Assert.AreEqual (CharacterSize.Small, halfling.Size);
+	}
+
 	private const string SkillsYamlFile = @"--- 
 - race: 
   name: Dwarf
@@ -64,21 +77,37 @@ public class RaceTests {
     constitution: 2
     wisdom: 2
     charisma: -2
+  size: Medium
+  traits:
+    - Darkvision
+    - Hardy
 - race: 
   name: Elf
   abilities:
     constitution: 2
     wisdom: 2
     charisma: -2
+  size: Medium
+  traits:
+    - Elfy Stuff
+    - Smart Guys
 - race:
   name: Human
   abilities:
     choose: 2
+  size: Medium
+  traits:
+    - Boring Stuff
+    - Extra Skill Point
 - race: 
   name: Halfling
+  size: Small
   abilities:
     constitution: 2
     wisdom: 2
     charisma: -2
+  traits:
+    - Halfling Luck
+    - Foobar
 ...";
 }

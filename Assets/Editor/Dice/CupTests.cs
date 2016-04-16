@@ -69,4 +69,12 @@ public class CupTests {
 
 		Assert.AreEqual (manualSum - lowest, sumTop3);
 	}
+
+	[Test]
+	public void CupCanHaveABaseValueForTheRoll() {
+		var cup = new Cup ();
+		cup.AddDie (Die.d4());
+		cup.BaseValue = 20;
+		Assert.GreaterOrEqual (cup.Roll (), 20);
+	}
 }

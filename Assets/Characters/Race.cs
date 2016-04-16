@@ -12,11 +12,13 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public string Name { get; set; }
 		public IList<AbilityScoreAdjustment> AbilityModifiers { get; private set;  }
+		public IList<string> Traits { get; private set; }
+		public CharacterSize Size { get; set; }
 
 		public Race() {
 			AbilityModifiers = new List<AbilityScoreAdjustment> ();
+			Traits = new List<string> ();
 		}
-
 
 		public static IList<Race> LoadFromYaml(YamlNodeWrapper yaml) {
 			var races = new List<Race> ();
@@ -24,8 +26,10 @@ namespace ShortLegStudio.RPG.Characters {
 			foreach (var raceNode in yaml.Children()) {
 				var race = new Race ();
 				race.Name = raceNode.GetString ("name"); 
-				var abilities = raceNode.GetNode ("abilities");
+				Debug.Log ("Loading Race: " + race.Name);
+				race.Size = (CharacterSize)System.Enum.Parse (typeof(CharacterSize), raceNode.GetString ("size"));
 
+				var abilities = raceNode.GetNode ("abilities");
 				foreach (var ability in abilities.ChildrenToDictionary()) {
 					var modifier = new AbilityScoreAdjustment ();
 					modifier.reason = "Racial Trait";
@@ -38,6 +42,11 @@ namespace ShortLegStudio.RPG.Characters {
 					}
 					race.AbilityModifiers.Add (modifier);
 					//Debug.Log (ability);
+				}
+
+				var traits = raceNode.GetNode ("traits");
+				foreach (var trait in traits.Children()) {
+					race.Traits.Add (trait.Value);
 				}
 				races.Add (race);
 			}

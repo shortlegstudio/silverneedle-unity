@@ -4,35 +4,90 @@
     strength: 2
     wisdom: 2
     charisma: -2
-  features:
+  traits:
+    - Slow and Steady
     - Darkvision
+    - Defensive Training (Dwarves)
+    - Greed
+    - Hatred vs Orcs and Goblins
+    - Hardy
+    - Stability
+    - Stonecunning
+    - Weapon Familiarity
+    - Languages
 - race:
   name: Elf
   abilities:
     dexterity: 2
     intelligence: 2
     constitution: -2
+  traits:
+    - Low-Light Vision
+    - Elven Immunities
+    - Elven Magic
+    - Keen Senses
+    - Weapon Familiarity
+    - Languages
 - race:
   name: Gnome
   abilities:
     strength: -2
     dexterity: 2
     charisma: 2
+  traits:
+    - Low-Light Vision
+    - Slow Speed
+    - Defensive Training (Gnomes)
+    - Gnome Magic
+    - Hatred vs Reptilian and Goblins
+    - Illusion Resistance
+    - Keen Senses
+    - Obsessive
+    - Weapon Familiarity
+    - Languages
 - race:
   name: Half-Elf
   abilities:
     choose: 2
+  traits:
+    - Low-Light Vision
+    - Adaptability
+    - Elf Blood
+    - Elven Immunities
+    - Keen Senses
+    - Multitalented
+    - Languages
 - race:
   name: Half-Orc
   abilities:
     choose: 2
+  traits:
+    - Darkvision
+    - Intimidating
+    - Orc Blood
+    - Orc Ferocity
+    - Weapon Familiarity
+    - Languages
 - race:
   name: Halfling
   abilities:
     strength: -2
     dexterity: 2
     constitution: 2
+  traits:
+    - Halfling Luck
+    - Slow Speed
+    - Fearless
+    - Halfling Luck
+    - Keen Senses
+    - Sure-Footed
+    - Weapon Familiarity
+    - Languages
 - race:
   name: Human
   abilities:
     choose: 2
+  traits:
+    - Bonus Feat
+    - Skilled
+    - Languages

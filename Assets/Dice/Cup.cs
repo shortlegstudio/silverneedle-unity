@@ -6,6 +6,7 @@ using System.Linq;
 namespace ShortLegStudio.Dice {
 	public class Cup {
 		private List<Die> _dice;
+		public int BaseValue { get; set; }
 
 		public Cup() {
 			_dice = new List<Die> ();
@@ -30,7 +31,7 @@ namespace ShortLegStudio.Dice {
 			foreach (Die d in _dice) {
 				total += d.Roll ();
 			}
-			return total;
+			return BaseValue + total;
 		}
 
 		public int SumTop(int number) {

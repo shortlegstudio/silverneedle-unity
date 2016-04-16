@@ -42,6 +42,7 @@ namespace ShortLegStudio.RPG.Characters {
 			foreach (var node in yaml.Children()) {
 				var cls = new Class ();
 				cls.Name = node.GetString ("name"); 
+				Debug.Log ("Loading Class: " + cls.Name);
 				cls.SkillPoints = node.GetInteger ("skillpoints");
 
 				cls.HitDice = DiceStrings.ParseSides (node.GetString ("hitdice"));

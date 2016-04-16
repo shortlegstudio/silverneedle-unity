@@ -18,11 +18,12 @@ namespace ShortLegStudio.RPG.Characters {
 		public int CurrentHitPoints { get; set; } 
 		public int Level { get; private set; }
 		private IDictionary<string, CharacterSkill> Skills { get; set; }
-
+		public IList<Trait> Traits { get; private set; }
 
 		public CharacterSheet() {
 			AbilityScores = new Dictionary<AbilityScoreTypes, AbilityScore> ();
 			Skills = new Dictionary<string, CharacterSkill> ();
+			Traits = new List<Trait> ();
 			Level = 1;
 		}
 
@@ -92,6 +93,15 @@ namespace ShortLegStudio.RPG.Characters {
 					abl.AddAdjustment (adj);
 				}
 			}
+
+			//Add Traits
+			foreach (var trait in race.Traits) {
+				AddTrait (trait);
+			}
+		}
+
+		public void AddTrait(string trait) {
+			Traits.Add (Trait.GetTrait (trait));
 		}
 
 		public void SetSkills(IList<Skill> skills) {

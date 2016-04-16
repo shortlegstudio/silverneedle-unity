@@ -4,6 +4,7 @@ using NUnit.Framework;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Characters.Generators;
 using System.Collections.Generic;
+using System.Linq;
 
 [TestFixture]
 public class CharacterSheetTests {
@@ -91,5 +92,23 @@ public class CharacterSheetTests {
 		sheet.SetAbility (AbilityScoreTypes.Intelligence, 14);
 		sheet.Class = fighter;
 		Assert.AreEqual (4, sheet.GetSkillPointsPerLevel());
+	}
+
+	[Test]
+	public void SettingRaceLoadsTraits() {
+		var sheet = new CharacterSheet ();
+
+		//Set up the trait
+		var trait = new Trait ();
+		trait.Name = "Elfy";
+		Trait.SetTraits (new List<Trait> () { trait });
+
+		//Set up the race
+		var elf = new Race ();
+		elf.Traits.Add ("Elfy");
+
+		sheet.SetRace (elf);
+		Assert.IsTrue(sheet.Traits.Any(x => x == trait));
+		Trait.SetTraits (null);
 	}
 }
