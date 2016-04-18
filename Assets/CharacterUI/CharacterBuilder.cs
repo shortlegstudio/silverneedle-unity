@@ -43,6 +43,11 @@ public class CharacterBuilder : MonoBehaviour {
 		CurrentCharacter.SetSkills (_skills);
 		CurrentCharacter.SetHitPoints (HitPointGenerator.RollHitPoints (CurrentCharacter));
 
+		//Generate Appearance
+		CurrentCharacter.Height = AppearanceGenerator.RollHeight(CurrentCharacter);
+		CurrentCharacter.Weight = AppearanceGenerator.RollWeight (CurrentCharacter);
+
+
 		//Assign Skill Points
 		SkillPointGenerator.AssignSkillPointsRandomly(CurrentCharacter);
 		UpdateInterface ();

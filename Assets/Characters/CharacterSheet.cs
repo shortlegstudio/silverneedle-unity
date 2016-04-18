@@ -9,7 +9,7 @@ namespace ShortLegStudio.RPG.Characters {
 	public class CharacterSheet {
 		public string Name { get; set; }
 		public CharacterAlignment Alignment { get; set; }
-		public float Height { get; set; }
+		public int Height { get; set; }
 		public int Weight { get; set; }
 		public IDictionary<AbilityScoreTypes, AbilityScore> AbilityScores { get; set; }
 		public Race Race { get; protected set; }

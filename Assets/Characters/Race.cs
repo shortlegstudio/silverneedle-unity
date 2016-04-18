@@ -3,6 +3,7 @@ using YamlDotNet.RepresentationModel;
 using System.Collections;
 using System.Collections.Generic;
 using ShortLegStudio;
+using ShortLegStudio.Dice;
 
 namespace ShortLegStudio.RPG.Characters {
 	public class Race {
@@ -14,6 +15,8 @@ namespace ShortLegStudio.RPG.Characters {
 		public IList<AbilityScoreAdjustment> AbilityModifiers { get; private set;  }
 		public IList<string> Traits { get; private set; }
 		public CharacterSize Size { get; set; }
+		public Cup HeightRange { get; set; }
+		public Cup WeightRange { get; set; }
 
 		public Race() {
 			AbilityModifiers = new List<AbilityScoreAdjustment> ();
@@ -28,6 +31,8 @@ namespace ShortLegStudio.RPG.Characters {
 				race.Name = raceNode.GetString ("name"); 
 				Debug.Log ("Loading Race: " + race.Name);
 				race.Size = (CharacterSize)System.Enum.Parse (typeof(CharacterSize), raceNode.GetString ("size"));
+				race.HeightRange = DiceStrings.ParseDice (raceNode.GetString ("height"));
+				race.WeightRange = DiceStrings.ParseDice (raceNode.GetString ("weight"));
 
 				var abilities = raceNode.GetNode ("abilities");
 				foreach (var ability in abilities.ChildrenToDictionary()) {

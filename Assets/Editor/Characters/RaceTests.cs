@@ -68,6 +68,16 @@ public class RaceTests {
 	public void RacesHaveSizeInformation() {
 		Assert.AreEqual (CharacterSize.Medium, dwarf.Size);
 		Assert.AreEqual (CharacterSize.Small, halfling.Size);
+
+		//Should have a dice cup for making height rolls
+		var cup = dwarf.HeightRange;
+		Assert.AreEqual (cup.Dice.Count, 2);
+		Assert.AreEqual (cup.BaseValue, 45);
+
+		cup = human.WeightRange;
+		Assert.AreEqual (cup.Dice.Count, 10);
+		Assert.AreEqual (cup.BaseValue, 120);
+
 	}
 
 	private const string SkillsYamlFile = @"--- 
@@ -78,6 +88,8 @@ public class RaceTests {
     wisdom: 2
     charisma: -2
   size: Medium
+  height: 2d4+45
+  weight: 14d4+120
   traits:
     - Darkvision
     - Hardy
@@ -88,6 +100,8 @@ public class RaceTests {
     wisdom: 2
     charisma: -2
   size: Medium
+  height: 64+2d8
+  weight: 14d4+120
   traits:
     - Elfy Stuff
     - Smart Guys
@@ -96,12 +110,16 @@ public class RaceTests {
   abilities:
     choose: 2
   size: Medium
+  height: 2d10+58
+  weight: 10d10+120
   traits:
     - Boring Stuff
     - Extra Skill Point
 - race: 
   name: Halfling
   size: Small
+  height: 2d4+32
+  weight: 14d4+120
   abilities:
     constitution: 2
     wisdom: 2

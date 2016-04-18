@@ -4,6 +4,9 @@
     strength: 2
     wisdom: 2
     charisma: -2
+  size: Medium
+  height: 2d4+45
+  weight: 14d4+150
   traits:
     - Slow and Steady
     - Darkvision
@@ -17,6 +20,9 @@
     - Languages
 - race:
   name: Elf
+  size: Medium
+  height: 2d8+64
+  weight: 6d8+100
   abilities:
     dexterity: 2
     intelligence: 2
@@ -30,6 +36,9 @@
     - Languages
 - race:
   name: Gnome
+  size: Small
+  height: 2d4+36
+  weight: 2d4+35
   abilities:
     strength: -2
     dexterity: 2
@@ -47,6 +56,9 @@
     - Languages
 - race:
   name: Half-Elf
+  size: Medium
+  height: 2d8+62
+  weight: 10d8+110
   abilities:
     choose: 2
   traits:
@@ -59,6 +71,9 @@
     - Languages
 - race:
   name: Half-Orc
+  size: Medium
+  height: 2d12+58
+  weight: 14d12+150
   abilities:
     choose: 2
   traits:
@@ -70,6 +85,9 @@
     - Languages
 - race:
   name: Halfling
+  size: Small
+  height: 2d4+32
+  weight: 2d4+30
   abilities:
     strength: -2
     dexterity: 2
@@ -85,6 +103,9 @@
     - Languages
 - race:
   name: Human
+  size: Medium
+  height: 2d10+58
+  weight: 10d10+120
   abilities:
     choose: 2
   traits:
