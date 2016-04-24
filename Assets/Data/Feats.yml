@@ -1,0 +1,10 @@
+- feat:
+  name: Acrobatic
+  prerequisite: none
+  benefit:
+    - skillbonus:
+      name: Acrobatics
+      amount: 2
+    - skillbonus:
+      name: Fly
+      amount: 2

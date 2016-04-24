@@ -36,10 +36,11 @@ public class CharacterBuilder : MonoBehaviour {
 	public void Generate() {
 		CurrentCharacter = new CharacterSheet ();
 		CurrentCharacter.Name = NameGenerator.CreateFullName ();
+		CurrentCharacter.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
+
 		CurrentCharacter.SetAbilityScores (AbilityScoreGenerator.RandomStandardHeroScores ());
 		CurrentCharacter.SetRace(Race.GetRaces ().ChooseOne ());
 		CurrentCharacter.Class = Class.GetClasses ().ChooseOne ();
-		CurrentCharacter.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
 		CurrentCharacter.SetSkills (_skills);
 		CurrentCharacter.SetHitPoints (HitPointGenerator.RollHitPoints (CurrentCharacter));
 

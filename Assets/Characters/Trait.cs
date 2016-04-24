@@ -13,6 +13,11 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public string Name { get; set; }
 		public string Description { get; set; }
+		public IList<SkillAdjustment> SkillModifiers { get; protected set; }
+
+		public Trait() {
+			SkillModifiers = new List<SkillAdjustment> ();
+		}
 
 		public static IList<Trait> LoadFromYaml(YamlNodeWrapper yaml) {
 			var traits = new List<Trait> ();
@@ -22,6 +27,20 @@ namespace ShortLegStudio.RPG.Characters {
 				trait.Name = traitNode.GetString ("name"); 
 				Debug.Log ("Loading Trait: " + trait.Name);
 				trait.Description = traitNode.GetString ("description");
+
+				//Get Any skill Modifiers if they exist
+				var skills = traitNode.GetNodeOptional("skillmodifiers");
+				if (skills != null) {
+					foreach (var skillAdj in skills.Children()) {
+						var skillName = skillAdj.GetString("skill");
+						var amount = int.Parse(skillAdj.GetString ("amount"));
+						trait.SkillModifiers.Add(new SkillAdjustment(
+							string.Format("{0} (trait)", trait.Name),
+							amount,
+							skillName
+						));
+					}
+				}
 				traits.Add (trait);
 			}
 

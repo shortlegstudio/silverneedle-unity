@@ -46,6 +46,14 @@ namespace ShortLegStudio {
 			return new YamlNodeWrapper (item);
 		}
 
+		public YamlNodeWrapper GetNodeOptional(string key) {
+			try {
+				return GetNode (key);
+			} catch(KeyNotFoundException) {
+				return null;
+			}
+		}
+
 		public IDictionary<string, string> ChildrenToDictionary() {
 			var results = new Dictionary<string, string> (); 
 			if (_mappingNode != null) {

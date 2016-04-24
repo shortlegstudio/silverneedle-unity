@@ -80,6 +80,9 @@
 - trait:
   name: Keen Senses
   description: This race grants a +2 racial bonus on Perception skill checks.
+  skillmodifiers:
+    - skill: Perception
+      amount: 2
 - trait:
   name: Low-Light Vision
   description: Can see in low light like normal light.

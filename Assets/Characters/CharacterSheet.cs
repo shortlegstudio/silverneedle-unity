@@ -7,18 +7,27 @@ using ShortLegStudio;
 
 namespace ShortLegStudio.RPG.Characters {
 	public class CharacterSheet {
+		// Basic Stats
 		public string Name { get; set; }
 		public CharacterAlignment Alignment { get; set; }
 		public int Height { get; set; }
 		public int Weight { get; set; }
-		public IDictionary<AbilityScoreTypes, AbilityScore> AbilityScores { get; set; }
+
+		//Race and Class
 		public Race Race { get; protected set; }
 		public Class Class { get; set; }
-		public int MaxHitPoints { get; set; }
-		public int CurrentHitPoints { get; set; } 
+
+		//Abilities
 		public int Level { get; private set; }
+		public IDictionary<AbilityScoreTypes, AbilityScore> AbilityScores { get; set; }
 		private IDictionary<string, CharacterSkill> Skills { get; set; }
 		public IList<Trait> Traits { get; private set; }
+
+		//Combat Related
+		public int MaxHitPoints { get; set; }
+		public int CurrentHitPoints { get; set; } 
+
+		public event EventHandler<CharacterSheetEventArgs> Modified;
 
 		public CharacterSheet() {
 			AbilityScores = new Dictionary<AbilityScoreTypes, AbilityScore> ();
@@ -33,20 +42,24 @@ namespace ShortLegStudio.RPG.Characters {
 		/// <param name="scores">Scores.</param>
 		public void SetAbilityScores(IList<AbilityScore> scores) {
 			foreach (var ab in scores) {
-				SetAbility (ab);
+				SetAbility (ab, false);
 			}
+			NotifyModified ();
 		}
 
 		/// <summary>
 		/// Sets the ability.
 		/// </summary>
 		/// <param name="score">Score.</param>
-		public void SetAbility(AbilityScore score) {
+		public void SetAbility(AbilityScore score, bool notify = true) {
 			if (AbilityScores.ContainsKey (score.Name)) {
 				AbilityScores [score.Name] = score;
 			} else {
 				AbilityScores.Add (score.Name, score);
 			}
+
+			if (notify)
+				NotifyModified ();
 		}
 
 		/// <summary>
@@ -96,12 +109,23 @@ namespace ShortLegStudio.RPG.Characters {
 
 			//Add Traits
 			foreach (var trait in race.Traits) {
-				AddTrait (trait);
+				AddTrait (trait, false);
 			}
+			NotifyModified ();
 		}
 
-		public void AddTrait(string trait) {
-			Traits.Add (Trait.GetTrait (trait));
+		public void AddTrait(string trait, bool notify = true) {
+			var traitInfo = Trait.GetTrait (trait);
+			AddTrait (traitInfo, notify);
+
+		}
+
+		public void AddTrait(Trait trait, bool notify = true) {
+			Traits.Add (trait);
+
+			if (notify) {
+				NotifyModified ();
+			}
 		}
 
 		public void SetSkills(IList<Skill> skills) {
@@ -111,6 +135,7 @@ namespace ShortLegStudio.RPG.Characters {
 					new CharacterSkill (s, this)
 				);
 			}
+			NotifyModified ();
 		}
 
 		public CharacterSkill GetSkill(Skill skill) {
@@ -123,6 +148,14 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public IList<CharacterSkill> GetSkillList() {
 			return Skills.Values.ToList ();
+		}
+
+		public IList<SkillAdjustment> FindSkillAdjustments(string name) {
+			var traitAdjustments = Traits.SelectMany (x =>
+				x.SkillModifiers.Where (y => y.SkillName == name)
+			);
+
+			return traitAdjustments.ToList();
 		}
 
 		public bool IsClassSkill(string name) {
@@ -141,6 +174,16 @@ namespace ShortLegStudio.RPG.Characters {
 			CurrentHitPoints = hp;
 		}
 
+		private void NotifyModified() {
+			if (Modified != null) { 
+				var args = new CharacterSheetEventArgs ();
+				args.Sheet = this;
+				Modified (this, args);
+			}
+		}
 	}
 
+	public class CharacterSheetEventArgs : EventArgs {
+		public CharacterSheet Sheet { get; set; }
+	}
 }

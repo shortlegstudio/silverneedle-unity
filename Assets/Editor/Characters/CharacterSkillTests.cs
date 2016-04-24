@@ -10,8 +10,21 @@ using System.Text;
 
 [TestFixture]
 public class CharacterSkillTests {
+	CharacterSkill flySkill;
+
 	[SetUp]
 	public void SetUp() {
+		//Set up a climb skill
+		var fly = new Skill (
+			"Fly",
+			AbilityScoreTypes.Dexterity,
+			false
+		);
+
+		var character = new CharacterSheet ();
+		character.SetAbility (AbilityScoreTypes.Dexterity, 10);
+
+		flySkill = new CharacterSkill (fly, character);
 	}
 		
 	[Test]
@@ -98,6 +111,18 @@ public class CharacterSkillTests {
 		Assert.AreEqual (4, charSkill.Score);
 		charSkill.AddRank ();
 		Assert.AreEqual (5, charSkill.Score);
+	}
+
+	[Test]
+	public void SkillsCanHaveAdjustmentsFromTraitsOrFeats() {
+		var adjust = new SkillAdjustment (
+			             "Acrobatic Feat",
+			             2,
+			             "Fly"
+		             );
+		flySkill.AddAdjustment (adjust);
+
+		Assert.AreEqual (2, flySkill.Score);
 	}
 
 }

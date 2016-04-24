@@ -8,6 +8,12 @@ using System.Linq;
 
 [TestFixture]
 public class CharacterSheetTests {
+	CharacterSheet character;
+
+	[SetUp]
+	public void SetupCharacter() {
+
+	}
 
     [Test]
     public void CharactersHaveVitalStats() {
@@ -110,5 +116,59 @@ public class CharacterSheetTests {
 		sheet.SetRace (elf);
 		Assert.IsTrue(sheet.Traits.Any(x => x == trait));
 		Trait.SetTraits (null);
+	}
+
+	[Test]
+	public void AddTraitTriggersModifiedEvent() {
+		bool called = false;
+
+		CharacterSheet sheet = new CharacterSheet ();
+		sheet.Modified += (object sender, CharacterSheetEventArgs e) => {
+			called = true;
+		};
+
+		//Set up the trait
+		var trait = new Trait ();
+		trait.Name = "Elfy";
+		Trait.SetTraits (new List<Trait> () { trait });
+
+		sheet.AddTrait ("Elfy");
+
+		//Make sure the event was called
+		Assert.IsTrue (called);
+	}
+
+	[Test]
+	public void AccessAllSkillAdjustments() {
+		var sheet = new CharacterSheet ();
+		var trait = new Trait ();
+		trait.SkillModifiers.Add(
+			new SkillAdjustment(
+				"Trait Adj",
+				3,
+				"Heal"
+			)
+		);
+
+		trait.SkillModifiers.Add(
+			new SkillAdjustment(
+				"Trait Adj",
+				3,
+				"Heal"
+			)
+		);
+
+		trait.SkillModifiers.Add(
+			new SkillAdjustment(
+				"Trait Adj",
+				3,
+				"Fly"
+			)
+		);
+		sheet.AddTrait (trait);
+
+		var adjustments = sheet.FindSkillAdjustments ("Heal");
+		Assert.AreEqual (2, adjustments.Count);
+
 	}
 }

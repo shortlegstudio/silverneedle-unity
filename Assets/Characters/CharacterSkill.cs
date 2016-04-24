@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
 
 namespace ShortLegStudio.RPG.Characters {
 	public class CharacterSkill {
@@ -9,11 +12,20 @@ namespace ShortLegStudio.RPG.Characters {
 		public bool AbleToUse { get; private set; }
 		public int Ranks { get; private set; }
 		public bool ClassSkill { get; set; }
+		public IList<SkillAdjustment> Adjustments { get; private set; }
+
 
 		public CharacterSkill(Skill baseSkill, CharacterSheet charSheet) {
+			Adjustments = new List<SkillAdjustment> ();
 			skill = baseSkill;
 			character = charSheet;
+
 			ClassSkill = charSheet.IsClassSkill(skill.Name);
+
+			foreach (var adj in charSheet.FindSkillAdjustments (skill.Name)) {
+				AddAdjustment (adj);
+			}
+				
 			CalculateScore ();
 		}
 
@@ -29,9 +41,14 @@ namespace ShortLegStudio.RPG.Characters {
 					val += 3;
 				AbleToUse = true;
 			}
+			val += TotalAdjustments ();
 
 			Score = val;
 			return Score;
+		}
+
+		public int TotalAdjustments() {
+			return Adjustments.Sum(x => x.Amount);
 		}
 
 		public void AddRank() {
@@ -41,6 +58,13 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public string Name { 
 			get { return skill.Name; }
+		}
+
+		public void AddAdjustment(SkillAdjustment adjustment) {
+			if (adjustment.SkillName == Name) {
+				Adjustments.Add (adjustment);
+				CalculateScore ();
+			}
 		}
 	}
 }

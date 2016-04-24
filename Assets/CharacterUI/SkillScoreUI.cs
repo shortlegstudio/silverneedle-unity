@@ -14,6 +14,8 @@ public class SkillScoreUI : MonoBehaviour {
 	void Start() {
 		characterBuilder = FindObjectOfType<CharacterBuilder> ();
 		characterBuilder.CharacterChanged += CharacterUpdated;
+
+		;
 	}
 
 	public void SetSkill(Skill skill) {

@@ -42,6 +42,20 @@ public class TraitTests {
 		Assert.AreEqual ("Really tough", hardy.Description);
 	}
 
+	[Test]
+	public void TraitsCanHaveSkillAdjustments() {
+		var modifiers = hardy.SkillModifiers;
+		Assert.AreEqual (2, modifiers.Count);
+		var skillAdj = modifiers.First ();
+		Assert.AreEqual ("Heal", skillAdj.SkillName);
+		Assert.AreEqual ("Hardy (trait)", skillAdj.Reason);
+		Assert.AreEqual (2, skillAdj.Amount);
+
+		var flyAdj = modifiers.Last ();
+		Assert.AreEqual ("Fly", flyAdj.SkillName);
+		Assert.AreEqual (4, flyAdj.Amount);
+	}
+
 	private const string TraitYamlFile = @"--- 
 - trait: 
   name: Darkvision
@@ -49,6 +63,11 @@ public class TraitTests {
 - trait:
   name: Hardy
   description: Really tough
+  skillmodifiers:
+    - skill: Heal
+      amount: 2 
+    - skill: Fly
+      amount: 4
 - trait:
   name: Halfling Luck
   description: Savings throw bonus
