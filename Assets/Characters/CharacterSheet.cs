@@ -90,7 +90,7 @@ namespace ShortLegStudio.RPG.Characters {
 		/// <returns>The ability modifier.</returns>
 		/// <param name="ability">Ability.</param>
 		public int GetAbilityModifier(AbilityScoreTypes ability) {
-			return AbilityScores [ability].BaseModifier;
+			return AbilityScores [ability].TotalModifier;
 		}
 
 		public void SetRace(Race race) {
