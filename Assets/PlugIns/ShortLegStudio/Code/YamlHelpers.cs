@@ -37,6 +37,14 @@ namespace ShortLegStudio {
 			return item.Value;
 		}
 
+		public string GetStringOptional(string key) {
+			var item = GetNodeOptional (key);
+			if (item != null)
+				return item.Value;
+
+			return null;
+		}
+
 		public int GetInteger(string key) {
 			return int.Parse (GetString (key));
 		}
@@ -80,6 +88,11 @@ namespace ShortLegStudio {
 
 				return null;
 			}
+		}
+
+		public override string ToString ()
+		{
+			return string.Format ("[YamlNodeWrapper: Node={0}, Value={1}, Key={2}, HasChildren={3}]", Node, Value, Key, HasChildren());
 		}
 	}
 

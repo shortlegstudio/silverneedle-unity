@@ -1,10 +1,8 @@
 - feat:
   name: Acrobatic
-  prerequisite: none
-  benefit:
-    - skillbonus:
-      name: Acrobatics
+  description: Skilled at leaping, jumping, and flying.
+  skillmodifiers:
+    - skill: Acrobatics
       amount: 2
-    - skillbonus:
-      name: Fly
+    - skill: Fly
       amount: 2
