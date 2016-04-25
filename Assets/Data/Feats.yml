@@ -6,3 +6,16 @@
       amount: 2
     - skill: Fly
       amount: 2
+- feat:
+  name: Acrobatic Steps
+  description: >
+    You can easily move over and through obstacles.
+  prerequisites:
+    - ability: dexterity 15
+    - feat: Nimble Moves
+- feat:
+  name: Agile Maneuvers
+  description: >
+    You've learned to use your quickness in place of brute force when performing
+    combat maneuvers.
+  combat: yes

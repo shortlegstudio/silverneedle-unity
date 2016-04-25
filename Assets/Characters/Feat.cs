@@ -15,10 +15,15 @@ namespace ShortLegStudio.RPG.Characters {
 		public string Description { get; set; }
 		public IList<SkillAdjustment> SkillModifiers { get; protected set; }
 		public Prerequisites Prerequisites { get; protected set; }
+		public bool IsCombatFeat { get; set; }
 
 		public Feat() {
 			SkillModifiers = new List<SkillAdjustment> ();
 			Prerequisites = new Prerequisites ();
+		}
+
+		public bool Qualified(CharacterSheet character) {
+			return Prerequisites.Qualified(character);
 		}
 
 		public static IList<Feat> LoadFromYaml(YamlNodeWrapper yaml) {
@@ -48,6 +53,9 @@ namespace ShortLegStudio.RPG.Characters {
 				var prereq = featNode.GetNodeOptional("prerequisites");
 				if(prereq != null)
 					feat.Prerequisites = new Prerequisites (prereq);
+
+
+				feat.IsCombatFeat = featNode.GetStringOptional ("combat") == "yes";
 				feats.Add (feat);
 			}
 
@@ -66,6 +74,10 @@ namespace ShortLegStudio.RPG.Characters {
 				Debug.Log ("Loaded Traits: " + _Feat.Count);
 			}
 			return _Feat;
+		}
+
+		public static IEnumerable<Feat> GetQualifyingFeats(CharacterSheet character) {
+			return GetFeats ().Where (x => x.Qualified (character));
 		}
 
 		public static void SetFeats(IList<Feat> feats) {

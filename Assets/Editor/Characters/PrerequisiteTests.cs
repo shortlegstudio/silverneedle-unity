@@ -23,8 +23,31 @@ public class PrerequisiteTests {
 
 		Assert.AreEqual (3, prereqs.Count);
 		Assert.IsInstanceOf<AbilityPrerequisite> (prereqs.First ());
-
 	}
+
+	[Test]
+	public void AlwaysQualifiedIfNoQualificationsNeeded() {
+		var pre = new Prerequisites ();
+		Assert.IsTrue(pre.Qualified(new CharacterSheet()));
+	}
+
+	[Test]
+	public void AbilityIsQualifiedIfExceedingScore() {
+		var pre = new AbilityPrerequisite ("Intelligence 13");
+		var c = new CharacterSheet ();
+		c.SetAbility (AbilityScoreTypes.Intelligence, 15);
+		Assert.IsTrue (pre.Qualified (c));
+	}
+
+	[Test]
+	public void AbilityIsNotQualifiedIfNotExceedingScore() {
+		var pre = new AbilityPrerequisite ("Intelligence 13");
+		var c = new CharacterSheet ();
+		c.SetAbility (AbilityScoreTypes.Intelligence, 11);
+		Assert.IsFalse (pre.Qualified (c));
+	}
+
+
 
 	private const string PrerequisitesYaml = @"--- 
 prerequisites:

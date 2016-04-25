@@ -66,6 +66,22 @@ public class FeatTests {
 		Assert.AreEqual (13, abilityCheck.Minimum);
 	}
 
+	[Test]
+	public void SomeFeatsAreCombatFeats() {
+		Assert.IsTrue (CombatExpertise.IsCombatFeat);
+		Assert.IsFalse (Acrobatic.IsCombatFeat);
+	}
+
+	[Test]
+	public void FeatsKnowWhetherYouQualify() {
+		var smartCharacter = new CharacterSheet ();
+		smartCharacter.SetAbility (AbilityScoreTypes.Intelligence, 15);
+		var dumbCharacter = new CharacterSheet ();
+		dumbCharacter.SetAbility (AbilityScoreTypes.Intelligence, 5);
+		Assert.IsTrue (CombatExpertise.Qualified (smartCharacter));
+		Assert.IsFalse (CombatExpertise.Qualified (dumbCharacter));
+	}
+
 	private const string FeatYamlFile = @"--- 
 - feat: 
   name: Acrobatic
@@ -78,9 +94,9 @@ public class FeatTests {
 - feat:
   name: Combat Expertise
   description: Dodge stuff better
+  combat: yes
   prerequisites:
     - ability: Intelligence 13
-
 - feat:
   name: Power Attack
   description: Hit Stuff Hard

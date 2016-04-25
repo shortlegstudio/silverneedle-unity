@@ -15,6 +15,13 @@ namespace ShortLegStudio.RPG.Characters {
 			ParseYaml (yaml);
 		}
 
+		public bool Qualified(CharacterSheet sheet) {
+			if (this.Count == 0)
+				return true;
+			
+			return this.All (x => x.Qualified (sheet));
+		}
+
 		private void ParseYaml(YamlNodeWrapper yaml) {
 			foreach (var prereq in yaml.Children()) {
 				Prerequisite newreq = null;
@@ -41,10 +48,11 @@ namespace ShortLegStudio.RPG.Characters {
 					Add(newreq);
 			}
 		}
+
 	}
 
 	public abstract class Prerequisite {
-		
+		public abstract bool Qualified (CharacterSheet character);
 	}
 
 	public class AbilityPrerequisite : Prerequisite {
@@ -56,6 +64,11 @@ namespace ShortLegStudio.RPG.Characters {
 			Ability = (AbilityScoreTypes)System.Enum.Parse(typeof(AbilityScoreTypes), vals[0]);
 			Minimum = int.Parse (vals [1]);
 		}
+
+		public override bool Qualified (CharacterSheet character)
+		{
+			return character.GetAbilityScore(Ability) >= Minimum;
+		}
 	}
 
 	public class RacePrerequisite : Prerequisite {
@@ -64,6 +77,11 @@ namespace ShortLegStudio.RPG.Characters {
 		public RacePrerequisite(string value) {
 			Race = value;
 		}
+
+		public override bool Qualified (CharacterSheet character)
+		{
+			return false;
+		}
 	}
 
 	public class FeatPrerequisite : Prerequisite {
@@ -71,6 +89,11 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public FeatPrerequisite(string value) {
 			Feat = value;
+		}
+
+		public override bool Qualified (CharacterSheet character)
+		{
+			return false;
 		}
 	}
 }
