@@ -7,7 +7,7 @@ using ShortLegStudio;
 
 namespace ShortLegStudio.RPG.Characters {
 	public class Prerequisites : List<Prerequisite> {
-		string[] PREREQ_KEYS = { "ability", "race", "feat" };
+		string[] PREREQ_KEYS = { "ability", "race", "feat", "classfeature", "proficiency" , "casterlevel", "baseattackbonus" };
 		public Prerequisites() {
 		}
 
@@ -39,6 +39,18 @@ namespace ShortLegStudio.RPG.Characters {
 						case "feat":
 							newreq = new FeatPrerequisite (val);
 							break;
+						case "classfeature":
+							newreq = new ClassFeaturePrerequisite(val);
+							break;
+						case "proficiency":
+							newreq = new ProficiencyPrerequisite (val);
+							break;
+						case "casterlevel":
+							newreq = new CasterLevelPrerequisite (val);
+							break;
+						case "baseattackbonus":
+							newreq = new BaseAttackBonus (val);
+							break;
 						}
 						break;
 					}
@@ -61,7 +73,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public AbilityPrerequisite(string req) {
 			var vals = req.Split (' ');
-			Ability = (AbilityScoreTypes)System.Enum.Parse(typeof(AbilityScoreTypes), vals[0]);
+			Ability = AbilityScore.GetType (vals [0]);
 			Minimum = int.Parse (vals [1]);
 		}
 
@@ -93,6 +105,54 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public override bool Qualified (CharacterSheet character)
 		{
+			return false;
+		}
+	}
+
+	public class ClassFeaturePrerequisite : Prerequisite {
+		public string ClassFeature { get; set; }
+
+		public ClassFeaturePrerequisite(string value) {
+			ClassFeature = value;
+		}
+
+		public override bool Qualified (CharacterSheet character) {
+			return false;
+		}
+	}
+
+	public class ProficiencyPrerequisite : Prerequisite {
+		public string Proficiency { get; set; }
+
+		public ProficiencyPrerequisite(string value) {
+			Proficiency = value;
+		}
+
+		public override bool Qualified (CharacterSheet character) {
+			return false;
+		}
+	}
+
+	public class CasterLevelPrerequisite : Prerequisite {
+		public string CasterLevel { get; set; }
+
+		public CasterLevelPrerequisite(string value) {
+			CasterLevel = value;
+		}
+
+		public override bool Qualified (CharacterSheet character) {
+			return false;
+		}
+	}
+
+	public class BaseAttackBonus : Prerequisite {
+		public string AttackBonus { get; set; }
+
+		public BaseAttackBonus(string value) {
+			AttackBonus = value;
+		}
+
+		public override bool Qualified (CharacterSheet character) {
 			return false;
 		}
 	}

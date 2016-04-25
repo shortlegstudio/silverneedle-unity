@@ -11,7 +11,7 @@
   description: >
     You can easily move over and through obstacles.
   prerequisites:
-    - ability: dexterity 15
+    - ability: Dexterity 15
     - feat: Nimble Moves
 - feat:
   name: Agile Maneuvers
@@ -19,3 +19,116 @@
     You've learned to use your quickness in place of brute force when performing
     combat maneuvers.
   combat: yes
+- feat:
+  name: Alertness
+  description: You often notice things that others might miss.
+  skillmodifiers:
+    - skill: Perception
+      amount: 2
+    - skill: Sense Motive
+      amount: 2
+- feat:
+  name: Alignment Channel (Chaos)
+  description: >
+    Choose chaos, evil, good, or law. You can channel divine energy to affect
+    outsiders that posses this subtype.
+  prerequisites:
+    - classfeature: Channel Energy
+- feat:
+  name: Alignment Channel (Evil)
+  description: >
+    Choose chaos, evil, good, or law. You can channel divine energy to affect
+    outsiders that posses this subtype.
+  prerequisites:
+    - classfeature: Channel Energy
+- feat:
+  name: Alignment Channel (Good)
+  description: >
+    Choose chaos, evil, good, or law. You can channel divine energy to affect
+    outsiders that posses this subtype.
+  prerequisites:
+    - classfeature: Channel Energy
+- feat:
+  name: Alignment Channel (Law)
+  description: >
+    Choose chaos, evil, good, or law. You can channel divine energy to affect
+    outsiders that posses this subtype.
+  prerequisites:
+    - classfeature: Channel Energy
+- feat:
+  name: Animal Affinity
+  description: You are skilled at working with animals and mounts.
+  skillmodifiers:
+    - skill: Handle Animal
+      amount: 2
+    - skill: Ride
+      amount: 2
+- feat:
+  name: Arcane Armor Mastery
+  description: >
+    You have masterd the ability to cast spells while wearing armor.
+  prerequisites:
+    - feat: Arcane Armor Training
+    - feat: Armor Proficiency (Medium)
+    - casterlevel: 7
+  combat: yes
+- feat:
+  name: Arcane Armor Training
+  description: You have learned how to cast spells while wearing armor.
+  prerequisites:
+    - feat: Armor Proficiency (Light)
+    - casterlevel: 3
+  combat: yes
+- feat:
+  name: Arcane Strike
+  description: >
+    You draw upon your arcane power to enhance
+    your weapons with magical energy.
+  prerequisites:
+    - classfeature: Arcane Spellcaster
+- feat:
+  name: Armor Proficiency (Heavy)
+  description: You are skilled at wearing light armor.
+- feat:
+  name: Armor Proficiency (Light)
+  description: You are skilled at wearing light armor.
+- feat:
+  name: Armor Proficiency (Medium)
+  description: You are skilled at wearing light armor.
+- feat:
+  name: Athletic
+  description: You possess inherent physical prowess.
+  skillmodifiers:
+    - skill: Climb
+      amount: 2
+    - skill: Swim
+      amount: 2
+- feat:
+  name: Augment Summoning
+  description: Your summoned creatures are more powerful and robust.
+  prerequisites:
+    - feat: Spell Focus (Conjuration)
+- feat:
+  name: Bleeding Critical
+  description: Your critical hits cause opponents to bleed profusely.
+  prerequisites:
+    - feat: Critical Focus
+    - baseattackbonus: 11
+  combat: yes
+- feat:
+  name: Blind-Fight
+  description: >
+    You are skilled at attacking opponents that you cannot clearly perceive.
+  combat: yes
+- feat:
+  name: Blinding Critical
+  description: Your critical hits blind your opponent.
+  combat: yes
+  prerequisites:
+    - feat: Critical Focus
+    - baseattackbonus: 15
+- feat:
+  name: Brew Potion
+  description: You can create magic potions.
+  prerequisites:
+    - casterlevel: 3

@@ -32,7 +32,7 @@ namespace ShortLegStudio.RPG.Characters {
 			foreach (var featNode in yaml.Children()) {
 				var feat = new Feat ();
 				feat.Name = featNode.GetString ("name"); 
-				Debug.Log ("Loading Trait: " + feat.Name);
+				Debug.LogFormat ("Loading Feat: {0}" , feat.Name);
 				feat.Description = featNode.GetString ("description");
 
 				//Get Any skill Modifiers if they exist

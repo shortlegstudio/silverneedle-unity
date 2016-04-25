@@ -22,6 +22,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public IDictionary<AbilityScoreTypes, AbilityScore> AbilityScores { get; set; }
 		private IDictionary<string, CharacterSkill> Skills { get; set; }
 		public IList<Trait> Traits { get; private set; }
+		public IList<Feat> Feats { get; private set; }
 
 		//Combat Related
 		public int MaxHitPoints { get; set; }
@@ -33,6 +34,7 @@ namespace ShortLegStudio.RPG.Characters {
 			AbilityScores = new Dictionary<AbilityScoreTypes, AbilityScore> ();
 			Skills = new Dictionary<string, CharacterSkill> ();
 			Traits = new List<Trait> ();
+			Feats = new List<Feat> ();
 			Level = 1;
 		}
 
@@ -128,6 +130,13 @@ namespace ShortLegStudio.RPG.Characters {
 			}
 		}
 
+		public void AddFeat(Feat feat, bool notify = true) {
+			Feats.Add (feat);
+			if (notify) {
+				NotifyModified ();
+			}
+		}
+
 		public void SetSkills(IList<Skill> skills) {
 			foreach (var s in skills) {
 				Skills.Add (
@@ -151,11 +160,18 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public IList<SkillAdjustment> FindSkillAdjustments(string name) {
-			var traitAdjustments = Traits.SelectMany (x =>
+
+			//Traits
+			var adjustments = Traits.SelectMany (x =>
 				x.SkillModifiers.Where (y => y.SkillName == name)
+			).Concat(
+				Feats.SelectMany (x =>
+					x.SkillModifiers.Where (y => y.SkillName == name)
+				)
 			);
 
-			return traitAdjustments.ToList();
+
+			return adjustments.ToList();
 		}
 
 		public bool IsClassSkill(string name) {

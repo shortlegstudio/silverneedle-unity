@@ -34,6 +34,13 @@ public class FeaturePanelUI : MonoBehaviour {
 			var tagScript = newTrait.GetComponent<FeatureUI> ();
 			tagScript.SetFeature (trait.Name, trait.Description);
 		}
+
+		foreach (var feat in character.CurrentCharacter.Feats) {
+			var featUI = Instantiate (FeatureUI);
+			featUI.transform.SetParent (transform, false);
+			var tagScript = featUI.GetComponent<FeatureUI> ();
+			tagScript.SetFeature (feat.Name, feat.Description);
+		}
 	}
 
 }

@@ -16,16 +16,26 @@ namespace ShortLegStudio.RPG.Characters {
 
 
 		public CharacterSkill(Skill baseSkill, CharacterSheet charSheet) {
-			Adjustments = new List<SkillAdjustment> ();
 			skill = baseSkill;
 			character = charSheet;
+			character.Modified += Character_Modified;
 
-			ClassSkill = charSheet.IsClassSkill(skill.Name);
+			RefreshCharacter ();
 
-			foreach (var adj in charSheet.FindSkillAdjustments (skill.Name)) {
+		}
+
+		void Character_Modified (object sender, CharacterSheetEventArgs e) {
+			RefreshCharacter ();
+		}
+
+		void RefreshCharacter() {
+			Adjustments = new List<SkillAdjustment> ();
+			ClassSkill = character.IsClassSkill(skill.Name);
+
+			foreach (var adj in character.FindSkillAdjustments (skill.Name)) {
 				AddAdjustment (adj);
 			}
-				
+
 			CalculateScore ();
 		}
 
@@ -66,5 +76,7 @@ namespace ShortLegStudio.RPG.Characters {
 				CalculateScore ();
 			}
 		}
+
+
 	}
 }

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Characters.Generators;
-
+using System.Linq;
 
 public class CharacterBuilder : MonoBehaviour {
 	public Text Name;
@@ -43,6 +43,7 @@ public class CharacterBuilder : MonoBehaviour {
 		CurrentCharacter.Class = Class.GetClasses ().ChooseOne ();
 		CurrentCharacter.SetSkills (_skills);
 		CurrentCharacter.SetHitPoints (HitPointGenerator.RollHitPoints (CurrentCharacter));
+		CurrentCharacter.AddFeat (Feat.GetQualifyingFeats (CurrentCharacter).ToList ().ChooseOne ());
 
 		//Generate Appearance
 		CurrentCharacter.Height = AppearanceGenerator.RollHeight(CurrentCharacter);
