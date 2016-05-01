@@ -7,7 +7,8 @@ using ShortLegStudio;
 
 namespace ShortLegStudio.RPG.Characters {
 	public class Prerequisites : List<Prerequisite> {
-		string[] PREREQ_KEYS = { "ability", "race", "feat", "classfeature", "proficiency" , "casterlevel", "baseattackbonus" };
+		string[] PREREQ_KEYS = { "ability", "race", "feat", "classfeature", "proficiency" , 
+			"casterlevel", "baseattackbonus", "classlevel", "skillranks" };
 		public Prerequisites() {
 		}
 
@@ -33,24 +34,32 @@ namespace ShortLegStudio.RPG.Characters {
 						case "ability":
 							newreq = new AbilityPrerequisite (val);
 							break;
-						case "race":
-							newreq = new RacePrerequisite (val);
-							break;
-						case "feat":
-							newreq = new FeatPrerequisite (val);
-							break;
-						case "classfeature":
-							newreq = new ClassFeaturePrerequisite(val);
-							break;
-						case "proficiency":
-							newreq = new ProficiencyPrerequisite (val);
+						case "baseattackbonus":
+							newreq = new BaseAttackBonusPrerequisite (val);
 							break;
 						case "casterlevel":
 							newreq = new CasterLevelPrerequisite (val);
 							break;
-						case "baseattackbonus":
-							newreq = new BaseAttackBonus (val);
+						case "classfeature":
+							newreq = new ClassFeaturePrerequisite(val);
 							break;
+						case "classlevel":
+							newreq = new ClassLevelPrerequisite(val);
+							break;
+						case "feat":
+							newreq = new FeatPrerequisite (val);
+							break;
+						case "proficiency":
+							newreq = new ProficiencyPrerequisite (val);
+							break;
+						case "race":
+							newreq = new RacePrerequisite (val);
+							break;
+						case "skillranks":
+							newreq = new SkillRankPrerequisite (val);
+							break;
+
+						
 						}
 						break;
 					}
@@ -145,10 +154,10 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 	}
 
-	public class BaseAttackBonus : Prerequisite {
+	public class BaseAttackBonusPrerequisite : Prerequisite {
 		public string AttackBonus { get; set; }
 
-		public BaseAttackBonus(string value) {
+		public BaseAttackBonusPrerequisite(string value) {
 			AttackBonus = value;
 		}
 
@@ -156,4 +165,38 @@ namespace ShortLegStudio.RPG.Characters {
 			return false;
 		}
 	}
+
+	public class ClassLevelPrerequisite: Prerequisite {
+		public string Class { get; set; }
+		public int Minimum { get; set; }
+
+		public ClassLevelPrerequisite(string req) {
+			var vals = req.Split (' ');
+			Class = vals [0];
+			Minimum = int.Parse (vals [1]);
+		}
+
+		public override bool Qualified (CharacterSheet character)
+		{
+			return false;
+		}
+	}
+
+
+	public class SkillRankPrerequisite : Prerequisite {
+		public string SkillName { get; set; }
+		public int Minimum { get; set; }
+
+		public SkillRankPrerequisite(string req) {
+			var vals = req.Split (' ');
+			SkillName = vals [0];
+			Minimum = int.Parse (vals [1]);
+		}
+
+		public override bool Qualified (CharacterSheet character)
+		{
+			return false;
+		}
+	}
+
 }

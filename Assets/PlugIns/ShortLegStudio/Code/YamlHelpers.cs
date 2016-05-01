@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Text.RegularExpressions;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ namespace ShortLegStudio {
 	}
 
 	public class YamlNodeWrapper {
+		public string BOOLEAN_TRUE = "yes";
+
 		public YamlNode Node { get; private set; }
 		private YamlSequenceNode _seqNode;
 		private YamlScalarNode _scalarNode;
@@ -43,6 +46,18 @@ namespace ShortLegStudio {
 				return item.Value;
 
 			return null;
+		}
+
+		public string[] GetCommaStringOptional(string key) {
+			var val = GetStringOptional (key);
+			if (val != null)
+				return Regex.Split(val, "\\s*,\\s*");
+		
+			return new string [] { };
+		}
+
+		public bool GetBoolOptional(string key) {
+			return GetStringOptional (key) == "yes";
 		}
 
 		public int GetInteger(string key) {

@@ -14,7 +14,7 @@ public class FeatTests {
 	Feat Acrobatic;
 	Feat CombatExpertise;
 	Feat PowerAttack;
-
+	Feat CraftWand;
 
 	[SetUp]
 	public void SetUp() {
@@ -27,6 +27,7 @@ public class FeatTests {
 		Acrobatic = feats.First (x => x.Name == "Acrobatic");
 		CombatExpertise = feats.First (x => x.Name == "Combat Expertise");
 		PowerAttack = feats.First (x => x.Name == "Power Attack");
+		CraftWand = feats.First (x => x.Name == "Craft Wand");
 	}
 		
     [Test]
@@ -73,6 +74,18 @@ public class FeatTests {
 	}
 
 	[Test]
+	public void SomeFeatsAreCriticalFeats() {
+		Assert.IsTrue (PowerAttack.IsCriticalFeat);
+		Assert.IsFalse (Acrobatic.IsCriticalFeat);
+	}
+
+	[Test]
+	public void SomeFeatsAreItemCreationFeats() {
+		Assert.IsTrue (CraftWand.IsItemCreation);
+		Assert.IsFalse (Acrobatic.IsItemCreation);
+	}
+
+	[Test]
 	public void FeatsKnowWhetherYouQualify() {
 		var smartCharacter = new CharacterSheet ();
 		smartCharacter.SetAbility (AbilityScoreTypes.Intelligence, 15);
@@ -87,18 +100,21 @@ public class FeatTests {
   name: Acrobatic
   description: Move good
   skillmodifiers:
-    - skill: Acrobatics
-      amount: 2
-    - skill: Fly
-      amount: 4
+    - Acrobatics = 2
+    - Fly = 4
 - feat:
   name: Combat Expertise
   description: Dodge stuff better
-  combat: yes
+  tags: combat
   prerequisites:
     - ability: Intelligence 13
 - feat:
   name: Power Attack
   description: Hit Stuff Hard
+  tags: combat, critical
+- feat:
+  name: Craft Wand
+  tags: itemcreation
+  description: Make Wands
 ...";
 }

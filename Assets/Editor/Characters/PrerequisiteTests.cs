@@ -21,7 +21,7 @@ public class PrerequisiteTests {
 
 		var prereqs = new Prerequisites (prereq);
 
-		Assert.AreEqual (3, prereqs.Count);
+		Assert.AreEqual (4, prereqs.Count);
 		Assert.IsInstanceOf<AbilityPrerequisite> (prereqs.First ());
 	}
 
@@ -49,11 +49,13 @@ public class PrerequisiteTests {
 
 
 
+
 	private const string PrerequisitesYaml = @"--- 
 prerequisites:
   - ability: Intelligence 13
   - race: Elf
   - feat: Weapon Finesse
+  - skillranks: Acrobatics 4
 ";
 }
 
