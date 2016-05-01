@@ -27,6 +27,13 @@ namespace ShortLegStudio.RPG.Characters {
 		//Combat Related
 		public int MaxHitPoints { get; set; }
 		public int CurrentHitPoints { get; set; } 
+		public int BaseAttackBonus { get; set; }
+		public int MeleeAttackBonus { get; set; }
+		public int RangeAttackBonus { get; set; }
+
+		public int FortitudeSaves { get; set; }
+		public int ReflexSaves { get; set; }
+		public int WillSaves { get; set; }
 
 		public event EventHandler<CharacterSheetEventArgs> Modified;
 
@@ -93,6 +100,29 @@ namespace ShortLegStudio.RPG.Characters {
 		/// <param name="ability">Ability.</param>
 		public int GetAbilityModifier(AbilityScoreTypes ability) {
 			return AbilityScores [ability].TotalModifier;
+		}
+
+		public void SetClass(Class cls) {
+			this.Class = cls;
+			this.BaseAttackBonus = GetCurrentBaseAttackBonus ();
+			this.MeleeAttackBonus = BaseAttackBonus + GetAbilityModifier (AbilityScoreTypes.Strength);
+			this.RangeAttackBonus = BaseAttackBonus + GetAbilityModifier (AbilityScoreTypes.Dexterity);
+			this.WillSaves = GetSaveValue (cls.WillSaveRate);
+			this.FortitudeSaves = GetSaveValue (cls.FortitudeSaveRate);
+			this.ReflexSaves = GetSaveValue (cls.ReflexSaveRate);
+		}
+
+		private int GetCurrentBaseAttackBonus() {
+			return (int)Class.BaseAttackBonusRate * Level;
+		}
+
+		private int GetSaveValue(float saveRate) {
+			var val = 0f;
+			if (saveRate == 0.667f)
+				val = 2;
+
+			val += saveRate * Level;
+			return (int)val;
 		}
 
 		public void SetRace(Race race) {

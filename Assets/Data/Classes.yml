@@ -13,6 +13,10 @@
     - Survival
     - Swim
   hitdice: d12
+  baseattackbonus: 1
+  fortitude: 0.667
+  reflex: 0.334
+  will: 0.334
 - class:
   name: Bard
   skillpoints: 6
@@ -46,6 +50,10 @@
     - Stealth
     - Use Magical Device
   hitdice: d6
+  baseattackbonus: 0.75
+  fortitude: 0.334
+  reflex: 0.667
+  will: 0.667
 - class:
   name: Cleric
   skillpoints: 2
@@ -64,6 +72,10 @@
     - Sense Motive
     - Spellcraft
   hitdice: d8
+  baseattackbonus: 0.75
+  fortitude: 0.667
+  reflex: 0.334
+  will: 0.667
 - class:
   name: Druid
   skillpoints: 4
@@ -82,6 +94,10 @@
     - Survival
     - Swim
   hitdice: d8
+  baseattackbonus: 0.75
+  fortitude: 0.667
+  reflex: 0.334
+  will: 0.667
 - class:
   name: Fighter
   skillpoints: 2
@@ -97,6 +113,10 @@
     - Survival
     - Swim
   hitdice: d10
+  baseattackbonus: 1
+  fortitude: 0.667
+  reflex: 0.334
+  will: 0.334
 - class:
   name: Monk
   skillpoints: 4
@@ -116,6 +136,10 @@
     - Stealth
     - Swim
   hitdice: d8
+  baseattackbonus: 0.75
+  fortitude: 0.667
+  reflex: 0.667
+  will: 0.667
 - class:
   name: Paladin
   skillpoints: 2
@@ -131,6 +155,10 @@
     - Sense Motive
     - Spellcraft
   hitdice: d10
+  baseattackbonus: 1
+  fortitude: 0.667
+  reflex: 0.334
+  will: 0.667
 - class:
   name: Ranger
   skillpoints: 6
@@ -151,6 +179,10 @@
     - Survival
     - Swim
   hitdice: d10
+  baseattackbonus: 1
+  fortitude: 0.667
+  reflex: 0.667
+  will: 0.334
 - class:
   name: Rogue
   skillpoints: 8
@@ -177,6 +209,10 @@
     - Swim
     - Use Magical Device
   hitdice: d8
+  baseattackbonus: 0.75
+  fortitude: 0.334
+  reflex: 0.667
+  will: 0.334
 - class:
   name: Sorcerer
   skillpoints: 2
@@ -191,6 +227,10 @@
     - Spellcraft
     - Use Magical Device
   hitdice: d6
+  baseattackbonus: 0.5
+  fortitude: 0.334
+  reflex: 0.334
+  will: 0.667
 - class:
   name: Wizard
   skillpoints: 2
@@ -212,3 +252,7 @@
     - Profession
     - Spellcraft
   hitdice: d6
+  baseattackbonus: 0.5
+  fortitude: 0.334
+  reflex: 0.334
+  will: 0.667

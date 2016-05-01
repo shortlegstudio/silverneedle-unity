@@ -64,6 +64,10 @@ namespace ShortLegStudio {
 			return int.Parse (GetString (key));
 		}
 
+		public float GetFloat(string key) {
+			return float.Parse (GetString (key));
+		}
+
 		public YamlNodeWrapper GetNode(string key) {
 			var item = _mappingNode.Children [new YamlScalarNode(key)];
 			return new YamlNodeWrapper (item);

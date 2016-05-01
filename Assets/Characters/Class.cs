@@ -11,6 +11,10 @@ namespace ShortLegStudio.RPG.Characters {
 		public IList<string> Skills { get; set; }
 		public int SkillPoints { get; set; }
 		public DiceSides HitDice { get; set; }
+		public float BaseAttackBonusRate { get; set; }
+		public float FortitudeSaveRate { get; set; }
+		public float ReflexSaveRate { get; set; }
+		public float WillSaveRate { get; set; }
 
 		public Class() {
 			Skills = new List<string> ();
@@ -44,8 +48,11 @@ namespace ShortLegStudio.RPG.Characters {
 				cls.Name = node.GetString ("name"); 
 				Debug.Log ("Loading Class: " + cls.Name);
 				cls.SkillPoints = node.GetInteger ("skillpoints");
-
 				cls.HitDice = DiceStrings.ParseSides (node.GetString ("hitdice"));
+				cls.BaseAttackBonusRate = node.GetFloat ("baseattackbonus");
+				cls.FortitudeSaveRate = node.GetFloat ("fortitude");
+				cls.ReflexSaveRate = node.GetFloat ("reflex");
+				cls.WillSaveRate = node.GetFloat ("will");
 
 				//Get the Skills for this class
 				var skills = node.GetNode ("skills").Children();

@@ -40,7 +40,7 @@ public class CharacterBuilder : MonoBehaviour {
 
 		CurrentCharacter.SetAbilityScores (AbilityScoreGenerator.RandomStandardHeroScores ());
 		CurrentCharacter.SetRace(Race.GetRaces ().ChooseOne ());
-		CurrentCharacter.Class = Class.GetClasses ().ChooseOne ();
+		CurrentCharacter.SetClass (Class.GetClasses ().ChooseOne ());
 		CurrentCharacter.SetSkills (_skills);
 		CurrentCharacter.SetHitPoints (HitPointGenerator.RollHitPoints (CurrentCharacter));
 		CurrentCharacter.AddFeat (Feat.GetQualifyingFeats (CurrentCharacter).ToList ().ChooseOne ());
