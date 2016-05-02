@@ -72,11 +72,11 @@ public class RaceTests {
 		//Should have a dice cup for making height rolls
 		var cup = dwarf.HeightRange;
 		Assert.AreEqual (cup.Dice.Count, 2);
-		Assert.AreEqual (cup.BaseValue, 45);
+		Assert.AreEqual (cup.Modifier, 45);
 
 		cup = human.WeightRange;
 		Assert.AreEqual (cup.Dice.Count, 10);
-		Assert.AreEqual (cup.BaseValue, 120);
+		Assert.AreEqual (cup.Modifier, 120);
 
 	}
 

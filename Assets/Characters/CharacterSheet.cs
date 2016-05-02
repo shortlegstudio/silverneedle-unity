@@ -17,8 +17,13 @@ namespace ShortLegStudio.RPG.Characters {
 		public Race Race { get; protected set; }
 		public Class Class { get; set; }
 
-		//Abilities
+
+		//Levels and Experience
 		public int Level { get; private set; }
+		public int XP { get; private set; }
+
+		//Abilities
+
 		public IDictionary<AbilityScoreTypes, AbilityScore> AbilityScores { get; set; }
 		private IDictionary<string, CharacterSkill> Skills { get; set; }
 		public IList<Trait> Traits { get; private set; }
@@ -144,6 +149,10 @@ namespace ShortLegStudio.RPG.Characters {
 				AddTrait (trait, false);
 			}
 			NotifyModified ();
+		}
+
+		public void SetLevel(int level) {
+			Level = level;
 		}
 
 		public void AddTrait(string trait, bool notify = true) {

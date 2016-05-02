@@ -44,6 +44,7 @@ public class CharacterBuilder : MonoBehaviour {
 		CurrentCharacter.SetSkills (_skills);
 		CurrentCharacter.SetHitPoints (HitPointGenerator.RollHitPoints (CurrentCharacter));
 		CurrentCharacter.AddFeat (Feat.GetQualifyingFeats (CurrentCharacter).ToList ().ChooseOne ());
+		LevelUpGenerator.BringCharacterToLevel(CurrentCharacter, UnityEngine.Random.Range (1, 21));
 
 		//Generate Appearance
 		CurrentCharacter.Height = AppearanceGenerator.RollHeight(CurrentCharacter);

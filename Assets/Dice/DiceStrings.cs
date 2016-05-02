@@ -21,7 +21,7 @@ namespace ShortLegStudio.Dice {
 
 			var dice = Die.GetDice ((DiceSides)dieSides, dieCount);
 			cup.AddDice (dice);
-			cup.BaseValue = modifier;
+			cup.Modifier = modifier;
 
 			return cup;
 		}
