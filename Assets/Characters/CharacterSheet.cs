@@ -112,21 +112,25 @@ namespace ShortLegStudio.RPG.Characters {
 			this.BaseAttackBonus = GetCurrentBaseAttackBonus ();
 			this.MeleeAttackBonus = BaseAttackBonus + GetAbilityModifier (AbilityScoreTypes.Strength);
 			this.RangeAttackBonus = BaseAttackBonus + GetAbilityModifier (AbilityScoreTypes.Dexterity);
-			this.WillSaves = GetSaveValue (cls.WillSaveRate);
-			this.FortitudeSaves = GetSaveValue (cls.FortitudeSaveRate);
-			this.ReflexSaves = GetSaveValue (cls.ReflexSaveRate);
+			UpdateSaveStats ();
+		}
+
+		public void UpdateSaveStats() {
+			this.WillSaves = GetSaveValue (Class.WillSaveRate, GetAbilityModifier(AbilityScoreTypes.Wisdom));
+			this.FortitudeSaves = GetSaveValue (Class.FortitudeSaveRate, GetAbilityModifier(AbilityScoreTypes.Constitution));
+			this.ReflexSaves = GetSaveValue (Class.ReflexSaveRate, GetAbilityModifier(AbilityScoreTypes.Dexterity));
 		}
 
 		private int GetCurrentBaseAttackBonus() {
 			return (int)Class.BaseAttackBonusRate * Level;
 		}
 
-		private int GetSaveValue(float saveRate) {
-			var val = 0f;
+		private int GetSaveValue(float saveRate, int modifier) {
+			var val = modifier;
 			if (saveRate == 0.667f)
 				val = 2;
 
-			val += saveRate * Level;
+			val += (int)(saveRate * Level);
 			return (int)val;
 		}
 

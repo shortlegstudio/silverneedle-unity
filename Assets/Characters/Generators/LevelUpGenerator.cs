@@ -14,6 +14,7 @@ namespace ShortLegStudio.RPG.Characters.Generators {
 			var incrementHitpoints = HitPointGenerator.RollLevelUp (character);
 			character.MaxHitPoints += incrementHitpoints;
 			character.CurrentHitPoints += incrementHitpoints;
+			character.UpdateSaveStats ();
 		}
 	}
 }
