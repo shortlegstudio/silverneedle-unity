@@ -100,6 +100,7 @@ public class ClassTests {
 		Assert.AreEqual (0.667f, Wizard.WillSaveRate);
 	}
 
+
 	private const string ClassYamlFile = @"--- 
 - class: 
   name: Fighter

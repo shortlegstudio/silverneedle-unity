@@ -95,6 +95,11 @@ public class FeatTests {
 		Assert.IsFalse (CombatExpertise.Qualified (dumbCharacter));
 	}
 
+	[Test]
+	public void FeatsCanBeFilteredByGroup() {
+
+	}
+
 	private const string FeatYamlFile = @"--- 
 - feat: 
   name: Acrobatic
