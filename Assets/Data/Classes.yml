@@ -17,6 +17,7 @@
   fortitude: 0.667
   reflex: 0.334
   will: 0.334
+  armorproficiencies: light, medium
 - class:
   name: Bard
   skillpoints: 6
@@ -54,6 +55,7 @@
   fortitude: 0.334
   reflex: 0.667
   will: 0.667
+  armorproficiencies: light
 - class:
   name: Cleric
   skillpoints: 2
@@ -76,6 +78,7 @@
   fortitude: 0.667
   reflex: 0.334
   will: 0.667
+  armorproficiencies: light, medium
 - class:
   name: Druid
   skillpoints: 4
@@ -98,6 +101,7 @@
   fortitude: 0.667
   reflex: 0.334
   will: 0.667
+  armorproficiencies: light, medium
 - class:
   name: Fighter
   skillpoints: 2
@@ -117,6 +121,7 @@
   fortitude: 0.667
   reflex: 0.334
   will: 0.334
+  armorproficiencies: light, medium, heavy
 - class:
   name: Monk
   skillpoints: 4
@@ -159,6 +164,7 @@
   fortitude: 0.667
   reflex: 0.334
   will: 0.667
+  armorproficiencies: light, medium, heavy
 - class:
   name: Ranger
   skillpoints: 6
@@ -183,6 +189,7 @@
   fortitude: 0.667
   reflex: 0.667
   will: 0.334
+  armorproficiencies: light, medium
 - class:
   name: Rogue
   skillpoints: 8
@@ -213,6 +220,7 @@
   fortitude: 0.334
   reflex: 0.667
   will: 0.334
+  armorproficiencies: light
 - class:
   name: Sorcerer
   skillpoints: 2

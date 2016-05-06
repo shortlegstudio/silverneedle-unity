@@ -82,13 +82,13 @@
     - classfeature: Arcane Spellcaster
 - feat:
   name: Armor Proficiency (Heavy)
-  description: You are skilled at wearing light armor.
+  description: You are skilled at wearing heavy armor.
 - feat:
   name: Armor Proficiency (Light)
   description: You are skilled at wearing light armor.
 - feat:
   name: Armor Proficiency (Medium)
-  description: You are skilled at wearing light armor.
+  description: You are skilled at wearing medium armor.
 - feat:
   name: Athletic
   description: You possess inherent physical prowess.

@@ -84,7 +84,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public static IEnumerable<Feat> GetQualifyingFeats(CharacterSheet character) {
-			return GetFeats ().Where (x => x.Qualified (character));
+			return GetFeats ().Where (x => x.Qualified (character) && !character.Feats.Contains(x));
 		}
 
 		public static IEnumerable<Feat> GetQualifyingFeats(CharacterSheet character, string tag) {

@@ -112,6 +112,12 @@ namespace ShortLegStudio.RPG.Characters {
 			this.BaseAttackBonus = GetCurrentBaseAttackBonus ();
 			this.MeleeAttackBonus = BaseAttackBonus + GetAbilityModifier (AbilityScoreTypes.Strength);
 			this.RangeAttackBonus = BaseAttackBonus + GetAbilityModifier (AbilityScoreTypes.Dexterity);
+
+			//Handle Armor Proficiencies
+			foreach (var x in cls.ArmorProficiencies) {
+				AddFeat (Feat.GetFeat (x));
+			}
+
 			UpdateSaveStats ();
 		}
 

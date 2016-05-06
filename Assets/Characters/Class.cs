@@ -15,9 +15,11 @@ namespace ShortLegStudio.RPG.Characters {
 		public float FortitudeSaveRate { get; set; }
 		public float ReflexSaveRate { get; set; }
 		public float WillSaveRate { get; set; }
+		public IList<string> ArmorProficiencies { get; set; }
 
 		public Class() {
 			Skills = new List<string> ();
+			ArmorProficiencies = new List<string> ();
 		}
 
 		public bool IsClassSkill(string name) {
@@ -53,6 +55,13 @@ namespace ShortLegStudio.RPG.Characters {
 				cls.FortitudeSaveRate = node.GetFloat ("fortitude");
 				cls.ReflexSaveRate = node.GetFloat ("reflex");
 				cls.WillSaveRate = node.GetFloat ("will");
+
+				var armor = node.GetCommaStringOptional ("armorproficiencies");
+				foreach (var a in armor) {
+					cls.ArmorProficiencies.Add (
+						string.Format ("Armor Proficiency ({0})", a.Capitalize ())
+					);
+				}
 
 				//Get the Skills for this class
 				var skills = node.GetNode ("skills").Children();

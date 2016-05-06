@@ -100,6 +100,15 @@ public class ClassTests {
 		Assert.AreEqual (0.667f, Wizard.WillSaveRate);
 	}
 
+	[Test]
+	public void ClassHaveArmorProficiencies() {
+		Assert.IsTrue (Fighter.ArmorProficiencies.Contains ("Armor Proficiency (Heavy)"));
+		Assert.IsTrue (Fighter.ArmorProficiencies.Contains ("Armor Proficiency (Medium)"));
+		Assert.IsTrue (Fighter.ArmorProficiencies.Contains ("Armor Proficiency (Light)"));
+		Assert.IsTrue (Monk.ArmorProficiencies.Count == 0 );
+		Assert.IsTrue (Wizard.ArmorProficiencies.Count == 0);
+
+	}
 
 	private const string ClassYamlFile = @"--- 
 - class: 
@@ -115,6 +124,7 @@ public class ClassTests {
   fortitude: 0.667
   reflex: 0.334
   will: 0.334
+  armorproficiencies: light, medium, heavy
 - class: 
   name: Monk
   skillpoints: 4
