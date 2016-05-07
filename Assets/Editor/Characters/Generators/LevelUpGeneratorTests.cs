@@ -3,6 +3,7 @@ using UnityEditor;
 using NUnit.Framework;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Characters.Generators;
+using System.Linq;
 
 
 [TestFixture]
@@ -38,5 +39,15 @@ public class LevelUpGeneratorTests {
 		var hp = character.MaxHitPoints;
 		LevelUpGenerator.LevelUp (character);
 		Assert.Greater (character.MaxHitPoints, hp);
+	}
+
+	[Test]
+	public void EveryFourLevelsYouGetAnExtraAbilityScore() {
+		LevelUpGenerator.BringCharacterToLevel (character, 4);
+
+		//At least one ability should be greater than 12 now
+		Assert.IsTrue (
+			character.AbilityScores.Values.Any (x => x.TotalValue > 12)
+		);
 	}
 }
