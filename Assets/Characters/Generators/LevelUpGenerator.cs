@@ -16,6 +16,8 @@ namespace ShortLegStudio.RPG.Characters.Generators {
 			character.CurrentHitPoints += incrementHitpoints;
 			character.UpdateSaveStats ();
 
+
+			//Special Level ups
 			if (character.Level % 4 == 0) {
 				AssignAbilityPoints (character);
 			}

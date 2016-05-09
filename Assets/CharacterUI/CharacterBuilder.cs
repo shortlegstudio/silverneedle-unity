@@ -19,7 +19,6 @@ public class CharacterBuilder : MonoBehaviour {
 	public CharacterSheet CurrentCharacter { get; private set; }
 	private IList<Race> _races;
 	private IList<Class> _classes;
-	private IList<Skill> _skills;
 
 	public event EventHandler CharacterChanged;
 
@@ -28,21 +27,13 @@ public class CharacterBuilder : MonoBehaviour {
 		AlignmentsUI = FindObjectOfType<AlignmentsDropdown> ();
 		_races = Race.GetRaces();
 		_classes = Class.GetClasses ();
-		_skills = Skill.GetSkills ();
 		BuildRaceDropdown ();
 		BuildClassDropdown ();
 	}
 
 	public void Generate() {
-		CurrentCharacter = new CharacterSheet ();
-		CurrentCharacter.Name = NameGenerator.CreateFullName ();
-		CurrentCharacter.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
-
-		CurrentCharacter.SetAbilityScores (AbilityScoreGenerator.RandomStandardHeroScores ());
-		CurrentCharacter.SetRace(Race.GetRaces ().ChooseOne ());
-		CurrentCharacter.SetClass (Class.GetClasses ().ChooseOne ());
-		CurrentCharacter.SetSkills (_skills);
-		CurrentCharacter.SetHitPoints (HitPointGenerator.RollHitPoints (CurrentCharacter));
+		CurrentCharacter = CharacterGenerator.CreateLevel0 ();
+		CharacterGenerator.SelectClass (CurrentCharacter);
 		CurrentCharacter.AddFeat (Feat.GetQualifyingFeats (CurrentCharacter).ToList ().ChooseOne ());
 
 		LevelUpGenerator.BringCharacterToLevel(CurrentCharacter, UnityEngine.Random.Range (1, 21));
