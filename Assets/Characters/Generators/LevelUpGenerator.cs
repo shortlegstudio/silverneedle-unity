@@ -26,8 +26,8 @@ namespace ShortLegStudio.RPG.Characters.Generators {
 		private static void AssignAbilityPoints(CharacterSheet character) {
 			var ability = EnumHelpers.ChooseOne<AbilityScoreTypes>();
 			var adjust = new AbilityScoreAdjustment();
-			adjust.reason = "Level Up";
-			adjust.value = 1;
+			adjust.Reason = "Level Up";
+			adjust.Modifier = 1;
 			adjust.ability = ability;
 
 			character.AbilityScores[ability].AddAdjustment(adjust);

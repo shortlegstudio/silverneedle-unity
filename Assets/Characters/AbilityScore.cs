@@ -5,18 +5,11 @@ using System.Linq;
 using ShortLegStudio.Dice;
 
 namespace ShortLegStudio.RPG.Characters {
-	public class AbilityScore {
+	public class AbilityScore : BasicStat {
 		public AbilityScoreTypes Name { get; set; }
-		public IList<AbilityScoreAdjustment> Adjustments { get; protected set; }
-		public int BaseValue { get; set; }
 		public int BaseModifier {
 			get {
 				return CalculateModifier (BaseValue);
-			}
-		}
-		public int TotalValue { 
-			get { 
-				return BaseValue + SumAdjustments; 
 			}
 		}
 		public int TotalModifier {
@@ -24,19 +17,13 @@ namespace ShortLegStudio.RPG.Characters {
 				return CalculateModifier (TotalValue);
 			}
 		}
-		public int SumAdjustments { get; private set; }
 
-		public AbilityScore() { Adjustments = new List<AbilityScoreAdjustment> (); }
-		public AbilityScore(AbilityScoreTypes type, int val) {
+		public AbilityScore() : base() { } 
+		public AbilityScore(AbilityScoreTypes type, int val) : base(val) {
 			Name = type;
-			BaseValue = val;
-			Adjustments = new List<AbilityScoreAdjustment> ();
 		}
 
-		public void AddAdjustment(AbilityScoreAdjustment adjustment) {
-			Adjustments.Add (adjustment);
-			SumAdjustments = Adjustments.Sum (x => x.value);
-		}
+
 
 		public override string ToString ()
 		{
@@ -72,10 +59,8 @@ namespace ShortLegStudio.RPG.Characters {
 		Charisma
 	}
 
-	public struct AbilityScoreAdjustment {
+	public class AbilityScoreAdjustment : BasicStatAdjustment {
 		public bool RacialChose;
 		public AbilityScoreTypes ability;
-		public int value;
-		public string reason;
 	}
 }

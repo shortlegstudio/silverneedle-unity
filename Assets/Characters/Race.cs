@@ -37,8 +37,8 @@ namespace ShortLegStudio.RPG.Characters {
 				var abilities = raceNode.GetNode ("abilities");
 				foreach (var ability in abilities.ChildrenToDictionary()) {
 					var modifier = new AbilityScoreAdjustment ();
-					modifier.reason = "Racial Trait";
-					modifier.value = int.Parse (ability.Value);
+					modifier.Reason = "Racial Trait";
+					modifier.Modifier = int.Parse (ability.Value);
 					//Special case is races that can choose
 					if (string.Compare (ability.Key, "choose", true) == 0) {
 						modifier.RacialChose = true;

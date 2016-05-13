@@ -52,7 +52,7 @@ public class AbilityScoreTests {
 		var score = new AbilityScore (AbilityScoreTypes.Strength, 15);
 		var adj = new AbilityScoreAdjustment ();
 		adj.ability = AbilityScoreTypes.Strength;
-		adj.value = 2;
+		adj.Modifier = 2;
 
 		score.AddAdjustment (adj);
 		Assert.AreEqual (17, score.TotalValue);

@@ -42,19 +42,19 @@ public class RaceTests {
 	public void HumansCanChooseAbilityModifier() {
 		var mod = human.AbilityModifiers.First ();
 		Assert.IsTrue (mod.RacialChose);
-		Assert.AreEqual (2, mod.value);
+		Assert.AreEqual (2, mod.Modifier);
 	}
 
 	[Test]
 	public void DwarvesHaveSpecificAbilitiesToModifier() {
 		var cons = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Constitution);
-		Assert.AreEqual (2, cons.value);
+		Assert.AreEqual (2, cons.Modifier);
 
 		var wis = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Wisdom);
-		Assert.AreEqual (2, wis.value);
+		Assert.AreEqual (2, wis.Modifier);
 
 		var cha = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Charisma);
-		Assert.AreEqual (-2, cha.value);
+		Assert.AreEqual (-2, cha.Modifier);
 	}
 
 	[Test]
