@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 using System.Collections;
+using ShortLegStudio;
 
 namespace ShortLegStudio.Dice {
 	public class Die  {
@@ -15,7 +16,7 @@ namespace ShortLegStudio.Dice {
 
 		public int LastRoll { get { return _lastRoll; } }
 		public int Roll() {
-			_lastRoll = Random.Range(1, _dieMaxValue); 
+			_lastRoll = Randomly.Range(1, _dieMaxValue); 
 			return _lastRoll;
 		}
 

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
+using ShortLegStudio;
 using ShortLegStudio.Dice;
 
 namespace ShortLegStudio.RPG.Characters {
@@ -39,7 +40,7 @@ namespace ShortLegStudio.RPG.Characters {
 			if (!IsClassSkill (name))
 				Skills.Add (name);
 			else
-				Debug.Log ("Not adding class skill as it already is there: " + name);
+				ShortLog.Debug ("Not adding class skill as it already is there: " + name);
 		}
 
 		public static IList<Class> LoadFromYaml(YamlNodeWrapper yaml) {
@@ -48,7 +49,7 @@ namespace ShortLegStudio.RPG.Characters {
 			foreach (var node in yaml.Children()) {
 				var cls = new Class ();
 				cls.Name = node.GetString ("name"); 
-				Debug.Log ("Loading Class: " + cls.Name);
+				ShortLog.Debug ("Loading Class: " + cls.Name);
 				cls.SkillPoints = node.GetInteger ("skillpoints");
 				cls.HitDice = DiceStrings.ParseSides (node.GetString ("hitdice"));
 				cls.BaseAttackBonusRate = node.GetFloat ("baseattackbonus");

@@ -29,7 +29,7 @@ namespace ShortLegStudio.RPG.Characters {
 			foreach (var raceNode in yaml.Children()) {
 				var race = new Race ();
 				race.Name = raceNode.GetString ("name"); 
-				Debug.Log ("Loading Race: " + race.Name);
+				ShortLog.Debug ("Loading Race: " + race.Name);
 				race.Size = (CharacterSize)System.Enum.Parse (typeof(CharacterSize), raceNode.GetString ("size"));
 				race.HeightRange = DiceStrings.ParseDice (raceNode.GetString ("height"));
 				race.WeightRange = DiceStrings.ParseDice (raceNode.GetString ("weight"));

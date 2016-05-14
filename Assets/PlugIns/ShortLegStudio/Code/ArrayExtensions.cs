@@ -17,12 +17,12 @@ namespace ShortLegStudio
 	public static class ArrayExtensions
 	{
 		public static T ChooseOne<T>(this T[] source) {
-			var index = UnityEngine.Random.Range (0, source.Length);
+			var index = Randomly.Range (0, source.Length);
 			return source[index];
 		}
 
 		public static T ChooseOne<T>(this IList<T> source) {
-			var index = UnityEngine.Random.Range (0, source.Count);
+			var index = Randomly.Range (0, source.Count);
 			return source [index];
 		}
 

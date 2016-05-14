@@ -25,7 +25,7 @@ namespace ShortLegStudio.RPG.Characters {
 			foreach (var traitNode in yaml.Children()) {
 				var trait = new Trait ();
 				trait.Name = traitNode.GetString ("name"); 
-				Debug.Log ("Loading Trait: " + trait.Name);
+				ShortLog.Debug ("Loading Trait: " + trait.Name);
 				trait.Description = traitNode.GetString ("description");
 
 				//Get Any skill Modifiers if they exist
