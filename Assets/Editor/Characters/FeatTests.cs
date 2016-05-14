@@ -50,12 +50,12 @@ public class FeatTests {
 		var skillAdj = modifiers.First ();
 		Assert.AreEqual ("Acrobatics", skillAdj.SkillName);
 		Assert.AreEqual ("Acrobatic (feat)", skillAdj.Reason);
-		Assert.AreEqual (2, skillAdj.Amount);
+		Assert.AreEqual (2, skillAdj.Modifier);
 
 		var flyAdj = modifiers.Last ();
 		Assert.AreEqual ("Fly", flyAdj.SkillName);
 		Assert.AreEqual ("Acrobatic (feat)", skillAdj.Reason);
-		Assert.AreEqual (4, flyAdj.Amount);
+		Assert.AreEqual (4, flyAdj.Modifier);
 	}
 
 	[Test]
@@ -88,9 +88,9 @@ public class FeatTests {
 	[Test]
 	public void FeatsKnowWhetherYouQualify() {
 		var smartCharacter = new CharacterSheet ();
-		smartCharacter.SetAbility (AbilityScoreTypes.Intelligence, 15);
+		smartCharacter.Abilities.SetScore (AbilityScoreTypes.Intelligence, 15);
 		var dumbCharacter = new CharacterSheet ();
-		dumbCharacter.SetAbility (AbilityScoreTypes.Intelligence, 5);
+		dumbCharacter.Abilities.SetScore (AbilityScoreTypes.Intelligence, 5);
 		Assert.IsTrue (CombatExpertise.Qualified (smartCharacter));
 		Assert.IsFalse (CombatExpertise.Qualified (dumbCharacter));
 	}

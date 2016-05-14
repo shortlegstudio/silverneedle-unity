@@ -43,6 +43,7 @@ public class RaceTests {
 		var mod = human.AbilityModifiers.First ();
 		Assert.IsTrue (mod.RacialChose);
 		Assert.AreEqual (2, mod.Modifier);
+
 	}
 
 	[Test]

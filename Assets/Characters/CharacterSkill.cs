@@ -45,7 +45,7 @@ namespace ShortLegStudio.RPG.Characters {
 				val = int.MinValue;
 				AbleToUse = false;
 			} else {
-				val += character.GetAbilityModifier (skill.Ability);
+				val += character.Abilities.GetModifier (skill.Ability);
 				val += Ranks;
 				if (Ranks > 0 && ClassSkill)
 					val += 3;
@@ -58,7 +58,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public int TotalAdjustments() {
-			return Adjustments.Sum(x => x.Amount);
+			return Adjustments.Sum(x => x.Modifier);
 		}
 
 		public void AddRank() {

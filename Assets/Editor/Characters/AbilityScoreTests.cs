@@ -58,4 +58,29 @@ public class AbilityScoreTests {
 		Assert.AreEqual (17, score.TotalValue);
 		Assert.AreEqual (3, score.TotalModifier);
 	}
+
+	[Test]
+	public void AbilityScoresContainerHasAllTheStatsSetToZero() {
+		var scores = new AbilityScores ();
+		Assert.AreEqual(0, scores.GetScore(AbilityScoreTypes.Strength));
+		Assert.AreEqual(0, scores.GetScore(AbilityScoreTypes.Wisdom));
+		Assert.AreEqual(0, scores.GetScore("Intelligence"));
+	}
+
+	[Test]
+	public void AbilityScoresCanSetAbilities() {
+		var scores = new AbilityScores ();
+		scores.SetScore (AbilityScoreTypes.Charisma, 15);
+		Assert.AreEqual (15, scores.GetScore ("Charisma"));
+	}
+
+	[Test]
+	public void YouMayGetTheAbilityModifier() {
+		var abilities = new AbilityScores ();
+		abilities.SetScore (AbilityScoreTypes.Charisma, 12);
+
+		Assert.AreEqual (1, abilities.GetModifier (AbilityScoreTypes.Charisma));
+	}
+
+
 }

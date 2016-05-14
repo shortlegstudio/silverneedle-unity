@@ -5,14 +5,10 @@ using ShortLegStudio;
 
 namespace ShortLegStudio.RPG.Characters.Generators {
 	public static class AbilityScoreGenerator  {
-		public static IList<AbilityScore> RandomStandardHeroScores() {
-			var list = new List<AbilityScore> ();
-
+		public static void RandomStandardHeroScores(AbilityScores abilities) {
 			foreach (var e in EnumHelpers.GetValues<AbilityScoreTypes>()) {
-				list.Add (AbilityScore.CreateFrom4d6 (e));	
+				abilities.GetAbility (e).Roll4d6 ();
 			}
-
-			return list;
 		}
 	}
 }

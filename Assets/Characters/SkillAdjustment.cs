@@ -5,17 +5,15 @@ using System.Collections.Generic;
 using ShortLegStudio;
 
 namespace ShortLegStudio.RPG.Characters {
-	public struct SkillAdjustment {
-		public string Reason { get ; set; }
-		public int Amount { get; set; }
+	public class SkillAdjustment : BasicStatAdjustment {
 		public string SkillName { get; set; }
 
 		public SkillAdjustment(
 			string reason,
-			int amount,
+			int modifier,
 			string skill) {
 			Reason = reason;
-			Amount = amount;
+			Modifier = modifier;
 			SkillName = skill;
 		}
 	}

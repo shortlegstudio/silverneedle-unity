@@ -19,14 +19,14 @@ public class AbilityScoreGUI : MonoBehaviour {
 	}
 	
 	void CharacterChanged(object sender, EventArgs args) {
-		var c = character.CurrentCharacter;
+		var abilities = character.CurrentCharacter.Abilities;
 
-		Score.text = c.GetAbilityScore (Ability).ToString ();
-		Modifier.text = c.GetAbilityModifier (Ability).ToString ();
+		Score.text = abilities.GetScore (Ability).ToString ();
+		Modifier.text = abilities.GetModifier (Ability).ToString ();
 		Modifier.color = Color.white;
-		if (c.GetAbilityModifier (Ability) > 0)
+		if (abilities.GetModifier (Ability) > 0)
 			Modifier.color = Color.green;
-		if (c.GetAbilityModifier (Ability) < 0)
+		if (abilities.GetModifier (Ability) < 0)
 			Modifier.color = Color.red;
 	}
 
@@ -34,7 +34,7 @@ public class AbilityScoreGUI : MonoBehaviour {
 		if (character.CurrentCharacter == null)
 			return;
 		
-		var ability = character.CurrentCharacter.GetAbility (Ability);
+		var ability = character.CurrentCharacter.Abilities.GetAbility (Ability);
 		Tooltip.ShowTip(
 			Ability.ToString(),
 			Score.text + " (" + Modifier.text + ")",

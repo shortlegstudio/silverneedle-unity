@@ -22,7 +22,7 @@ public class CharacterSkillTests {
 		);
 
 		var character = new CharacterSheet ();
-		character.SetAbility (AbilityScoreTypes.Dexterity, 10);
+		character.Abilities.SetScore (AbilityScoreTypes.Dexterity, 10);
 
 		flySkill = new CharacterSkill (fly, character);
 	}
@@ -36,15 +36,12 @@ public class CharacterSkillTests {
 			false
 		);
 
-		//Set up an ability
-		var ability = new AbilityScore (AbilityScoreTypes.Strength, 15);
-
 		//Set up a character
 		var character = new CharacterSheet ();
-		character.SetAbility (ability);
+		character.Abilities.SetScore (AbilityScoreTypes.Strength, 15);
 
 		var charSkill = new CharacterSkill (skill, character);
-		Assert.AreEqual (ability.BaseModifier, charSkill.Score);
+		Assert.AreEqual (character.Abilities.GetModifier(AbilityScoreTypes.Strength), charSkill.Score);
 		Assert.IsTrue (charSkill.AbleToUse);
 	}
 
@@ -55,10 +52,8 @@ public class CharacterSkillTests {
 			            AbilityScoreTypes.Dexterity,
 			            true
 		            );
-		var ability = new AbilityScore (AbilityScoreTypes.Dexterity, 18);
-
 		var character = new CharacterSheet ();
-		character.SetAbility (ability);
+		character.Abilities.SetScore (AbilityScoreTypes.Dexterity, 18);
 		var charSkill = new CharacterSkill (skill, character);
 		Assert.AreEqual (int.MinValue, charSkill.Score);
 		Assert.IsFalse (charSkill.AbleToUse);
@@ -72,7 +67,7 @@ public class CharacterSkillTests {
 			            false
 		);
 		var character = new CharacterSheet ();
-		character.SetAbility (AbilityScoreTypes.Strength, 15);
+		character.Abilities.SetScore (AbilityScoreTypes.Strength, 15);
 		var charSkill = new CharacterSkill (skill, character);
 		var baseValue = charSkill.Score;
 		charSkill.AddRank ();
@@ -88,7 +83,7 @@ public class CharacterSkillTests {
 			            true
 		            );
 		var character = new CharacterSheet ();
-		character.SetAbility (AbilityScoreTypes.Intelligence, 15);
+		character.Abilities.SetScore (AbilityScoreTypes.Intelligence, 15);
 		var charSkill = new CharacterSkill (skill, character);
 		Assert.IsFalse (charSkill.AbleToUse);
 		charSkill.AddRank ();
@@ -104,7 +99,7 @@ public class CharacterSkillTests {
 			            false
 		            );
 		var character = new CharacterSheet ();
-		character.SetAbility (AbilityScoreTypes.Strength, 10);
+		character.Abilities.SetScore (AbilityScoreTypes.Strength, 10);
 		var charSkill = new CharacterSkill (skill, character);
 		charSkill.ClassSkill = true;
 		charSkill.AddRank ();

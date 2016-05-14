@@ -15,12 +15,12 @@ public class LevelUpGeneratorTests {
 		character = new CharacterSheet ();
 
 		//Go with flat Twelves to make calculations easy
-		character.SetAbility(AbilityScoreTypes.Strength, 12);
-		character.SetAbility(AbilityScoreTypes.Dexterity, 12);
-		character.SetAbility(AbilityScoreTypes.Constitution, 12);
-		character.SetAbility(AbilityScoreTypes.Intelligence, 12);
-		character.SetAbility(AbilityScoreTypes.Wisdom, 12);
-		character.SetAbility(AbilityScoreTypes.Charisma, 12);
+		character.Abilities.SetScore(AbilityScoreTypes.Strength, 12);
+		character.Abilities.SetScore(AbilityScoreTypes.Dexterity, 12);
+		character.Abilities.SetScore(AbilityScoreTypes.Constitution, 12);
+		character.Abilities.SetScore(AbilityScoreTypes.Intelligence, 12);
+		character.Abilities.SetScore(AbilityScoreTypes.Wisdom, 12);
+		character.Abilities.SetScore(AbilityScoreTypes.Charisma, 12);
 
 		var cls = new Class ();
 		character.SetClass (cls);
@@ -47,7 +47,7 @@ public class LevelUpGeneratorTests {
 
 		//At least one ability should be greater than 12 now
 		Assert.IsTrue (
-			character.AbilityScores.Values.Any (x => x.TotalValue > 12)
+			character.Abilities.GetAbilities().Any (x => x.TotalValue > 12)
 		);
 	}
 }

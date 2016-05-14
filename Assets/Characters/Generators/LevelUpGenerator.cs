@@ -30,7 +30,7 @@ namespace ShortLegStudio.RPG.Characters.Generators {
 			adjust.Modifier = 1;
 			adjust.ability = ability;
 
-			character.AbilityScores[ability].AddAdjustment(adjust);
+			character.Abilities.GetAbility(ability).AddAdjustment(adjust);
 		}
 	}
 }

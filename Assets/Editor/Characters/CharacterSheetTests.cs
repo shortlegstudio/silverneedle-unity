@@ -32,48 +32,15 @@ public class CharacterSheetTests {
 	[Test]
 	public void CharactersCanRollSomeStats() {
 		var sheet = new CharacterSheet ();
-
-		sheet.SetAbilityScores(AbilityScoreGenerator.RandomStandardHeroScores());
-		Assert.IsNotNull (sheet.GetAbility (AbilityScoreTypes.Strength));
-		Assert.IsNotNull (sheet.GetAbility (AbilityScoreTypes.Charisma));
-		Assert.IsNotNull (sheet.GetAbility (AbilityScoreTypes.Intelligence));
+		AbilityScoreGenerator.RandomStandardHeroScores (sheet.Abilities);
+		var abilities = sheet.Abilities;
+		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Strength));
+		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Charisma));
+		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Intelligence));
 
 	}
 
-	[Test]
-	public void CharactersCanHaveAbilitiesSet() {
-		var sheet = new CharacterSheet ();
-		var abilityScore = new AbilityScore (AbilityScoreTypes.Strength, 15);
-		sheet.SetAbility (abilityScore);
-		Assert.AreEqual (sheet.GetAbility(AbilityScoreTypes.Strength), abilityScore);
-	}
 
-	[Test]
-	public void SettingTheSameAbilityScoreOverwrites() {
-		var sheet = new CharacterSheet ();
-		var score1 = new AbilityScore (AbilityScoreTypes.Strength, 15);
-		var score2 = new AbilityScore (AbilityScoreTypes.Strength, 17);
-
-		sheet.SetAbility (score1);
-		sheet.SetAbility (score2);
-		Assert.AreEqual(score2, sheet.GetAbility(AbilityScoreTypes.Strength));
-	}
-
-	[Test]
-	public void YouMayGetTheAbilityModifier() {
-		var sheet = new CharacterSheet ();
-		var score = new AbilityScore (AbilityScoreTypes.Charisma, 5);
-		sheet.SetAbility (score);
-
-		Assert.AreEqual (score.BaseModifier, sheet.GetAbilityModifier (AbilityScoreTypes.Charisma));
-	}
-
-	[Test]
-	public void YouMaySetAbilityScores() {
-		var sheet = new CharacterSheet ();
-		sheet.SetAbility (AbilityScoreTypes.Charisma, 12);
-		Assert.AreEqual (12, sheet.GetAbilityScore (AbilityScoreTypes.Charisma));
-	}
 
 	[Test]
 	public void SetAllTheSkills() {
@@ -82,9 +49,9 @@ public class CharacterSheetTests {
 		skills.Add (new Skill ("Disable Device", AbilityScoreTypes.Dexterity, true));
 
 		var sheet = new CharacterSheet ();
-		sheet.SetAbilityScores (AbilityScoreGenerator.RandomStandardHeroScores ());
+		AbilityScoreGenerator.RandomStandardHeroScores (sheet.Abilities);
 		sheet.SetSkills (skills);
-		var strength = sheet.GetAbilityModifier (AbilityScoreTypes.Strength);
+		var strength = sheet.Abilities.GetModifier (AbilityScoreTypes.Strength);
 
 		Assert.AreEqual (strength, sheet.GetSkillValue ("Climb"));
 		Assert.AreEqual (int.MinValue, sheet.GetSkillValue ("Disable Device"));
@@ -95,7 +62,7 @@ public class CharacterSheetTests {
 		var sheet = new CharacterSheet ();
 		var fighter = new Class ();
 		fighter.SkillPoints = 2;
-		sheet.SetAbility (AbilityScoreTypes.Intelligence, 14);
+		sheet.Abilities.SetScore (AbilityScoreTypes.Intelligence, 14);
 		sheet.Class = fighter;
 		Assert.AreEqual (4, sheet.GetSkillPointsPerLevel());
 	}

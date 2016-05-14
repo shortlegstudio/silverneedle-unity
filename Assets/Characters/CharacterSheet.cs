@@ -23,8 +23,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public int XP { get; private set; }
 
 		//Abilities
-
-		public IDictionary<AbilityScoreTypes, AbilityScore> AbilityScores { get; set; }
+		public AbilityScores Abilities { get; private set; }
 		private IDictionary<string, CharacterSkill> Skills { get; set; }
 		public IList<Trait> Traits { get; private set; }
 		public IList<Feat> Feats { get; private set; }
@@ -43,13 +42,14 @@ namespace ShortLegStudio.RPG.Characters {
 		public event EventHandler<CharacterSheetEventArgs> Modified;
 
 		public CharacterSheet() {
-			AbilityScores = new Dictionary<AbilityScoreTypes, AbilityScore> ();
+			Abilities = new AbilityScores ();
 			Skills = new Dictionary<string, CharacterSkill> ();
 			Traits = new List<Trait> ();
 			Feats = new List<Feat> ();
 			Level = 1;
 		}
 
+		/*
 		/// <summary>
 		/// Sets the ability scores.
 		/// </summary>
@@ -106,12 +106,12 @@ namespace ShortLegStudio.RPG.Characters {
 		public int GetAbilityModifier(AbilityScoreTypes ability) {
 			return AbilityScores [ability].TotalModifier;
 		}
-
+		*/
 		public void SetClass(Class cls) {
 			this.Class = cls;
 			this.BaseAttackBonus = GetCurrentBaseAttackBonus ();
-			this.MeleeAttackBonus = BaseAttackBonus + GetAbilityModifier (AbilityScoreTypes.Strength);
-			this.RangeAttackBonus = BaseAttackBonus + GetAbilityModifier (AbilityScoreTypes.Dexterity);
+			this.MeleeAttackBonus = BaseAttackBonus + Abilities.GetModifier (AbilityScoreTypes.Strength);
+			this.RangeAttackBonus = BaseAttackBonus + Abilities.GetModifier (AbilityScoreTypes.Dexterity);
 
 			//Handle Armor Proficiencies
 			foreach (var x in cls.ArmorProficiencies) {
@@ -122,9 +122,9 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public void UpdateSaveStats() {
-			this.WillSaves = GetSaveValue (Class.WillSaveRate, GetAbilityModifier(AbilityScoreTypes.Wisdom));
-			this.FortitudeSaves = GetSaveValue (Class.FortitudeSaveRate, GetAbilityModifier(AbilityScoreTypes.Constitution));
-			this.ReflexSaves = GetSaveValue (Class.ReflexSaveRate, GetAbilityModifier(AbilityScoreTypes.Dexterity));
+			this.WillSaves = GetSaveValue (Class.WillSaveRate, Abilities.GetModifier(AbilityScoreTypes.Wisdom));
+			this.FortitudeSaves = GetSaveValue (Class.FortitudeSaveRate, Abilities.GetModifier(AbilityScoreTypes.Constitution));
+			this.ReflexSaves = GetSaveValue (Class.ReflexSaveRate, Abilities.GetModifier(AbilityScoreTypes.Dexterity));
 		}
 
 		private int GetCurrentBaseAttackBonus() {
@@ -146,11 +146,12 @@ namespace ShortLegStudio.RPG.Characters {
 			//Add Ability Modifiers
 			foreach (var adj in race.AbilityModifiers) {
 				if (adj.RacialChose) {
-					var rand = AbilityScores.Values.ToArray().ChooseOne();
-					rand.AddAdjustment (adj);
+					var ability = EnumHelpers.ChooseOne<AbilityScoreTypes> ();
+					var a = Abilities.GetAbility (ability);
+					a.AddAdjustment (adj);
 				} else {
-					var abl = GetAbility (adj.ability);
-					abl.AddAdjustment (adj);
+					var a = Abilities.GetAbility (adj.ability);
+					a.AddAdjustment (adj);
 				}
 			}
 
@@ -231,7 +232,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public int GetSkillPointsPerLevel() {
-			return Class.SkillPoints + GetAbilityModifier (AbilityScoreTypes.Intelligence);
+			return Class.SkillPoints + Abilities.GetModifier (AbilityScoreTypes.Intelligence);
 		}
 
 		public void SetHitPoints(int hp) {

@@ -88,7 +88,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public override bool Qualified (CharacterSheet character)
 		{
-			return character.GetAbilityScore(Ability) >= Minimum;
+			return character.Abilities.GetScore(Ability) >= Minimum;
 		}
 	}
 

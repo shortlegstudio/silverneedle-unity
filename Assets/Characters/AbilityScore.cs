@@ -23,11 +23,15 @@ namespace ShortLegStudio.RPG.Characters {
 			Name = type;
 		}
 
-
-
 		public override string ToString ()
 		{
 			return string.Format ("[AbilityScore: Name={0}, Adjustments={1}, BaseValue={2}, BaseModifier={3}, TotalValue={4}, TotalModifier={5}, SumAdjustments={6}]", Name, Adjustments, BaseValue, BaseModifier, TotalValue, TotalModifier, SumAdjustments);
+		}
+
+		public void Roll4d6() {
+			var diceCup = new Cup (Die.GetDice (DiceSides.d6, 4));
+			diceCup.Roll ();
+			SetValue (diceCup.SumTop (3));
 		}
 
 		/// <summary>

@@ -49,11 +49,11 @@ public class TraitTests {
 		var skillAdj = modifiers.First ();
 		Assert.AreEqual ("Heal", skillAdj.SkillName);
 		Assert.AreEqual ("Hardy (trait)", skillAdj.Reason);
-		Assert.AreEqual (2, skillAdj.Amount);
+		Assert.AreEqual (2, skillAdj.Modifier);
 
 		var flyAdj = modifiers.Last ();
 		Assert.AreEqual ("Fly", flyAdj.SkillName);
-		Assert.AreEqual (4, flyAdj.Amount);
+		Assert.AreEqual (4, flyAdj.Modifier);
 	}
 
 	private const string TraitYamlFile = @"--- 

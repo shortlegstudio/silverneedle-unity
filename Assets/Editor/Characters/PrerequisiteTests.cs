@@ -35,7 +35,7 @@ public class PrerequisiteTests {
 	public void AbilityIsQualifiedIfExceedingScore() {
 		var pre = new AbilityPrerequisite ("Intelligence 13");
 		var c = new CharacterSheet ();
-		c.SetAbility (AbilityScoreTypes.Intelligence, 15);
+		c.Abilities.SetScore (AbilityScoreTypes.Intelligence, 15);
 		Assert.IsTrue (pre.Qualified (c));
 	}
 
@@ -43,7 +43,7 @@ public class PrerequisiteTests {
 	public void AbilityIsNotQualifiedIfNotExceedingScore() {
 		var pre = new AbilityPrerequisite ("Intelligence 13");
 		var c = new CharacterSheet ();
-		c.SetAbility (AbilityScoreTypes.Intelligence, 11);
+		c.Abilities.SetScore (AbilityScoreTypes.Intelligence, 11);
 		Assert.IsFalse (pre.Qualified (c));
 	}
 

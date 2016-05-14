@@ -18,8 +18,16 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public void AddAdjustment(BasicStatAdjustment adjustment) {
-
 			Adjustments.Add (adjustment);
+			Refresh ();
+		}
+
+		public void SetValue(int val) {
+			BaseValue = val;
+			Refresh ();
+		}
+
+		protected virtual void Refresh() {
 			SumAdjustments = Adjustments.Sum (x => x.Modifier);
 		}
 	}
