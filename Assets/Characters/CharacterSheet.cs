@@ -17,14 +17,13 @@ namespace ShortLegStudio.RPG.Characters {
 		public Race Race { get; protected set; }
 		public Class Class { get; set; }
 
-
 		//Levels and Experience
 		public int Level { get; private set; }
 		public int XP { get; private set; }
 
 		//Abilities
 		public AbilityScores Abilities { get; private set; }
-		private IDictionary<string, CharacterSkill> Skills { get; set; }
+		public SkillRanks SkillRanks { get; private set; }
 		public IList<Trait> Traits { get; private set; }
 		public IList<Feat> Feats { get; private set; }
 
@@ -43,7 +42,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public CharacterSheet() {
 			Abilities = new AbilityScores ();
-			Skills = new Dictionary<string, CharacterSkill> ();
+			SkillRanks = new SkillRanks (Skill.GetSkills(), Abilities);
 			Traits = new List<Trait> ();
 			Feats = new List<Feat> ();
 			Level = 1;
@@ -187,26 +186,16 @@ namespace ShortLegStudio.RPG.Characters {
 			}
 		}
 
-		public void SetSkills(IList<Skill> skills) {
-			foreach (var s in skills) {
-				Skills.Add (
-					s.Name,
-					new CharacterSkill (s, this)
-				);
-			}
-			NotifyModified ();
-		}
-
 		public CharacterSkill GetSkill(Skill skill) {
-			return Skills [skill.Name];
+			return SkillRanks.GetSkill (skill.Name);
 		}
 
 		public int GetSkillValue(string name) {
-			return Skills [name].Score;
+			return SkillRanks.GetScore (name);
 		}
 
 		public IList<CharacterSkill> GetSkillList() {
-			return Skills.Values.ToList ();
+			return SkillRanks.GetSkills().ToList ();
 		}
 
 		public IList<SkillAdjustment> FindSkillAdjustments(string name) {

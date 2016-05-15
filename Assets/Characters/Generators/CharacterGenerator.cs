@@ -8,7 +8,6 @@ namespace ShortLegStudio.RPG.Characters.Generators {
 			character.Name = NameGenerator.CreateFullName ();
 			character.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
 			AbilityScoreGenerator.RandomStandardHeroScores (character.Abilities);
-			character.SetSkills (Skill.GetSkills());
 			character.SetRace(Race.GetRaces ().ChooseOne ());
 
 

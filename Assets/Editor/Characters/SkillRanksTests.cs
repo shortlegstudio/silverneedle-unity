@@ -7,37 +7,26 @@ using System.Collections.Generic;
 using System.Linq;
 
 [TestFixture]
-public class CharacterSheetTests {
-	CharacterSheet character;
-
+public class SkillRanksTests {
+	
 	[SetUp]
 	public void SetupCharacter() {
 
 	}
 
-    [Test]
-    public void CharactersHaveVitalStats() {
-		var sheet = new CharacterSheet ();
-		sheet.Name = "Foobar";
-		sheet.Alignment = CharacterAlignment.LawfulGood;
-		sheet.Height = 72;
-		sheet.Weight = 150;
-		Assert.AreEqual ("Foobar", sheet.Name);
-		Assert.AreEqual (CharacterAlignment.LawfulGood, sheet.Alignment);
-		Assert.AreEqual (72, sheet.Height);
-		Assert.AreEqual (150, sheet.Weight);
-		Assert.AreEqual (1, sheet.Level);
-    }
-
 	[Test]
-	public void CharactersCanRollSomeStats() {
-		var sheet = new CharacterSheet ();
-		AbilityScoreGenerator.RandomStandardHeroScores (sheet.Abilities);
-		var abilities = sheet.Abilities;
-		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Strength));
-		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Charisma));
-		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Intelligence));
+	public void SkillRanksLoadsAllTheSkills() {
+		
+		var skills = new List<Skill> ();
+		skills.Add (new Skill ("Climb", AbilityScoreTypes.Strength, false));
+		skills.Add (new Skill ("Disable Device", AbilityScoreTypes.Dexterity, true));
 
+		var abilityScores = new AbilityScores ();
+		abilityScores.SetScore (AbilityScoreTypes.Strength, 14);
+		var ranks = new SkillRanks (skills, abilityScores);
+
+		Assert.AreEqual (2, ranks.GetScore ("Climb"));
+		Assert.AreEqual (int.MinValue, ranks.GetScore ("Disable Device"));
 	}
 
 	[Test]

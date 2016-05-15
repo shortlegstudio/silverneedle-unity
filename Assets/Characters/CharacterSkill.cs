@@ -7,7 +7,7 @@ using System.Linq;
 namespace ShortLegStudio.RPG.Characters {
 	public class CharacterSkill {
 		private Skill skill;
-		private CharacterSheet character;
+		private AbilityScore _baseScore;
 		public int Score { get; private set; }
 		public bool AbleToUse { get; private set; }
 		public int Ranks { get; private set; }
@@ -15,27 +15,11 @@ namespace ShortLegStudio.RPG.Characters {
 		public IList<SkillAdjustment> Adjustments { get; private set; }
 
 
-		public CharacterSkill(Skill baseSkill, CharacterSheet charSheet) {
+		public CharacterSkill(Skill baseSkill, AbilityScore baseScore, bool isClassSkill) {
 			skill = baseSkill;
-			character = charSheet;
-			character.Modified += Character_Modified;
-
-			RefreshCharacter ();
-
-		}
-
-		void Character_Modified (object sender, CharacterSheetEventArgs e) {
-			RefreshCharacter ();
-		}
-
-		void RefreshCharacter() {
+			_baseScore = baseScore;
+			ClassSkill = isClassSkill;
 			Adjustments = new List<SkillAdjustment> ();
-			ClassSkill = character.IsClassSkill(skill.Name);
-
-			foreach (var adj in character.FindSkillAdjustments (skill.Name)) {
-				AddAdjustment (adj);
-			}
-
 			CalculateScore ();
 		}
 
@@ -45,7 +29,7 @@ namespace ShortLegStudio.RPG.Characters {
 				val = int.MinValue;
 				AbleToUse = false;
 			} else {
-				val += character.Abilities.GetModifier (skill.Ability);
+				val += _baseScore.BaseModifier;
 				val += Ranks;
 				if (Ranks > 0 && ClassSkill)
 					val += 3;

@@ -10,23 +10,6 @@ using System.Text;
 
 [TestFixture]
 public class CharacterSkillTests {
-	CharacterSkill flySkill;
-
-	[SetUp]
-	public void SetUp() {
-		//Set up a climb skill
-		var fly = new Skill (
-			"Fly",
-			AbilityScoreTypes.Dexterity,
-			false
-		);
-
-		var character = new CharacterSheet ();
-		character.Abilities.SetScore (AbilityScoreTypes.Dexterity, 10);
-
-		flySkill = new CharacterSkill (fly, character);
-	}
-		
 	[Test]
 	public void UntrainedSkillsAreBasedOffOfAttributeScore() {
 		//Set up a skill
@@ -36,12 +19,8 @@ public class CharacterSkillTests {
 			false
 		);
 
-		//Set up a character
-		var character = new CharacterSheet ();
-		character.Abilities.SetScore (AbilityScoreTypes.Strength, 15);
-
-		var charSkill = new CharacterSkill (skill, character);
-		Assert.AreEqual (character.Abilities.GetModifier(AbilityScoreTypes.Strength), charSkill.Score);
+		var charSkill = new CharacterSkill (skill, new AbilityScore(AbilityScoreTypes.Strength, 14), false);
+		Assert.AreEqual (2, charSkill.Score);
 		Assert.IsTrue (charSkill.AbleToUse);
 	}
 
@@ -52,9 +31,7 @@ public class CharacterSkillTests {
 			            AbilityScoreTypes.Dexterity,
 			            true
 		            );
-		var character = new CharacterSheet ();
-		character.Abilities.SetScore (AbilityScoreTypes.Dexterity, 18);
-		var charSkill = new CharacterSkill (skill, character);
+		var charSkill = new CharacterSkill (skill, new AbilityScore(AbilityScoreTypes.Dexterity, 18), false);
 		Assert.AreEqual (int.MinValue, charSkill.Score);
 		Assert.IsFalse (charSkill.AbleToUse);
 	}
@@ -66,9 +43,7 @@ public class CharacterSkillTests {
 			            AbilityScoreTypes.Strength,
 			            false
 		);
-		var character = new CharacterSheet ();
-		character.Abilities.SetScore (AbilityScoreTypes.Strength, 15);
-		var charSkill = new CharacterSkill (skill, character);
+		var charSkill = new CharacterSkill (skill, new AbilityScore(AbilityScoreTypes.Strength, 15), false);
 		var baseValue = charSkill.Score;
 		charSkill.AddRank ();
 		Assert.AreEqual (1, charSkill.Ranks);
@@ -82,9 +57,7 @@ public class CharacterSkillTests {
 			            AbilityScoreTypes.Intelligence,
 			            true
 		            );
-		var character = new CharacterSheet ();
-		character.Abilities.SetScore (AbilityScoreTypes.Intelligence, 15);
-		var charSkill = new CharacterSkill (skill, character);
+		var charSkill = new CharacterSkill (skill, new AbilityScore(AbilityScoreTypes.Intelligence, 15), false);
 		Assert.IsFalse (charSkill.AbleToUse);
 		charSkill.AddRank ();
 		Assert.IsTrue (charSkill.AbleToUse);
@@ -98,9 +71,7 @@ public class CharacterSkillTests {
 			            AbilityScoreTypes.Strength,
 			            false
 		            );
-		var character = new CharacterSheet ();
-		character.Abilities.SetScore (AbilityScoreTypes.Strength, 10);
-		var charSkill = new CharacterSkill (skill, character);
+		var charSkill = new CharacterSkill (skill, new AbilityScore(AbilityScoreTypes.Strength, 10), true);
 		charSkill.ClassSkill = true;
 		charSkill.AddRank ();
 		Assert.AreEqual (4, charSkill.Score);
@@ -115,9 +86,11 @@ public class CharacterSkillTests {
 			             2,
 			             "Fly"
 		             );
-		flySkill.AddAdjustment (adjust);
+		var flySkill = new Skill ("Fly", AbilityScoreTypes.Dexterity, false);
+		var charSkill = new CharacterSkill (flySkill, new AbilityScore (AbilityScoreTypes.Dexterity, 10), false);
+		charSkill.AddAdjustment (adjust);
 
-		Assert.AreEqual (2, flySkill.Score);
+		Assert.AreEqual (2, charSkill.Score);
 	}
 
 }
