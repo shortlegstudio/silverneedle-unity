@@ -40,9 +40,9 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public event EventHandler<CharacterSheetEventArgs> Modified;
 
-		public CharacterSheet() {
+		public CharacterSheet(IEnumerable<Skill> skills) {
 			Abilities = new AbilityScores ();
-			SkillRanks = new SkillRanks (Skill.GetSkills(), Abilities);
+			SkillRanks = new SkillRanks (skills, Abilities);
 			Traits = new List<Trait> ();
 			Feats = new List<Feat> ();
 			Level = 1;

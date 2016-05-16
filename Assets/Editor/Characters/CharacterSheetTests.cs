@@ -9,15 +9,19 @@ using System.Linq;
 [TestFixture]
 public class CharacterSheetTests {
 	CharacterSheet character;
+	List<Skill> _testSkills;
 
 	[SetUp]
-	public void SetupCharacter() {
-
+	public void SetUp() {
+		_testSkills = new List<Skill> ();
+		_testSkills.Add (new Skill("Climb", AbilityScoreTypes.Strength, false));
+		_testSkills.Add (new Skill ("Disable Device", AbilityScoreTypes.Dexterity, true));
+		_testSkills.Add (new Skill ("Spellcraft", AbilityScoreTypes.Intelligence, true));
 	}
 
     [Test]
     public void CharactersHaveVitalStats() {
-		var sheet = new CharacterSheet ();
+		var sheet = new CharacterSheet (_testSkills);
 		sheet.Name = "Foobar";
 		sheet.Alignment = CharacterAlignment.LawfulGood;
 		sheet.Height = 72;
@@ -31,7 +35,7 @@ public class CharacterSheetTests {
 
 	[Test]
 	public void CharactersCanRollSomeStats() {
-		var sheet = new CharacterSheet ();
+		var sheet = new CharacterSheet (_testSkills);
 		AbilityScoreGenerator.RandomStandardHeroScores (sheet.Abilities);
 		var abilities = sheet.Abilities;
 		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Strength));
@@ -42,7 +46,7 @@ public class CharacterSheetTests {
 
 	[Test]
 	public void CalculatesSkillPointsBasedOnClassAndIntelligence() {
-		var sheet = new CharacterSheet ();
+		var sheet = new CharacterSheet (_testSkills);
 		var fighter = new Class ();
 		fighter.SkillPoints = 2;
 		sheet.Abilities.SetScore (AbilityScoreTypes.Intelligence, 14);
@@ -52,7 +56,7 @@ public class CharacterSheetTests {
 
 	[Test]
 	public void SettingRaceLoadsTraits() {
-		var sheet = new CharacterSheet ();
+		var sheet = new CharacterSheet (_testSkills);
 
 		//Set up the trait
 		var trait = new Trait ();
@@ -72,7 +76,7 @@ public class CharacterSheetTests {
 	public void AddTraitTriggersModifiedEvent() {
 		bool called = false;
 
-		CharacterSheet sheet = new CharacterSheet ();
+		CharacterSheet sheet = new CharacterSheet (_testSkills);
 		sheet.Modified += (object sender, CharacterSheetEventArgs e) => {
 			called = true;
 		};
@@ -90,7 +94,7 @@ public class CharacterSheetTests {
 
 	[Test]
 	public void AccessAllSkillAdjustments() {
-		var sheet = new CharacterSheet ();
+		var sheet = new CharacterSheet (_testSkills);
 		var trait = new Trait ();
 		trait.SkillModifiers.Add(
 			new SkillAdjustment(

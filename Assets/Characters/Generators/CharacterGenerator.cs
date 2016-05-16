@@ -3,7 +3,7 @@
 namespace ShortLegStudio.RPG.Characters.Generators {
 	public static class CharacterGenerator {
 		public static CharacterSheet CreateLevel0() {
-			var character = new CharacterSheet ();
+			var character = new CharacterSheet (Skill.GetSkills());
 
 			character.Name = NameGenerator.CreateFullName ();
 			character.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();

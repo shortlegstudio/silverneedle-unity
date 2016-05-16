@@ -2,6 +2,7 @@
 using UnityEditor;
 using System.Linq;
 using System.IO;
+using System.Collections.Generic;
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
@@ -19,7 +20,6 @@ public class FeatTests {
 	[SetUp]
 	public void SetUp() {
 		var input = new StringReader(FeatYamlFile);
-
 		yaml = new YamlStream();
 		yaml.Load(input);
 		var yamlNode = new YamlNodeWrapper(yaml.Documents [0].RootNode);
@@ -87,9 +87,9 @@ public class FeatTests {
 
 	[Test]
 	public void FeatsKnowWhetherYouQualify() {
-		var smartCharacter = new CharacterSheet ();
+		var smartCharacter = new CharacterSheet (new List<Skill>());
 		smartCharacter.Abilities.SetScore (AbilityScoreTypes.Intelligence, 15);
-		var dumbCharacter = new CharacterSheet ();
+		var dumbCharacter = new CharacterSheet (new List<Skill>());
 		dumbCharacter.Abilities.SetScore (AbilityScoreTypes.Intelligence, 5);
 		Assert.IsTrue (CombatExpertise.Qualified (smartCharacter));
 		Assert.IsFalse (CombatExpertise.Qualified (dumbCharacter));

@@ -4,6 +4,7 @@ using NUnit.Framework;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Characters.Generators;
 using System.Linq;
+using System.Collections.Generic;
 
 
 [TestFixture]
@@ -12,7 +13,7 @@ public class LevelUpGeneratorTests {
 
 	[SetUp]
 	public void SetUp() {
-		character = new CharacterSheet ();
+		character = new CharacterSheet (new List<Skill>());
 
 		//Go with flat Twelves to make calculations easy
 		character.Abilities.SetScore(AbilityScoreTypes.Strength, 12);

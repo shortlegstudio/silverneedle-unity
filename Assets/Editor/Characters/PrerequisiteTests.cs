@@ -6,6 +6,7 @@ using YamlDotNet.RepresentationModel;
 using System.IO;
 using ShortLegStudio;
 using System.Linq;
+using System.Collections.Generic;
 
 [TestFixture]
 public class PrerequisiteTests {
@@ -28,13 +29,13 @@ public class PrerequisiteTests {
 	[Test]
 	public void AlwaysQualifiedIfNoQualificationsNeeded() {
 		var pre = new Prerequisites ();
-		Assert.IsTrue(pre.Qualified(new CharacterSheet()));
+		Assert.IsTrue(pre.Qualified(new CharacterSheet(new List<Skill>())));
 	}
 
 	[Test]
 	public void AbilityIsQualifiedIfExceedingScore() {
 		var pre = new AbilityPrerequisite ("Intelligence 13");
-		var c = new CharacterSheet ();
+		var c = new CharacterSheet (new List<Skill>());
 		c.Abilities.SetScore (AbilityScoreTypes.Intelligence, 15);
 		Assert.IsTrue (pre.Qualified (c));
 	}
@@ -42,7 +43,7 @@ public class PrerequisiteTests {
 	[Test]
 	public void AbilityIsNotQualifiedIfNotExceedingScore() {
 		var pre = new AbilityPrerequisite ("Intelligence 13");
-		var c = new CharacterSheet ();
+		var c = new CharacterSheet (new List<Skill>());
 		c.Abilities.SetScore (AbilityScoreTypes.Intelligence, 11);
 		Assert.IsFalse (pre.Qualified (c));
 	}

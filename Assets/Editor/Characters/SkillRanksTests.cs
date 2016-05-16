@@ -31,7 +31,7 @@ public class SkillRanksTests {
 
 	[Test]
 	public void CalculatesSkillPointsBasedOnClassAndIntelligence() {
-		var sheet = new CharacterSheet ();
+		var sheet = new CharacterSheet (new List<Skill>());
 		var fighter = new Class ();
 		fighter.SkillPoints = 2;
 		sheet.Abilities.SetScore (AbilityScoreTypes.Intelligence, 14);
@@ -41,7 +41,7 @@ public class SkillRanksTests {
 
 	[Test]
 	public void SettingRaceLoadsTraits() {
-		var sheet = new CharacterSheet ();
+		var sheet = new CharacterSheet (new List<Skill>());
 
 		//Set up the trait
 		var trait = new Trait ();
@@ -61,7 +61,7 @@ public class SkillRanksTests {
 	public void AddTraitTriggersModifiedEvent() {
 		bool called = false;
 
-		CharacterSheet sheet = new CharacterSheet ();
+		CharacterSheet sheet = new CharacterSheet (new List<Skill>());
 		sheet.Modified += (object sender, CharacterSheetEventArgs e) => {
 			called = true;
 		};
@@ -79,7 +79,7 @@ public class SkillRanksTests {
 
 	[Test]
 	public void AccessAllSkillAdjustments() {
-		var sheet = new CharacterSheet ();
+		var sheet = new CharacterSheet (new List<Skill>());
 		var trait = new Trait ();
 		trait.SkillModifiers.Add(
 			new SkillAdjustment(

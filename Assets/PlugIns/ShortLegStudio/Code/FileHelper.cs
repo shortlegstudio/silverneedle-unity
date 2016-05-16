@@ -2,9 +2,7 @@
 using System.IO;
 using System.Text;
 using System;
-
 using UnityEngine;
-
 using YamlDotNet.RepresentationModel;
 
 namespace ShortLegStudio {
