@@ -11,7 +11,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		private IList<BasicStatAdjustment> _adjustments;
 
-		public event EventHandler<EventArgs> Modified;
+		public event EventHandler<BasicStatModifiedEventArgs> Modified;
 
 		public BasicStat () {
 			_adjustments = new List<BasicStatAdjustment> ();
@@ -22,23 +22,33 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public void AddAdjustment(BasicStatAdjustment adjustment) {
+			var oldBase = BaseValue;
+			var oldTotal = TotalValue;
 			_adjustments.Add (adjustment);
-			Refresh ();
+			Refresh (oldBase, oldTotal);
 		}
 
 		public void SetValue(int val) {
+			var oldBase = BaseValue;
+			var oldTotal = TotalValue;
 			BaseValue = val;
-			Refresh ();
+			Refresh (oldBase, oldTotal);
 		}
 
-		protected virtual void Refresh() {
+		protected virtual void Refresh(int oldBase, int oldTotal) {
 			SumAdjustments = _adjustments.Sum (x => x.Modifier);
-			OnModified ();
+			OnModified (oldBase, oldTotal);
 		}
 
-		protected void OnModified() {
+		protected void OnModified(int oldBase, int oldTotal) {
 			if (Modified != null) {
-				Modified(this, new EventArgs());
+				Modified(this, 
+					new BasicStatModifiedEventArgs(
+						oldBase,
+						BaseValue,
+						oldTotal,
+						TotalValue
+				));
 			}
 		}
 	}
@@ -52,6 +62,24 @@ namespace ShortLegStudio.RPG.Characters {
 		public BasicStatAdjustment(int mod, string reas) {
 			Modifier = mod;
 			Reason = reas;
+		}
+	}
+
+	public class BasicStatModifiedEventArgs : EventArgs {
+		public int OldBaseValue;
+		public int NewBaseValue;
+		public int OldTotalValue;
+		public int NewTotalValue;
+
+		public BasicStatModifiedEventArgs(
+			int oldBase,
+			int newBase,
+			int oldTotal,
+			int newTotal) {
+			OldBaseValue = oldBase;
+			NewBaseValue = newBase;
+			OldTotalValue = oldTotal;
+			NewTotalValue = newTotal;
 		}
 	}
 

@@ -23,8 +23,7 @@ namespace ShortLegStudio.RPG.Characters {
 			Name = type;
 		}
 
-		public override string ToString ()
-		{
+		public override string ToString () {
 			return string.Format ("[AbilityScore: Name={0}, Adjustments={1}, BaseValue={2}, BaseModifier={3}, TotalValue={4}, TotalModifier={5}, SumAdjustments={6}]", Name, Adjustments, BaseValue, BaseModifier, TotalValue, TotalModifier, SumAdjustments);
 		}
 

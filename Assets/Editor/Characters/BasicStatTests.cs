@@ -10,7 +10,7 @@ public class BasicStatTests {
     public void StatsRaiseModifiedEventWhenValueSet() {
 		var stat = new BasicStat (20);
 		var changeCalled = false;
-		stat.Modified += (object sender, System.EventArgs e) => {
+		stat.Modified += (object sender, BasicStatModifiedEventArgs e) => {
 			changeCalled = true;
 		};
 
@@ -22,7 +22,7 @@ public class BasicStatTests {
 	public void StatsRaiseModifiedEventWhenAdjustmentAdded() {
 		var stat = new BasicStat (20);
 		var changeCalled = false;
-		stat.Modified += (object sender, System.EventArgs e) => {
+		stat.Modified += (object sender, BasicStatModifiedEventArgs e) => {
 			changeCalled = true;
 		};
 		stat.AddAdjustment (new BasicStatAdjustment ());
@@ -30,5 +30,17 @@ public class BasicStatTests {
 		Assert.True (changeCalled);
 	}
 
+	[Test]
+	public void StatsRaiseTheOldValueAndNewValue() {
+		var stat = new BasicStat (10);
+		bool mod = false;
+		stat.Modified += (object sender, BasicStatModifiedEventArgs e) => {
+			Assert.AreEqual(10, e.OldBaseValue);
+			Assert.AreEqual(14, e.NewBaseValue);
+			mod = true;
+		};
+		stat.SetValue (14);
 
+		Assert.IsTrue (mod);
+	}
 }
