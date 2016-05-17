@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace ShortLegStudio.RPG.Characters {
-	public abstract class BasicStat {
+	public class BasicStat {
 		public int BaseValue { get; private set; }
 		public int TotalValue { get { return BaseValue + SumAdjustments; } }
-		public IList<BasicStatAdjustment> Adjustments { get; private set; }
+		public IEnumerable<BasicStatAdjustment> Adjustments { get { return _adjustments; } }
 		public int SumAdjustments { get; private set; }
 
+		private IList<BasicStatAdjustment> _adjustments;
+
+		public event EventHandler<EventArgs> Modified;
+
 		public BasicStat () {
-			Adjustments = new List<BasicStatAdjustment> ();
+			_adjustments = new List<BasicStatAdjustment> ();
 		}
 
 		public BasicStat(int baseValue) : this() {
@@ -18,7 +22,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public void AddAdjustment(BasicStatAdjustment adjustment) {
-			Adjustments.Add (adjustment);
+			_adjustments.Add (adjustment);
 			Refresh ();
 		}
 
@@ -28,13 +32,27 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		protected virtual void Refresh() {
-			SumAdjustments = Adjustments.Sum (x => x.Modifier);
+			SumAdjustments = _adjustments.Sum (x => x.Modifier);
+			OnModified ();
+		}
+
+		protected void OnModified() {
+			if (Modified != null) {
+				Modified(this, new EventArgs());
+			}
 		}
 	}
 
 	public class BasicStatAdjustment {
 		public int Modifier { get; set; }
 		public string Reason { get; set; }
+
+		public BasicStatAdjustment() { }
+
+		public BasicStatAdjustment(int mod, string reas) {
+			Modifier = mod;
+			Reason = reas;
+		}
 	}
 
 }

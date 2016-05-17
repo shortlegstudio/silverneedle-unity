@@ -18,8 +18,7 @@ public class FeatTests {
 	Feat CraftWand;
 
 	[SetUp]
-	public void SetUp() {
-		var input = new StringReader(FeatYamlFile);
+	public void SetUp() {var input = new StringReader(FeatYamlFile);
 		yaml = new YamlStream();
 		yaml.Load(input);
 		var yamlNode = new YamlNodeWrapper(yaml.Documents [0].RootNode);

@@ -12,10 +12,17 @@ namespace ShortLegStudio.RPG.Characters {
 		void SetScore (AbilityScoreTypes ability, int val);
 		void SetScore (string ability, int val);
 		IEnumerable<AbilityScore> GetAbilities();
+
+		event EventHandler<AbilityModifiedEventArgs> Modified;
+	}
+
+	public class AbilityModifiedEventArgs : EventArgs { 
+		public AbilityScore Ability;
 	}
 
 	public class AbilityScores : IAbilityScores {
 		private Dictionary<AbilityScoreTypes, AbilityScore> _abilities;
+		public event EventHandler<AbilityModifiedEventArgs> Modified;
 
 		public AbilityScores () {
 			FillAbilities ();
@@ -56,10 +63,25 @@ namespace ShortLegStudio.RPG.Characters {
 		public IEnumerable<AbilityScore> GetAbilities() {
 			return _abilities.Values;
 		}
+
+		private void AbilityModified(object source, EventArgs t) {
+			OnModified ((AbilityScore)source);
+		}
+
+		private void OnModified(AbilityScore changed) {
+			if (Modified != null) {
+				var args = new AbilityModifiedEventArgs ();
+				args.Ability = changed;
+				Modified (this, args);
+			}
+		}
+
 		private void FillAbilities() {
 			_abilities = new Dictionary<AbilityScoreTypes, AbilityScore> ();
 			foreach (var v in EnumHelpers.GetValues<AbilityScoreTypes>()) {
-				_abilities.Add (v, new AbilityScore (v, 0));
+				var ability = new AbilityScore (v, 0);
+				ability.Modified += AbilityModified;
+				_abilities.Add (v, ability);
 			}
 		}
 	}
