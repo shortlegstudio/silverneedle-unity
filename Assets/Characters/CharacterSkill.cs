@@ -18,8 +18,13 @@ namespace ShortLegStudio.RPG.Characters {
 		public CharacterSkill(Skill baseSkill, AbilityScore baseScore, bool isClassSkill) {
 			skill = baseSkill;
 			_baseScore = baseScore;
+			_baseScore.Modified += AbilityModified;
 			ClassSkill = isClassSkill;
 			Adjustments = new List<SkillAdjustment> ();
+			CalculateScore ();
+		}
+
+		void AbilityModified (object sender, BasicStatModifiedEventArgs e) {
 			CalculateScore ();
 		}
 

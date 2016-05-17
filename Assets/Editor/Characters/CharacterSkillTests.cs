@@ -93,4 +93,15 @@ public class CharacterSkillTests {
 		Assert.AreEqual (2, charSkill.Score);
 	}
 
+	[Test]
+	public void SkillsRecalculateWhenAbilityIsUpdated() {
+		var skill = new Skill ("Chew", AbilityScoreTypes.Strength, false);
+		var ability = new AbilityScore (AbilityScoreTypes.Strength, 10);
+		var charSkill = new CharacterSkill (skill, ability, false);
+
+		var oldVal = charSkill.Score;
+		ability.SetValue (16);
+		Assert.Greater (charSkill.Score, oldVal);
+
+	}
 }
