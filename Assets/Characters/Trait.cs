@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio;
 
-namespace ShortLegStudio.RPG.Characters {
-	public class Trait {
+namespace ShortLegStudio.RPG.Characters  {
+	public class Trait : ISkillModifier {
 		//Static Values
 		const string TRAIT_DATA_FILE = "Data/traits.yml";
 		static IList<Trait> _Traits = new List<Trait>();

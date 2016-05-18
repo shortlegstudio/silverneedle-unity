@@ -9,7 +9,7 @@ using ShortLegStudio.Dice;
 namespace ShortLegStudio.RPG.Characters {
 	public class Class {
 		public string Name { get; set; }
-		public IList<string> Skills { get; set; }
+		public IList<string> ClassSkills { get; set; }
 		public int SkillPoints { get; set; }
 		public DiceSides HitDice { get; set; }
 		public float BaseAttackBonusRate { get; set; }
@@ -19,7 +19,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public IList<string> ArmorProficiencies { get; set; }
 
 		public Class() {
-			Skills = new List<string> ();
+			ClassSkills = new List<string> ();
 			ArmorProficiencies = new List<string> ();
 		}
 
@@ -33,12 +33,12 @@ namespace ShortLegStudio.RPG.Characters {
 			// etc...
 			var pattern = "(\\(.*\\))";
 			var skillName = Regex.Replace (name, pattern, string.Empty).Trim();
-			return Skills.Any (x => x == skillName);
+			return ClassSkills.Any (x => x == skillName);
 		}
 
 		public void AddClassSkill(string name) {
 			if (!IsClassSkill (name))
-				Skills.Add (name);
+				ClassSkills.Add (name);
 			else
 				ShortLog.Debug ("Not adding class skill as it already is there: " + name);
 		}

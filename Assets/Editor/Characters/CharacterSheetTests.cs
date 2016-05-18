@@ -19,6 +19,16 @@ public class CharacterSheetTests {
 		_testSkills.Add (new Skill ("Spellcraft", AbilityScoreTypes.Intelligence, true));
 	}
 
+	[Test]
+	public void CalculatesSkillPointsBasedOnClassAndIntelligence() {
+		var sheet = new CharacterSheet (new List<Skill>());
+		var fighter = new Class ();
+		fighter.SkillPoints = 2;
+		sheet.Abilities.SetScore (AbilityScoreTypes.Intelligence, 14);
+		sheet.Class = fighter;
+		Assert.AreEqual (4, sheet.GetSkillPointsPerLevel());
+	}
+
     [Test]
     public void CharactersHaveVitalStats() {
 		var sheet = new CharacterSheet (_testSkills);
@@ -42,16 +52,6 @@ public class CharacterSheetTests {
 		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Charisma));
 		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Intelligence));
 
-	}
-
-	[Test]
-	public void CalculatesSkillPointsBasedOnClassAndIntelligence() {
-		var sheet = new CharacterSheet (_testSkills);
-		var fighter = new Class ();
-		fighter.SkillPoints = 2;
-		sheet.Abilities.SetScore (AbilityScoreTypes.Intelligence, 14);
-		sheet.Class = fighter;
-		Assert.AreEqual (4, sheet.GetSkillPointsPerLevel());
 	}
 
 	[Test]
@@ -92,37 +92,4 @@ public class CharacterSheetTests {
 		Assert.IsTrue (called);
 	}
 
-	[Test]
-	public void AccessAllSkillAdjustments() {
-		var sheet = new CharacterSheet (_testSkills);
-		var trait = new Trait ();
-		trait.SkillModifiers.Add(
-			new SkillAdjustment(
-				"Trait Adj",
-				3,
-				"Heal"
-			)
-		);
-
-		trait.SkillModifiers.Add(
-			new SkillAdjustment(
-				"Trait Adj",
-				3,
-				"Heal"
-			)
-		);
-
-		trait.SkillModifiers.Add(
-			new SkillAdjustment(
-				"Trait Adj",
-				3,
-				"Fly"
-			)
-		);
-		sheet.AddTrait (trait);
-
-		var adjustments = sheet.FindSkillAdjustments ("Heal");
-		Assert.AreEqual (2, adjustments.Count);
-
-	}
 }

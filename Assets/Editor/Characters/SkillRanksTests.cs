@@ -8,106 +8,43 @@ using System.Linq;
 
 [TestFixture]
 public class SkillRanksTests {
-	
+	List<Skill> _skillList;
+	AbilityScores _abilityScores;
+
+	SkillRanks Subject;
+
 	[SetUp]
 	public void SetupCharacter() {
+		_skillList = new List<Skill> ();
+		_skillList.Add (new Skill ("Climb", AbilityScoreTypes.Strength, false));
+		_skillList.Add (new Skill ("Disable Device", AbilityScoreTypes.Dexterity, true));
+
+		_abilityScores = new AbilityScores ();
+		_abilityScores.SetScore (AbilityScoreTypes.Strength, 14);
+		_abilityScores.SetScore (AbilityScoreTypes.Dexterity, 12);
+
+		Subject = new SkillRanks (_skillList, _abilityScores);
 
 	}
 
 	[Test]
 	public void SkillRanksLoadsAllTheSkills() {
-		
-		var skills = new List<Skill> ();
-		skills.Add (new Skill ("Climb", AbilityScoreTypes.Strength, false));
-		skills.Add (new Skill ("Disable Device", AbilityScoreTypes.Dexterity, true));
-
-		var abilityScores = new AbilityScores ();
-		abilityScores.SetScore (AbilityScoreTypes.Strength, 14);
-		var ranks = new SkillRanks (skills, abilityScores);
-
-		Assert.AreEqual (2, ranks.GetScore ("Climb"));
-		Assert.AreEqual (int.MinValue, ranks.GetScore ("Disable Device"));
+		Assert.AreEqual (2, Subject.GetScore ("Climb"));
+		Assert.AreEqual (int.MinValue, Subject.GetScore ("Disable Device"));
 	}
 
 	[Test]
-	public void CalculatesSkillPointsBasedOnClassAndIntelligence() {
-		var sheet = new CharacterSheet (new List<Skill>());
-		var fighter = new Class ();
-		fighter.SkillPoints = 2;
-		sheet.Abilities.SetScore (AbilityScoreTypes.Intelligence, 14);
-		sheet.Class = fighter;
-		Assert.AreEqual (4, sheet.GetSkillPointsPerLevel());
+	public void CanProcessASkillModifierForModifyingSkills() {
+		Subject.ProcessModifier (new MockMod ());
+		Assert.AreEqual (5, Subject.GetScore ("Climb"));
 	}
 
-	[Test]
-	public void SettingRaceLoadsTraits() {
-		var sheet = new CharacterSheet (new List<Skill>());
+	class MockMod : ISkillModifier {
+		public IList<SkillAdjustment> SkillModifiers { get; set;  }
 
-		//Set up the trait
-		var trait = new Trait ();
-		trait.Name = "Elfy";
-		Trait.SetTraits (new List<Trait> () { trait });
-
-		//Set up the race
-		var elf = new Race ();
-		elf.Traits.Add ("Elfy");
-
-		sheet.SetRace (elf);
-		Assert.IsTrue(sheet.Traits.Any(x => x == trait));
-		Trait.SetTraits (null);
-	}
-
-	[Test]
-	public void AddTraitTriggersModifiedEvent() {
-		bool called = false;
-
-		CharacterSheet sheet = new CharacterSheet (new List<Skill>());
-		sheet.Modified += (object sender, CharacterSheetEventArgs e) => {
-			called = true;
-		};
-
-		//Set up the trait
-		var trait = new Trait ();
-		trait.Name = "Elfy";
-		Trait.SetTraits (new List<Trait> () { trait });
-
-		sheet.AddTrait ("Elfy");
-
-		//Make sure the event was called
-		Assert.IsTrue (called);
-	}
-
-	[Test]
-	public void AccessAllSkillAdjustments() {
-		var sheet = new CharacterSheet (new List<Skill>());
-		var trait = new Trait ();
-		trait.SkillModifiers.Add(
-			new SkillAdjustment(
-				"Trait Adj",
-				3,
-				"Heal"
-			)
-		);
-
-		trait.SkillModifiers.Add(
-			new SkillAdjustment(
-				"Trait Adj",
-				3,
-				"Heal"
-			)
-		);
-
-		trait.SkillModifiers.Add(
-			new SkillAdjustment(
-				"Trait Adj",
-				3,
-				"Fly"
-			)
-		);
-		sheet.AddTrait (trait);
-
-		var adjustments = sheet.FindSkillAdjustments ("Heal");
-		Assert.AreEqual (2, adjustments.Count);
-
+		public MockMod() {
+			SkillModifiers = new List<SkillAdjustment>();
+			SkillModifiers.Add(new SkillAdjustment("Cause", 3, "Climb"));
+		}
 	}
 }

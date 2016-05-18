@@ -28,6 +28,13 @@ namespace ShortLegStudio.RPG.Characters {
 		public IEnumerable<CharacterSkill> GetSkills() {
 			return _skills.Values;
 		}
+
+		public void ProcessModifier(ISkillModifier modifier) {
+			foreach (var a in modifier.SkillModifiers) {
+				var sk = _skills [a.SkillName];
+				sk.AddAdjustment (a);
+			}
+		}
 			
 		private void FillSkills(IEnumerable<Skill> skills, AbilityScores scores) {
 			foreach (var s in skills) {

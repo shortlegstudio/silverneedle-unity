@@ -40,9 +40,9 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public event EventHandler<CharacterSheetEventArgs> Modified;
 
-		public CharacterSheet(IEnumerable<Skill> skills) {
+		public CharacterSheet(IEnumerable<Skill> skillList) {
 			Abilities = new AbilityScores ();
-			SkillRanks = new SkillRanks (skills, Abilities);
+			SkillRanks = new SkillRanks (skillList, Abilities);
 			Traits = new List<Trait> ();
 			Feats = new List<Feat> ();
 			Level = 1;
@@ -173,7 +173,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public void AddTrait(Trait trait, bool notify = true) {
 			Traits.Add (trait);
-
+			SkillRanks.ProcessModifier (trait);
 			if (notify) {
 				NotifyModified ();
 			}
@@ -181,6 +181,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public void AddFeat(Feat feat, bool notify = true) {
 			Feats.Add (feat);
+
 			if (notify) {
 				NotifyModified ();
 			}
@@ -196,21 +197,6 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public IList<CharacterSkill> GetSkillList() {
 			return SkillRanks.GetSkills().ToList ();
-		}
-
-		public IList<SkillAdjustment> FindSkillAdjustments(string name) {
-
-			//Traits
-			var adjustments = Traits.SelectMany (x =>
-				x.SkillModifiers.Where (y => y.SkillName == name)
-			).Concat(
-				Feats.SelectMany (x =>
-					x.SkillModifiers.Where (y => y.SkillName == name)
-				)
-			);
-
-
-			return adjustments.ToList();
 		}
 
 		public bool IsClassSkill(string name) {
