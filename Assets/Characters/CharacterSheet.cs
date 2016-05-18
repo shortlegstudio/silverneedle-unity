@@ -174,6 +174,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public void AddTrait(Trait trait, bool notify = true) {
 			Traits.Add (trait);
 			SkillRanks.ProcessModifier (trait);
+
 			if (notify) {
 				NotifyModified ();
 			}
@@ -181,6 +182,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public void AddFeat(Feat feat, bool notify = true) {
 			Feats.Add (feat);
+			SkillRanks.ProcessModifier (feat);
 
 			if (notify) {
 				NotifyModified ();

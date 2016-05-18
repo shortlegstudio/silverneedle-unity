@@ -7,7 +7,7 @@ using System.Linq;
 using ShortLegStudio;
 
 namespace ShortLegStudio.RPG.Characters {
-	public class Feat {
+	public class Feat : ISkillModifier {
 		//Static Values
 		const string TRAIT_DATA_FILE = "Data/feats.yml";
 		static IList<Feat> _Feat = new List<Feat>();
