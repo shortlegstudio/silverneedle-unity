@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ShortLegStudio.RPG.Characters {
 	public interface ISkillRanks {
@@ -27,6 +28,12 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public IEnumerable<CharacterSkill> GetSkills() {
 			return _skills.Values;
+		}
+
+		public IEnumerable<CharacterSkill> GetRankedSkills() {
+			return _skills.Values.Where (x => 
+				x.Ranks > 0
+			);
 		}
 
 		public void ProcessModifier(ISkillModifier modifier) {

@@ -18,6 +18,7 @@ public class SkillRanksTests {
 		_skillList = new List<Skill> ();
 		_skillList.Add (new Skill ("Climb", AbilityScoreTypes.Strength, false));
 		_skillList.Add (new Skill ("Disable Device", AbilityScoreTypes.Dexterity, true));
+		_skillList.Add (new Skill ("Stealth", AbilityScoreTypes.Dexterity, false));
 
 		_abilityScores = new AbilityScores ();
 		_abilityScores.SetScore (AbilityScoreTypes.Strength, 14);
@@ -37,6 +38,14 @@ public class SkillRanksTests {
 	public void CanProcessASkillModifierForModifyingSkills() {
 		Subject.ProcessModifier (new MockMod ());
 		Assert.AreEqual (5, Subject.GetScore ("Climb"));
+	}
+
+	[Test]
+	public void ReturnsAListOfSkillsThatHaveRanks() {
+		Subject.GetSkill ("Climb").AddRank ();
+		var list = Subject.GetRankedSkills ().ToList();
+		Assert.AreEqual (1, list.Count);
+		Assert.AreEqual ("Climb", list [0].Name);
 	}
 
 	class MockMod : ISkillModifier {

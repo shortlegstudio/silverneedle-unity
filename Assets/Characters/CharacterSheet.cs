@@ -197,10 +197,6 @@ namespace ShortLegStudio.RPG.Characters {
 			return SkillRanks.GetScore (name);
 		}
 
-		public IList<CharacterSkill> GetSkillList() {
-			return SkillRanks.GetSkills().ToList ();
-		}
-
 		public bool IsClassSkill(string name) {
 			if (Class == null)
 				return false;
