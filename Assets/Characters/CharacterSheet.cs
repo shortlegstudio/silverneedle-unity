@@ -30,9 +30,7 @@ namespace ShortLegStudio.RPG.Characters {
 		//Combat Related
 		public int MaxHitPoints { get; set; }
 		public int CurrentHitPoints { get; set; } 
-		public int BaseAttackBonus { get; set; }
-		public int MeleeAttackBonus { get; set; }
-		public int RangeAttackBonus { get; set; }
+		public OffenseStats Offense { get; set; }
 
 		public int FortitudeSaves { get; set; }
 		public int ReflexSaves { get; set; }
@@ -45,6 +43,7 @@ namespace ShortLegStudio.RPG.Characters {
 			SkillRanks = new SkillRanks (skillList, Abilities);
 			Traits = new List<Trait> ();
 			Feats = new List<Feat> ();
+			Offense = new OffenseStats (Abilities);
 			Level = 1;
 		}
 
@@ -108,9 +107,7 @@ namespace ShortLegStudio.RPG.Characters {
 		*/
 		public void SetClass(Class cls) {
 			this.Class = cls;
-			this.BaseAttackBonus = GetCurrentBaseAttackBonus ();
-			this.MeleeAttackBonus = BaseAttackBonus + Abilities.GetModifier (AbilityScoreTypes.Strength);
-			this.RangeAttackBonus = BaseAttackBonus + Abilities.GetModifier (AbilityScoreTypes.Dexterity);
+			Offense.BaseAttackBonus.SetValue (GetCurrentBaseAttackBonus ());
 
 			//Handle Armor Proficiencies
 			foreach (var x in cls.ArmorProficiencies) {

@@ -16,9 +16,9 @@ public class BaseAttackBonusUI : MonoBehaviour {
 
 	void CharacterChanged (object sender, System.EventArgs e) {
 		textbox.text = string.Format (BAB_FORMAT, 
-			character.CurrentCharacter.BaseAttackBonus,
-			character.CurrentCharacter.MeleeAttackBonus,
-			character.CurrentCharacter.RangeAttackBonus
+			character.CurrentCharacter.Offense.BaseAttackBonus.TotalValue,
+			character.CurrentCharacter.Offense.MeleeAttackBonus(),
+			character.CurrentCharacter.Offense.RangeAttackBonus()
 		);
 	}
 
