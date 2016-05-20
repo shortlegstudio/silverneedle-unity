@@ -18,6 +18,16 @@ namespace ShortLegStudio.RPG.Characters {
 		public int RangeAttackBonus() {
 			return BaseAttackBonus.TotalValue + AbilityScores.GetModifier (AbilityScoreTypes.Dexterity);
 		}
+
+		public int CombatManueverBonus() {
+			return BaseAttackBonus.TotalValue + AbilityScores.GetModifier (AbilityScoreTypes.Strength);
+		}
+
+		public int CombatManueverDefense() {
+			return 10 + BaseAttackBonus.TotalValue
+				+ AbilityScores.GetModifier (AbilityScoreTypes.Strength)
+				+ AbilityScores.GetModifier (AbilityScoreTypes.Dexterity);
+		}
 	}
 }
 

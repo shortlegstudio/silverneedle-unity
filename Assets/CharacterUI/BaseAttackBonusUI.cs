@@ -4,7 +4,7 @@ using System.Collections;
 
 public class BaseAttackBonusUI : MonoBehaviour {
 	private CharacterBuilder character;
-	private const string BAB_FORMAT = "Base Attack Bonus: {0}\n\tMelee: {1}\n\tRange: {2}";
+	private const string BAB_FORMAT = "Base Attack Bonus: {0}\n\tMelee: {1}\n\tRange: {2}\nCMB: {3}\nCMD: {4}";
 	private Text textbox;
 
 	// Use this for initialization
@@ -15,10 +15,13 @@ public class BaseAttackBonusUI : MonoBehaviour {
 	}
 
 	void CharacterChanged (object sender, System.EventArgs e) {
+		var offense = character.CurrentCharacter.Offense;
 		textbox.text = string.Format (BAB_FORMAT, 
-			character.CurrentCharacter.Offense.BaseAttackBonus.TotalValue,
-			character.CurrentCharacter.Offense.MeleeAttackBonus(),
-			character.CurrentCharacter.Offense.RangeAttackBonus()
+			offense.BaseAttackBonus.TotalValue,
+			offense.MeleeAttackBonus(),
+			offense.RangeAttackBonus(),
+			offense.CombatManueverBonus(),
+			offense.CombatManueverDefense()
 		);
 	}
 

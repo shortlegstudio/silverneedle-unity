@@ -32,4 +32,15 @@ public class OffenseStatsTests {
 		Assert.AreEqual (6, stats.RangeAttackBonus());
 	}
 
+	[Test]
+	public void CMBIsBABAndStrength() {
+		stats.BaseAttackBonus.SetValue (3);
+		Assert.AreEqual (6, stats.CombatManueverBonus ());
+	}
+
+	[Test]
+	public void CMDIsBABStrengthAndDexterity() {
+		stats.BaseAttackBonus.SetValue (3);
+		Assert.AreEqual (19, stats.CombatManueverDefense ());
+	}
 }

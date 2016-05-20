@@ -39,7 +39,7 @@ public class SkillListGUI : MonoBehaviour {
 			skillUI.UpdateUI (skill);
 		}
 
-		trans.sizeDelta = new Vector2 (trans.sizeDelta.x, -currentY + 10);
+		trans.sizeDelta = new Vector2 (trans.sizeDelta.x, -currentY + 20);
 
 	}
 

@@ -30,7 +30,8 @@ namespace ShortLegStudio.RPG.Characters {
 		//Combat Related
 		public int MaxHitPoints { get; set; }
 		public int CurrentHitPoints { get; set; } 
-		public OffenseStats Offense { get; set; }
+		public OffenseStats Offense { get; private set; }
+		public DefenseStats Defense { get; private set; }
 
 		public int FortitudeSaves { get; set; }
 		public int ReflexSaves { get; set; }
@@ -44,6 +45,7 @@ namespace ShortLegStudio.RPG.Characters {
 			Traits = new List<Trait> ();
 			Feats = new List<Feat> ();
 			Offense = new OffenseStats (Abilities);
+			Defense = new DefenseStats (Abilities);
 			Level = 1;
 		}
 
