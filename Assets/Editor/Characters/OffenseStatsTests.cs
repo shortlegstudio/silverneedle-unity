@@ -5,42 +5,42 @@ using ShortLegStudio.RPG.Characters;
 
 [TestFixture]
 public class OffenseStatsTests {
-	OffenseStats stats;
+	OffenseStats smallStats;
 
 	[SetUp]
 	public void SetUp() {
 		var abilities = new AbilityScores ();
 		abilities.SetScore (AbilityScoreTypes.Strength, 16);
 		abilities.SetScore (AbilityScoreTypes.Dexterity, 16);
-		stats = new OffenseStats (abilities);
+		smallStats = new OffenseStats (abilities);
 	}
 
 	[Test]
 	public void BaseAttackBonusIsAStat() {
-		Assert.IsInstanceOf<BasicStat> (stats.BaseAttackBonus);
+		Assert.IsInstanceOf<BasicStat> (smallStats.BaseAttackBonus);
 	}
 
 	[Test]
 	public void BaseMeleeBonusIsBABAndStrength() {
-		stats.BaseAttackBonus.SetValue (3);
-		Assert.AreEqual (6, stats.MeleeAttackBonus());
+		smallStats.BaseAttackBonus.SetValue (3);
+		Assert.AreEqual (6, smallStats.MeleeAttackBonus());
 	}
 
 	[Test]
 	public void BaseRangeBonusIsBABAndDexterity() {
-		stats.BaseAttackBonus.SetValue (3);
-		Assert.AreEqual (6, stats.RangeAttackBonus());
+		smallStats.BaseAttackBonus.SetValue (3);
+		Assert.AreEqual (6, smallStats.RangeAttackBonus());
 	}
 
 	[Test]
 	public void CMBIsBABAndStrength() {
-		stats.BaseAttackBonus.SetValue (3);
-		Assert.AreEqual (6, stats.CombatManueverBonus ());
+		smallStats.BaseAttackBonus.SetValue (3);
+		Assert.AreEqual (6, smallStats.CombatManueverBonus ());
 	}
 
 	[Test]
 	public void CMDIsBABStrengthAndDexterity() {
-		stats.BaseAttackBonus.SetValue (3);
-		Assert.AreEqual (19, stats.CombatManueverDefense ());
+		smallStats.BaseAttackBonus.SetValue (3);
+		Assert.AreEqual (19, smallStats.CombatManueverDefense ());
 	}
 }
