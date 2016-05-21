@@ -8,8 +8,8 @@ namespace ShortLegStudio.RPG.Characters {
 		const int FLY_MODIFIER = 2;
 
 		public CharacterSize Size { get; private set; }
-		public float Height { get; private set; }
-		public float Weight { get; private set; }
+		public int Height { get; private set; }
+		public int Weight { get; private set; }
 		public int SizeModifier { get; private set; }
 		public System.Collections.Generic.IList<SkillAdjustment> SkillModifiers { get; private set; }
 
@@ -17,7 +17,17 @@ namespace ShortLegStudio.RPG.Characters {
 		private SkillAdjustment StealthAdj { get; set; }
 		private SkillAdjustment FlyAdj { get; set; }
 
-		public void SetSize (CharacterSize size, float height, float weight)
+
+		public SizeStats() : this(CharacterSize.Medium, 72, 180) {
+
+		}
+
+		public SizeStats (CharacterSize size, int height, int weight) {
+			SetupSkillModifiers ();
+			SetSize (size, height, weight);
+		}
+
+		public void SetSize (CharacterSize size, int height, int weight)
 		{
 			Size = size;
 			Height = height;
@@ -28,10 +38,6 @@ namespace ShortLegStudio.RPG.Characters {
 			UpdateFly ();
 		}
 
-		public SizeStats (CharacterSize size, float height, float weight) {
-			SetupSkillModifiers ();
-			SetSize (size, height, weight);
-		}
 
 		private void SetupSkillModifiers() {
 			StealthAdj = new SkillAdjustment ("Size", 0, "Stealth");

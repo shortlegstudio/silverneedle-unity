@@ -8,7 +8,6 @@ namespace ShortLegStudio.RPG.Characters {
 	public class CharacterSkill {
 		public Skill Skill { get; private set; }
 		private AbilityScore _baseScore;
-		public int Score { get; private set; }
 		public bool AbleToUse { get; private set; }
 		public int Ranks { get; private set; }
 		public bool ClassSkill { get; set; }
@@ -18,32 +17,32 @@ namespace ShortLegStudio.RPG.Characters {
 		public CharacterSkill(Skill baseSkill, AbilityScore baseScore, bool isClassSkill) {
 			Skill = baseSkill;
 			_baseScore = baseScore;
-			_baseScore.Modified += AbilityModified;
 			ClassSkill = isClassSkill;
 			Adjustments = new List<SkillAdjustment> ();
-			CalculateScore ();
+			UpdateAbleToUse ();
 		}
 
-		void AbilityModified (object sender, BasicStatModifiedEventArgs e) {
-			CalculateScore ();
-		}
+		public int Score() {
 
-		public int CalculateScore() {
+			//I can't do this...
+			if (!AbleToUse)
+				return int.MinValue;
+			
 			var val = 0;
-			if (Skill.TrainingRequired && Ranks == 0) {
-				val = int.MinValue;
-				AbleToUse = false;
-			} else {
-				val += _baseScore.BaseModifier;
-				val += Ranks;
-				if (Ranks > 0 && ClassSkill)
-					val += 3;
-				AbleToUse = true;
-			}
-			val += TotalAdjustments ();
 
-			Score = val;
-			return Score;
+			//Base Ability Score
+			val += _baseScore.BaseModifier;
+
+			//Number of Ranks
+			val += Ranks;
+
+			//Class Skill
+			if (Ranks > 0 && ClassSkill)
+				val += 3;
+
+			//Other Bonuses
+			val += TotalAdjustments ();
+			return val;
 		}
 
 		public int TotalAdjustments() {
@@ -52,7 +51,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public void AddRank() {
 			Ranks++;
-			CalculateScore ();
+			UpdateAbleToUse ();
 		}
 
 		public string Name { 
@@ -62,10 +61,12 @@ namespace ShortLegStudio.RPG.Characters {
 		public void AddAdjustment(SkillAdjustment adjustment) {
 			if (adjustment.SkillName == Name) {
 				Adjustments.Add (adjustment);
-				CalculateScore ();
 			}
 		}
 
+		private void UpdateAbleToUse() {
+			AbleToUse = !Skill.TrainingRequired || Ranks > 0;
+		}
 
 	}
 }

@@ -5,6 +5,7 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Characters.Generators;
 using System.Collections.Generic;
 using System.Linq;
+using ShortLegStudio.Dice;
 
 [TestFixture]
 public class CharacterSheetTests {
@@ -34,12 +35,8 @@ public class CharacterSheetTests {
 		var sheet = new CharacterSheet (_testSkills);
 		sheet.Name = "Foobar";
 		sheet.Alignment = CharacterAlignment.LawfulGood;
-		sheet.Height = 72;
-		sheet.Weight = 150;
 		Assert.AreEqual ("Foobar", sheet.Name);
 		Assert.AreEqual (CharacterAlignment.LawfulGood, sheet.Alignment);
-		Assert.AreEqual (72, sheet.Height);
-		Assert.AreEqual (150, sheet.Weight);
 		Assert.AreEqual (1, sheet.Level);
     }
 
@@ -66,10 +63,27 @@ public class CharacterSheetTests {
 		//Set up the race
 		var elf = new Race ();
 		elf.Traits.Add ("Elfy");
+		elf.SizeSetting = CharacterSize.Medium;
+		elf.HeightRange = DiceStrings.ParseDice ("10d6");
+		elf.WeightRange = DiceStrings.ParseDice ("20d8");
 
 		sheet.SetRace (elf);
 		Assert.IsTrue(sheet.Traits.Any(x => x == trait));
 		Trait.SetTraits (null);
+	}
+
+	[Test]
+	public void SettingRaceCalculatesSize() {
+		var sheet = new CharacterSheet (_testSkills);
+		var smallGuy = new Race ();
+		smallGuy.SizeSetting = CharacterSize.Small;
+		smallGuy.HeightRange = DiceStrings.ParseDice ("2d4+10");
+		smallGuy.WeightRange = DiceStrings.ParseDice ("2d4+100");
+
+		sheet.SetRace (smallGuy);
+		Assert.AreEqual (CharacterSize.Small, sheet.Size.Size);
+		Assert.GreaterOrEqual (sheet.Size.Height, 12);
+		Assert.GreaterOrEqual (sheet.Size.Weight, 102);
 	}
 
 	[Test]

@@ -24,6 +24,11 @@ namespace ShortLegStudio
 			UnityEngine.Debug.LogError (message);
 		}
 
+		public static void ErrorFormat(string format, params string[] args) {
+			var s = string.Format (format, args);
+			Error (s);
+		}
+
 		public static void Debug(string message) {
 			if (_useConsole) {
 				Console.WriteLine ("DEBUG: {0}", message);

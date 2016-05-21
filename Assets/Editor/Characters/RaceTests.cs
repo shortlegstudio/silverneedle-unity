@@ -67,8 +67,8 @@ public class RaceTests {
 
 	[Test]
 	public void RacesHaveSizeInformation() {
-		Assert.AreEqual (CharacterSize.Medium, dwarf.Size);
-		Assert.AreEqual (CharacterSize.Small, halfling.Size);
+		Assert.AreEqual (CharacterSize.Medium, dwarf.SizeSetting);
+		Assert.AreEqual (CharacterSize.Small, halfling.SizeSetting);
 
 		//Should have a dice cup for making height rolls
 		var cup = dwarf.HeightRange;

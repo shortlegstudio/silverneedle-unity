@@ -2,10 +2,12 @@
 using System;
 using System.Collections;
 using ShortLegStudio.RPG.Characters;
+using UnityEngine.UI;
 
 public class SkillListGUI : MonoBehaviour {
 	public GameObject SkillUIPrefab;
 	CharacterBuilder character;
+	public Toggle ShowAllControl;
 
 	// Use this for initialization
 	void Start () {
@@ -25,7 +27,13 @@ public class SkillListGUI : MonoBehaviour {
 		ClearSkillList ();
 		float currentY = 0;
 		float paddingY = 1;
+
 		var skills = character.CurrentCharacter.SkillRanks.GetRankedSkills();
+
+		if (ShowAllControl.isOn) {
+			skills = character.CurrentCharacter.SkillRanks.GetSkills ();
+		}
+
 		var trans = GetComponent<RectTransform> ();
 		foreach (var skill in skills) {
 			var skillScore = (GameObject)Instantiate (SkillUIPrefab);

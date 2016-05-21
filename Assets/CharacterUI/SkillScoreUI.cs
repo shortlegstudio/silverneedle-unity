@@ -27,7 +27,7 @@ public class SkillScoreUI : MonoBehaviour {
 
 		if (skill.AbleToUse) {
 			skillName.color = Color.white;
-			score.text = skill.Score.ToString ();
+			score.text = skill.Score().ToString ();
 		} else {
 			skillName.color = Color.gray;
 			score.text = "-";

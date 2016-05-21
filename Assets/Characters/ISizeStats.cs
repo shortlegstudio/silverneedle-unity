@@ -4,10 +4,10 @@ namespace ShortLegStudio.RPG.Characters {
 	public interface ISizeStats {
 		CharacterSize Size { get; }
 		int SizeModifier { get; }
-		float Height { get; }
-		float Weight { get; }
+		int Height { get; }
+		int Weight { get; }
 
-		void SetSize(CharacterSize size, float height, float width);
+		void SetSize(CharacterSize size, int height, int width);
 	}
 }
 

@@ -48,6 +48,13 @@ public class SkillRanksTests {
 		Assert.AreEqual ("Climb", list [0].Name);
 	}
 
+	[Test]
+	public void IfSkillDoesNotExistWhenProcessingAModifierJustLogIt() {
+		var ranks = new SkillRanks (new List<Skill> (), new AbilityScores ());
+		ranks.ProcessModifier (new MockMod ());
+		//Should not throw exception
+	}
+
 	class MockMod : ISkillModifier {
 		public IList<SkillAdjustment> SkillModifiers { get; set;  }
 

@@ -10,8 +10,7 @@ namespace ShortLegStudio.RPG.Characters {
 		// Basic Stats
 		public string Name { get; set; }
 		public CharacterAlignment Alignment { get; set; }
-		public int Height { get; set; }
-		public int Weight { get; set; }
+		public SizeStats Size { get; set; }
 
 		//Race and Class
 		public Race Race { get; protected set; }
@@ -46,6 +45,11 @@ namespace ShortLegStudio.RPG.Characters {
 			Feats = new List<Feat> ();
 			Offense = new OffenseStats (Abilities);
 			Defense = new DefenseStats (Abilities);
+			Size = new SizeStats ();
+
+			//Prepare size skill Modifiers
+			SkillRanks.ProcessModifier(Size);
+
 			Level = 1;
 		}
 
@@ -140,6 +144,9 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public void SetRace(Race race) {
 			Race = race;
+
+			//Update Size
+			Size.SetSize(race.SizeSetting, race.HeightRange.Roll(), race.WeightRange.Roll());
 
 			//Add Ability Modifiers
 			foreach (var adj in race.AbilityModifiers) {

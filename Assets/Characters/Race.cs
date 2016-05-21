@@ -14,7 +14,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public string Name { get; set; }
 		public IList<AbilityScoreAdjustment> AbilityModifiers { get; private set;  }
 		public IList<string> Traits { get; private set; }
-		public CharacterSize Size { get; set; }
+		public CharacterSize SizeSetting { get; set; }
 		public Cup HeightRange { get; set; }
 		public Cup WeightRange { get; set; }
 
@@ -30,7 +30,7 @@ namespace ShortLegStudio.RPG.Characters {
 				var race = new Race ();
 				race.Name = raceNode.GetString ("name"); 
 				ShortLog.Debug ("Loading Race: " + race.Name);
-				race.Size = (CharacterSize)System.Enum.Parse (typeof(CharacterSize), raceNode.GetString ("size"));
+				race.SizeSetting = (CharacterSize)System.Enum.Parse (typeof(CharacterSize), raceNode.GetString ("size"));
 				race.HeightRange = DiceStrings.ParseDice (raceNode.GetString ("height"));
 				race.WeightRange = DiceStrings.ParseDice (raceNode.GetString ("weight"));
 

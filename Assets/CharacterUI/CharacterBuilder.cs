@@ -38,11 +38,6 @@ public class CharacterBuilder : MonoBehaviour {
 
 		LevelUpGenerator.BringCharacterToLevel(CurrentCharacter, UnityEngine.Random.Range (1, 21));
 
-		//Generate Appearance
-		CurrentCharacter.Height = AppearanceGenerator.RollHeight(CurrentCharacter);
-		CurrentCharacter.Weight = AppearanceGenerator.RollWeight (CurrentCharacter);
-
-
 		//Assign Skill Points
 		SkillPointGenerator.AssignSkillPointsRandomly(CurrentCharacter);
 		UpdateInterface ();

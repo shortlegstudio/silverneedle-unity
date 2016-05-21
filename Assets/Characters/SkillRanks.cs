@@ -19,7 +19,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public int GetScore(string skill) {
-			return _skills [skill].Score;
+			return _skills [skill].Score();
 		}
 
 		public CharacterSkill GetSkill(string skill) {
@@ -38,8 +38,12 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public void ProcessModifier(ISkillModifier modifier) {
 			foreach (var a in modifier.SkillModifiers) {
-				var sk = _skills [a.SkillName];
-				sk.AddAdjustment (a);
+				CharacterSkill sk;
+				if (_skills.TryGetValue (a.SkillName, out sk)) {
+					sk.AddAdjustment (a);
+				} else {
+					ShortLog.ErrorFormat ("Skill: {0} was not found in the Skill Ranks and modifiers could not be applied.", a.SkillName);
+				}
 			}
 		}
 			

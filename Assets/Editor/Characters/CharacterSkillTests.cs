@@ -20,7 +20,7 @@ public class CharacterSkillTests {
 		);
 
 		var charSkill = new CharacterSkill (skill, new AbilityScore(AbilityScoreTypes.Strength, 14), false);
-		Assert.AreEqual (2, charSkill.Score);
+		Assert.AreEqual (2, charSkill.Score());
 		Assert.IsTrue (charSkill.AbleToUse);
 	}
 
@@ -32,7 +32,7 @@ public class CharacterSkillTests {
 			            true
 		            );
 		var charSkill = new CharacterSkill (skill, new AbilityScore(AbilityScoreTypes.Dexterity, 18), false);
-		Assert.AreEqual (int.MinValue, charSkill.Score);
+		Assert.AreEqual (int.MinValue, charSkill.Score());
 		Assert.IsFalse (charSkill.AbleToUse);
 	}
 
@@ -44,10 +44,10 @@ public class CharacterSkillTests {
 			            false
 		);
 		var charSkill = new CharacterSkill (skill, new AbilityScore(AbilityScoreTypes.Strength, 15), false);
-		var baseValue = charSkill.Score;
+		var baseValue = charSkill.Score();
 		charSkill.AddRank ();
 		Assert.AreEqual (1, charSkill.Ranks);
-		Assert.AreEqual (baseValue + 1, charSkill.Score);
+		Assert.AreEqual (baseValue + 1, charSkill.Score());
 	}
 
 	[Test]
@@ -61,7 +61,7 @@ public class CharacterSkillTests {
 		Assert.IsFalse (charSkill.AbleToUse);
 		charSkill.AddRank ();
 		Assert.IsTrue (charSkill.AbleToUse);
-		Assert.AreEqual (3, charSkill.Score);
+		Assert.AreEqual (3, charSkill.Score());
 	}
 
 	[Test]
@@ -74,9 +74,9 @@ public class CharacterSkillTests {
 		var charSkill = new CharacterSkill (skill, new AbilityScore(AbilityScoreTypes.Strength, 10), true);
 		charSkill.ClassSkill = true;
 		charSkill.AddRank ();
-		Assert.AreEqual (4, charSkill.Score);
+		Assert.AreEqual (4, charSkill.Score());
 		charSkill.AddRank ();
-		Assert.AreEqual (5, charSkill.Score);
+		Assert.AreEqual (5, charSkill.Score());
 	}
 
 	[Test]
@@ -90,7 +90,7 @@ public class CharacterSkillTests {
 		var charSkill = new CharacterSkill (flySkill, new AbilityScore (AbilityScoreTypes.Dexterity, 10), false);
 		charSkill.AddAdjustment (adjust);
 
-		Assert.AreEqual (2, charSkill.Score);
+		Assert.AreEqual (2, charSkill.Score());
 	}
 
 	[Test]
@@ -99,9 +99,21 @@ public class CharacterSkillTests {
 		var ability = new AbilityScore (AbilityScoreTypes.Strength, 10);
 		var charSkill = new CharacterSkill (skill, ability, false);
 
-		var oldVal = charSkill.Score;
+		var oldVal = charSkill.Score();
 		ability.SetValue (16);
-		Assert.Greater (charSkill.Score, oldVal);
+		Assert.Greater (charSkill.Score(), oldVal);
 
+	}
+
+	[Test]
+	public void ModificationToAnAdjustmentAreReflectedInTotalScore() {
+		var skill = new Skill ("Chew", AbilityScoreTypes.Strength, false);
+		var ability = new AbilityScore (AbilityScoreTypes.Strength, 10);
+		var charSkill = new CharacterSkill (skill, ability, false);
+		var adj = new SkillAdjustment ("Teeth", 0, "Chew");
+		charSkill.AddAdjustment (adj);
+		Assert.AreEqual (0, charSkill.Score());
+		adj.Modifier = 5;
+		Assert.AreEqual (5, charSkill.Score());
 	}
 }

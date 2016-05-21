@@ -16,8 +16,8 @@ public class CreatureSizeUI : MonoBehaviour {
 	}
 	
 	void CharacterChanged (object sender, System.EventArgs e) {
-		size.text = character.CurrentCharacter.Race.Size.ToString();
-		height.text = MeasureConversion.InchesToFeetString(character.CurrentCharacter.Height);
-		weight.text = string.Format ("{0} lbs", character.CurrentCharacter.Weight);
+		size.text = character.CurrentCharacter.Size.Size.ToString();
+		height.text = MeasureConversion.InchesToFeetString(character.CurrentCharacter.Size.Height);
+		weight.text = string.Format ("{0} lbs", character.CurrentCharacter.Size.Weight);
 	}
 }
