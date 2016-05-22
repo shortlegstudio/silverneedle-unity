@@ -1,0 +1,61 @@
+- weapon:
+  name: Dagger
+  weight: 1
+  damage: 1d4
+  damage_type: Piercing
+  critical_threat: 19
+  critical_modifier: 2
+  range: 10
+  type: Light
+  group: LightBlades
+  training_level: Simple
+- weapon:
+  name: Dagger, punching
+  weight: 1
+  damage: 1d4
+  damage_type: Piercing
+  critical_threat: 20
+  critical_modifier: 3
+  type: Light
+  group: Close
+  training_level: Simple
+- weapon:
+  name: Gauntlet, spiked
+  weight: 1
+  damage: 1d4
+  damage_type: Piercing
+  critical_threat: 20
+  critical_modifier: 2
+  type: Light
+  group: Close
+  training_level: Simple
+- weapon:
+  name: Mace, Light
+  weight: 4
+  damage: 1d6
+  damage_type: Bludgeoning
+  critical_threat: 20
+  critical_modifier: 2
+  type: Light
+  group: Hammers
+  training_level: Simple
+- weapon:
+  name: Sickle
+  weight: 2
+  damage: 1d6
+  damage_type: Slashing
+  critical_threat: 20
+  critical_modifier: 2
+  type: Light
+  group: LightBlades
+  training_level: Simple
+- weapon:
+  name: Club
+  weight: 3
+  damage: 1d6
+  damage_type: Bludgeoning
+  critical_threat: 20
+  critical_modifier: 2
+  type: OneHanded
+  group: Hammers
+  training_level: Simple

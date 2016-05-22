@@ -3,11 +3,18 @@ using System.Text.RegularExpressions;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using YamlDotNet.RepresentationModel;
+using System;
 
 namespace ShortLegStudio {
-	public class YamlHelpers {
-		
+	public static class YamlHelpers {
+		public static YamlNodeWrapper ParseYaml(this string yamlString) {
+			var input = new StringReader(yamlString);
+			var yaml = new YamlStream();
+			yaml.Load(input);
+			return new YamlNodeWrapper(yaml.Documents [0].RootNode);
+		}
 	}
 
 	public class YamlNodeWrapper {
@@ -60,12 +67,24 @@ namespace ShortLegStudio {
 			return GetStringOptional (key) == "yes";
 		}
 
+		public int GetIntegerOptional(string key) {
+			var v = GetStringOptional (key);
+			if (v == null)
+				return 0;
+
+			return int.Parse (v);
+		}
+
 		public int GetInteger(string key) {
 			return int.Parse (GetString (key));
 		}
 
 		public float GetFloat(string key) {
 			return float.Parse (GetString (key));
+		}
+
+		public t GetEnum<t>(string key) {
+			return (t)Enum.Parse (typeof(t), GetStringOptional (key));
 		}
 
 		public YamlNodeWrapper GetNode(string key) {

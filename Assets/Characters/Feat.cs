@@ -10,7 +10,7 @@ namespace ShortLegStudio.RPG.Characters {
 	public class Feat : ISkillModifier {
 		//Static Values
 		const string TRAIT_DATA_FILE = "Data/feats.yml";
-		static IList<Feat> _Feat = new List<Feat>();
+		static IList<Feat> _Feats = new List<Feat>();
 
 		public string Name { get; set; }
 		public string Description { get; set; }
@@ -75,12 +75,12 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public static IList<Feat> GetFeats() {
 			
-			if (_Feat == null || _Feat.Count == 0) {
+			if (_Feats == null || _Feats.Count == 0) {
 				var yaml = FileHelper.OpenYaml (TRAIT_DATA_FILE);
-				_Feat = LoadFromYaml (yaml);
-				Debug.Log ("Loaded Traits: " + _Feat.Count);
+				_Feats = LoadFromYaml (yaml);
+				Debug.Log ("Loaded Traits: " + _Feats.Count);
 			}
-			return _Feat;
+			return _Feats;
 		}
 
 		public static IEnumerable<Feat> GetQualifyingFeats(CharacterSheet character) {
@@ -93,7 +93,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public static void SetFeats(IList<Feat> feats) {
-			_Feat = feats;
+			_Feats = feats;
 		}
 	}
 
