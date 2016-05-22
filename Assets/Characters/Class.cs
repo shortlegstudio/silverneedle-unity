@@ -7,7 +7,11 @@ using ShortLegStudio;
 using ShortLegStudio.Dice;
 
 namespace ShortLegStudio.RPG.Characters {
+	
 	public class Class {
+		public const float GOOD_SAVE_RATE = 0.667f;
+		public const float POOR_SAVE_RATE = 0.334f;
+
 		public string Name { get; set; }
 		public IList<string> ClassSkills { get; set; }
 		public int SkillPoints { get; set; }
@@ -17,6 +21,16 @@ namespace ShortLegStudio.RPG.Characters {
 		public float ReflexSaveRate { get; set; }
 		public float WillSaveRate { get; set; }
 		public IList<string> ArmorProficiencies { get; set; }
+
+		public bool IsFortitudeGoodSave { 
+			get { return FortitudeSaveRate == GOOD_SAVE_RATE; }
+		}
+		public bool IsReflexGoodSave {
+			get { return ReflexSaveRate == GOOD_SAVE_RATE; }
+		}
+		public bool IsWillGoodSave {
+			get { return WillSaveRate == GOOD_SAVE_RATE; }
+		}
 
 		public Class() {
 			ClassSkills = new List<string> ();

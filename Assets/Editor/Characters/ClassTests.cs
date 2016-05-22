@@ -110,6 +110,15 @@ public class ClassTests {
 
 	}
 
+	[Test]
+	public void ClassKnownTheirGoodSaves() {
+		Assert.IsTrue (Fighter.IsFortitudeGoodSave);
+		Assert.IsFalse (Fighter.IsWillGoodSave);
+		Assert.IsFalse (Fighter.IsReflexGoodSave);
+		Assert.IsTrue (Wizard.IsWillGoodSave);
+		Assert.IsFalse (Wizard.IsFortitudeGoodSave);
+		Assert.IsTrue (Monk.IsReflexGoodSave);
+	}
 	private const string ClassYamlFile = @"--- 
 - class: 
   name: Fighter

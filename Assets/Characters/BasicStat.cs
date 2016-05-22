@@ -36,7 +36,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		protected virtual void Refresh(int oldBase, int oldTotal) {
-			SumAdjustments = _adjustments.Sum (x => x.Modifier);
+			SumAdjustments = (int)_adjustments.Sum (x => x.Modifier);
 			OnModified (oldBase, oldTotal);
 		}
 
@@ -54,16 +54,18 @@ namespace ShortLegStudio.RPG.Characters {
 	}
 
 	public class BasicStatAdjustment {
-		public int Modifier { get; set; }
+		public float Modifier { get; set; }
 		public string Reason { get; set; }
 
 		public BasicStatAdjustment() { }
 
-		public BasicStatAdjustment(int mod, string reas) {
+		public BasicStatAdjustment(float mod, string reas) {
 			Modifier = mod;
 			Reason = reas;
 		}
 	}
+
+
 
 	public class BasicStatModifiedEventArgs : EventArgs {
 		public int OldBaseValue;

@@ -46,7 +46,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public int TotalAdjustments() {
-			return Adjustments.Sum(x => x.Modifier);
+			return (int)Adjustments.Sum(x => x.Modifier);
 		}
 
 		public void AddRank() {

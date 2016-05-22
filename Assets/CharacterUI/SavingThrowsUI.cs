@@ -16,9 +16,9 @@ public class SavingThrowsUI : MonoBehaviour {
 
 	void CharacterChanged (object sender, System.EventArgs e) {
 		textbox.text = string.Format (SVG_FORMAT,
-			character.CurrentCharacter.FortitudeSaves,
-			character.CurrentCharacter.ReflexSaves,
-			character.CurrentCharacter.WillSaves
+			character.CurrentCharacter.Defense.FortitudeSave(),
+			character.CurrentCharacter.Defense.ReflexSave(),
+			character.CurrentCharacter.Defense.WillSave()
 		);
 	}
 	
