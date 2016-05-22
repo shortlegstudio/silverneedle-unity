@@ -12,7 +12,8 @@ public class OffenseStatsTests {
 		var abilities = new AbilityScores ();
 		abilities.SetScore (AbilityScoreTypes.Strength, 16);
 		abilities.SetScore (AbilityScoreTypes.Dexterity, 16);
-		smallStats = new OffenseStats (abilities);
+		var size = new SizeStats (CharacterSize.Small, 1,1);
+		smallStats = new OffenseStats (abilities, size);
 	}
 
 	[Test]
@@ -21,26 +22,26 @@ public class OffenseStatsTests {
 	}
 
 	[Test]
-	public void BaseMeleeBonusIsBABAndStrength() {
+	public void BaseMeleeBonusIsBABAndStrengthAndSize() {
 		smallStats.BaseAttackBonus.SetValue (3);
-		Assert.AreEqual (6, smallStats.MeleeAttackBonus());
+		Assert.AreEqual (7, smallStats.MeleeAttackBonus());
 	}
 
 	[Test]
-	public void BaseRangeBonusIsBABAndDexterity() {
+	public void BaseRangeBonusIsBABAndDexterityAndSize() {
 		smallStats.BaseAttackBonus.SetValue (3);
-		Assert.AreEqual (6, smallStats.RangeAttackBonus());
+		Assert.AreEqual (7, smallStats.RangeAttackBonus());
 	}
 
 	[Test]
-	public void CMBIsBABAndStrength() {
+	public void CMBIsBABAndStrengthAndSize() {
 		smallStats.BaseAttackBonus.SetValue (3);
-		Assert.AreEqual (6, smallStats.CombatManueverBonus ());
+		Assert.AreEqual (5, smallStats.CombatManueverBonus ());
 	}
 
 	[Test]
-	public void CMDIsBABStrengthAndDexterity() {
+	public void CMDIsBABStrengthAndDexterityAndSize() {
 		smallStats.BaseAttackBonus.SetValue (3);
-		Assert.AreEqual (19, smallStats.CombatManueverDefense ());
+		Assert.AreEqual (18, smallStats.CombatManueverDefense ());
 	}
 }

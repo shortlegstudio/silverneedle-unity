@@ -18,10 +18,8 @@ namespace ShortLegStudio.RPG.Characters {
 		private SkillAdjustment FlyAdj { get; set; }
 
 
-		public SizeStats() : this(CharacterSize.Medium, 72, 180) {
-
-		}
-
+		public SizeStats() : this(CharacterSize.Medium, 72, 180) { }
+		public SizeStats(CharacterSize size) : this(size, 72, 180) { }
 		public SizeStats (CharacterSize size, int height, int weight) {
 			SetupSkillModifiers ();
 			SetSize (size, height, weight);

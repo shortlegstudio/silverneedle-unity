@@ -5,29 +5,30 @@ using ShortLegStudio.RPG.Characters;
 
 [TestFixture]
 public class DefenseStatsTests {
-	DefenseStats stats;
+	DefenseStats smallStats;
 
 	[SetUp]
 	public void SetUp() {
 		var abilities = new AbilityScores ();
 		abilities.SetScore (AbilityScoreTypes.Strength, 16);
 		abilities.SetScore (AbilityScoreTypes.Dexterity, 16);
-		stats = new DefenseStats (abilities);
+		var size = new SizeStats (CharacterSize.Small);
+		smallStats = new DefenseStats (abilities, size);
 	}
 
 	[Test]
-	public void ACIsBasedOnDexterity() {
-		Assert.AreEqual (13, stats.ArmorClass());
+	public void ACIsBasedOnDexterityAndSize() {
+		Assert.AreEqual (14, smallStats.ArmorClass());
 	}
 
 	[Test]
-	public void TouchACIsBasedOnDexterity() {
-		Assert.AreEqual (13, stats.TouchArmorClass ());
+	public void TouchACIsBasedOnDexterityAndSize() {
+		Assert.AreEqual (14, smallStats.TouchArmorClass ());
 	}
 
 	[Test]
-	public void FlatFootedACIsBaseAC() {
-		Assert.AreEqual (10, stats.FlatFootedArmorClass ());
+	public void FlatFootedACIsBaseACAndSize() {
+		Assert.AreEqual (11, smallStats.FlatFootedArmorClass ());
 	}
 
 }

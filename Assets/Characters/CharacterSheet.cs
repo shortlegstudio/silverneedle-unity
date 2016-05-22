@@ -40,15 +40,18 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public CharacterSheet(IEnumerable<Skill> skillList) {
 			Abilities = new AbilityScores ();
+			Size = new SizeStats ();
+			Offense = new OffenseStats (Abilities, Size);
+			Defense = new DefenseStats (Abilities, Size);
+
+
 			SkillRanks = new SkillRanks (skillList, Abilities);
+			SkillRanks.ProcessModifier(Size);
+
 			Traits = new List<Trait> ();
 			Feats = new List<Feat> ();
-			Offense = new OffenseStats (Abilities);
-			Defense = new DefenseStats (Abilities);
-			Size = new SizeStats ();
 
-			//Prepare size skill Modifiers
-			SkillRanks.ProcessModifier(Size);
+
 
 			Level = 1;
 		}
