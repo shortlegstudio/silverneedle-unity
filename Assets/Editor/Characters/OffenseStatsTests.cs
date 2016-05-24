@@ -44,4 +44,5 @@ public class OffenseStatsTests {
 		smallStats.BaseAttackBonus.SetValue (3);
 		Assert.AreEqual (18, smallStats.CombatManueverDefense ());
 	}
+
 }

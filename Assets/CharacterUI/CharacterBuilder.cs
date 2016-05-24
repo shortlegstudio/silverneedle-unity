@@ -20,7 +20,7 @@ public class CharacterBuilder : MonoBehaviour {
 	public CharacterSheet CurrentCharacter { get; private set; }
 	private IList<Race> _races;
 	private IList<Class> _classes;
-	private IList<Weapon> _weapons;
+	//private IList<Weapon> _weapons;
 
 	public event EventHandler CharacterChanged;
 
@@ -29,7 +29,7 @@ public class CharacterBuilder : MonoBehaviour {
 		AlignmentsUI = FindObjectOfType<AlignmentsDropdown> ();
 		_races = Race.GetRaces();
 		_classes = Class.GetClasses ();
-		_weapons = Weapon.GetWeapons ();
+		//_weapons = Weapon.GetWeapons ();
 		BuildRaceDropdown ();
 		BuildClassDropdown ();
 	}

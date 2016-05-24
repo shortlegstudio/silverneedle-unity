@@ -11,6 +11,7 @@ namespace ShortLegStudio.RPG.Characters {
 		// Basic Stats
 		public string Name { get; set; }
 		public CharacterAlignment Alignment { get; set; }
+		public Gender Gender { get; set; }
 		public SizeStats Size { get; set; }
 
 		//Race and Class
@@ -26,6 +27,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public SkillRanks SkillRanks { get; private set; }
 		public IList<Trait> Traits { get; private set; }
 		public IList<Feat> Feats { get; private set; }
+		public Initiative Initiative { get; private set; }
 
 		//Combat Related
 		public int MaxHitPoints { get; set; }
@@ -38,6 +40,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public CharacterSheet(IEnumerable<Skill> skillList) {
 			Abilities = new AbilityScores ();
 			Size = new SizeStats ();
+			Initiative = new Initiative (Abilities);
 			Offense = new OffenseStats (Abilities, Size);
 			Defense = new DefenseStats (Abilities, Size);
 
