@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Linq;
 using ShortLegStudio.RPG.Characters;
+using System;
+using ShortLegStudio.RPG.Equipment;
 
 public class LinkTextToProperty : MonoBehaviour {
 	private Text text;
@@ -15,13 +17,11 @@ public class LinkTextToProperty : MonoBehaviour {
 		character.Generated += Character_Generated;
 	}
 
-	void Character_Generated (object sender, System.EventArgs e)
-	{
+	void Character_Generated (object sender, System.EventArgs e) {
 		text.text = GetProperty (character.Character);
 	}
 
 	private string GetProperty(CharacterSheet character) {
-		
 		switch (Property) {
 		case "AlignmentSizeType":
 			return string.Format ("{0} {1} humanoid({2})", character.Alignment.ShortString(), character.Size.Size, character.Race.Name);
@@ -36,6 +36,8 @@ public class LinkTextToProperty : MonoBehaviour {
 			return string.Format ("{0}", character.Offense.CombatManueverBonus().ToModifierString());
 		case "CMD":
 			return string.Format ("{0}", character.Offense.CombatManueverDefense());
+		case "Feats":
+			return MakeFeatList (character);
 		case "FortitudeSave":
 			return character.Defense.FortitudeSave ().ToModifierString ();
 		case "GenderRaceClass":
@@ -48,6 +50,8 @@ public class LinkTextToProperty : MonoBehaviour {
 			return character.Name;
 		case "ReflexSave":
 			return character.Defense.ReflexSave ().ToModifierString ();
+		case "Senses":
+			return GetSenses (character);
 		case "SkillsList":
 			return MakeSkillList(character);
 
@@ -58,6 +62,15 @@ public class LinkTextToProperty : MonoBehaviour {
 		case "Wisdom":
 		case "Charisma":
 			return string.Format("{0} ({1})", character.Abilities.GetScore(Property), character.Abilities.GetModifier(Property).ToModifierString());
+		case "WeaponOneType":
+			return character.Inventory.Weapons.ToList () [0].GetBasicType();
+		case "WeaponTwoType":
+			return character.Inventory.Weapons.ToList () [1].GetBasicType();
+		case "WeaponOneInfo":
+			return GetWeaponInfo(character, character.Inventory.Weapons.ToList () [0]);
+		case "WeaponTwoInfo":
+			return GetWeaponInfo(character, character.Inventory.Weapons.ToList () [1]);
+
 		case "WillSave":
 			return character.Defense.WillSave ().ToModifierString ();
 		}
@@ -69,6 +82,32 @@ public class LinkTextToProperty : MonoBehaviour {
 		return string.Join(",", character.SkillRanks.GetRankedSkills().Select(
 			x => { return string.Format("{0} {1}", x.Name, x.Score().ToModifierString()); }
 		).ToArray<string>());
+	}
+
+	private string MakeFeatList(CharacterSheet character) {
+		return string.Join (",",
+			character.Feats.Select (
+				x => {
+					return x.Name;
+				}
+			).ToArray<String> ()
+		);
+	}
+
+	private string GetSenses(CharacterSheet character) {
+		//TODO: Find lowlight/darkvision/blindness/etc...
+
+		return string.Format ("Perception {0}", character.SkillRanks.GetScore ("Perception").ToModifierString ());
+		//return perception score
+	}
+
+	private string GetWeaponInfo(CharacterSheet character, Weapon wpn) {
+		var format = "{0} {1} ({2})";
+		if (wpn.Type == WeaponType.Ranged) {
+			return string.Format (format, wpn.Name, character.Offense.RangeAttackBonus().ToModifierString(), wpn.Damage);
+		} else {
+			return string.Format (format, wpn.Name, character.Offense.MeleeAttackBonus().ToModifierString(), wpn.Damage);
+		}
 
 	}
 }

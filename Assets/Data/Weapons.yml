@@ -59,3 +59,13 @@
   type: OneHanded
   group: Hammers
   training_level: Simple
+- weapon:
+  name: Crossbow
+  weight: 4
+  damage: 1d8
+  damage_type: Piercing
+  critical_threat: 20
+  critical_modifier: 2
+  type: Ranged
+  group: Bows
+  training_level: Simple

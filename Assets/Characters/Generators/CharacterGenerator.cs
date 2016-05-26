@@ -31,6 +31,8 @@ namespace ShortLegStudio.RPG.Characters.Generators {
 			//Assign Skill Points
 			SkillPointGenerator.AssignSkillPointsRandomly(character);
 
+			//Get some gear!
+			EquipCharacter.AssignWeapons(character);
 			return character;
 		}
 	}

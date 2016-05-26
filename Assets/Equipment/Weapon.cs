@@ -45,6 +45,15 @@ namespace ShortLegStudio.RPG.Equipment {
 			Level = level;
 		}
 
+
+		/// <summary>
+		/// Returns either "Melee" or "Ranged"
+		/// </summary>
+		/// <returns>The basic type.</returns>
+		public string GetBasicType() {
+			return Type == WeaponType.Ranged ? "Ranged" : "Melee";
+		}
+
 		public static IList<Weapon> LoadFromYaml(YamlNodeWrapper yaml) {
 			var weapons = new List<Weapon> ();
 
