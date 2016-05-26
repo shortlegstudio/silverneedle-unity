@@ -78,7 +78,19 @@ public class RaceTests {
 		cup = human.WeightRange;
 		Assert.AreEqual (cup.Dice.Count, 10);
 		Assert.AreEqual (cup.Modifier, 120);
+	}
 
+	[Test]
+	public void KnownLanguagesAreAssigned() {
+		Assert.IsTrue(dwarf.KnownLanguages.Any(x => x == "Common"));
+		Assert.IsTrue(dwarf.KnownLanguages.Any(x => x == "Dwarven"));
+
+		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Giant"));
+		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Gnome"));
+		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Terran"));
+		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Undercommon"));
+
+			
 	}
 
 	private const string SkillsYamlFile = @"--- 
@@ -94,6 +106,9 @@ public class RaceTests {
   traits:
     - Darkvision
     - Hardy
+  languages: 
+    known: Common, Dwarven
+    available: Giant, Gnome, Goblin, Orc, Terran, Undercommon
 - race: 
   name: Elf
   abilities:
@@ -106,6 +121,9 @@ public class RaceTests {
   traits:
     - Elfy Stuff
     - Smart Guys
+  languages: 
+    known: Common, Dwarven
+    available: Giant, Gnome, Goblin, Orc, Terrain, Undercommon
 - race:
   name: Human
   abilities:
@@ -116,6 +134,9 @@ public class RaceTests {
   traits:
     - Boring Stuff
     - Extra Skill Point
+  languages: 
+    known: Common
+    available: ALL
 - race: 
   name: Halfling
   size: Small
@@ -128,5 +149,8 @@ public class RaceTests {
   traits:
     - Halfling Luck
     - Foobar
+  languages: 
+    known: Common, Halfling
+    available: Gnome
 ...";
 }

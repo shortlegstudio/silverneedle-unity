@@ -17,7 +17,9 @@
     - Stability
     - Stonecunning
     - Weapon Familiarity
-    - Languages
+  languages:
+    known: Common, Dwarven
+    available: Giant, Gnome, Goblin, Orc, Terran, Undercommon
 - race:
   name: Elf
   size: Medium
@@ -33,7 +35,9 @@
     - Elven Magic
     - Keen Senses
     - Weapon Familiarity
-    - Languages
+  languages:
+    known: Common, Elven
+    available: Celestial, Draconic, Gnoll, Gnome, Goblin, Orc, Sylvan
 - race:
   name: Gnome
   size: Small
@@ -53,7 +57,9 @@
     - Keen Senses
     - Obsessive
     - Weapon Familiarity
-    - Languages
+  languages:
+    known: Common, Gnome, Sylvan
+    available: Draconic, Dwarven, Elven, Giant, Goblin, Orc
 - race:
   name: Half-Elf
   size: Medium
@@ -68,7 +74,9 @@
     - Elven Immunities
     - Keen Senses
     - Multitalented
-    - Languages
+  languages:
+    known: Common, Elven
+    available: ALL
 - race:
   name: Half-Orc
   size: Medium
@@ -82,7 +90,9 @@
     - Orc Blood
     - Orc Ferocity
     - Weapon Familiarity
-    - Languages
+  languages:
+    known: Common, Orc
+    available: Abyssal, Draconic, Giant, Gnoll, Goblin
 - race:
   name: Halfling
   size: Small
@@ -99,7 +109,9 @@
     - Keen Senses
     - Sure-Footed
     - Weapon Familiarity
-    - Languages
+  languages:
+    known: Common, Halfling
+    available: Dwarven, Elven, Gnome, Goblin
 - race:
   name: Human
   size: Medium
@@ -110,4 +122,6 @@
   traits:
     - Bonus Feat
     - Skilled
-    - Languages
+  languages:
+    known: Common
+    available: ALL

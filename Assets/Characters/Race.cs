@@ -14,13 +14,20 @@ namespace ShortLegStudio.RPG.Characters {
 		public string Name { get; set; }
 		public IList<AbilityScoreAdjustment> AbilityModifiers { get; private set;  }
 		public IList<string> Traits { get; private set; }
+		public IEnumerable<string> KnownLanguages { get { return _knownLanguages; } }
+		public IEnumerable<string> AvailableLanguages { get { return _availableLanguages; } }
 		public CharacterSize SizeSetting { get; set; }
 		public Cup HeightRange { get; set; }
 		public Cup WeightRange { get; set; }
 
+		private IList<string> _availableLanguages;
+		private IList<string> _knownLanguages;
+
 		public Race() {
 			AbilityModifiers = new List<AbilityScoreAdjustment> ();
 			Traits = new List<string> ();
+			_availableLanguages = new List<string> ();
+			_knownLanguages = new List<string> ();
 		}
 
 		public static IList<Race> LoadFromYaml(YamlNodeWrapper yaml) {
@@ -46,6 +53,7 @@ namespace ShortLegStudio.RPG.Characters {
 						modifier.ability = AbilityScore.GetType (ability.Key);
 					}
 					race.AbilityModifiers.Add (modifier);
+
 					//Debug.Log (ability);
 				}
 
@@ -53,6 +61,10 @@ namespace ShortLegStudio.RPG.Characters {
 				foreach (var trait in traits.Children()) {
 					race.Traits.Add (trait.Value);
 				}
+
+				var languages = raceNode.GetNode ("languages");
+				race._knownLanguages = languages.GetCommaStringOptional ("known");
+				race._availableLanguages = languages.GetCommaStringOptional ("available");
 				races.Add (race);
 			}
 
