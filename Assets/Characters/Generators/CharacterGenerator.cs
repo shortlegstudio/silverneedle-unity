@@ -35,6 +35,7 @@ namespace ShortLegStudio.RPG.Characters.Generators {
 			EquipCharacter.AssignWeapons(character);
 			return character;
 		}
+
 	}
 }
 

@@ -30,6 +30,14 @@ namespace ShortLegStudio.RPG.Characters {
 			_knownLanguages = new List<string> ();
 		}
 
+		public void AddKnownLanguage(string languageName) {
+			_knownLanguages.Add (languageName);
+		}
+
+		public void AddAvailableLanguage(string languageName) {
+			_availableLanguages.Add (languageName);
+		}
+
 		public static IList<Race> LoadFromYaml(YamlNodeWrapper yaml) {
 			var races = new List<Race> ();
 

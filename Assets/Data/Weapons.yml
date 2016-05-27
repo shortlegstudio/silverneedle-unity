@@ -1,4 +1,46 @@
 - weapon:
+  name: Blowgun
+  weight: 1
+  damage: 1d2
+  damage_type: Piercing
+  range: 20
+  type: Ranged
+  group: Thrown
+  training_level: Simple
+  cost: 2gp
+- weapon:
+  name: Club
+  weight: 3
+  damage: 1d6
+  damage_type: Bludgeoning
+  type: OneHanded
+  group: Hammers
+  training_level: Simple
+- weapon:
+  name: Crossbow, Heavy
+  weight: 8
+  damage: 1d10
+  damage_type: Piercing
+  critical_threat: 19
+  critical_modifier: 2
+  range: 120
+  type: Ranged
+  group: Crossbows
+  training_level: Simple
+  cost: 50gp
+- weapon:
+  name: Crossbow, Light
+  weight: 4
+  damage: 1d8
+  damage_type: Piercing
+  critical_threat: 19
+  critical_modifier: 2
+  range: 80
+  type: Ranged
+  group: Crossbows
+  training_level: Simple
+  cost: 35gp
+- weapon:
   name: Dagger
   weight: 1
   damage: 1d4
@@ -9,6 +51,7 @@
   type: Light
   group: LightBlades
   training_level: Simple
+  cost: 2gp
 - weapon:
   name: Dagger, punching
   weight: 1
@@ -19,53 +62,107 @@
   type: Light
   group: Close
   training_level: Simple
+  cost: 2gp
 - weapon:
-  name: Gauntlet, spiked
-  weight: 1
+  name: Dart
+  weight: 0.5
   damage: 1d4
   damage_type: Piercing
-  critical_threat: 20
-  critical_modifier: 2
+  range: 20
+  cost: 5sp
+  group: Thrown
+  training_level: Simple
+  type: Ranged
+- weapon:
+  name: Gauntlet
+  weight: 1
+  damage: 1d3
+  damage_type: Piercing
   type: Light
   group: Close
   training_level: Simple
+  cost: 2gp
+- weapon:
+  name: Javelin
+  weight: 2
+  damage: 1d6
+  damage_type: Piercing
+  range: 30
+  type: Ranged
+  group: Thrown
+  training_level: Simple
+  cost: 1gp
+- weapon:
+  name: Longspear
+  weight: 9
+  damage: 1d8
+  damage_type: Piercing
+  critical_threat: 20
+  critical_modifier: 3
+  type: TwoHanded
+  group: Spears
+  training_level: Simple
+  cost: 5gp
 - weapon:
   name: Mace, Light
   weight: 4
   damage: 1d6
   damage_type: Bludgeoning
-  critical_threat: 20
-  critical_modifier: 2
   type: Light
   group: Hammers
   training_level: Simple
+- weapon:
+  name: Morningstar
+  weight: 6
+  damage: 1d8
+  damage_type: Bludgeoning
+  type: OneHanded
+  group: Flails
+  training_level: Simple
+- weapon:
+  name: Quarterstaff
+  weight: 4
+  damage: 1d6
+  damage_type: Bludgeoning
+  type: TwoHanded
+  group: Monk
+  training_level: Simple
+- weapon:
+  name: Shortspear
+  weight: 3
+  damage: 1d6
+  damage_type: Piercing
+  range: 20
+  training_level: Simple
+  type: TwoHanded
+  group: Spears
+  cost: 2gp
+- weapon:
+  name: Sling
+  weight: 0
+  damage: 1d4
+  damage_type: Bludgeoning
+  range: 50
+  type: Ranged
+  group: Thrown
+  training_level: Simple
+- weapon:
+  name: Spear
+  weight: 6
+  damage: 1d8
+  damage_type: Piercing
+  critical_threat: 20
+  critical_modifier: 3
+  range: 20
+  type: TwoHanded
+  group: Spears
+  training_level: Simple
+  cost: 2gp
 - weapon:
   name: Sickle
   weight: 2
   damage: 1d6
   damage_type: Slashing
-  critical_threat: 20
-  critical_modifier: 2
   type: Light
   group: LightBlades
-  training_level: Simple
-- weapon:
-  name: Club
-  weight: 3
-  damage: 1d6
-  damage_type: Bludgeoning
-  critical_threat: 20
-  critical_modifier: 2
-  type: OneHanded
-  group: Hammers
-  training_level: Simple
-- weapon:
-  name: Crossbow
-  weight: 4
-  damage: 1d8
-  damage_type: Piercing
-  critical_threat: 20
-  critical_modifier: 2
-  type: Ranged
-  group: Bows
   training_level: Simple

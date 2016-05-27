@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio.RPG.Characters;
 using System.IO;
+using System.Diagnostics;
 
 namespace ShortLegStudio.RPG.Equipment {
 	public class Weapon : IEquipment {
@@ -37,8 +38,8 @@ namespace ShortLegStudio.RPG.Equipment {
 			Weight = weight;
 			Damage = damage;
 			DamageType = damageType;
-			CriticalThreat = critThreat;
-			CriticalModifier = critMod;
+			CriticalThreat = critThreat == 0 ? 20 : critThreat;
+			CriticalModifier = critMod == 0 ? 2 : critMod; 
 			Range = range;
 			Type = type;
 			Group = group;
@@ -58,13 +59,14 @@ namespace ShortLegStudio.RPG.Equipment {
 			var weapons = new List<Weapon> ();
 
 			foreach (var node in yaml.Children()) {
+				ShortLog.DebugFormat ("Loading Weapon: {0}", node.GetString ("name"));
 				var w = new Weapon (
 					        node.GetString ("name"),
 					        node.GetFloat ("weight"),
 					        node.GetString ("damage"),
 							node.GetEnum<DamageTypes>("damage_type"),
-							node.GetInteger ("critical_threat"),
-					        node.GetInteger ("critical_modifier"),
+							node.GetIntegerOptional ("critical_threat"),
+					        node.GetIntegerOptional ("critical_modifier"),
 							node.GetIntegerOptional ("range"),
 							node.GetEnum<WeaponType>("type"),
 							node.GetEnum<WeaponGroup>("group"),

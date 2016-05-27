@@ -22,6 +22,8 @@ namespace ShortLegStudio
 		}
 
 		public static T ChooseOne<T>(this IList<T> source) {
+			if (source == null || source.Count == 0)
+				throw new ArgumentException ("Cannot choose from an empty list");
 			var index = Randomly.Range (0, source.Count);
 			return source [index];
 		}

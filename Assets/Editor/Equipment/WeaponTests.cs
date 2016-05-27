@@ -31,7 +31,7 @@ public class WeaponTests {
 		Assert.AreEqual ("1d8", longsword.Damage);
 		Assert.AreEqual (4, longsword.Weight);
 		Assert.AreEqual (19, longsword.CriticalThreat);
-		Assert.AreEqual (2, longsword.CriticalModifier);
+		Assert.AreEqual (3, longsword.CriticalModifier);
 		Assert.AreEqual (DamageTypes.Slashing, longsword.DamageType);
 		Assert.AreEqual (WeaponType.OneHanded, longsword.Type);
 		Assert.AreEqual (WeaponGroup.HeavyBlades, longsword.Group);
@@ -45,7 +45,7 @@ public class WeaponTests {
 		Assert.AreEqual ("Dagger", dagger.Name);
 		Assert.AreEqual ("1d4", dagger.Damage);
 		Assert.AreEqual (1, dagger.Weight);
-		Assert.AreEqual (19, dagger.CriticalThreat);
+		Assert.AreEqual (20, dagger.CriticalThreat);
 		Assert.AreEqual (2, dagger.CriticalModifier);
 		Assert.AreEqual (DamageTypes.Piercing, dagger.DamageType);
 		Assert.AreEqual (10, dagger.Range);
@@ -54,6 +54,26 @@ public class WeaponTests {
 		Assert.AreEqual (WeaponTrainingLevel.Simple, dagger.Level);
 	}
 
+	[Test]
+	public void DefaultCriticalValuesForWeaponsAreTwentyAndTimesTwo() {
+		var wpn = new Weapon (
+			"Test",
+			0,
+			"1d8",
+			DamageTypes.Piercing,
+			0,
+			0,
+			0,
+			WeaponType.Light,
+			WeaponGroup.Axes,
+			WeaponTrainingLevel.Simple
+		);
+		Assert.AreEqual (20, wpn.CriticalThreat);
+		Assert.AreEqual (2, wpn.CriticalModifier);
+	}
+
+
+
 
 	private const string WeaponYamlFile = @"--- 
 - weapon: 
@@ -61,7 +81,7 @@ public class WeaponTests {
   damage: 1d8
   damage_type: Slashing
   critical_threat: 19
-  critical_modifier: 2
+  critical_modifier: 3
   weight: 4
   group: HeavyBlades
   type: OneHanded
@@ -70,8 +90,6 @@ public class WeaponTests {
   name: Dagger
   damage: 1d4
   damage_type: Piercing
-  critical_threat: 19
-  critical_modifier: 2
   weight: 1
   range: 10
   group: LightBlades
