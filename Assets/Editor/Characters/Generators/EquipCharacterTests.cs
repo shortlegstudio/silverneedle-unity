@@ -6,6 +6,7 @@ using ShortLegStudio.RPG.Characters.Generators;
 using System.Linq;
 using System.Collections.Generic;
 using ShortLegStudio.RPG.Equipment;
+using ShortLegStudio.Enchilada;
 
 
 [TestFixture]
@@ -30,26 +31,30 @@ public class EquipCharacterTests {
 
 	[Test]
 	public void CharactersGetARangedAndMeleeWeapon() {
-		var weapons = new List<Weapon> ();
-		var wpn1 = new Weapon ("Mace", 0f, "1d6", 
-			DamageTypes.Bludgeoning, 20, 2, 0, 
-			WeaponType.OneHanded, WeaponGroup.Hammers, 
-			WeaponTrainingLevel.Simple);
-		var wpn2 = new Weapon ("Bow", 0, "1d6", 
-			DamageTypes.Piercing, 20, 2, 0, 
-			WeaponType.Ranged, WeaponGroup.Bows, 
-			WeaponTrainingLevel.Martial);
-		weapons.Add (wpn1);
-		weapons.Add (wpn2);
-
 		//Bad test, but good enough for now
 		for (int i = 0; i < 1000; i++) {
 			var character = new CharacterSheet (new List<Skill>());
-			EquipCharacter.AssignWeapons (character, weapons);
+			EquipCharacter.AssignWeapons (character, new WeaponTestRepo());
 			Assert.AreEqual (character.Inventory.Weapons.Count (), 2);
 			Assert.IsTrue (character.Inventory.Weapons.Any (x => x.Type == WeaponType.Ranged));
 			Assert.IsTrue (character.Inventory.Weapons.Any (x => x.Type != WeaponType.Ranged));
 		}
-			
+	}
+
+	private class WeaponTestRepo : EntityGateway<Weapon> {
+		public IEnumerable<Weapon> All() {
+			var weapons = new List<Weapon> ();
+			var wpn1 = new Weapon ("Mace", 0f, "1d6", 
+				DamageTypes.Bludgeoning, 20, 2, 0, 
+				WeaponType.OneHanded, WeaponGroup.Hammers, 
+				WeaponTrainingLevel.Simple);
+			var wpn2 = new Weapon ("Bow", 0, "1d6", 
+				DamageTypes.Piercing, 20, 2, 0, 
+				WeaponType.Ranged, WeaponGroup.Bows, 
+				WeaponTrainingLevel.Martial);
+			weapons.Add (wpn1);
+			weapons.Add (wpn2);
+			return weapons;
+		}
 	}
 }

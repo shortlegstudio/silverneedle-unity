@@ -7,22 +7,7 @@ using System.Security.Policy;
 
 [TestFixture]
 [Category("Equipment")]
-public class WeaponTests {
-	[Test]
-	public void DamageStatisticsCanBeConvertedBasedOnSize() {
-		Assert.AreEqual ("1d4", Weapon.ConvertDamageBySize("1d6", CharacterSize.Small));
-		Assert.AreEqual ("2d6", Weapon.ConvertDamageBySize ("1d8", CharacterSize.Large));
-		Assert.AreEqual ("2d6", Weapon.ConvertDamageBySize ("2d10", CharacterSize.Tiny));
-		Assert.AreEqual ("1d6", Weapon.ConvertDamageBySize ("1d8", CharacterSize.Small));
-		Assert.AreEqual ("1d8", Weapon.ConvertDamageBySize ("1d8", CharacterSize.Medium));
-	}
-
-	[Test]
-	[ExpectedException(typeof(NotImplementedException))]
-	public void NotImplementedExceptionTriggeredForNotSupportedSizes() {
-		Weapon.ConvertDamageBySize ("1d6", CharacterSize.Colossal);
-	}
-		
+public class WeaponTests {		
 	[Test]
 	public void DefaultCriticalValuesForWeaponsAreTwentyAndTimesTwo() {
 		var wpn = new Weapon (
@@ -39,5 +24,30 @@ public class WeaponTests {
 		);
 		Assert.AreEqual (20, wpn.CriticalThreat);
 		Assert.AreEqual (2, wpn.CriticalModifier);
+	}
+
+	[Test]
+	public void LightWeaponsWithNoRangeAreMeleeOnly() {
+		var wpn = new Weapon ();
+		wpn.Type = WeaponType.Light;
+		Assert.IsFalse (wpn.IsRanged);
+		Assert.IsTrue(wpn.IsMelee);
+	}
+
+	[Test]
+	public void LightWeaponsWithSomeRangeAreBothRangedAndMelee() {
+		var wpn = new Weapon ();
+		wpn.Type = WeaponType.Light;
+		wpn.Range = 10;
+		Assert.IsTrue (wpn.IsRanged);
+		Assert.IsTrue (wpn.IsMelee);
+	}
+
+	[Test]
+	public void RangedWeaponsArentMeleeCompatible() {
+		var wpn = new Weapon ();
+		wpn.Type = WeaponType.Ranged;
+		Assert.IsTrue (wpn.IsRanged);
+		Assert.IsFalse (wpn.IsMelee);
 	}
 }

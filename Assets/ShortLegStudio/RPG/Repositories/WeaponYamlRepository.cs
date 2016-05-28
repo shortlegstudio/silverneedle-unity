@@ -3,18 +3,22 @@ using ShortLegStudio.RPG.Equipment;
 using ShortLegStudio.Enchilada;
 using System.Collections.Generic;
 
-namespace ShortLegStudio.RPG.Repositories
-{
-	public class WeaponYamlRepository : EntityGateway<Weapon>
-	{
-		private IList<Weapon> weapons;
+namespace ShortLegStudio.RPG.Repositories {
+	public class WeaponYamlRepository : EntityGateway<Weapon> {
+		const string WEAPON_YAML_FILE = "Data/weapons.yml";
 
-		public WeaponYamlRepository (YamlNodeWrapper yamlData) { 
-			weapons = LoadFromYaml (yamlData);
+		private IList<Weapon> Weapons;
+
+		public WeaponYamlRepository()  { 
+			LoadFromYaml (FileHelper.OpenYaml (WEAPON_YAML_FILE));
 		}
 
-		private IList<Weapon> LoadFromYaml(YamlNodeWrapper yaml) {
-			var weapons = new List<Weapon> ();
+		public WeaponYamlRepository (YamlNodeWrapper yamlData) { 
+			LoadFromYaml (yamlData);
+		}
+
+		private void LoadFromYaml(YamlNodeWrapper yaml) {
+			Weapons = new List<Weapon> ();
 
 			foreach (var node in yaml.Children()) {
 				ShortLog.DebugFormat ("Loading Weapon: {0}", node.GetString ("name"));
@@ -30,14 +34,12 @@ namespace ShortLegStudio.RPG.Repositories
 					node.GetEnum<WeaponGroup>("group"),
 					node.GetEnum<WeaponTrainingLevel>("training_level")
 				);
-				weapons.Add (w);
+				Weapons.Add (w);
 			}
-
-			return weapons;
 		}
 
 		public IEnumerable<Weapon> All() {
-			return weapons;
+			return Weapons;
 		}
 	}
 }
