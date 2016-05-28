@@ -2,7 +2,7 @@
 using UnityEditor;
 using NUnit.Framework;
 using ShortLegStudio.RPG.Characters;
-using ShortLegStudio.RPG.Characters.Generators;
+using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio.Dice;

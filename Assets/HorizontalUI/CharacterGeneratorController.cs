@@ -2,7 +2,7 @@
 using System.Collections;
 using ShortLegStudio.RPG.Characters;
 using System;
-using ShortLegStudio.RPG.Characters.Generators;
+using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 
 public class CharacterGeneratorController : MonoBehaviour {
 	public CharacterSheet Character;
