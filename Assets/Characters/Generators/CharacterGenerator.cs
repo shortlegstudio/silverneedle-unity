@@ -11,7 +11,13 @@ namespace ShortLegStudio.RPG.Characters.Generators {
 			character.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
 			AbilityScoreGenerator.RandomStandardHeroScores (character.Abilities);
 			character.SetRace(Race.GetRaces ().ChooseOne ());
-
+			character.Languages.Add (
+				LanguagePicker.PickLanguage (
+					character.Race, 
+					Language.GetLanguages (), 
+					character.Abilities.GetModifier (AbilityScoreTypes.Intelligence)
+				)
+			);
 			return character;
 		}
 

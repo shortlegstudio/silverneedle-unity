@@ -29,6 +29,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public IList<Feat> Feats { get; private set; }
 		public Initiative Initiative { get; private set; }
 		public Inventory Inventory { get; private set; }
+		public IList<Language> Languages { get; private set; }
 
 		//Combat Related
 		public int MaxHitPoints { get; set; }
@@ -45,7 +46,7 @@ namespace ShortLegStudio.RPG.Characters {
 			Initiative = new Initiative (Abilities);
 			Offense = new OffenseStats (Abilities, Size);
 			Defense = new DefenseStats (Abilities, Size);
-
+			Languages = new List<Language> ();
 
 			SkillRanks = new SkillRanks (skillList, Abilities);
 			SkillRanks.ProcessModifier(Size);

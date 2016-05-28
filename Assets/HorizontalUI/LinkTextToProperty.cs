@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio.RPG.Characters;
 using System;
@@ -46,8 +46,12 @@ public class LinkTextToProperty : MonoBehaviour {
 			return character.MaxHitPoints.ToString ();
 		case "Initiative":
 			return character.Initiative.TotalValue.ToModifierString();
+		case "Languages":
+			return GetLanguageList (character);
 		case "Name":
 			return character.Name;
+		case "OtherGear":
+			return InventoryList (character.Inventory.All);
 		case "ReflexSave":
 			return character.Defense.ReflexSave ().ToModifierString ();
 		case "Senses":
@@ -108,6 +112,15 @@ public class LinkTextToProperty : MonoBehaviour {
 		} else {
 			return string.Format (format, wpn.Name, character.Offense.MeleeAttackBonus().ToModifierString(), wpn.Damage);
 		}
+	}
 
+	private string GetLanguageList(CharacterSheet character) {
+		return string.Join(",", character.Languages.Select (x => x.Name).ToArray());
+	}
+
+	private string InventoryList(IEnumerable<IEquipment> inv) {
+		return string.Join (", ", 
+			inv.Select (x => x.Name).ToArray()
+		);
 	}
 }

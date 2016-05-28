@@ -14,7 +14,7 @@ using UnityEngine;
 
 namespace ShortLegStudio
 {
-	public static class ArrayExtensions
+	public static class CollectionExtensions
 	{
 		public static T ChooseOne<T>(this T[] source) {
 			var index = Randomly.Range (0, source.Length);
@@ -28,6 +28,11 @@ namespace ShortLegStudio
 			return source [index];
 		}
 
+		public static void Add<T>(this IList<T> source, IEnumerable<T> items) {
+			foreach (var i in items) {
+				source.Add (i);
+			}
+		}
 
 		/// UI Extensions TODO: Move them around
 
