@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using ShortLegStudio.RPG.Characters;
+using ShortLegStudio.RPG.Repositories;
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 	public static class CharacterGenerator {
@@ -38,7 +39,8 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 			SkillPointGenerator.AssignSkillPointsRandomly(character);
 
 			//Get some gear!
-			EquipCharacter.AssignWeapons(character);
+			var equip = new EquipMeleeAndRangedWeapon(new WeaponYamlRepository());
+			equip.AssignWeapons(character.Inventory);
 			return character;
 		}
 
