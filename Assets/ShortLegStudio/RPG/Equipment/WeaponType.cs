@@ -1,6 +1,5 @@
 ﻿
-namespace ShortLegStudio.RPG.Characters
-{
+namespace ShortLegStudio.RPG.Equipment {
 	public enum WeaponType {
 		Unarmed,
 		Light,
