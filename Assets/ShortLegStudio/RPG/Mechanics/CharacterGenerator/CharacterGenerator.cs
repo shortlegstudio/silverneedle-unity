@@ -12,10 +12,12 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 			character.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
 			AbilityScoreGenerator.RandomStandardHeroScores (character.Abilities);
 			character.SetRace(Race.GetRaces ().ChooseOne ());
+
+			var languageSelector = new LanguageSelector (new LanguageYamlRepository());
+
 			character.Languages.Add (
-				LanguagePicker.PickLanguage (
+				languageSelector.PickLanguage (
 					character.Race, 
-					Language.GetLanguages (), 
 					character.Abilities.GetModifier (AbilityScoreTypes.Intelligence)
 				)
 			);
