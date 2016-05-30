@@ -4,7 +4,7 @@ using ShortLegStudio.Enchilada;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.Dice;
 
-namespace ShortLegStudio.RPG.Repositories
+namespace ShortLegStudio.RPG.Gateways
 {
 	public class RaceYamlGateway : EntityGateway<Race>
 	{

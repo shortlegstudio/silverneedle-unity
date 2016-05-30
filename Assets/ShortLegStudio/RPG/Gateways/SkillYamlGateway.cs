@@ -5,7 +5,7 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.Enchilada;
 using System.Collections;
 
-namespace ShortLegStudio.RPG.Repositories {
+namespace ShortLegStudio.RPG.Gateways {
 	public class SkillYamlGateway : EntityGateway<Skill>
 	{
 		const string SKILL_DATA_FILE = "Data/skills.yml";

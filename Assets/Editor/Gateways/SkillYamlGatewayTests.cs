@@ -2,7 +2,7 @@
 using NUnit.Framework;
 using System.Linq;
 using ShortLegStudio;
-using ShortLegStudio.RPG.Repositories;
+using ShortLegStudio.RPG.Gateways;
 using ShortLegStudio.RPG.Characters;
 
 [TestFixture]

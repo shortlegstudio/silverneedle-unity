@@ -3,7 +3,7 @@ using System.Linq;
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
-using ShortLegStudio.RPG.Repositories;
+using ShortLegStudio.RPG.Gateways;
 
 [TestFixture]
 public class LanguageYamlGatewayTests

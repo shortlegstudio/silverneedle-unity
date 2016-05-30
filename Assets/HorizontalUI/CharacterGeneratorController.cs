@@ -3,7 +3,7 @@ using System.Collections;
 using ShortLegStudio.RPG.Characters;
 using System;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
-using ShortLegStudio.RPG.Repositories;
+using ShortLegStudio.RPG.Gateways;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
 
 public class CharacterGeneratorController : MonoBehaviour {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using ShortLegStudio.RPG.Equipment;
-using ShortLegStudio.RPG.Repositories;
+using ShortLegStudio.RPG.Gateways;
 using System.Linq;
 using ShortLegStudio.Enchilada;
 using ShortLegStudio.RPG.Characters;

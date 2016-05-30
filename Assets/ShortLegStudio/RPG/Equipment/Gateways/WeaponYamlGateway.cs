@@ -3,7 +3,7 @@ using ShortLegStudio.RPG.Equipment;
 using ShortLegStudio.Enchilada;
 using System.Collections.Generic;
 
-namespace ShortLegStudio.RPG.Repositories {
+namespace ShortLegStudio.RPG.Equipment.Gateways {
 	public class WeaponYamlGateway : EntityGateway<Weapon> {
 		const string WEAPON_YAML_FILE = "Data/weapons.yml";
 

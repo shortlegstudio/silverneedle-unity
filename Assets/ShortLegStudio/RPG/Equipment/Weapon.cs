@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.Enchilada;
-using ShortLegStudio.RPG.Repositories;
+using ShortLegStudio.RPG.Gateways;
 using UnityEngineInternal;
 using System.Runtime.Remoting.Messaging;
 

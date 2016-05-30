@@ -4,7 +4,7 @@ using NUnit.Framework;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Equipment;
 using ShortLegStudio;
-using ShortLegStudio.RPG.Repositories;
+using ShortLegStudio.RPG.Equipment.Gateways;
 
 [TestFixture]
 [Category("Repositories")]

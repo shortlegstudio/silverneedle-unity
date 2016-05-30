@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using ShortLegStudio.RPG.Characters;
-using ShortLegStudio.RPG.Repositories;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
+using ShortLegStudio.RPG.Equipment.Gateways;
+using ShortLegStudio.RPG.Gateways;
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 	public class CharacterGenerator {

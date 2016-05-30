@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ShortLegStudio.Enchilada;
 using ShortLegStudio.RPG.Characters;
 
-namespace ShortLegStudio.RPG.Repositories {
+namespace ShortLegStudio.RPG.Gateways {
 	public class LanguageYamlGateway : EntityGateway<Language> {
 		const string LANGUAGE_YAML_FILE = "Data/languages.yml";
 		private IList<Language> Languages;
