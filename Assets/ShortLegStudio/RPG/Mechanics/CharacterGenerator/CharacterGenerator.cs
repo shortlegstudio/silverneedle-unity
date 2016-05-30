@@ -23,7 +23,8 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 
 
 		public CharacterSheet CreateLevel0() {
-			var character = new CharacterSheet (Skill.GetSkills());
+			var repo = new SkillYamlRepository ();
+			var character = new CharacterSheet (repo.All());
 
 			character.Name = nameGenerator.CreateFullName ();
 			character.Gender = EnumHelpers.ChooseOne<Gender> ();

@@ -23,7 +23,6 @@ public class CharacterGeneratorController : MonoBehaviour {
 	}
 
 	public void GenerateCharacter() {
-		
 		Character = generator.GenerateRandomCharacter ();
 		OnGenerate ();
 	}
