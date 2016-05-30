@@ -11,8 +11,8 @@ public class LanguageSelectorTests {
 	[Test]
 	public void PickLanguagesThatAreKnownToTheRace() {
 		var race = new Race ();
-		race.AddKnownLanguage ("Elvish");
-		race.AddKnownLanguage ("Giant");
+		race.KnownLanguages.Add ("Elvish");
+		race.KnownLanguages.Add ("Giant");
 		var subject = new LanguageSelector (new LanguageTestRepo());
 		var res = subject.PickLanguage (race, 0);
 		Assert.AreEqual (2, res.Count ());
@@ -23,9 +23,9 @@ public class LanguageSelectorTests {
 	[Test]
 	public void PickExtraLanguagesIfSmartEnough() {
 		var race = new Race ();
-		race.AddKnownLanguage ("Elvish");
-		race.AddAvailableLanguage ("Corgi");
-		race.AddAvailableLanguage ("Giant");
+		race.KnownLanguages.Add ("Elvish");
+		race.AvailableLanguages.Add ("Corgi");
+		race.AvailableLanguages.Add ("Giant");
 		var subject = new LanguageSelector (new LanguageTestRepo());
 
 		//Pick two bonus Language -> This should always return all the above
@@ -41,9 +41,9 @@ public class LanguageSelectorTests {
 	[Test]
 	public void IfRunOutOfLanguagesItsOk() {
 		var race = new Race ();
-		race.AddKnownLanguage ("Elvish");
-		race.AddAvailableLanguage ("Corgi");
-		race.AddAvailableLanguage ("Giant");
+		race.KnownLanguages.Add ("Elvish");
+		race.AvailableLanguages.Add ("Corgi");
+		race.AvailableLanguages.Add ("Giant");
 		var subject = new LanguageSelector (new LanguageTestRepo());
 
 		//Pick two bonus Language -> This should always return all the above

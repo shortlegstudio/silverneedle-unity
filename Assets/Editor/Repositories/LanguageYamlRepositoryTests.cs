@@ -6,7 +6,7 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Repositories;
 
 [TestFixture]
-public class LanguageTests
+public class LanguageYamlRepositoryTests
 {
 	[Test]
 	public void ParseTheYamlFile() {

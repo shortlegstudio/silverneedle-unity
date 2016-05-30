@@ -1,13 +1,13 @@
 ﻿using ShortLegStudio;
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
-	public static class NameGenerator {
-		public static string CreateFullName() {
+	public class NameGenerator {
+		public string CreateFullName() {
 			return string.Format ("{0} {1}", CreateFirstName (), CreateLastName ());
 		}
 
 
-		public static string BuildNameFromSyllables(string[] syllables, int count) {
+		public string BuildNameFromSyllables(string[] syllables, int count) {
 			string name = "";
 
 			for (var i = 0; i < count; i++) {
@@ -16,15 +16,15 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 			return name.Capitalize ();
 		}
 
-		public static string CreateFirstName() {
+		public string CreateFirstName() {
 			return BuildNameFromSyllables (GetFirstNameSyllables (), Randomly.Range (1, 5));
 		}
 
-		public static string CreateLastName() {
+		public string CreateLastName() {
 			return BuildNameFromSyllables (GetLastNameSyllables (), Randomly.Range (1, 5));
 		}
 
-		public static string[] GetFirstNameSyllables() {
+		public string[] GetFirstNameSyllables() {
 			return new string[] {
 				"li",
 				"pe",
@@ -42,7 +42,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 			};
 		}
 
-		public static string[] GetLastNameSyllables() {
+		public string[] GetLastNameSyllables() {
 			return new string[] {
 				"li",
 				"pe",

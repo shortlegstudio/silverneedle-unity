@@ -41,17 +41,6 @@ public class CharacterSheetTests {
     }
 
 	[Test]
-	public void CharactersCanRollSomeStats() {
-		var sheet = new CharacterSheet (_testSkills);
-		AbilityScoreGenerator.RandomStandardHeroScores (sheet.Abilities);
-		var abilities = sheet.Abilities;
-		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Strength));
-		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Charisma));
-		Assert.IsNotNull (abilities.GetAbility (AbilityScoreTypes.Intelligence));
-
-	}
-
-	[Test]
 	public void SettingRaceLoadsTraits() {
 		var sheet = new CharacterSheet (_testSkills);
 

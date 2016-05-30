@@ -14,15 +14,8 @@ public class LevelUpGeneratorTests {
 	[SetUp]
 	public void SetUp() {
 		character = new CharacterSheet (new List<Skill>());
-
-		//Go with flat Twelves to make calculations easy
-		character.Abilities.SetScore(AbilityScoreTypes.Strength, 12);
-		character.Abilities.SetScore(AbilityScoreTypes.Dexterity, 12);
-		character.Abilities.SetScore(AbilityScoreTypes.Constitution, 12);
-		character.Abilities.SetScore(AbilityScoreTypes.Intelligence, 12);
-		character.Abilities.SetScore(AbilityScoreTypes.Wisdom, 12);
-		character.Abilities.SetScore(AbilityScoreTypes.Charisma, 12);
-
+		var abGen = new AbilityScoreGenerator ();
+		abGen.CreateAverageCharacter (character.Abilities);
 		var cls = new Class ();
 		character.SetClass (cls);
 	}
@@ -31,24 +24,29 @@ public class LevelUpGeneratorTests {
 
     [Test]
     public void LevelingUpIncrementsTheLevelNumber() {
-		LevelUpGenerator.LevelUp (character);
+		var levelUp = new LevelUpGenerator (new HitPointGenerator());
+		levelUp.LevelUp (character);
 		Assert.AreEqual (2, character.Level);
     }
 
 	[Test]
 	public void HitpointsIncreaseWhenYouLevelUp() {
 		var hp = character.MaxHitPoints;
-		LevelUpGenerator.LevelUp (character);
+		var levelUp = new LevelUpGenerator (new HitPointGenerator());
+
+		levelUp.LevelUp (character);
 		Assert.Greater (character.MaxHitPoints, hp);
 	}
 
 	[Test]
 	public void EveryFourLevelsYouGetAnExtraAbilityScore() {
-		LevelUpGenerator.BringCharacterToLevel (character, 4);
+		var levelUp = new LevelUpGenerator (new HitPointGenerator());
 
-		//At least one ability should be greater than 12 now
+		levelUp.BringCharacterToLevel (character, 4);
+
+		//At least one ability should be greater than 10 now
 		Assert.IsTrue (
-			character.Abilities.GetAbilities().Any (x => x.TotalValue > 12)
+			character.Abilities.GetAbilities().Any (x => x.TotalValue > 10)
 		);
 	}
 }

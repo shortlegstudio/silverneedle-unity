@@ -23,6 +23,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 				var available = Languages.All().Where (
 					x => !result.Any(r => r.Name == x.Name) && race.AvailableLanguages.Any(avail => x.Name == avail)
 				);
+
 				if (available.Count () > 0) {
 					var language = available.ToList ().ChooseOne ();
 					result.Add (language);
