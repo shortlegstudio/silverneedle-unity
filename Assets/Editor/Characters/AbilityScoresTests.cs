@@ -46,4 +46,18 @@ public class AbilityScoresTests {
 		Assert.IsTrue (modified);
 	}
 
+	[Test]
+	public void YouCanCopyOneSetOfAbilityScoresToAnother() {
+		var abilityScores = new AbilityScores ();
+		var copyFrom = new AbilityScores ();
+		foreach (var e in copyFrom.GetAbilities()) {
+			e.SetValue (15);
+		}
+
+		abilityScores.Copy (copyFrom);
+
+		foreach (var e in abilityScores.GetAbilities()) {
+			Assert.AreEqual (e.TotalValue, copyFrom.GetScore (e.Name));
+		}
+	}
 }

@@ -33,14 +33,7 @@ public class AbilityScoreTests {
 		score = new AbilityScore (AbilityScoreTypes.Strength, 6);
 		Assert.AreEqual (-2, score.BaseModifier);
     }
-
-	[Test]
-	public void RollAbilityScores() {
-		var score = AbilityScore.CreateFrom4d6 (AbilityScoreTypes.Charisma);
-		Assert.GreaterOrEqual (score.BaseValue, 3);
-		Assert.LessOrEqual (score.BaseValue, 18);
-	}
-
+		
 	[Test]
 	public void TotalScoreIsTheSumOfAllModifiers() {
 		var score = new AbilityScore (AbilityScoreTypes.Strength, 15);

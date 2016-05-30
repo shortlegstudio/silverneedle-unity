@@ -46,6 +46,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public void SetScore(AbilityScoreTypes ability, int val) {
 			_abilities [ability].SetValue (val);
+			OnModified(_abilities[ability]);
 		}
 
 		public void SetScore(string ability, int val) {
@@ -58,6 +59,12 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public int GetModifier(string ability) {
 			return GetModifier (AbilityScore.GetType (ability));
+		}
+
+		public void Copy(AbilityScores scores) {
+			foreach (var e in scores.GetAbilities()) {
+				SetScore (e.Name, e.BaseValue);
+			}
 		}
 		 
 		public IEnumerable<AbilityScore> GetAbilities() {

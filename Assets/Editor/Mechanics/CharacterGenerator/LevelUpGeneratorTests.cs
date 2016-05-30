@@ -16,7 +16,7 @@ public class LevelUpGeneratorTests {
 	public void SetUp() {
 		character = new CharacterSheet (new List<Skill>());
 		var abGen = new AverageAbilityScoreGenerator ();
-		character.Abilities = abGen.Get ();
+		character.Abilities.Copy(abGen.Get ());
 		var cls = new Class ();
 		character.SetClass (cls);
 	}

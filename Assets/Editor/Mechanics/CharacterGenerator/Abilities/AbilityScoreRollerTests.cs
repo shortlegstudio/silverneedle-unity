@@ -9,10 +9,11 @@ public class AbilityScoreRollerTests {
 		var roller = new RandomAbilityScoreGenerator ();
 		var abilities = roller.Get ();
 
-		Assert.GreaterOrEqual (abilities.GetScore (AbilityScoreTypes.Strength), 3);
-		Assert.GreaterOrEqual (abilities.GetScore (AbilityScoreTypes.Charisma), 3);
-		Assert.GreaterOrEqual (abilities.GetScore (AbilityScoreTypes.Intelligence), 3);
-
+		//Values should be between 3 and 18 for all abilities
+		foreach (var a in abilities.GetAbilities()) {
+			Assert.GreaterOrEqual (a.TotalValue, 3);
+			Assert.LessOrEqual (a.TotalValue, 18);
+		}
 	}
 
 	[Test]
