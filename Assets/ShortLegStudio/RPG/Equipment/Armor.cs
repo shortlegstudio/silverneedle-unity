@@ -9,6 +9,7 @@ namespace ShortLegStudio.RPG.Equipment {
 		public int MaximumDexterityBonus { get; private set; }
 		public int ArmorCheckPenalty { get; private set; }
 		public int ArcaneSpellFailureChance { get; private set; }
+		public ArmorType ArmorType { get; private set; }
 			
 		public Armor () {
 		}
@@ -19,7 +20,8 @@ namespace ShortLegStudio.RPG.Equipment {
 			float weight,
 			int maxDexBonus,
 			int armorCheckPenalty,
-			int arcaneSpell
+			int arcaneSpell,
+			ArmorType armorType
 		) {
 			Name = name;
 			ArmorClass = ac;
@@ -27,6 +29,7 @@ namespace ShortLegStudio.RPG.Equipment {
 			MaximumDexterityBonus = maxDexBonus;
 			ArmorCheckPenalty = armorCheckPenalty;
 			ArcaneSpellFailureChance = arcaneSpell;
+			ArmorType = armorType;
 		}
 	}
 }
