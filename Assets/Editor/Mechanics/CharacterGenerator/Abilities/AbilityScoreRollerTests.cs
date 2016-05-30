@@ -7,7 +7,8 @@ public class AbilityScoreRollerTests {
 	[Test]
 	public void CharactersCanRollSomeStats() {
 		var roller = new RandomAbilityScoreGenerator ();
-		var abilities = roller.Get ();
+		var abilities = new AbilityScores ();
+		roller.AssignAbilities (abilities);
 
 		//Values should be between 3 and 18 for all abilities
 		foreach (var a in abilities.GetAbilities()) {
@@ -19,7 +20,8 @@ public class AbilityScoreRollerTests {
 	[Test]
 	public void CreateAverageScores() {
 		var roller = new AverageAbilityScoreGenerator ();
-		var abilities = roller.Get ();
+		var abilities = new AbilityScores ();
+		roller.AssignAbilities (abilities);
 		Assert.AreEqual (10, abilities.GetScore (AbilityScoreTypes.Strength));
 		Assert.AreEqual (10, abilities.GetScore (AbilityScoreTypes.Dexterity));
 		Assert.AreEqual (10, abilities.GetScore (AbilityScoreTypes.Constitution));

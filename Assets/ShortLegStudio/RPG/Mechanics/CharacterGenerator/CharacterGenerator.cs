@@ -29,7 +29,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 			character.Name = nameGenerator.CreateFullName ();
 			character.Gender = EnumHelpers.ChooseOne<Gender> ();
 			character.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
-			character.Abilities.Copy(abilityGenerator.Get ());
+			abilityGenerator.AssignAbilities (character.Abilities);
 			character.SetRace(raceRepo.All ().ToList().ChooseOne ());
 
 			character.Languages.Add (

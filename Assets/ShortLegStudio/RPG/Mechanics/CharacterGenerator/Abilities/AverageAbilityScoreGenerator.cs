@@ -8,12 +8,10 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities {
 		public AverageAbilityScoreGenerator () {
 		}
 
-		public ShortLegStudio.RPG.Characters.AbilityScores Get () {
-			var abilities = new AbilityScores ();
+		public void AssignAbilities(ShortLegStudio.RPG.Characters.AbilityScores abilities) {
 			foreach (var e in EnumHelpers.GetValues<AbilityScoreTypes>()) {
 				abilities.SetScore (e, averageScore);
 			}
-			return abilities;
 		}
 	}
 }

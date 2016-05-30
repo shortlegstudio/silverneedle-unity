@@ -6,12 +6,10 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities {
 	public class RandomAbilityScoreGenerator : IAbilityScoreGenerator  {
 		public RandomAbilityScoreGenerator() { }
 
-		public AbilityScores Get() {
-			var abilities = new AbilityScores ();
+		public void AssignAbilities(AbilityScores abilities) {
 			foreach (var e in EnumHelpers.GetValues<AbilityScoreTypes>()) {
 				abilities.SetScore (e, Roll4d6());
 			}
-			return abilities;
 		}
 
 		private int Roll4d6() {
