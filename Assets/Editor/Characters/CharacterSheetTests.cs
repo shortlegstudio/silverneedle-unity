@@ -6,6 +6,7 @@ using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio.Dice;
+using NUnit.Framework.Constraints;
 
 [TestFixture]
 public class CharacterSheetTests {
@@ -73,6 +74,19 @@ public class CharacterSheetTests {
 		Assert.AreEqual (CharacterSize.Small, sheet.Size.Size);
 		Assert.GreaterOrEqual (sheet.Size.Height, 12);
 		Assert.GreaterOrEqual (sheet.Size.Weight, 102);
+	}
+
+
+	[Test]
+	public void SettingRaceAssignsMovement() {
+		var sheet = new CharacterSheet (_testSkills);
+		var fastGuy = new Race ();
+		fastGuy.SizeSetting = CharacterSize.Small;
+		fastGuy.HeightRange = DiceStrings.ParseDice ("2d4+10");
+		fastGuy.WeightRange = DiceStrings.ParseDice ("2d4+100");
+		fastGuy.BaseMovementSpeed = 45;
+		sheet.SetRace (fastGuy);
+		Assert.AreEqual (45, sheet.BaseMovementSpeed);
 	}
 
 	[Test]

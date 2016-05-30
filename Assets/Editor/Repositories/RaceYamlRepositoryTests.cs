@@ -83,8 +83,14 @@ public class RaceYamlRepositoryTests {
 		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Gnome"));
 		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Terran"));
 		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Undercommon"));
+	}
 
-
+	[Test]
+	public void RacesHaveABaseMovementSpeed() {
+		Assert.AreEqual (20, dwarf.BaseMovementSpeed);
+		Assert.AreEqual (30, human.BaseMovementSpeed);
+		Assert.AreEqual (100, elf.BaseMovementSpeed);
+		Assert.AreEqual (25, halfling.BaseMovementSpeed);
 	}
 
 	private const string SkillsYamlFile = @"--- 
@@ -103,6 +109,7 @@ public class RaceYamlRepositoryTests {
   languages: 
     known: Common, Dwarven
     available: Giant, Gnome, Goblin, Orc, Terran, Undercommon
+  basemovementspeed: 20
 - race: 
   name: Elf
   abilities:
@@ -118,6 +125,7 @@ public class RaceYamlRepositoryTests {
   languages: 
     known: Common, Dwarven
     available: Giant, Gnome, Goblin, Orc, Terrain, Undercommon
+  basemovementspeed: 100
 - race:
   name: Human
   abilities:
@@ -131,6 +139,7 @@ public class RaceYamlRepositoryTests {
   languages: 
     known: Common
     available: ALL
+  basemovementspeed: 30
 - race: 
   name: Halfling
   size: Small
@@ -146,6 +155,7 @@ public class RaceYamlRepositoryTests {
   languages: 
     known: Common, Halfling
     available: Gnome
+  basemovementspeed: 25
 ...";
 	
 }

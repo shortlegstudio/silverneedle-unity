@@ -20,6 +20,7 @@
   languages:
     known: Common, Dwarven
     available: Giant, Gnome, Goblin, Orc, Terran, Undercommon
+  basemovementspeed: 20
 - race:
   name: Elf
   size: Medium
@@ -38,6 +39,7 @@
   languages:
     known: Common, Elven
     available: Celestial, Draconic, Gnoll, Gnome, Goblin, Orc, Sylvan
+  basemovementspeed: 30
 - race:
   name: Gnome
   size: Small
@@ -60,6 +62,7 @@
   languages:
     known: Common, Gnome, Sylvan
     available: Draconic, Dwarven, Elven, Giant, Goblin, Orc
+  basemovementspeed: 20
 - race:
   name: Half-Elf
   size: Medium
@@ -77,6 +80,7 @@
   languages:
     known: Common, Elven
     available: ALL
+  basemovementspeed: 30
 - race:
   name: Half-Orc
   size: Medium
@@ -93,6 +97,7 @@
   languages:
     known: Common, Orc
     available: Abyssal, Draconic, Giant, Gnoll, Goblin
+  basemovementspeed: 30
 - race:
   name: Halfling
   size: Small
@@ -112,6 +117,7 @@
   languages:
     known: Common, Halfling
     available: Dwarven, Elven, Gnome, Goblin
+  basemovementspeed: 20
 - race:
   name: Human
   size: Medium
@@ -125,3 +131,4 @@
   languages:
     known: Common
     available: ALL
+  basemovementspeed: 30

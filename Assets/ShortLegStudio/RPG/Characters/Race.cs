@@ -13,6 +13,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public CharacterSize SizeSetting { get; set; }
 		public Cup HeightRange { get; set; }
 		public Cup WeightRange { get; set; }
+		public int BaseMovementSpeed { get; set; }
 
 		public Race() {
 			AbilityModifiers = new List<AbilityScoreAdjustment> ();

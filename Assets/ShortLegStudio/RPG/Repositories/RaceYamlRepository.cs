@@ -58,6 +58,10 @@ namespace ShortLegStudio.RPG.Repositories
 				var languages = raceNode.GetNode ("languages");
 				race.KnownLanguages.Add(languages.GetCommaStringOptional ("known"));
 				race.AvailableLanguages.Add(languages.GetCommaStringOptional ("available"));
+
+
+				//Get Speed
+				race.BaseMovementSpeed = raceNode.GetInteger("basemovementspeed");
 				Races.Add (race);
 			}
 		}

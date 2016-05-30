@@ -34,6 +34,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public int CurrentHitPoints { get; set; } 
 		public OffenseStats Offense { get; private set; }
 		public DefenseStats Defense { get; private set; }
+		public int BaseMovementSpeed { get; set; }
 
 		public event EventHandler<CharacterSheetEventArgs> Modified;
 
@@ -89,6 +90,9 @@ namespace ShortLegStudio.RPG.Characters {
 
 			//Update Size
 			Size.SetSize(race.SizeSetting, race.HeightRange.Roll(), race.WeightRange.Roll());
+
+			//Update Speed
+			BaseMovementSpeed = race.BaseMovementSpeed;
 
 			//Add Ability Modifiers
 			foreach (var adj in race.AbilityModifiers) {
