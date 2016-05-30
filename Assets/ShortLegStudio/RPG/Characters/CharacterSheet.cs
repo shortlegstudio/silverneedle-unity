@@ -21,7 +21,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public int XP { get; private set; }
 
 		//Abilities
-		public AbilityScores Abilities { get; private set; }
+		public AbilityScores Abilities { get; set; }
 		public SkillRanks SkillRanks { get; private set; }
 		public IList<Trait> Traits { get; private set; }
 		public IList<Feat> Feats { get; private set; }

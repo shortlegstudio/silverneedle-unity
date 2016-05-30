@@ -3,6 +3,7 @@ using UnityEditor;
 using NUnit.Framework;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
+using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -14,8 +15,8 @@ public class LevelUpGeneratorTests {
 	[SetUp]
 	public void SetUp() {
 		character = new CharacterSheet (new List<Skill>());
-		var abGen = new AbilityScoreGenerator ();
-		abGen.CreateAverageCharacter (character.Abilities);
+		var abGen = new AverageAbilityScoreGenerator ();
+		character.Abilities = abGen.Get ();
 		var cls = new Class ();
 		character.SetClass (cls);
 	}

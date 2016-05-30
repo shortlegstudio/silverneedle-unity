@@ -1,14 +1,13 @@
 ﻿using NUnit.Framework;
-using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
+using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
 using ShortLegStudio.RPG.Characters;
 
 [TestFixture]
 public class AbilityScoreRollerTests {
 	[Test]
 	public void CharactersCanRollSomeStats() {
-		var abilities = new AbilityScores ();
-		var roller = new AbilityScoreGenerator ();
-		roller.RandomStandardHeroScores (abilities);
+		var roller = new RandomAbilityScoreGenerator ();
+		var abilities = roller.Get ();
 
 		Assert.GreaterOrEqual (abilities.GetScore (AbilityScoreTypes.Strength), 3);
 		Assert.GreaterOrEqual (abilities.GetScore (AbilityScoreTypes.Charisma), 3);
@@ -18,9 +17,8 @@ public class AbilityScoreRollerTests {
 
 	[Test]
 	public void CreateAverageScores() {
-		var abilities = new AbilityScores ();
-		var roller = new AbilityScoreGenerator ();
-		roller.CreateAverageCharacter (abilities);
+		var roller = new AverageAbilityScoreGenerator ();
+		var abilities = roller.Get ();
 		Assert.AreEqual (10, abilities.GetScore (AbilityScoreTypes.Strength));
 		Assert.AreEqual (10, abilities.GetScore (AbilityScoreTypes.Dexterity));
 		Assert.AreEqual (10, abilities.GetScore (AbilityScoreTypes.Constitution));
