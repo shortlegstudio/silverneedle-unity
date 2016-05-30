@@ -6,16 +6,16 @@ using ShortLegStudio.Enchilada;
 using System.Collections;
 
 namespace ShortLegStudio.RPG.Repositories {
-	public class SkillYamlRepository : EntityGateway<Skill>
+	public class SkillYamlGateway : EntityGateway<Skill>
 	{
 		const string SKILL_DATA_FILE = "Data/skills.yml";
 		IList<Skill> Skills; 
 
-		public SkillYamlRepository() {
+		public SkillYamlGateway() {
 			LoadFromYaml (FileHelper.OpenYaml (SKILL_DATA_FILE));
 		}
 
-		public SkillYamlRepository (YamlNodeWrapper yaml) { 
+		public SkillYamlGateway (YamlNodeWrapper yaml) { 
 			LoadFromYaml (yaml);
 		}
 

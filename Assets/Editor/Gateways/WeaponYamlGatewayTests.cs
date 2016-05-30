@@ -8,10 +8,10 @@ using ShortLegStudio.RPG.Repositories;
 
 [TestFixture]
 [Category("Repositories")]
-public class WeaponYamlRepositoryTests {
+public class WeaponYamlGatewayTests {
 	[Test]
 	public void AllImportantStatsForALongSwordAreAvailable() {
-		var repo = new WeaponYamlRepository (WeaponYamlFile.ParseYaml());
+		var repo = new WeaponYamlGateway (WeaponYamlFile.ParseYaml());
 		var weapons = repo.All ();
 		var longsword = weapons.First();
 		Assert.AreEqual ("Longsword", longsword.Name);
@@ -27,7 +27,7 @@ public class WeaponYamlRepositoryTests {
 
 	[Test]
 	public void AllImportantStatsForADaggerAreAvailable() {
-		var repo = new WeaponYamlRepository (WeaponYamlFile.ParseYaml());
+		var repo = new WeaponYamlGateway (WeaponYamlFile.ParseYaml());
 		var dagger = repo.All().Last();
 		Assert.AreEqual ("Dagger", dagger.Name);
 		Assert.AreEqual ("1d4", dagger.Damage);

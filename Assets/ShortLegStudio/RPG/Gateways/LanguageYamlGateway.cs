@@ -4,15 +4,15 @@ using ShortLegStudio.Enchilada;
 using ShortLegStudio.RPG.Characters;
 
 namespace ShortLegStudio.RPG.Repositories {
-	public class LanguageYamlRepository : EntityGateway<Language> {
+	public class LanguageYamlGateway : EntityGateway<Language> {
 		const string LANGUAGE_YAML_FILE = "Data/languages.yml";
 		private IList<Language> Languages;
 
-		public LanguageYamlRepository () {
+		public LanguageYamlGateway () {
 			LoadFromYaml (FileHelper.OpenYaml (LANGUAGE_YAML_FILE));
 		}
 
-		public LanguageYamlRepository(YamlNodeWrapper yaml) {
+		public LanguageYamlGateway(YamlNodeWrapper yaml) {
 			LoadFromYaml (yaml);
 		}
 

@@ -4,16 +4,16 @@ using ShortLegStudio.Enchilada;
 using System.Collections.Generic;
 
 namespace ShortLegStudio.RPG.Repositories {
-	public class WeaponYamlRepository : EntityGateway<Weapon> {
+	public class WeaponYamlGateway : EntityGateway<Weapon> {
 		const string WEAPON_YAML_FILE = "Data/weapons.yml";
 
 		private IList<Weapon> Weapons;
 
-		public WeaponYamlRepository()  { 
+		public WeaponYamlGateway()  { 
 			LoadFromYaml (FileHelper.OpenYaml (WEAPON_YAML_FILE));
 		}
 
-		public WeaponYamlRepository (YamlNodeWrapper yamlData) { 
+		public WeaponYamlGateway (YamlNodeWrapper yamlData) { 
 			LoadFromYaml (yamlData);
 		}
 

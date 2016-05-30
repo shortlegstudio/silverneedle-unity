@@ -6,11 +6,11 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Repositories;
 
 [TestFixture]
-public class LanguageYamlRepositoryTests
+public class LanguageYamlGatewayTests
 {
 	[Test]
 	public void ParseTheYamlFile() {
-		var gateway = new LanguageYamlRepository (LanguageYamlFile.ParseYaml ());
+		var gateway = new LanguageYamlGateway (LanguageYamlFile.ParseYaml ());
 		var french = gateway.All().First (x => x.Name == "French");
 		Assert.AreEqual ("C'est la vie", french.Description);
 		var english = gateway.All().First (x => x.Name == "English");

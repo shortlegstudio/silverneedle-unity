@@ -8,7 +8,7 @@ using ShortLegStudio.RPG.Repositories;
 
 
 [TestFixture]
-public class RaceYamlRepositoryTests {
+public class RacyYamlGatewayTests {
 	Race dwarf;
 	Race elf;
 	Race halfling;
@@ -16,7 +16,7 @@ public class RaceYamlRepositoryTests {
 
 	[SetUp]
 	public void SetUp() {
-		var repository = new RaceYamlRepository (SkillsYamlFile.ParseYaml());
+		var repository = new RaceYamlGateway (SkillsYamlFile.ParseYaml());
 		var races = repository.All ();
 		dwarf = races.First (x => x.Name == "Dwarf");
 		elf = races.First (x => x.Name == "Elf");

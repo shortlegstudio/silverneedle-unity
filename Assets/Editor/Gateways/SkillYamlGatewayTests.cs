@@ -6,14 +6,14 @@ using ShortLegStudio.RPG.Repositories;
 using ShortLegStudio.RPG.Characters;
 
 [TestFixture]
-public class SkillYamlRepositoryTests {
+public class SkillYamlGatewayTests {
 	Skill Acrobatics;
 	Skill Bluff;
 	Skill DisableDevice;
 
 	[SetUp]
 	public void LoadYamlRepository() {
-		var repo = new SkillYamlRepository (SkillsYamlFile.ParseYaml());
+		var repo = new SkillYamlGateway (SkillsYamlFile.ParseYaml());
 		var skills = repo.All();
 
 		Acrobatics = skills.First (x => x.Name == "Acrobatics");

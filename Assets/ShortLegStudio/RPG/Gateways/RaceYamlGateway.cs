@@ -6,7 +6,7 @@ using ShortLegStudio.Dice;
 
 namespace ShortLegStudio.RPG.Repositories
 {
-	public class RaceYamlRepository : EntityGateway<Race>
+	public class RaceYamlGateway : EntityGateway<Race>
 	{
 		const string RACE_DATA_FILE = "Data/races.yml";
 		IList<Race> Races;
@@ -15,11 +15,11 @@ namespace ShortLegStudio.RPG.Repositories
 			return Races;
 		}
 
-		public RaceYamlRepository() {
+		public RaceYamlGateway() {
 			LoadFromYaml (FileHelper.OpenYaml (RACE_DATA_FILE));
 		}
 
-		public RaceYamlRepository(YamlNodeWrapper yaml) {
+		public RaceYamlGateway(YamlNodeWrapper yaml) {
 			LoadFromYaml (yaml);
 		}
 

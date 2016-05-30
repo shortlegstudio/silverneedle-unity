@@ -7,13 +7,13 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 	public class CharacterGenerator {
 		private IAbilityScoreGenerator abilityGenerator;
 		private LanguageSelector languageSelector;
-		private RaceYamlRepository raceRepo;
+		private RaceYamlGateway raceRepo;
 		private NameGenerator nameGenerator;
 
 		public CharacterGenerator(
 			IAbilityScoreGenerator abilities,
 			LanguageSelector langs,
-			RaceYamlRepository races,
+			RaceYamlGateway races,
 			NameGenerator names) {
 			abilityGenerator = abilities;
 			languageSelector = langs;
@@ -23,7 +23,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 
 
 		public CharacterSheet CreateLevel0() {
-			var repo = new SkillYamlRepository ();
+			var repo = new SkillYamlGateway ();
 			var character = new CharacterSheet (repo.All());
 
 			character.Name = nameGenerator.CreateFullName ();
@@ -61,7 +61,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 			skillGen.AssignSkillPointsRandomly(character);
 
 			//Get some gear!
-			var equip = new EquipMeleeAndRangedWeapon(new WeaponYamlRepository());
+			var equip = new EquipMeleeAndRangedWeapon(new WeaponYamlGateway());
 			equip.AssignWeapons(character.Inventory);
 			return character;
 		}
