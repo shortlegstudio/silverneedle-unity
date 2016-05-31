@@ -3,13 +3,13 @@ using ShortLegStudio.RPG.Equipment;
 
 namespace ShortLegStudio.RPG.Equipment {
 	public class Armor : IEquipment {
-		public string Name { get; private set; }
-		public float Weight { get; private set; }
-		public int ArmorClass { get; private set; }
-		public int MaximumDexterityBonus { get; private set; }
-		public int ArmorCheckPenalty { get; private set; }
-		public int ArcaneSpellFailureChance { get; private set; }
-		public ArmorType ArmorType { get; private set; }
+		public string Name { get; set; }
+		public float Weight { get; set; }
+		public int ArmorClass { get; set; }
+		public int MaximumDexterityBonus { get; set; }
+		public int ArmorCheckPenalty { get; set; }
+		public int ArcaneSpellFailureChance { get; set; }
+		public ArmorType ArmorType { get; set; }
 			
 		public Armor () {
 		}

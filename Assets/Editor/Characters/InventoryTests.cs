@@ -18,6 +18,17 @@ public class InventoryTests {
 		Assert.AreEqual (wpn1, inv.Weapons.First ());
 	}
 
+	[Test]
+	public void InventoryWillReturnCurrentArmor() {
+		var inv = new Inventory ();
+		var armor = new Armor ();
+		inv.AddItem (armor);
+
+		Assert.AreEqual (armor, inv.Armor.First());
+
+	}
+
+
 	class PieceOfJunk : IEquipment {
 		public string Name { get { return "Junk"; } }
 		public float Weight { get { return 0.5f; } }

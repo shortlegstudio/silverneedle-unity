@@ -7,7 +7,7 @@ namespace ShortLegStudio.RPG.Characters {
 	public class Inventory {
 		public IEnumerable<IEquipment> All { get { return _inv; } }
 		public IEnumerable<Weapon> Weapons { get { return _inv.OfType<Weapon>(); } }
-
+		public IEnumerable<Armor> Armor { get { return _inv.OfType<Armor>(); } }
 		private IList<IEquipment> _inv;
 
 		public Inventory () {

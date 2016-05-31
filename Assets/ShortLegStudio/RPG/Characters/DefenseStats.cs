@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Reflection;
+using ShortLegStudio.RPG.Equipment;
+using System.Linq;
 
 namespace ShortLegStudio.RPG.Characters {
 	
@@ -12,19 +14,26 @@ namespace ShortLegStudio.RPG.Characters {
 		private BasicStat Fortitude { get; set; }
 		private BasicStat Reflex { get; set; }
 		private BasicStat Will { get; set; }
+		private Inventory Inventory { get; set; }
 
-		public DefenseStats(AbilityScores abilityScores, SizeStats size) {
+		public DefenseStats(AbilityScores abilityScores, SizeStats size, Inventory inv) {
 			Abilities = abilityScores;	
 			Size = size;
 			Fortitude = new BasicStat ();
 			Reflex = new BasicStat ();
 			Will = new BasicStat ();
+			Inventory = inv;
+		}
+
+		public int EquipedArmorBonus() {
+			return Inventory.Armor.Sum (x => x.ArmorClass);
 		}
 
 		public int ArmorClass() {
 			return BASE_ARMOR_CLASS 
 				+ Abilities.GetModifier (AbilityScoreTypes.Dexterity)
-				+ Size.SizeModifier;
+				+ Size.SizeModifier
+				+ EquipedArmorBonus();
 		}
 
 		public int TouchArmorClass() {
@@ -35,7 +44,8 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public int FlatFootedArmorClass() {
 			return BASE_ARMOR_CLASS
-				+ Size.SizeModifier;
+				+ Size.SizeModifier
+				+ EquipedArmorBonus();
 		}
 
 		public void SetFortitudeGoodSave() {

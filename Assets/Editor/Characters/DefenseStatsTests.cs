@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
+using ShortLegStudio.RPG.Equipment;
 
 [TestFixture]
 public class DefenseStatsTests {
@@ -15,7 +16,7 @@ public class DefenseStatsTests {
 		abilities.SetScore (AbilityScoreTypes.Constitution, 9);
 		abilities.SetScore (AbilityScoreTypes.Wisdom, 12);
 		var size = new SizeStats (CharacterSize.Small);
-		smallStats = new DefenseStats (abilities, size);
+		smallStats = new DefenseStats (abilities, size, new Inventory());
 	}
 
 	[Test]
@@ -98,5 +99,28 @@ public class DefenseStatsTests {
 		Assert.AreEqual (3, smallStats.FortitudeSave ());
 		Assert.AreEqual (4, smallStats.ReflexSave ());
 		Assert.AreEqual (2, smallStats.WillSave ());
+	}
+
+
+	[Test]
+	public void AddingArmorIncreasesYourDefenseAndYourFlatFootedDefenseButNotTouchDefense() {
+		var inventory = new Inventory ();
+		var def = new DefenseStats (
+			          new AbilityScores (),
+			          new SizeStats (),
+						inventory
+		          );
+		var startAC = def.ArmorClass();
+		var startFlat = def.FlatFootedArmorClass ();
+		var startTouch = def.TouchArmorClass ();
+
+		var armor = new Armor ();
+		armor.ArmorClass = 10;
+
+		inventory.AddItem (armor);
+		Assert.AreEqual (10, def.EquipedArmorBonus ());
+		Assert.AreEqual (startAC + 10, def.ArmorClass());
+		Assert.AreEqual (startFlat + 10, def.FlatFootedArmorClass ());
+		Assert.AreEqual (startTouch, def.TouchArmorClass ());
 	}
 }

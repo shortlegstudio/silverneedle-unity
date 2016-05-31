@@ -44,7 +44,7 @@ namespace ShortLegStudio.RPG.Characters {
 			Inventory = new Inventory ();
 			Initiative = new Initiative (Abilities);
 			Offense = new OffenseStats (Abilities, Size);
-			Defense = new DefenseStats (Abilities, Size);
+			Defense = new DefenseStats (Abilities, Size, Inventory);
 			Languages = new List<Language> ();
 
 			SkillRanks = new SkillRanks (skillList, Abilities);
