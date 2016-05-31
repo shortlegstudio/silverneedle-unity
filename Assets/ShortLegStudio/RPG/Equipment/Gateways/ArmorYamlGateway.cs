@@ -30,6 +30,12 @@ namespace ShortLegStudio.RPG.Equipment.Gateways {
 			return _armors.Where(x => x.ArmorType == type);
 		}
 
+		public IEnumerable<Armor> FindByArmorTypes(params ArmorType[] types) {
+			return _armors.Where (
+				x => types.Contains (x.ArmorType)
+			);
+		}
+
 		private void LoadFromYaml(YamlNodeWrapper yaml) {
 			_armors = new List<Armor> ();
 

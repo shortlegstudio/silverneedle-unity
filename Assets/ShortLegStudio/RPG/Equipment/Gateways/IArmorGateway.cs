@@ -7,6 +7,8 @@ namespace ShortLegStudio.RPG.Equipment.Gateways {
 		IEnumerable<Armor> All();
 		Armor GetByName(string name);
 		IEnumerable<Armor> FindByArmorType(ArmorType type);
+		IEnumerable<Armor> FindByArmorTypes (params ArmorType[] types);
+			
 	}
 }
 

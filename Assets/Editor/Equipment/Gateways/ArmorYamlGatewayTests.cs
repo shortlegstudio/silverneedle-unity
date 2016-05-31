@@ -78,6 +78,12 @@ public class ArmorYamlGatewayTests
 		Assert.IsTrue (armors.All (x => x.ArmorType == ArmorType.HeavyArmor));
 	}
 
+	[Test]
+	public void GetArmorsOfTypes() {
+		var armors = gateway.FindByArmorTypes (ArmorType.LightArmor, ArmorType.HeavyArmor);
+		Assert.AreEqual (3, armors.Count ());
+	}
+
 	const string ArmorYamlFile = @"
 - armor:
   name: Leather Armor

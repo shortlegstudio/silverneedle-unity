@@ -26,7 +26,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public int EquipedArmorBonus() {
-			return Inventory.Armor.Sum (x => x.ArmorClass);
+			return Inventory.EquippedItems.OfType<Armor>().Sum (x => x.ArmorClass);
 		}
 
 		public int ArmorClass() {

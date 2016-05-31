@@ -103,7 +103,7 @@ public class DefenseStatsTests {
 
 
 	[Test]
-	public void AddingArmorIncreasesYourDefenseAndYourFlatFootedDefenseButNotTouchDefense() {
+	public void EquippedArmorIncreasesYourDefenseAndYourFlatFootedDefenseButNotTouchDefense() {
 		var inventory = new Inventory ();
 		var def = new DefenseStats (
 			          new AbilityScores (),
@@ -118,9 +118,27 @@ public class DefenseStatsTests {
 		armor.ArmorClass = 10;
 
 		inventory.AddItem (armor);
+		inventory.EquipItem (armor);
 		Assert.AreEqual (10, def.EquipedArmorBonus ());
 		Assert.AreEqual (startAC + 10, def.ArmorClass());
 		Assert.AreEqual (startFlat + 10, def.FlatFootedArmorClass ());
 		Assert.AreEqual (startTouch, def.TouchArmorClass ());
+	}
+
+	[Test]
+	public void UnEquippedArmorMakesNoDifference() {
+		var inv = new Inventory ();
+		var def = new DefenseStats (
+			          new AbilityScores (),
+			          new SizeStats (),
+			          inv
+		          );
+
+		var armor = new Armor ();
+		armor.ArmorClass = 12;
+		inv.AddItem (armor);
+
+		Assert.AreEqual (0, def.EquipedArmorBonus ());
+
 	}
 }
