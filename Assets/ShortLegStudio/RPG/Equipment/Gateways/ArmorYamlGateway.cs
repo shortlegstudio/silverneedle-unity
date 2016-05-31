@@ -6,8 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace ShortLegStudio.RPG.Equipment.Gateways {
-	public class ArmorYamlGateway : EntityGateway<Armor>, IArmorGateway {
+	public class ArmorYamlGateway : IArmorGateway {
+		const string ARMOR_YAML_FILE = "Data/Armors.yml";
 		private IList<Armor> _armors;
+
+		public ArmorYamlGateway() {
+			LoadFromYaml (FileHelper.OpenYaml (ARMOR_YAML_FILE));
+		}
 
 		public ArmorYamlGateway (YamlNodeWrapper yaml) {
 			LoadFromYaml (yaml);
@@ -29,6 +34,7 @@ namespace ShortLegStudio.RPG.Equipment.Gateways {
 			_armors = new List<Armor> ();
 
 			foreach (var node in yaml.Children()) {
+				ShortLog.DebugFormat ("Loading Armor: {0}", node.GetString ("name"));
 				var armor = new Armor (
 					node.GetString("name"),
 					node.GetInteger("armor_class"),

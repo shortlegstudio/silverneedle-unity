@@ -88,8 +88,13 @@ namespace ShortLegStudio {
 		}
 
 		public YamlNodeWrapper GetNode(string key) {
-			var item = _mappingNode.Children [new YamlScalarNode(key)];
-			return new YamlNodeWrapper (item);
+			try {
+				var item = _mappingNode.Children [new YamlScalarNode(key)];
+				return new YamlNodeWrapper (item);
+			} catch {
+				ShortLog.ErrorFormat ("Yaml Node not found: {0}", key);
+				throw;
+			}
 		}
 
 		public YamlNodeWrapper GetNodeOptional(string key) {

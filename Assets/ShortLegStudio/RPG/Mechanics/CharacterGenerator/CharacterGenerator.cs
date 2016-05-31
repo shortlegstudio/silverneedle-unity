@@ -64,6 +64,11 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 			//Get some gear!
 			var equip = new EquipMeleeAndRangedWeapon(new WeaponYamlGateway());
 			equip.AssignWeapons(character.Inventory);
+
+
+			var equipArmor = new EquipArmor (new ArmorYamlGateway ());
+			equipArmor.Equip (character.Inventory);
+
 			return character;
 		}
 
