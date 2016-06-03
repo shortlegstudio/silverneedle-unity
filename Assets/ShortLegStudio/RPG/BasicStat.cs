@@ -2,30 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ShortLegStudio.RPG.Characters {
+namespace ShortLegStudio.RPG {
 	public class BasicStat {
 		public int BaseValue { get; private set; }
-		public int TotalValue { get { return BaseValue + SumAdjustments; } }
-		public IEnumerable<BasicStatAdjustment> Adjustments { get { return _adjustments; } }
-		public int SumAdjustments { get; private set; }
+		public int TotalValue { get { return BaseValue + SumBasicModifiers; } }
+		public IEnumerable<BasicStatModifier> Modifiers { get { return _adjustments; } }
+		public IEnumerable<ConditionalStatModifier> ConditionalModifiers { 
+			get { return _conditionals; }
+		}
+		public int SumBasicModifiers { 
+			get { 
+				return (int)_adjustments.Sum (x => x.Modifier);	
+			}
+		}
 
-		private IList<BasicStatAdjustment> _adjustments;
+		public int ConditionalScore(string conditionName) {
+			return TotalValue + _conditionals.Where(x => x.Condition == conditionName)
+				.Sum(x => x.Modifier);
+		}
 
 		public event EventHandler<BasicStatModifiedEventArgs> Modified;
 
+		private IList<BasicStatModifier> _adjustments;
+		private IList<ConditionalStatModifier> _conditionals;
+
 		public BasicStat () {
-			_adjustments = new List<BasicStatAdjustment> ();
+			_adjustments = new List<BasicStatModifier> ();
+			_conditionals = new List<ConditionalStatModifier>();
 		}
 
 		public BasicStat(int baseValue) : this() {
 			BaseValue = baseValue;
 		}
 
-		public void AddAdjustment(BasicStatAdjustment adjustment) {
+		public void AddModifier(BasicStatModifier adjustment) {
 			var oldBase = BaseValue;
 			var oldTotal = TotalValue;
 			_adjustments.Add (adjustment);
 			Refresh (oldBase, oldTotal);
+		}
+
+		public void AddModifier(ConditionalStatModifier mod) {
+			_conditionals.Add(mod);
+			Refresh(BaseValue, TotalValue);
 		}
 
 		public void SetValue(int val) {
@@ -36,7 +55,6 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		protected virtual void Refresh(int oldBase, int oldTotal) {
-			SumAdjustments = (int)_adjustments.Sum (x => x.Modifier);
 			OnModified (oldBase, oldTotal);
 		}
 
@@ -52,20 +70,6 @@ namespace ShortLegStudio.RPG.Characters {
 			}
 		}
 	}
-
-	public class BasicStatAdjustment {
-		public float Modifier { get; set; }
-		public string Reason { get; set; }
-
-		public BasicStatAdjustment() { }
-
-		public BasicStatAdjustment(float mod, string reas) {
-			Modifier = mod;
-			Reason = reas;
-		}
-	}
-
-
 
 	public class BasicStatModifiedEventArgs : EventArgs {
 		public int OldBaseValue;

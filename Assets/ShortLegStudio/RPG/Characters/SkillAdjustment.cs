@@ -1,6 +1,6 @@
 ﻿
 namespace ShortLegStudio.RPG.Characters {
-	public class SkillAdjustment : BasicStatAdjustment {
+	public class SkillAdjustment : BasicStatModifier {
 		public string SkillName { get; set; }
 
 		public SkillAdjustment(

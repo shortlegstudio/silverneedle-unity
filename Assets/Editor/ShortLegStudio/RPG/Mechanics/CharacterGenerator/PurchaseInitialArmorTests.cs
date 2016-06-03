@@ -17,8 +17,9 @@ public class PurchaseInitialArmorTests
 		var inventory = new Inventory ();
 		equip.PurchaseArmorAndShield (inventory);
 
-		Assert.IsNotNull (inventory.OfType<Armor> ().First (x => x.ArmorType == ArmorType.Shield));
-		Assert.IsNotNull (inventory.OfType<Armor> ().First (x => x.ArmorType != ArmorType.Shield));
+
+		Assert.IsTrue (inventory.OfType<Armor> ().Any (x => x.ArmorType == ArmorType.Shield));
+		Assert.IsTrue (inventory.OfType<Armor> ().Any (x => x.ArmorType != ArmorType.Shield));
 	}
 
 	private class TestArmorGateway : IArmorGateway {
@@ -46,7 +47,7 @@ public class PurchaseInitialArmorTests
 
 		public IEnumerable<Armor> FindByArmorType (ArmorType type)
 		{
-			return armors;
+			return armors.Where( x => x.ArmorType == type);
 		}
 
 		public IEnumerable<Armor> FindByArmorTypes (params ArmorType[] types)

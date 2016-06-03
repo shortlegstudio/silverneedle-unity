@@ -99,10 +99,10 @@ namespace ShortLegStudio.RPG.Characters {
 				if (adj.RacialChose) {
 					var ability = EnumHelpers.ChooseOne<AbilityScoreTypes> ();
 					var a = Abilities.GetAbility (ability);
-					a.AddAdjustment (adj);
+					a.AddModifier (adj);
 				} else {
 					var a = Abilities.GetAbility (adj.ability);
-					a.AddAdjustment (adj);
+					a.AddModifier (adj);
 				}
 			}
 

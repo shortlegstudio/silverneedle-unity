@@ -35,7 +35,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 			adjust.Modifier = 1;
 			adjust.ability = ability;
 
-			character.Abilities.GetAbility(ability).AddAdjustment(adjust);
+			character.Abilities.GetAbility(ability).AddModifier(adjust);
 		}
 	}
 }

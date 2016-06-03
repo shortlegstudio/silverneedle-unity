@@ -84,9 +84,9 @@ namespace ShortLegStudio.RPG.Characters {
 
 			var reason = string.Format ("LEVEL UP ({0})", cls.Name);
 			//Add Adjustment for each level
-			Fortitude.AddAdjustment(new BasicStatAdjustment(cls.FortitudeSaveRate, reason));
-			Reflex.AddAdjustment (new BasicStatAdjustment (cls.ReflexSaveRate, reason));
-			Will.AddAdjustment (new BasicStatAdjustment (cls.WillSaveRate, reason));
+			Fortitude.AddModifier(new BasicStatModifier(cls.FortitudeSaveRate, reason));
+			Reflex.AddModifier (new BasicStatModifier (cls.ReflexSaveRate, reason));
+			Will.AddModifier (new BasicStatModifier (cls.WillSaveRate, reason));
 
 		}
 	}

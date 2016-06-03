@@ -47,7 +47,7 @@ public class AbilityScoreTests {
 		adj.ability = AbilityScoreTypes.Strength;
 		adj.Modifier = 2;
 
-		score.AddAdjustment (adj);
+		score.AddModifier (adj);
 		Assert.AreEqual (17, score.TotalValue);
 		Assert.AreEqual (3, score.TotalModifier);
 	}

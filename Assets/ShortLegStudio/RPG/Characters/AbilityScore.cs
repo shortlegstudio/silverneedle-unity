@@ -23,7 +23,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public override string ToString () {
-			return string.Format ("[AbilityScore: Name={0}, Adjustments={1}, BaseValue={2}, BaseModifier={3}, TotalValue={4}, TotalModifier={5}, SumAdjustments={6}]", Name, Adjustments, BaseValue, BaseModifier, TotalValue, TotalModifier, SumAdjustments);
+			return string.Format ("[AbilityScore: Name={0}, Adjustments={1}, BaseValue={2}, BaseModifier={3}, TotalValue={4}, TotalModifier={5}, SumAdjustments={6}]", Name, Modifiers, BaseValue, BaseModifier, TotalValue, TotalModifier, SumBasicModifiers);
 		}
 
 		public static AbilityScoreTypes GetType(string name) {
@@ -44,7 +44,7 @@ namespace ShortLegStudio.RPG.Characters {
 		Charisma
 	}
 
-	public class AbilityScoreAdjustment : BasicStatAdjustment {
+	public class AbilityScoreAdjustment : BasicStatModifier {
 		public bool RacialChose;
 		public AbilityScoreTypes ability;
 	}

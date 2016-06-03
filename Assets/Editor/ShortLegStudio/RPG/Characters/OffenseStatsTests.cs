@@ -1,6 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
 using ShortLegStudio;
+using ShortLegStudio.RPG;
 using ShortLegStudio.RPG.Characters;
 
 [TestFixture]
