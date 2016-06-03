@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ShortLegStudio.RPG {
 	public class BasicStat {
-		public int BaseValue { get; private set; }
+		public int BaseValue { get; protected set; }
 		public int TotalValue { get { return BaseValue + SumBasicModifiers; } }
 		public IEnumerable<BasicStatModifier> Modifiers { get { return _adjustments; } }
 		public IEnumerable<ConditionalStatModifier> ConditionalModifiers { 
