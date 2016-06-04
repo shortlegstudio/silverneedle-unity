@@ -38,8 +38,8 @@ namespace ShortLegStudio.RPG.Characters {
 
 
 		private void SetupSkillModifiers() {
-			StealthAdj = new SkillAdjustment ("Size", 0, "Stealth");
-			FlyAdj = new SkillAdjustment ("Size", 0, "Fly");
+			StealthAdj = new SkillAdjustment (0, "Size", "Stealth");
+			FlyAdj = new SkillAdjustment (0, "Size", "Fly");
 
 			SkillModifiers = new List<SkillAdjustment> ();
 			SkillModifiers.Add (StealthAdj);

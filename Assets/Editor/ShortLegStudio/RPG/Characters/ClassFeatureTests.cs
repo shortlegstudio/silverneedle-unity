@@ -9,8 +9,11 @@ using ShortLegStudio.RPG.Characters.ClassFeatures;
 using YamlDotNet.RepresentationModel;
 using System.Text;
 
-[TestFixture]
-[Category("Class Features")]
-public class BonusFeatTests {
+namespace RPG.Characters {
 
+	[TestFixture]
+	[Category("Class Features")]
+	public class BonusFeatTests {
+
+	}
 }

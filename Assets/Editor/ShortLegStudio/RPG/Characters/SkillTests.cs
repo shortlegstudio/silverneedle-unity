@@ -8,7 +8,10 @@ using ShortLegStudio.RPG.Characters;
 using YamlDotNet.RepresentationModel;
 using System.Text;
 
-[TestFixture]
-public class SkillTests {
+namespace RPG.Characters {
 
+	[TestFixture]
+	public class SkillTests {
+
+	}
 }

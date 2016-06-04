@@ -33,8 +33,8 @@ namespace ShortLegStudio.RPG.Characters  {
 						var skillName = skillAdj.GetString("skill");
 						var amount = int.Parse(skillAdj.GetString ("amount"));
 						trait.SkillModifiers.Add(new SkillAdjustment(
-							string.Format("{0} (trait)", trait.Name),
 							amount,
+							string.Format("{0} (trait)", trait.Name),
 							skillName
 						));
 					}

@@ -6,61 +6,64 @@ using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 using System.Collections.Generic;
 using System.Linq;
 
-[TestFixture]
-public class SkillRanksTests {
-	List<Skill> _skillList;
-	AbilityScores _abilityScores;
+namespace RPG.Characters {
 
-	SkillRanks Subject;
+	[TestFixture]
+	public class SkillRanksTests {
+		List<Skill> _skillList;
+		AbilityScores _abilityScores;
 
-	[SetUp]
-	public void SetupCharacter() {
-		_skillList = new List<Skill> ();
-		_skillList.Add (new Skill ("Climb", AbilityScoreTypes.Strength, false));
-		_skillList.Add (new Skill ("Disable Device", AbilityScoreTypes.Dexterity, true));
-		_skillList.Add (new Skill ("Stealth", AbilityScoreTypes.Dexterity, false));
+		SkillRanks Subject;
 
-		_abilityScores = new AbilityScores ();
-		_abilityScores.SetScore (AbilityScoreTypes.Strength, 14);
-		_abilityScores.SetScore (AbilityScoreTypes.Dexterity, 12);
+		[SetUp]
+		public void SetupCharacter() {
+			_skillList = new List<Skill> ();
+			_skillList.Add (new Skill ("Climb", AbilityScoreTypes.Strength, false));
+			_skillList.Add (new Skill ("Disable Device", AbilityScoreTypes.Dexterity, true));
+			_skillList.Add (new Skill ("Stealth", AbilityScoreTypes.Dexterity, false));
 
-		Subject = new SkillRanks (_skillList, _abilityScores);
+			_abilityScores = new AbilityScores ();
+			_abilityScores.SetScore (AbilityScoreTypes.Strength, 14);
+			_abilityScores.SetScore (AbilityScoreTypes.Dexterity, 12);
 
-	}
+			Subject = new SkillRanks (_skillList, _abilityScores);
 
-	[Test]
-	public void SkillRanksLoadsAllTheSkills() {
-		Assert.AreEqual (2, Subject.GetScore ("Climb"));
-		Assert.AreEqual (int.MinValue, Subject.GetScore ("Disable Device"));
-	}
+		}
 
-	[Test]
-	public void CanProcessASkillModifierForModifyingSkills() {
-		Subject.ProcessModifier (new MockMod ());
-		Assert.AreEqual (5, Subject.GetScore ("Climb"));
-	}
+		[Test]
+		public void SkillRanksLoadsAllTheSkills() {
+			Assert.AreEqual (2, Subject.GetScore ("Climb"));
+			Assert.AreEqual (int.MinValue, Subject.GetScore ("Disable Device"));
+		}
 
-	[Test]
-	public void ReturnsAListOfSkillsThatHaveRanks() {
-		Subject.GetSkill ("Climb").AddRank ();
-		var list = Subject.GetRankedSkills ().ToList();
-		Assert.AreEqual (1, list.Count);
-		Assert.AreEqual ("Climb", list [0].Name);
-	}
+		[Test]
+		public void CanProcessASkillModifierForModifyingSkills() {
+			Subject.ProcessModifier (new MockMod ());
+			Assert.AreEqual (5, Subject.GetScore ("Climb"));
+		}
 
-	[Test]
-	public void IfSkillDoesNotExistWhenProcessingAModifierJustLogIt() {
-		var ranks = new SkillRanks (new List<Skill> (), new AbilityScores ());
-		ranks.ProcessModifier (new MockMod ());
-		//Should not throw exception
-	}
+		[Test]
+		public void ReturnsAListOfSkillsThatHaveRanks() {
+			Subject.GetSkill ("Climb").AddRank ();
+			var list = Subject.GetRankedSkills ().ToList();
+			Assert.AreEqual (1, list.Count);
+			Assert.AreEqual ("Climb", list [0].Name);
+		}
 
-	class MockMod : ISkillModifier {
-		public IList<SkillAdjustment> SkillModifiers { get; set;  }
+		[Test]
+		public void IfSkillDoesNotExistWhenProcessingAModifierJustLogIt() {
+			var ranks = new SkillRanks (new List<Skill> (), new AbilityScores ());
+			ranks.ProcessModifier (new MockMod ());
+			//Should not throw exception
+		}
 
-		public MockMod() {
-			SkillModifiers = new List<SkillAdjustment>();
-			SkillModifiers.Add(new SkillAdjustment("Cause", 3, "Climb"));
+		class MockMod : ISkillModifier {
+			public IList<SkillAdjustment> SkillModifiers { get; set;  }
+
+			public MockMod() {
+				SkillModifiers = new List<SkillAdjustment>();
+				SkillModifiers.Add(new SkillAdjustment(3, "Cause", "Climb"));
+			}
 		}
 	}
 }

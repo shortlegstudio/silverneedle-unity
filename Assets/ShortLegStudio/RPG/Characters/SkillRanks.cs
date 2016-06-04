@@ -40,7 +40,7 @@ namespace ShortLegStudio.RPG.Characters {
 			foreach (var a in modifier.SkillModifiers) {
 				CharacterSkill sk;
 				if (_skills.TryGetValue (a.SkillName, out sk)) {
-					sk.AddAdjustment (a);
+					sk.AddModifier (a);
 				} else {
 					ShortLog.ErrorFormat ("Skill: {0} was not found in the Skill Ranks and modifiers could not be applied.", a.SkillName);
 				}

@@ -5,19 +5,21 @@ using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Gateways;
 
-[TestFixture]
-public class LanguageYamlGatewayTests
-{
-	[Test]
-	public void ParseTheYamlFile() {
-		var gateway = new LanguageYamlGateway (LanguageYamlFile.ParseYaml ());
-		var french = gateway.All().First (x => x.Name == "French");
-		Assert.AreEqual ("C'est la vie", french.Description);
-		var english = gateway.All().First (x => x.Name == "English");
-		Assert.AreEqual ("Good day old boy", english.Description);
-	}
 
-	private const string LanguageYamlFile = @"--- 
+namespace RPG.Gateways {
+	[TestFixture]
+	public class LanguageYamlGatewayTests
+	{
+		[Test]
+		public void ParseTheYamlFile() {
+			var gateway = new LanguageYamlGateway (LanguageYamlFile.ParseYaml ());
+			var french = gateway.All().First (x => x.Name == "French");
+			Assert.AreEqual ("C'est la vie", french.Description);
+			var english = gateway.All().First (x => x.Name == "English");
+			Assert.AreEqual ("Good day old boy", english.Description);
+		}
+
+		private const string LanguageYamlFile = @"--- 
 - language: 
   name: French
   description: C'est la vie
@@ -25,6 +27,5 @@ public class LanguageYamlGatewayTests
   name: English
   description: Good day old boy
 ";
+	}
 }
-
-

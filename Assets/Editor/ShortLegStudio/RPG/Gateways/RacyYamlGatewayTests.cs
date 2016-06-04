@@ -6,94 +6,95 @@ using System.Linq;
 using ShortLegStudio.RPG.Gateways;
 
 
+namespace RPG.Gateways {
 
-[TestFixture]
-public class RacyYamlGatewayTests {
-	Race dwarf;
-	Race elf;
-	Race halfling;
-	Race human;
+	[TestFixture]
+	public class RacyYamlGatewayTests {
+		Race dwarf;
+		Race elf;
+		Race halfling;
+		Race human;
 
-	[SetUp]
-	public void SetUp() {
-		var repository = new RaceYamlGateway (SkillsYamlFile.ParseYaml());
-		var races = repository.All ();
-		dwarf = races.First (x => x.Name == "Dwarf");
-		elf = races.First (x => x.Name == "Elf");
-		halfling = races.First (x => x.Name == "Halfling");
-		human = races.First (x => x.Name == "Human");
-	}
+		[SetUp]
+		public void SetUp() {
+			var repository = new RaceYamlGateway (SkillsYamlFile.ParseYaml());
+			var races = repository.All ();
+			dwarf = races.First (x => x.Name == "Dwarf");
+			elf = races.First (x => x.Name == "Elf");
+			halfling = races.First (x => x.Name == "Halfling");
+			human = races.First (x => x.Name == "Human");
+		}
 
-	[Test]
-	public void LoadRaceYamlFile() {
-		Assert.IsNotNull (dwarf);
-		Assert.IsNotNull (elf);
-		Assert.IsNotNull (halfling);
-		Assert.IsNotNull (human);
-	}
+		[Test]
+		public void LoadRaceYamlFile() {
+			Assert.IsNotNull (dwarf);
+			Assert.IsNotNull (elf);
+			Assert.IsNotNull (halfling);
+			Assert.IsNotNull (human);
+		}
 
-	[Test]
-	public void HumansCanChooseAbilityModifier() {
-		var mod = human.AbilityModifiers.First ();
-		Assert.IsTrue (mod.RacialChose);
-		Assert.AreEqual (2, mod.Modifier);
+		[Test]
+		public void HumansCanChooseAbilityModifier() {
+			var mod = human.AbilityModifiers.First ();
+			Assert.IsTrue (mod.RacialChose);
+			Assert.AreEqual (2, mod.Modifier);
 
-	}
+		}
 
-	[Test]
-	public void DwarvesHaveSpecificAbilitiesToModifier() {
-		var cons = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Constitution);
-		Assert.AreEqual (2, cons.Modifier);
+		[Test]
+		public void DwarvesHaveSpecificAbilitiesToModifier() {
+			var cons = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Constitution);
+			Assert.AreEqual (2, cons.Modifier);
 
-		var wis = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Wisdom);
-		Assert.AreEqual (2, wis.Modifier);
+			var wis = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Wisdom);
+			Assert.AreEqual (2, wis.Modifier);
 
-		var cha = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Charisma);
-		Assert.AreEqual (-2, cha.Modifier);
-	}
+			var cha = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Charisma);
+			Assert.AreEqual (-2, cha.Modifier);
+		}
 
-	[Test]
-	public void RacesHaveTraitsThatTheCanPullFrom() {
-		CollectionAssert.Contains (dwarf.Traits, "Darkvision");
-		CollectionAssert.Contains (dwarf.Traits, "Hardy");
-		CollectionAssert.Contains (halfling.Traits, "Halfling Luck");
-	}
+		[Test]
+		public void RacesHaveTraitsThatTheCanPullFrom() {
+			CollectionAssert.Contains (dwarf.Traits, "Darkvision");
+			CollectionAssert.Contains (dwarf.Traits, "Hardy");
+			CollectionAssert.Contains (halfling.Traits, "Halfling Luck");
+		}
 
-	[Test]
-	public void RacesHaveSizeInformation() {
-		Assert.AreEqual (CharacterSize.Medium, dwarf.SizeSetting);
-		Assert.AreEqual (CharacterSize.Small, halfling.SizeSetting);
+		[Test]
+		public void RacesHaveSizeInformation() {
+			Assert.AreEqual (CharacterSize.Medium, dwarf.SizeSetting);
+			Assert.AreEqual (CharacterSize.Small, halfling.SizeSetting);
 
-		//Should have a dice cup for making height rolls
-		var cup = dwarf.HeightRange;
-		Assert.AreEqual (cup.Dice.Count, 2);
-		Assert.AreEqual (cup.Modifier, 45);
+			//Should have a dice cup for making height rolls
+			var cup = dwarf.HeightRange;
+			Assert.AreEqual (cup.Dice.Count, 2);
+			Assert.AreEqual (cup.Modifier, 45);
 
-		cup = human.WeightRange;
-		Assert.AreEqual (cup.Dice.Count, 10);
-		Assert.AreEqual (cup.Modifier, 120);
-	}
+			cup = human.WeightRange;
+			Assert.AreEqual (cup.Dice.Count, 10);
+			Assert.AreEqual (cup.Modifier, 120);
+		}
 
-	[Test]
-	public void KnownLanguagesAreAssigned() {
-		Assert.IsTrue(dwarf.KnownLanguages.Any(x => x == "Common"));
-		Assert.IsTrue(dwarf.KnownLanguages.Any(x => x == "Dwarven"));
+		[Test]
+		public void KnownLanguagesAreAssigned() {
+			Assert.IsTrue(dwarf.KnownLanguages.Any(x => x == "Common"));
+			Assert.IsTrue(dwarf.KnownLanguages.Any(x => x == "Dwarven"));
 
-		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Giant"));
-		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Gnome"));
-		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Terran"));
-		Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Undercommon"));
-	}
+			Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Giant"));
+			Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Gnome"));
+			Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Terran"));
+			Assert.IsTrue (dwarf.AvailableLanguages.Any (x => x == "Undercommon"));
+		}
 
-	[Test]
-	public void RacesHaveABaseMovementSpeed() {
-		Assert.AreEqual (20, dwarf.BaseMovementSpeed);
-		Assert.AreEqual (30, human.BaseMovementSpeed);
-		Assert.AreEqual (100, elf.BaseMovementSpeed);
-		Assert.AreEqual (25, halfling.BaseMovementSpeed);
-	}
+		[Test]
+		public void RacesHaveABaseMovementSpeed() {
+			Assert.AreEqual (20, dwarf.BaseMovementSpeed);
+			Assert.AreEqual (30, human.BaseMovementSpeed);
+			Assert.AreEqual (100, elf.BaseMovementSpeed);
+			Assert.AreEqual (25, halfling.BaseMovementSpeed);
+		}
 
-	private const string SkillsYamlFile = @"--- 
+		private const string SkillsYamlFile = @"--- 
 - race: 
   name: Dwarf
   abilities: 
@@ -157,5 +158,5 @@ public class RacyYamlGatewayTests {
     available: Gnome
   basemovementspeed: 25
 ...";
-	
+	}
 }

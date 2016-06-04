@@ -1,15 +1,11 @@
-﻿
+﻿using System.Security.Cryptography.X509Certificates;
+
+
 namespace ShortLegStudio.RPG.Characters {
 	public class SkillAdjustment : BasicStatModifier {
-		public string SkillName { get; set; }
-
-		public SkillAdjustment(
-			string reason,
-			int modifier,
-			string skill) {
-			Reason = reason;
-			Modifier = modifier;
-			SkillName = skill;
+		public string SkillName { get; private set; }
+		public SkillAdjustment(int modifier, string reason, string name) : base(modifier, reason) {
+			SkillName = name;
 		}
 	}
 }
