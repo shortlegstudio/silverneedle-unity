@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 
 namespace ShortLegStudio.RPG.Characters {
-	public interface ISkillModifier {
-		IList<SkillAdjustment> SkillModifiers { get; }
+	public interface IModifiesSkills {
+		IList<SkillModifier> SkillModifiers { get; }
 	}
 }
 

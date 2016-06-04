@@ -79,7 +79,7 @@ namespace RPG.Characters {
 
 		[Test]
 		public void SkillsCanHaveAdjustmentsFromTraitsOrFeats() {
-			var adjust = new SkillAdjustment (
+			var adjust = new SkillModifier (
 							2,
 							"Acrobatic Feat",
 				             "Fly"
@@ -108,7 +108,7 @@ namespace RPG.Characters {
 			var skill = new Skill ("Chew", AbilityScoreTypes.Strength, false);
 			var ability = new AbilityScore (AbilityScoreTypes.Strength, 10);
 			var charSkill = new CharacterSkill (skill, ability, false);
-			var adj = new SkillAdjustment (0, "Teeth", "Chew");
+			var adj = new SkillModifier (0, "Teeth", "Chew");
 			charSkill.AddModifier (adj);
 			Assert.AreEqual (0, charSkill.Score());
 			adj.Modifier = 5;

@@ -36,7 +36,7 @@ namespace ShortLegStudio.RPG.Characters {
 			);
 		}
 
-		public void ProcessModifier(ISkillModifier modifier) {
+		public void ProcessModifier(IModifiesSkills modifier) {
 			foreach (var a in modifier.SkillModifiers) {
 				CharacterSkill sk;
 				if (_skills.TryGetValue (a.SkillName, out sk)) {

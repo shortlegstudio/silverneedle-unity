@@ -55,12 +55,12 @@ namespace RPG.Characters {
 			//Should not throw exception
 		}
 
-		class MockMod : ISkillModifier {
-			public IList<SkillAdjustment> SkillModifiers { get; set;  }
+		class MockMod : IModifiesSkills {
+			public IList<SkillModifier> SkillModifiers { get; set;  }
 
 			public MockMod() {
-				SkillModifiers = new List<SkillAdjustment>();
-				SkillModifiers.Add(new SkillAdjustment(3, "Cause", "Climb"));
+				SkillModifiers = new List<SkillModifier>();
+				SkillModifiers.Add(new SkillModifier(3, "Cause", "Climb"));
 			}
 		}
 	}

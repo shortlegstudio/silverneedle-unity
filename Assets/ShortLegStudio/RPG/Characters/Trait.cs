@@ -4,17 +4,17 @@ using System.Linq;
 using ShortLegStudio;
 
 namespace ShortLegStudio.RPG.Characters  {
-	public class Trait : ISkillModifier {
+	public class Trait : IModifiesSkills {
 		//Static Values
 		const string TRAIT_DATA_FILE = "Data/traits.yml";
 		static IList<Trait> _Traits = new List<Trait>();
 
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public IList<SkillAdjustment> SkillModifiers { get; protected set; }
+		public IList<SkillModifier> SkillModifiers { get; protected set; }
 
 		public Trait() {
-			SkillModifiers = new List<SkillAdjustment> ();
+			SkillModifiers = new List<SkillModifier> ();
 		}
 
 		public static IList<Trait> LoadFromYaml(YamlNodeWrapper yaml) {
@@ -32,7 +32,7 @@ namespace ShortLegStudio.RPG.Characters  {
 					foreach (var skillAdj in skills.Children()) {
 						var skillName = skillAdj.GetString("skill");
 						var amount = int.Parse(skillAdj.GetString ("amount"));
-						trait.SkillModifiers.Add(new SkillAdjustment(
+						trait.SkillModifiers.Add(new SkillModifier(
 							amount,
 							string.Format("{0} (trait)", trait.Name),
 							skillName

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace ShortLegStudio.RPG.Characters {
-	public class SizeStats : ISizeStats, ISkillModifier {
+	public class SizeStats : ISizeStats, IModifiesSkills {
 		const int STEALTH_MODIFIER = 4;
 		const int FLY_MODIFIER = 2;
 
@@ -10,11 +10,11 @@ namespace ShortLegStudio.RPG.Characters {
 		public int Height { get; private set; }
 		public int Weight { get; private set; }
 		public int SizeModifier { get; private set; }
-		public System.Collections.Generic.IList<SkillAdjustment> SkillModifiers { get; private set; }
+		public System.Collections.Generic.IList<SkillModifier> SkillModifiers { get; private set; }
 
 		//Accessories to common attributes modified
-		private SkillAdjustment StealthAdj { get; set; }
-		private SkillAdjustment FlyAdj { get; set; }
+		private SkillModifier StealthAdj { get; set; }
+		private SkillModifier FlyAdj { get; set; }
 
 
 		public SizeStats() : this(CharacterSize.Medium, 72, 180) { }
@@ -37,10 +37,10 @@ namespace ShortLegStudio.RPG.Characters {
 
 
 		private void SetupSkillModifiers() {
-			StealthAdj = new SkillAdjustment (0, "Size", "Stealth");
-			FlyAdj = new SkillAdjustment (0, "Size", "Fly");
+			StealthAdj = new SkillModifier (0, "Size", "Stealth");
+			FlyAdj = new SkillModifier (0, "Size", "Fly");
 
-			SkillModifiers = new List<SkillAdjustment> ();
+			SkillModifiers = new List<SkillModifier> ();
 			SkillModifiers.Add (StealthAdj);
 			SkillModifiers.Add (FlyAdj);
 		}

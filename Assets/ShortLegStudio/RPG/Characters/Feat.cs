@@ -5,14 +5,14 @@ using System.Linq;
 using ShortLegStudio;
 
 namespace ShortLegStudio.RPG.Characters {
-	public class Feat : ISkillModifier {
+	public class Feat : IModifiesSkills {
 		//Static Values
 		const string TRAIT_DATA_FILE = "Data/feats.yml";
 		static IList<Feat> _Feats = new List<Feat>();
 
 		public string Name { get; set; }
 		public string Description { get; set; }
-		public IList<SkillAdjustment> SkillModifiers { get; protected set; }
+		public IList<SkillModifier> SkillModifiers { get; protected set; }
 		public Prerequisites Prerequisites { get; protected set; }
 		public bool IsCombatFeat { get { return Tags.Contains ("combat"); } }
 		public bool IsCriticalFeat { get { return Tags.Contains ("critical"); } }
@@ -20,7 +20,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public IList<string> Tags { get; set; }
 
 		public Feat() {
-			SkillModifiers = new List<SkillAdjustment> ();
+			SkillModifiers = new List<SkillModifier> ();
 			Prerequisites = new Prerequisites ();
 			Tags = new List<string> ();
 		}
@@ -45,7 +45,7 @@ namespace ShortLegStudio.RPG.Characters {
 						var val = Regex.Split(skillAdj.Value, "\\s*=\\s*");
 						var skillName = val[0];
 						var amount = int.Parse(val[1]);
-						feat.SkillModifiers.Add(new SkillAdjustment(
+						feat.SkillModifiers.Add(new SkillModifier(
 							amount,
 							string.Format("{0} (feat)", feat.Name),
 							skillName
