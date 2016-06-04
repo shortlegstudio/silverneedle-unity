@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio;
-using ShortLegStudio.RPG.Characters.Skills;
 
 namespace ShortLegStudio.RPG.Characters  {
 	public class Trait : ISkillModifier {

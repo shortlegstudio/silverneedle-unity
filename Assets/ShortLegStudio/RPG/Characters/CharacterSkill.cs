@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 
-namespace ShortLegStudio.RPG.Characters.Skills {
+namespace ShortLegStudio.RPG.Characters {
 	public class CharacterSkill : BasicStat {
 		public Skill Skill { get; private set; }
 		private AbilityScore _baseScore;

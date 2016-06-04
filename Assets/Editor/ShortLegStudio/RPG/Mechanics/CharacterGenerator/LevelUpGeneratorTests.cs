@@ -4,8 +4,6 @@ using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
 using System.Linq;
 using System.Collections.Generic;
-using ShortLegStudio.RPG.Characters.Skills;
-
 
 namespace RPG.Mechanics.CharacterGenerator {
 	[TestFixture]

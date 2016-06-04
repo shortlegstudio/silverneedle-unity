@@ -4,7 +4,6 @@ using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.Enchilada;
 using System.Collections;
-using ShortLegStudio.RPG.Characters.Skills;
 
 namespace ShortLegStudio.RPG.Gateways {
 	public class SkillYamlGateway : EntityGateway<Skill>

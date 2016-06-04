@@ -3,7 +3,6 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 using System.Collections.Generic;
 using System.Linq;
-using ShortLegStudio.RPG.Characters.Skills;
 
 namespace RPG.Characters {
 

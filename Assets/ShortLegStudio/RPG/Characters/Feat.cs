@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
 using ShortLegStudio;
-using ShortLegStudio.RPG.Characters.Skills;
 
 namespace ShortLegStudio.RPG.Characters {
 	public class Feat : ISkillModifier {
@@ -19,13 +18,11 @@ namespace ShortLegStudio.RPG.Characters {
 		public bool IsCriticalFeat { get { return Tags.Contains ("critical"); } }
 		public bool IsItemCreation { get { return Tags.Contains ("itemcreation"); } }
 		public IList<string> Tags { get; set; }
-		public PathfinderRuleset Ruleset { get; set; }
 
 		public Feat() {
 			SkillModifiers = new List<SkillAdjustment> ();
 			Prerequisites = new Prerequisites ();
 			Tags = new List<string> ();
-			Ruleset = PathfinderRuleset.Core;
 		}
 
 		public bool Qualified(CharacterSheet character) {

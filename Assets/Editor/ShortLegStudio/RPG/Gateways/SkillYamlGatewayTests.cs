@@ -4,7 +4,6 @@ using System.Linq;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Gateways;
 using ShortLegStudio.RPG.Characters;
-using ShortLegStudio.RPG.Characters.Skills;
 
 
 namespace RPG.Gateways {

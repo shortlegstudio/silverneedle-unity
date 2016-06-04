@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio.Dice;
 using NUnit.Framework.Constraints;
-using ShortLegStudio.RPG.Characters.Skills;
 
 namespace RPG.Characters {
 

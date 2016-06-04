@@ -3,7 +3,6 @@ using System.IO;
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
-using ShortLegStudio.RPG.Characters.Skills;
 
 namespace RPG.Characters {
 

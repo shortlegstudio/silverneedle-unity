@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using ShortLegStudio.RPG.Characters.Skills;
-
 
 namespace ShortLegStudio.RPG.Characters {
 	public class SizeStats : ISizeStats, ISkillModifier {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using ShortLegStudio;
 
-namespace ShortLegStudio.RPG.Characters.Skills {
+namespace ShortLegStudio.RPG.Characters {
 	public class Skill {
 		//Static Values
 
