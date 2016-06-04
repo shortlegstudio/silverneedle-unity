@@ -1,12 +1,10 @@
-﻿using UnityEngine;
-using UnityEditor;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using ShortLegStudio.RPG.Characters;
-using YamlDotNet.RepresentationModel;
 using System.IO;
 using ShortLegStudio;
 using System.Linq;
 using System.Collections.Generic;
+using ShortLegStudio.RPG.Characters.Skills;
 
 namespace RPG.Characters {
 
@@ -14,12 +12,7 @@ namespace RPG.Characters {
 	public class PrerequisiteTests {
 		[Test]
 		public void ParseSomeYaml() {
-			var input = new StringReader(PrerequisitesYaml);
-
-			var yaml = new YamlStream();
-			yaml.Load(input);
-			var yamlNode = new YamlNodeWrapper(yaml.Documents [0].RootNode);
-
+			var yamlNode = PrerequisitesYaml.ParseYaml();
 			var prereq = yamlNode.GetNode ("prerequisites");
 
 			var prereqs = new Prerequisites (prereq);

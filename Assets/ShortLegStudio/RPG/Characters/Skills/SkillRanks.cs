@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace ShortLegStudio.RPG.Characters {
+namespace ShortLegStudio.RPG.Characters.Skills {
 	public interface ISkillRanks {
 		int GetScore (string skill);
 		CharacterSkill GetSkill (string skill);

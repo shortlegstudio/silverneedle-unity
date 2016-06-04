@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
 using ShortLegStudio;
+using ShortLegStudio.RPG.Characters.Skills;
 
 namespace ShortLegStudio.RPG.Characters {
 	public class Feat : ISkillModifier {

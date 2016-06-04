@@ -1,12 +1,11 @@
-﻿using UnityEngine;
-using UnityEditor;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio.Dice;
 using NUnit.Framework.Constraints;
+using ShortLegStudio.RPG.Characters.Skills;
 
 namespace RPG.Characters {
 

@@ -1,19 +1,14 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Linq;
-using System.IO;
+﻿using System.Linq;
 using System.Collections.Generic;
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
-using YamlDotNet.RepresentationModel;
-using System.Text;
+using ShortLegStudio.RPG.Characters.Skills;
 
 namespace RPG.Characters {
 
 	[TestFixture]
 	public class FeatTests {
-		YamlStream yaml;
 		Feat Acrobatic;
 		Feat CombatExpertise;
 		Feat PowerAttack;
@@ -21,11 +16,7 @@ namespace RPG.Characters {
 
 		[SetUp]
 		public void SetUp() {
-			var input = new StringReader(FeatYamlFile);
-			yaml = new YamlStream();
-			yaml.Load(input);
-			var yamlNode = new YamlNodeWrapper(yaml.Documents [0].RootNode);
-			var feats = Feat.LoadFromYaml (yamlNode);
+			var feats = Feat.LoadFromYaml (FeatYamlFile.ParseYaml());
 			Acrobatic = feats.First (x => x.Name == "Acrobatic");
 			CombatExpertise = feats.First (x => x.Name == "Combat Expertise");
 			PowerAttack = feats.First (x => x.Name == "Power Attack");
