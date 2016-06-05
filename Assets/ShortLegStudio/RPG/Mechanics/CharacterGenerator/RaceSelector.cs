@@ -5,11 +5,11 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.Enchilada;
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
-	public class AssignRaceToCharacter {
+	public class RaceSelector {
 		EntityGateway<Trait> _traitGateway;
 		EntityGateway<Race> _racesGateway;
 
-		public AssignRaceToCharacter( EntityGateway<Race> races, EntityGateway<Trait> traitGateway) {
+		public RaceSelector( EntityGateway<Race> races, EntityGateway<Trait> traitGateway) {
 			_traitGateway = traitGateway;
 			_racesGateway = races;
 		}

@@ -10,13 +10,13 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 	public class CharacterGenerator {
 		private IAbilityScoreGenerator abilityGenerator;
 		private LanguageSelector languageSelector;
-		private AssignRaceToCharacter raceSelector;
+		private RaceSelector raceSelector;
 		private NameGenerator nameGenerator;
 
 		public CharacterGenerator(
 			IAbilityScoreGenerator abilities,
 			LanguageSelector langs,
-			AssignRaceToCharacter races,
+			RaceSelector races,
 			NameGenerator names) {
 			abilityGenerator = abilities;
 			languageSelector = langs;

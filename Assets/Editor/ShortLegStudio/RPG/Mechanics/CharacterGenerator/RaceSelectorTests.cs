@@ -9,7 +9,7 @@ using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 
 namespace RPG.Mechanics.CharacterGenerator {
 	[TestFixture]
-	public class AssignRaceToCharacterTests {
+	public class RaceSelectorTests {
 		List<Skill> _testSkills;
 
 		[SetUp]
@@ -39,7 +39,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 			elf.WeightRange = DiceStrings.ParseDice ("20d8");
 
 			//sheet.SetRace (elf);
-			var assign = new AssignRaceToCharacter(new TestRacesGateway(), gateway);
+			var assign = new RaceSelector(new TestRacesGateway(), gateway);
 			assign.SetRace(sheet, elf);
 			Assert.AreEqual(elf, sheet.Race);
 			Assert.IsTrue(sheet.Traits.Any(x => x == trait));
@@ -57,7 +57,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 			smallGuy.WeightRange = DiceStrings.ParseDice ("2d4+100");
 
 
-			var assign = new AssignRaceToCharacter(new TestRacesGateway(), gateway);
+			var assign = new RaceSelector(new TestRacesGateway(), gateway);
 			assign.SetRace(sheet, smallGuy);
 			Assert.AreEqual (CharacterSize.Small, sheet.Size.Size);
 			Assert.GreaterOrEqual (sheet.Size.Height, 12);
@@ -74,7 +74,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 			fastGuy.WeightRange = DiceStrings.ParseDice ("2d4+100");
 			fastGuy.BaseMovementSpeed = 45;
 
-			var assign = new AssignRaceToCharacter(new TestRacesGateway(), new TestTraitGateway());
+			var assign = new RaceSelector(new TestRacesGateway(), new TestTraitGateway());
 			assign.SetRace(sheet, fastGuy);
 			Assert.AreEqual (45, sheet.BaseMovementSpeed);
 		}

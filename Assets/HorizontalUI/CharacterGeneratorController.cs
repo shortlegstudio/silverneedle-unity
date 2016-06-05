@@ -17,7 +17,7 @@ public class CharacterGeneratorController : MonoBehaviour {
 		generator = new CharacterGenerator (
 			new RandomAbilityScoreGenerator(),
 			new LanguageSelector(new LanguageYamlGateway()),
-			new AssignRaceToCharacter(new RaceYamlGateway(), new TraitYamlGateway()),
+			new RaceSelector(new RaceYamlGateway(), new TraitYamlGateway()),
 			new NameGenerator()
 		);
 	}
