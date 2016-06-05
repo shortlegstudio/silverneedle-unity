@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
@@ -15,7 +16,7 @@ namespace RPG.Gateways {
 		[SetUp]
 		public void SetUp() {
 			gateway = new TraitYamlGateway(TraitYamlFile.ParseYaml());
-			var traits = Trait.LoadFromYaml (yamlNode);
+			var traits = gateway.All();
 			darkvision = traits.First (x => x.Name == "Darkvision");
 			hardy = traits.First (x => x.Name == "Hardy");
 			halflingLuck = traits.First (x => x.Name == "Halfling Luck");

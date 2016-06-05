@@ -89,31 +89,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public void SetRace(Race race) {
 			Race = race;
 
-			//Update Size
-			Size.SetSize(race.SizeSetting, race.HeightRange.Roll(), race.WeightRange.Roll());
 
-			//Update Speed
-			BaseMovementSpeed = race.BaseMovementSpeed;
-
-			//Add Ability Modifiers
-			foreach (var adj in race.AbilityModifiers) {
-				if (adj.RacialChose) {
-					var ability = EnumHelpers.ChooseOne<AbilityScoreTypes> ();
-					var a = Abilities.GetAbility (ability);
-					a.AddModifier (adj);
-				} else {
-					var a = Abilities.GetAbility (adj.ability);
-					a.AddModifier (adj);
-				}
-			}
-
-			var gateway = new TraitYamlGateway();
-			//Add Traits
-			foreach (var trait in race.Traits) {
-				var t = gateway.All().First(x => x.Name == trait);
-				AddTrait (t, false);
-			}
-			NotifyModified ();
 		}
 
 		public void SetLevel(int level) {
@@ -146,13 +122,6 @@ namespace ShortLegStudio.RPG.Characters {
 			return SkillRanks.GetScore (name);
 		}
 
-		public bool IsClassSkill(string name) {
-			if (Class == null)
-				return false;
-
-			return Class.IsClassSkill (name);
-		}
-
 		public int GetSkillPointsPerLevel() {
 			return Class.SkillPoints + Abilities.GetModifier (AbilityScoreTypes.Intelligence);
 		}
@@ -162,7 +131,7 @@ namespace ShortLegStudio.RPG.Characters {
 			CurrentHitPoints = hp;
 		}
 
-		private void NotifyModified() {
+		public void NotifyModified() {
 			if (Modified != null) { 
 				var args = new CharacterSheetEventArgs ();
 				args.Sheet = this;

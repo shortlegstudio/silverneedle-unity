@@ -18,7 +18,7 @@ namespace ShortLegStudio.RPG.Gateways {
 		}
 
 		public System.Collections.Generic.IEnumerable<Trait> All() {
-			throw new NotImplementedException();
+			return _traits;
 		}
 
 		private void LoadFromYaml(YamlNodeWrapper yaml) {

@@ -3,22 +3,24 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
 using ShortLegStudio.RPG.Equipment.Gateways;
 using ShortLegStudio.RPG.Gateways;
+using ShortLegStudio.Enchilada;
+using System.Collections.Generic;
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 	public class CharacterGenerator {
 		private IAbilityScoreGenerator abilityGenerator;
 		private LanguageSelector languageSelector;
-		private RaceYamlGateway raceRepo;
+		private AssignRaceToCharacter raceSelector;
 		private NameGenerator nameGenerator;
 
 		public CharacterGenerator(
 			IAbilityScoreGenerator abilities,
 			LanguageSelector langs,
-			RaceYamlGateway races,
+			AssignRaceToCharacter races,
 			NameGenerator names) {
 			abilityGenerator = abilities;
 			languageSelector = langs;
-			raceRepo = races;
+			raceSelector = races;
 			nameGenerator = names;
 		}
 
@@ -31,7 +33,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 			character.Gender = EnumHelpers.ChooseOne<Gender> ();
 			character.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
 			abilityGenerator.AssignAbilities (character.Abilities);
-			character.SetRace(raceRepo.All ().ToList().ChooseOne ());
+			raceSelector.ChooseRace(character);
 
 			character.Languages.Add (
 				languageSelector.PickLanguage (
@@ -73,5 +75,6 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 		}
 
 	}
+
 }
 
