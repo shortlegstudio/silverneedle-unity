@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio;
+using ShortLegStudio.RPG.Gateways;
 
 
 namespace ShortLegStudio.RPG.Characters {
@@ -106,21 +107,17 @@ namespace ShortLegStudio.RPG.Characters {
 				}
 			}
 
+			var gateway = new TraitYamlGateway();
 			//Add Traits
 			foreach (var trait in race.Traits) {
-				AddTrait (trait, false);
+				var t = gateway.All().First(x => x.Name == trait);
+				AddTrait (t, false);
 			}
 			NotifyModified ();
 		}
 
 		public void SetLevel(int level) {
 			Level = level;
-		}
-
-		public void AddTrait(string trait, bool notify = true) {
-			var traitInfo = Trait.GetTrait (trait);
-			AddTrait (traitInfo, notify);
-
 		}
 
 		public void AddTrait(Trait trait, bool notify = true) {

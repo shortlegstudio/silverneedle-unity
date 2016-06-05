@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio.Dice;
 using NUnit.Framework.Constraints;
+using ShortLegStudio.Enchilada;
 
 namespace RPG.Characters {
 
@@ -108,5 +109,9 @@ namespace RPG.Characters {
 			//Make sure the event was called
 			Assert.IsTrue (called);
 		}
+	}
+
+	class TraitTestGateway : EntityGateway<Trait> {
+		
 	}
 }
