@@ -45,6 +45,16 @@ namespace ShortLegStudio.RPG.Characters {
 					ShortLog.ErrorFormat ("Skill: {0} was not found in the Skill Ranks and modifiers could not be applied.", a.SkillName);
 				}
 			}
+
+			foreach (var a in modifier.ConditionalModifiers) {
+				CharacterSkill sk;
+				if (_skills.TryGetValue (a.SkillName, out sk)) {
+					sk.AddModifier (a);
+				} else {
+					ShortLog.ErrorFormat ("Skill: {0} was not found in the Skill Ranks and modifiers could not be applied.", a.SkillName);
+				}
+			}
+
 		}
 			
 		private void FillSkills(IEnumerable<Skill> skills, AbilityScores scores) {

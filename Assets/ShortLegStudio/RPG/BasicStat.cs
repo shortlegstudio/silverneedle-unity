@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace ShortLegStudio.RPG {
 	public class BasicStat {
@@ -15,10 +16,12 @@ namespace ShortLegStudio.RPG {
 				return (int)_adjustments.Sum (x => x.Modifier);	
 			}
 		}
+		public int SumConditionalModifiers(string condition) {
+			return _conditionals.Where(x => x.Condition == condition).Sum(x => x.Modifier);
+		}
 
 		public int ConditionalScore(string conditionName) {
-			return TotalValue + _conditionals.Where(x => x.Condition == conditionName)
-				.Sum(x => x.Modifier);
+			return TotalValue + SumConditionalModifiers(conditionName);
 		}
 
 		public event EventHandler<BasicStatModifiedEventArgs> Modified;

@@ -11,6 +11,7 @@ namespace RPG.Gateways {
 		Trait darkvision;
 		Trait hardy;
 		Trait halflingLuck;
+		Trait stoneCunning;
 		TraitYamlGateway gateway;
 
 		[SetUp]
@@ -20,6 +21,7 @@ namespace RPG.Gateways {
 			darkvision = traits.First (x => x.Name == "Darkvision");
 			hardy = traits.First (x => x.Name == "Hardy");
 			halflingLuck = traits.First (x => x.Name == "Halfling Luck");
+			stoneCunning = traits.First(x => x.Name == "Stonecunning");
 		}
 
 		[Test]
@@ -49,7 +51,18 @@ namespace RPG.Gateways {
 			Assert.AreEqual (4, flyAdj.Modifier);
 		}
 
-		private const string TraitYamlFile = @"--- 
+		[Test]
+		public void TraitsCanHaveConditionalModifiers() {
+			var modifiers = stoneCunning.ConditionalModifiers;
+			Assert.AreEqual(1, modifiers.Count);
+			var skillAdj = modifiers.First();
+			Assert.AreEqual("Perception", skillAdj.SkillName);
+			Assert.AreEqual("Stonecunning (trait)", skillAdj.Reason);
+			Assert.AreEqual("Stonecunning", skillAdj.Condition);
+			Assert.AreEqual(2, skillAdj.Modifier);
+		}
+
+		private const string TraitYamlFile = @"
 - trait: 
   name: Darkvision
   description: See in the dark.
@@ -61,6 +74,12 @@ namespace RPG.Gateways {
       amount: 2 
     - skill: Fly
       amount: 4
+- trait:
+  name: Stonecunning
+  description: Work the stone
+  conditionalskillmodifiers:
+    - skill: Perception
+      amount: 2
 - trait:
   name: Halfling Luck
   description: Savings throw bonus

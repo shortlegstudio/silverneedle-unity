@@ -43,6 +43,20 @@ namespace ShortLegStudio.RPG.Gateways {
 						));
 					}
 				}
+
+				var condMods = traitNode.GetNodeOptional("conditionalskillmodifiers");
+				if (condMods != null) {
+					foreach (var s in condMods.Children()) {
+						var skillName = s.GetString("skill");
+						var amount = s.GetInteger("amount");
+						trait.ConditionalModifiers.Add(new ConditionalSkillModifier(
+								amount,
+								string.Format("{0} (trait)", trait.Name),
+								skillName,
+								trait.Name
+							));
+					}
+				}
 				_traits.Add (trait);
 			}
 		}

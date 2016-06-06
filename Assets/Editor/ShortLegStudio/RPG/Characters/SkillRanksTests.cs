@@ -57,10 +57,13 @@ namespace RPG.Characters {
 
 		class MockMod : IModifiesSkills {
 			public IList<SkillModifier> SkillModifiers { get; set;  }
+			public IList<ConditionalSkillModifier> ConditionalModifiers { get; set; }
 
 			public MockMod() {
 				SkillModifiers = new List<SkillModifier>();
 				SkillModifiers.Add(new SkillModifier(3, "Cause", "Climb"));
+
+				ConditionalModifiers = new List<ConditionalSkillModifier>();
 			}
 		}
 	}

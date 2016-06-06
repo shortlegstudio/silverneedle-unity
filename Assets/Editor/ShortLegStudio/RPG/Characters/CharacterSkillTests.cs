@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.IO;
+using System.Collections.Generic;
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
@@ -113,6 +114,22 @@ namespace RPG.Characters {
 			Assert.AreEqual (0, charSkill.Score());
 			adj.Modifier = 5;
 			Assert.AreEqual (5, charSkill.Score());
+		}
+
+		[Test]
+		public void SkillsCanHaveConditionalModifiers() {
+			var skill = new Skill("Chew", AbilityScoreTypes.Strength, false);
+			var ability = new AbilityScore(AbilityScoreTypes.Strength, 14);
+			var charSkill = new CharacterSkill(skill, ability, false);
+
+			var adj = new ConditionalSkillModifier(10, "Teeth", "Chew", "Power Chew");
+			charSkill.AddModifier(adj);
+			Assert.AreEqual(2, charSkill.Score());
+			adj.Modifier = 10;
+			Assert.AreEqual(2, charSkill.Score());
+			Assert.AreEqual("Power Chew", charSkill.ConditionalModifiers().First());
+			Assert.AreEqual(12, charSkill.Score("Power Chew"));
+
 		}
 	}
 }

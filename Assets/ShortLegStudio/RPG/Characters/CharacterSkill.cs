@@ -4,21 +4,24 @@ using System.Linq;
 
 
 namespace ShortLegStudio.RPG.Characters {
-	public class CharacterSkill : BasicStat {
+	public class CharacterSkill {
 		public Skill Skill { get; private set; }
 		private AbilityScore _baseScore;
+		private BasicStat _skillStats;
+
 		public bool AbleToUse { 
 			get {
 				return !Skill.TrainingRequired || Ranks > 0;
 			} 
 		}
-		public int Ranks { get { return BaseValue; } }
+		public int Ranks { get { return _skillStats.BaseValue; } }
 		public bool ClassSkill { get; set; }
 
 		public CharacterSkill(Skill baseSkill, AbilityScore baseScore, bool isClassSkill) {
 			Skill = baseSkill;
 			_baseScore = baseScore;
 			ClassSkill = isClassSkill;
+			_skillStats = new BasicStat();
 		}
 
 		public int Score() {
@@ -36,14 +39,30 @@ namespace ShortLegStudio.RPG.Characters {
 				val += 3;
 
 			//Other Bonuses
-			val += SumBasicModifiers;
+			val += _skillStats.SumBasicModifiers;
 			return val;
 		}
 
+		public int Score(string condition) {
+			int baseScore =  Score();
+			baseScore += _skillStats.SumConditionalModifiers(condition);
+			return baseScore;
+		}
+
+		public IEnumerable<string> ConditionalModifiers() {
+			return _skillStats.ConditionalModifiers.Select(x => x.Condition);
+		}
+
 		public void AddRank() {
-			BaseValue++;
-			//Total Hack job
-			OnModified(BaseValue - 1, TotalValue - 1);
+			_skillStats.SetValue(_skillStats.BaseValue+1);
+		}
+
+		public void AddModifier(SkillModifier mod) {
+			_skillStats.AddModifier(mod);
+		}
+
+		public void AddModifier(ConditionalSkillModifier mod) {
+			_skillStats.AddModifier(mod);
 		}
 
 		public string Name { 
