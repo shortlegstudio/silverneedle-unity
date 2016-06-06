@@ -13,7 +13,6 @@ namespace ShortLegStudio.RPG.Characters {
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public IList<SkillModifier> SkillModifiers { get; protected set; }
-		public IList<ConditionalSkillModifier> ConditionalModifiers { get; protected set; }
 		public Prerequisites Prerequisites { get; protected set; }
 		public bool IsCombatFeat { get { return Tags.Contains ("combat"); } }
 		public bool IsCriticalFeat { get { return Tags.Contains ("critical"); } }
@@ -22,7 +21,6 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public Feat() {
 			SkillModifiers = new List<SkillModifier> ();
-			ConditionalModifiers = new List<ConditionalSkillModifier>();
 			Prerequisites = new Prerequisites ();
 			Tags = new List<string> ();
 		}

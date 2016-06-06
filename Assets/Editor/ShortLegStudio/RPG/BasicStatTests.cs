@@ -50,25 +50,5 @@ namespace RPG {
 			stat.AddModifier (new BasicStatModifier (5, "Foo"));
 			Assert.AreEqual (15, stat.TotalValue);
 		}
-
-		[Test]
-		public void StatsCanHaveSituationalAdjustments() {
-			var stat = new BasicStat (10);
-			stat.AddModifier (new ConditionalStatModifier (5, "Foo", "vs. Dancing"));
-			stat.AddModifier (new ConditionalStatModifier (5, "Foo", "vs. Comedy"));
-			Assert.AreEqual (10, stat.TotalValue);
-			Assert.AreEqual("vs. Dancing", stat.ConditionalModifiers.First().Condition);
-			Assert.AreEqual (15, stat.ConditionalScore("vs. Dancing"));
-		}
-
-		[Test]
-		public void ConditionalModifiersAreBasedOnAllStats() {
-			var stat = new BasicStat (10);
-			stat.AddModifier(new BasicStatModifier(10, "Bar"));
-			stat.AddModifier (new ConditionalStatModifier (5, "Foo", "vs. Dancing"));
-			Assert.AreEqual (20, stat.TotalValue);
-			Assert.AreEqual("vs. Dancing", stat.ConditionalModifiers.First().Condition);
-			Assert.AreEqual (25, stat.ConditionalScore("vs. Dancing"));
-		}
 	}
 }

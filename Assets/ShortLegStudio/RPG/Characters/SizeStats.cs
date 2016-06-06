@@ -11,7 +11,6 @@ namespace ShortLegStudio.RPG.Characters {
 		public int Weight { get; private set; }
 		public int SizeModifier { get; private set; }
 		public System.Collections.Generic.IList<SkillModifier> SkillModifiers { get; private set; }
-		public IList<ConditionalSkillModifier> ConditionalModifiers { get { return new List<ConditionalSkillModifier>(); } }
 
 		//Accessories to common attributes modified
 		private SkillModifier StealthAdj { get; set; }

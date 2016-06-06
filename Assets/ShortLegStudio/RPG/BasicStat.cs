@@ -8,30 +8,19 @@ namespace ShortLegStudio.RPG {
 		public int BaseValue { get; protected set; }
 		public int TotalValue { get { return BaseValue + SumBasicModifiers; } }
 		public IEnumerable<BasicStatModifier> Modifiers { get { return _adjustments; } }
-		public IEnumerable<ConditionalStatModifier> ConditionalModifiers { 
-			get { return _conditionals; }
-		}
 		public int SumBasicModifiers { 
 			get { 
 				return (int)_adjustments.Sum (x => x.Modifier);	
 			}
 		}
-		public int SumConditionalModifiers(string condition) {
-			return _conditionals.Where(x => x.Condition == condition).Sum(x => x.Modifier);
-		}
 
-		public int ConditionalScore(string conditionName) {
-			return TotalValue + SumConditionalModifiers(conditionName);
-		}
 
 		public event EventHandler<BasicStatModifiedEventArgs> Modified;
 
 		private IList<BasicStatModifier> _adjustments;
-		private IList<ConditionalStatModifier> _conditionals;
 
 		public BasicStat () {
 			_adjustments = new List<BasicStatModifier> ();
-			_conditionals = new List<ConditionalStatModifier>();
 		}
 
 		public BasicStat(int baseValue) : this() {
@@ -45,10 +34,6 @@ namespace ShortLegStudio.RPG {
 			Refresh (oldBase, oldTotal);
 		}
 
-		public void AddModifier(ConditionalStatModifier mod) {
-			_conditionals.Add(mod);
-			Refresh(BaseValue, TotalValue);
-		}
 
 		public void SetValue(int val) {
 			var oldBase = BaseValue;

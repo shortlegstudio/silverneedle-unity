@@ -43,15 +43,6 @@ namespace ShortLegStudio.RPG.Characters {
 			return val;
 		}
 
-		public int Score(string condition) {
-			int baseScore =  Score();
-			baseScore += _skillStats.SumConditionalModifiers(condition);
-			return baseScore;
-		}
-
-		public IEnumerable<string> ConditionalModifiers() {
-			return _skillStats.ConditionalModifiers.Select(x => x.Condition);
-		}
 
 		public void AddRank() {
 			_skillStats.SetValue(_skillStats.BaseValue+1);
@@ -61,9 +52,6 @@ namespace ShortLegStudio.RPG.Characters {
 			_skillStats.AddModifier(mod);
 		}
 
-		public void AddModifier(ConditionalSkillModifier mod) {
-			_skillStats.AddModifier(mod);
-		}
 
 		public string Name { 
 			get { return Skill.Name; }

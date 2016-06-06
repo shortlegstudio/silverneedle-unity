@@ -9,11 +9,9 @@ namespace ShortLegStudio.RPG.Characters  {
 		public string Name { get; set; }
 		public string Description { get; set; }
 		public IList<SkillModifier> SkillModifiers { get; protected set; }
-		public IList<ConditionalSkillModifier> ConditionalModifiers { get; protected set; }
 
 		public Trait() {
 			SkillModifiers = new List<SkillModifier> ();
-			ConditionalModifiers = new List<ConditionalSkillModifier>();
 		}
 
 

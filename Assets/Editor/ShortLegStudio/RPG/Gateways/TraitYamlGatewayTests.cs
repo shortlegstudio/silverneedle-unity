@@ -51,16 +51,6 @@ namespace RPG.Gateways {
 			Assert.AreEqual (4, flyAdj.Modifier);
 		}
 
-		[Test]
-		public void TraitsCanHaveConditionalModifiers() {
-			var modifiers = stoneCunning.ConditionalModifiers;
-			Assert.AreEqual(1, modifiers.Count);
-			var skillAdj = modifiers.First();
-			Assert.AreEqual("Perception", skillAdj.SkillName);
-			Assert.AreEqual("Stonecunning (trait)", skillAdj.Reason);
-			Assert.AreEqual("Stonecunning", skillAdj.Condition);
-			Assert.AreEqual(2, skillAdj.Modifier);
-		}
 
 		private const string TraitYamlFile = @"
 - trait: 
