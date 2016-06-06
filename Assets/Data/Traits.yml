@@ -77,15 +77,17 @@
   description: >
     Half-Orcs receive a +2 racial bonus on Intimidate skill checks due to
     their fearsome nature.
-  skillmodifiers:
-    - skill: Intimidate
-      amount: 2
+  modifiers:
+    - stat: Intimidate
+      modifier: 2
+      type: racial
 - trait:
   name: Keen Senses
   description: This race grants a +2 racial bonus on Perception skill checks.
-  skillmodifiers:
-    - skill: Perception
-      amount: 2
+  modifiers:
+    - stat: Perception
+      type: racial
+      modifier: 2
 - trait:
   name: Low-Light Vision
   description: Can see in low light like normal light.
@@ -138,11 +140,13 @@
   description: >
     Halflings receive a +2 racial bonus on Acrobatis and Climb
     skill checks.
-  skillmodifiers:
-    - skill: Acrobatics
-      amount: 2
-    - skill: Climb
-      amount: 2
+  modifiers:
+    - stat: Acrobatics
+      type: racial
+      modifier: 2
+    - stat: Climb
+      type: racial
+      modifier: 2
 - trait:
   name: Weapon Familiarity
   description: TODO - handle this case

@@ -1,9 +1,13 @@
 - feat:
   name: Acrobatic
   description: Skilled at leaping, jumping, and flying.
-  skillmodifiers:
-    - Acrobatics = 2
-    - Fly = 2
+  modifiers:
+    - stat: Acrobatics
+      type: bonus
+      modifier: 2
+    - stat: Fly
+      type: bonus
+      modifier: 2
 - feat:
   name: Acrobatic Steps
   description: >
@@ -20,9 +24,13 @@
 - feat:
   name: Alertness
   description: You often notice things that others might miss.
-  skillmodifiers:
-    - Perception = 2
-    - Sense Motive = 2
+  modifiers:
+    - stat: Perception
+      type: bonus
+      modifier: 2
+    - stat: Sense Motive
+      type: bonus
+      modifier: 2
 - feat:
   name: Alignment Channel (Chaos)
   description: >
@@ -54,9 +62,13 @@
 - feat:
   name: Animal Affinity
   description: You are skilled at working with animals and mounts.
-  skillmodifiers:
-    - Handle Animal = 2
-    - Ride = 2
+  modifiers:
+    - stat: Handle Animal
+      type: bonus
+      modifier: 2
+    - stat: Ride
+      type: bonus
+      modifier: 2
 - feat:
   name: Arcane Armor Mastery
   description: >
@@ -92,9 +104,13 @@
 - feat:
   name: Athletic
   description: You possess inherent physical prowess.
-  skillmodifiers:
-    - Climb = 2
-    - Swim = 2
+  modifiers:
+    - stat: Climb
+      type: bonus
+      modifier: 2
+    - stat: Swim
+      type: bonus
+      modifier: 2
 - feat:
   name: Augment Summoning
   description: Your summoned creatures are more powerful and robust.
@@ -248,9 +264,13 @@
   description: >
     You are skilled at deceiving others, both with spoken words and with
     physical disguises.
-  skillmodifiers:
-    - Bluff = 2
-    - Disguise = 2
+  modifiers:
+    - stat: Bluff
+      type: bonus
+      modifier: 2
+    - stat: Disguise
+      type: bonus
+      modifier: 2
 - feat:
   name: Defensive Combat Training
   description: You excel at defending yourself from all manner of combat maneuvers.
@@ -731,9 +751,13 @@
 - feat:
   name: Magical Aptitude
   description: You are skilled at spellcasting and using magic items.
-  skillmodifiers:
-    - Spellcraft = 2
-    - Use Magical Device = 2
+  modifiers:
+    - stat: Spellcraft
+      type: bonus
+      modifier: 2
+    - stat: Use Magical Device
+      type: bonus
+      modifier: 2
 - feat:
   name: Manyshot
   description: You can fire multiple arrows at a single target.
@@ -814,9 +838,13 @@
   description: >
     You are skilled at swaying attitudes and intimidating others into your
     way of thinking.
-  skillmodifiers:
-    - Diplomacy = 2
-    - Intimidate = 2
+  modifiers:
+    - stat: Diplomacy
+      type: bonus
+      modifier: 2
+    - stat: Intimate
+      type: bonus
+      modifier: 2
 - feat:
   name: Pinpoint Targeting
   description: You can target the weak points in your opponent's armor.
@@ -906,9 +934,13 @@
   name: Self Sufficient
   description: >
     You know how to get along in the wild and how to effectively treat wounds.
-  skillmodifiers:
-    - Heal = 2
-    - Survival = 2
+  modifiers:
+    - stat: Heal
+      modifier: 2
+      type: bonus
+    - stat: Survival
+      modifier: 2
+      type: bonus
 - feat:
   name: Shatter Defenses
   description: >
@@ -1055,9 +1087,13 @@
 - feat:
   name: Stealthy
   description: You are good at avoiding unwanted attend and slipping out of bonds.
-  skillmodifiers:
-    - Escape Artist = 2
-    - Stealth = 2
+  modifiers:
+    - stat: Escape Artist
+      modifier: 2
+      type: bonus
+    - stat: Stealth
+      modifier: 2
+      type: bonus
 - feat:
   name: Step Up
   tags: combat

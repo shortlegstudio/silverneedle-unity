@@ -39,18 +39,25 @@ namespace RPG.Gateways {
 
 		[Test]
 		public void TraitsCanHaveSkillAdjustments() {
-			var modifiers = hardy.SkillModifiers;
+			var modifiers = hardy.Modifiers;
 			Assert.AreEqual (2, modifiers.Count);
 			var skillAdj = modifiers.First ();
-			Assert.AreEqual ("Heal", skillAdj.SkillName);
+			Assert.AreEqual ("Heal", skillAdj.StatName);
+			Assert.AreEqual ("racial", skillAdj.Type);
 			Assert.AreEqual ("Hardy (trait)", skillAdj.Reason);
 			Assert.AreEqual (2, skillAdj.Modifier);
 
 			var flyAdj = modifiers.Last ();
-			Assert.AreEqual ("Fly", flyAdj.SkillName);
+			Assert.AreEqual ("Fly", flyAdj.StatName);
+			Assert.AreEqual ("racial", flyAdj.Type);
 			Assert.AreEqual (4, flyAdj.Modifier);
 		}
 
+		[Test]
+		public void TraitsCanModifySavingsThrows() {
+			var luck = halflingLuck.Modifiers;
+			Assert.AreEqual(3, luck.Count);
+		}
 
 		private const string TraitYamlFile = @"
 - trait: 
@@ -59,20 +66,34 @@ namespace RPG.Gateways {
 - trait:
   name: Hardy
   description: Really tough
-  skillmodifiers:
-    - skill: Heal
-      amount: 2 
-    - skill: Fly
-      amount: 4
+  modifiers:
+    - type: racial
+      stat: Heal
+      modifier: 2
+    - type: racial
+      stat: Fly
+      modifier: 4
 - trait:
   name: Stonecunning
   description: Work the stone
-  conditionalskillmodifiers:
-    - skill: Perception
-      amount: 2
+  modifiers:
+    - type: racial
+      stat: Perception
+      modifier: 2
+      condition: Stoneworking
 - trait:
   name: Halfling Luck
   description: Savings throw bonus
+  modifiers:
+    - type: racial
+      stat: Fortitude
+      modifier: 1
+    - type: racial
+      stat: Reflex
+      modifier: 1
+    - type: racial
+      stat: Will
+      modifier: 1
 ...";
 	}
 }

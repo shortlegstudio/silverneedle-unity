@@ -36,13 +36,13 @@ namespace ShortLegStudio.RPG.Characters {
 			);
 		}
 
-		public void ProcessModifier(IModifiesSkills modifier) {
-			foreach (var a in modifier.SkillModifiers) {
+		public void ProcessModifier(IModifiesStats modifier) {
+			foreach (var a in modifier.Modifiers) {
 				CharacterSkill sk;
-				if (_skills.TryGetValue (a.SkillName, out sk)) {
+				if (_skills.TryGetValue (a.StatName, out sk)) {
 					sk.AddModifier (a);
 				} else {
-					ShortLog.ErrorFormat ("Skill: {0} was not found in the Skill Ranks and modifiers could not be applied.", a.SkillName);
+					ShortLog.ErrorFormat ("Skill: {0} was not found in the Skill Ranks and modifiers could not be applied.", a.StatName);
 				}
 			}
 		}

@@ -3,6 +3,7 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 using System.Collections.Generic;
 using System.Linq;
+using ShortLegStudio.RPG;
 
 namespace RPG.Characters {
 
@@ -55,12 +56,12 @@ namespace RPG.Characters {
 			//Should not throw exception
 		}
 
-		class MockMod : IModifiesSkills {
-			public IList<SkillModifier> SkillModifiers { get; set;  }
+		class MockMod : IModifiesStats {
+			public IList<BasicStatModifier> Modifiers { get; set;  }
 
 			public MockMod() {
-				SkillModifiers = new List<SkillModifier>();
-				SkillModifiers.Add(new SkillModifier(3, "Cause", "Climb"));
+				Modifiers = new List<BasicStatModifier>();
+				Modifiers.Add(new BasicStatModifier("Climb", 3, "Cause", "Climb"));
 
 			}
 		}

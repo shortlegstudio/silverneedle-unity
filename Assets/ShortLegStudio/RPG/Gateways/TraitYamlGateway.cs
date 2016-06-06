@@ -31,15 +31,17 @@ namespace ShortLegStudio.RPG.Gateways {
 				trait.Description = traitNode.GetString ("description");
 
 				//Get Any skill Modifiers if they exist
-				var skills = traitNode.GetNodeOptional("skillmodifiers");
+				var skills = traitNode.GetNodeOptional("modifiers");
 				if (skills != null) {
 					foreach (var skillAdj in skills.Children()) {
-						var skillName = skillAdj.GetString("skill");
-						var amount = int.Parse(skillAdj.GetString ("amount"));
-						trait.SkillModifiers.Add(new SkillModifier(
+						var skillName = skillAdj.GetString("stat");
+						var amount = skillAdj.GetInteger ("modifier");
+						var type = skillAdj.GetString("type");
+						trait.Modifiers.Add(new BasicStatModifier(
+							skillName,
 							amount,
-							string.Format("{0} (trait)", trait.Name),
-							skillName
+							type,
+							string.Format("{0} (trait)", trait.Name)
 						));
 					}
 				}

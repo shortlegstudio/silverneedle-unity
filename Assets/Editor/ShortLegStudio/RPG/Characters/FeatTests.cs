@@ -37,15 +37,17 @@ namespace RPG.Characters {
 
 		[Test]
 		public void FeatsCanHaveSkillAdjustments() {
-			var modifiers = Acrobatic.SkillModifiers;
+			var modifiers = Acrobatic.Modifiers;
 			Assert.AreEqual (2, modifiers.Count);
 			var skillAdj = modifiers.First ();
-			Assert.AreEqual ("Acrobatics", skillAdj.SkillName);
+			Assert.AreEqual ("Acrobatics", skillAdj.StatName);
+			Assert.AreEqual("bonus", skillAdj.Type);
 			Assert.AreEqual ("Acrobatic (feat)", skillAdj.Reason);
 			Assert.AreEqual (2, skillAdj.Modifier);
 
 			var flyAdj = modifiers.Last ();
-			Assert.AreEqual ("Fly", flyAdj.SkillName);
+			Assert.AreEqual ("Fly", flyAdj.StatName);
+			Assert.AreEqual("bonus", skillAdj.Type);
 			Assert.AreEqual ("Acrobatic (feat)", skillAdj.Reason);
 			Assert.AreEqual (4, flyAdj.Modifier);
 		}
@@ -96,9 +98,13 @@ namespace RPG.Characters {
 - feat: 
   name: Acrobatic
   description: Move good
-  skillmodifiers:
-    - Acrobatics = 2
-    - Fly = 4
+  modifiers:
+    - type: bonus
+      stat: Acrobatics
+      modifier: 2
+    - type: bonus
+      stat: Fly
+      modifier: 4
 - feat:
   name: Combat Expertise
   description: Dodge stuff better

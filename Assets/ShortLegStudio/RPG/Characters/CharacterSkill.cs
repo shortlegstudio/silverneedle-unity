@@ -48,7 +48,7 @@ namespace ShortLegStudio.RPG.Characters {
 			_skillStats.SetValue(_skillStats.BaseValue+1);
 		}
 
-		public void AddModifier(SkillModifier mod) {
+		public void AddModifier(BasicStatModifier mod) {
 			_skillStats.AddModifier(mod);
 		}
 

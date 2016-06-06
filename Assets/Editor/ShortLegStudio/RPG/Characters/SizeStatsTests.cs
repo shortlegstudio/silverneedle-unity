@@ -24,35 +24,35 @@ namespace RPG.Characters {
 		[Test]
 		public void ContainsModifiersForFlyAndStealth() {
 			var medium = new SizeStats (CharacterSize.Medium, 70, 184);
-			Assert.IsTrue(medium.SkillModifiers.Any(x => x.SkillName == "Stealth"));
-			Assert.IsTrue (medium.SkillModifiers.Any (x => x.SkillName == "Fly"));	
+			Assert.IsTrue(medium.Modifiers.Any(x => x.StatName == "Stealth"));
+			Assert.IsTrue (medium.Modifiers.Any (x => x.StatName == "Fly"));	
 		}
 
 		[Test]
 		public void SmallCreaturesProvideABonusToStealthAndFly() {
 			var small = new SizeStats (CharacterSize.Small, 34, 37);
-			var stealth = small.SkillModifiers.First (x => x.SkillName == "Stealth");
+			var stealth = small.Modifiers.First (x => x.StatName == "Stealth");
 			Assert.AreEqual (4, stealth.Modifier);
 		}
 
 		[Test]
 		public void ColossalCreaturesAreBadAtStealth() {
 			var col = new SizeStats (CharacterSize.Colossal, 680, 29932);
-			var stealth = col.SkillModifiers.First (x => x.SkillName == "Stealth");
+			var stealth = col.Modifiers.First (x => x.StatName == "Stealth");
 			Assert.AreEqual (-16, stealth.Modifier);
 		}
 
 		[Test]
 		public void FineCreaturesAreGoodAtFlying() {
 			var fine = new SizeStats (CharacterSize.Fine, 1, 2);
-			var fly = fine.SkillModifiers.First (x => x.SkillName == "Fly");
+			var fly = fine.Modifiers.First (x => x.StatName == "Fly");
 			Assert.AreEqual (8, fly.Modifier);
 		}
 
 		[Test]
 		public void LargeCreaturesArePoorAtFlying() {
 			var large = new SizeStats (CharacterSize.Large, 1, 3);
-			var fly = large.SkillModifiers.First (x => x.SkillName == "Fly");
+			var fly = large.Modifiers.First (x => x.StatName == "Fly");
 			Assert.AreEqual (-2, fly.Modifier);
 		}
 
