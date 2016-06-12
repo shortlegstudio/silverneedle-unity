@@ -2,6 +2,7 @@
 using System.Linq;
 using NUnit.Framework;
 using ShortLegStudio;
+using ShortLegStudio.RPG;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Gateways;
 
@@ -57,6 +58,13 @@ namespace RPG.Gateways {
 		public void TraitsCanModifySavingsThrows() {
 			var luck = halflingLuck.Modifiers;
 			Assert.AreEqual(3, luck.Count);
+		}
+
+		[Test]
+		public void TraitsCanHaveConditionalModifiers() {
+			var conditional = stoneCunning.Modifiers.OfType<ConditionalStatModifier>();
+			Assert.AreEqual(1, conditional.Count());
+			Assert.AreEqual("Stoneworking", conditional.First().Condition);
 		}
 
 		private const string TraitYamlFile = @"

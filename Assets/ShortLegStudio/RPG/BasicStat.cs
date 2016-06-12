@@ -30,9 +30,15 @@ namespace ShortLegStudio.RPG {
 		}
 
 		public void AddModifier(BasicStatModifier adjustment) {
+			//Check for conditionalModifer
+			//HACK: This is a hack job I think. Shouldn't check type to get proper behavior
+			if (adjustment is ConditionalStatModifier) {
+				AddModifier((ConditionalStatModifier)adjustment);
+				return;
+			}
+
 			var oldBase = BaseValue;
 			var oldTotal = TotalValue;
-
 			_adjustments.Add (adjustment);
 			Refresh (oldBase, oldTotal);
 		}
