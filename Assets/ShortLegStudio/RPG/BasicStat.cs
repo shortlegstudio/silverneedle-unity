@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Xml.Linq;
 
 namespace ShortLegStudio.RPG {
 	public class BasicStat {
@@ -21,6 +22,7 @@ namespace ShortLegStudio.RPG {
 
 		public BasicStat () {
 			_adjustments = new List<BasicStatModifier> ();
+			conditionalModifiers = new List<ConditionalStatModifier>();
 		}
 
 		public BasicStat(int baseValue) : this() {
@@ -30,16 +32,29 @@ namespace ShortLegStudio.RPG {
 		public void AddModifier(BasicStatModifier adjustment) {
 			var oldBase = BaseValue;
 			var oldTotal = TotalValue;
+
 			_adjustments.Add (adjustment);
 			Refresh (oldBase, oldTotal);
 		}
 
+		public void AddModifier(ConditionalStatModifier conditional) {
+			conditionalModifiers.Add(conditional);
+		}
 
 		public void SetValue(int val) {
 			var oldBase = BaseValue;
 			var oldTotal = TotalValue;
 			BaseValue = val;
 			Refresh (oldBase, oldTotal);
+		}
+
+		public IEnumerable<string> GetConditions() {
+			return conditionalModifiers.GroupBy(x => x.Condition).Select(x => x.Key);
+		}
+
+		public int GetConditionalScore(string cond) {
+			var conditions = conditionalModifiers.Where(x => x.Condition == cond);
+			return TotalValue + (int)conditions.Sum(x => x.Modifier);
 		}
 
 		protected virtual void Refresh(int oldBase, int oldTotal) {
@@ -57,6 +72,11 @@ namespace ShortLegStudio.RPG {
 				));
 			}
 		}
+
+
+		//First Hack job approach to handling conditional modifiers
+		private IList<ConditionalStatModifier> conditionalModifiers;
+
 	}
 
 	public class BasicStatModifiedEventArgs : EventArgs {

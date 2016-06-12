@@ -842,7 +842,7 @@
     - stat: Diplomacy
       type: bonus
       modifier: 2
-    - stat: Intimate
+    - stat: Intimidate
       type: bonus
       modifier: 2
 - feat:

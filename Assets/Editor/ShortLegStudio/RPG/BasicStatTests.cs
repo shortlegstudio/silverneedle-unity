@@ -50,5 +50,16 @@ namespace RPG {
 			stat.AddModifier (new BasicStatModifier (5, "Foo"));
 			Assert.AreEqual (15, stat.TotalValue);
 		}
+
+		[Test]
+		public void StatModifiersCanHaveConditionalModifiers() {
+			var stat = new BasicStat(10);
+			var mod = new ConditionalStatModifier("vs. Giants", "Skill", 5, "bonus", "Feat");
+			stat.AddModifier(mod);
+			Assert.AreEqual(10, stat.TotalValue);
+			Assert.AreEqual(15, stat.GetConditionalScore("vs. Giants"));
+			Assert.AreEqual(1, stat.GetConditions().Count());
+			Assert.AreEqual("vs. Giants", stat.GetConditions().First());
+		}
 	}
 }
