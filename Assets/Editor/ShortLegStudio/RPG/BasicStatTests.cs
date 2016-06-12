@@ -61,5 +61,25 @@ namespace RPG {
 			Assert.AreEqual(1, stat.GetConditions().Count());
 			Assert.AreEqual("vs. Giants", stat.GetConditions().First());
 		}
+
+		[Test]
+		public void StatsCanHaveAListOfConditionalModifiers() {
+			var stat = new BasicStat(10);
+			stat.AddModifier(
+				new ConditionalStatModifier("vs. Corgis", "Skill", 3, "bonus", "Trait")
+			);
+			stat.AddModifier(
+				new ConditionalStatModifier("vs. Corgis", "Skill", 3, "bonus", "Trait")
+			);
+			stat.AddModifier(
+				new ConditionalStatModifier("Trapfinding", "Skill", 3, "bonus", "Trait")
+			);
+
+			Assert.AreEqual(2, stat.GetConditions().Count());
+			Assert.IsTrue(stat.GetConditions().Any(x => x == "vs. Corgis"));
+			Assert.IsTrue(stat.GetConditions().Any(x => x == "Trapfinding"));
+
+		}
+			
 	}
 }
