@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
+using UnityEditor.Graphs;
+using ShortLegStudio.RPG;
 
 namespace RPG.Characters {
 
@@ -80,10 +82,11 @@ namespace RPG.Characters {
 
 		[Test]
 		public void SkillsCanHaveAdjustmentsFromTraitsOrFeats() {
-			var adjust = new SkillModifier (
+			var adjust = new BasicStatModifier (
+							"Fly",
 							2,
-							"Acrobatic Feat",
-				             "Fly"
+							"Bonus",
+							"Acrobatic Feat"
 			             );
 			var flySkill = new Skill ("Fly", AbilityScoreTypes.Dexterity, false);
 			var charSkill = new CharacterSkill (flySkill, new AbilityScore (AbilityScoreTypes.Dexterity, 10), false);
@@ -109,11 +112,23 @@ namespace RPG.Characters {
 			var skill = new Skill ("Chew", AbilityScoreTypes.Strength, false);
 			var ability = new AbilityScore (AbilityScoreTypes.Strength, 10);
 			var charSkill = new CharacterSkill (skill, ability, false);
-			var adj = new SkillModifier (0, "Teeth", "Chew");
+			var adj = new BasicStatModifier ("Chew", 0, "Teeth", "Chew");
 			charSkill.AddModifier (adj);
 			Assert.AreEqual (0, charSkill.Score());
 			adj.Modifier = 5;
 			Assert.AreEqual (5, charSkill.Score());
+		}
+
+		[Test]
+		public void SkillsCanHaveConditionalModifiers() {
+			var skill = new Skill("Eat", AbilityScoreTypes.Intelligence, false);
+			var ability = new AbilityScore(AbilityScoreTypes.Intelligence, 10);
+			var charSkill = new CharacterSkill(skill, ability, false);
+			var adj = new ConditionalStatModifier("Celery", "Eat", 3, "bonus", "High in Fiber");
+			charSkill.AddModifier(adj);
+			Assert.AreEqual(1, charSkill.ConditionalModifiers().Count());
+			Assert.AreEqual(3, charSkill.GetConditionalScore("Celery"));
+			Assert.AreEqual(0, charSkill.Score());
 		}
 	}
 }

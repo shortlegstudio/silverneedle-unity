@@ -52,6 +52,13 @@ namespace ShortLegStudio.RPG.Characters {
 			_skillStats.AddModifier(mod);
 		}
 
+		public IEnumerable<string> ConditionalModifiers() {
+			return _skillStats.GetConditions();
+		}
+
+		public int GetConditionalScore(string condition) {
+			return _skillStats.GetConditionalScore(condition) + Score();
+		}
 
 		public string Name { 
 			get { return Skill.Name; }
