@@ -9,7 +9,7 @@ namespace ShortLegStudio.RPG.Characters {
 		IEnumerable<CharacterSkill> GetSkills ();
 	}
 
-	public class SkillRanks : ISkillRanks {
+	public class SkillRanks : ISkillRanks, IStatTracker {
 		private IDictionary<string, CharacterSkill> _skills { get; set; }
 
 		public SkillRanks (IEnumerable<Skill> skills, AbilityScores scores) {
