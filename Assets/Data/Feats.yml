@@ -311,6 +311,10 @@
   tags: combat
   prerequisites:
     - ability: Dexterity 13
+  modifiers:
+    - stat: Armor Class
+      modifier: 1
+      type: dodge
 - feat:
   name: Double Slice
   description: >

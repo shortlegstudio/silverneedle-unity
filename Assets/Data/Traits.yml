@@ -11,10 +11,20 @@
   name: Defensive Training (Dwarves)
   description: >
     Dwarves get a +4 dodge bonus to AC against monsters of the giant subtype.
+  modifiers:
+    - stat: Armor Class
+      modifier: 4
+      type: dodge
+      condition: vs. Humanoid (giant)
 - trait:
   name: Defensive Training (Gnomes)
   description: >
     Gnomes get a +4 dodge bonus to AC against monsters of the giant subtype.
+  modifiers:
+    - stat: Armor Class
+      modifier: 4
+      type: dodge
+      condition: vs. Humanoid (giant)
 - trait:
   name: Elf Blood
   description: Half-Elves count as both elves and humans for any effect related to race.
@@ -29,11 +39,21 @@
     Elves receive a +2 racial bonus on caster level checks made to overcome
     spell resistance. In addition, elves receive a +2 racial bonus on
     Spellcraft skill checks made to identify the properties of magic items.
+  modifiers:
+    - stat: Spellcraft
+      modifier: 2
+      type: racial
+      condition: identify magic items
 - trait:
   name: Fearless
   description: >
     Halflings receive a +2 racial bonus on all saving throws against fear.
     This bonus stacks with bonuses from Halfling Luck.
+  modifiers:
+    - stat: Will
+      modifier: 2
+      type: racial
+      condition: vs. fear
 - trait:
   name: Gnome Magic
   description: >
