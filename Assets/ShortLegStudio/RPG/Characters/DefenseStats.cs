@@ -5,9 +5,13 @@ using System.Linq;
 
 namespace ShortLegStudio.RPG.Characters {
 	
-	public class DefenseStats  {
+	public class DefenseStats : IStatTracker  {
 		const int BASE_ARMOR_CLASS = 10;
 		const int GOOD_SAVE_BASE = 2;
+		const string ARMOR_CLASS_STAT_NAME = "Armor Class";
+		const string WILL_SAVE_STAT_NAME = "Will";
+		const string REFLEX_SAVE_STAT_NAME = "Reflex";
+		const string FORTITUDE_SAVE_STAT_NAME = "Fortitude";
 
 		private AbilityScores Abilities;
 		private SizeStats Size;
@@ -15,6 +19,7 @@ namespace ShortLegStudio.RPG.Characters {
 		private BasicStat Reflex { get; set; }
 		private BasicStat Will { get; set; }
 		private Inventory Inventory { get; set; }
+		private BasicStat Armor { get; set; }
 
 		public DefenseStats(AbilityScores abilityScores, SizeStats size, Inventory inv) {
 			Abilities = abilityScores;	
@@ -22,6 +27,7 @@ namespace ShortLegStudio.RPG.Characters {
 			Fortitude = new BasicStat ();
 			Reflex = new BasicStat ();
 			Will = new BasicStat ();
+			Armor = new BasicStat(BASE_ARMOR_CLASS);
 			Inventory = inv;
 		}
 
@@ -30,7 +36,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public int ArmorClass() {
-			return BASE_ARMOR_CLASS 
+			return Armor.TotalValue 
 				+ Abilities.GetModifier (AbilityScoreTypes.Dexterity)
 				+ Size.SizeModifier
 				+ EquipedArmorBonus();
@@ -88,6 +94,25 @@ namespace ShortLegStudio.RPG.Characters {
 			Reflex.AddModifier (new BasicStatModifier (cls.ReflexSaveRate, reason));
 			Will.AddModifier (new BasicStatModifier (cls.WillSaveRate, reason));
 
+		}
+
+		public void ProcessModifier(IModifiesStats stats) {
+			foreach (var s in stats.Modifiers) {
+				switch (s.StatName) {
+					case ARMOR_CLASS_STAT_NAME:
+						Armor.AddModifier(s);
+						break;
+					case FORTITUDE_SAVE_STAT_NAME:
+						Fortitude.AddModifier(s);
+						break;
+					case REFLEX_SAVE_STAT_NAME:
+						Reflex.AddModifier(s);
+						break;
+					case WILL_SAVE_STAT_NAME:
+						Will.AddModifier(s);
+						break;
+				}
+			}
 		}
 	}
 }

@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using ShortLegStudio;
+using ShortLegStudio.RPG;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Equipment;
 
@@ -106,6 +108,7 @@ namespace RPG.Characters {
 
 		[Test]
 		public void EquippedArmorIncreasesYourDefenseAndYourFlatFootedDefenseButNotTouchDefense() {
+			//TODO: Not sure if inventory is correct, or if inventory items should have modifiers?
 			var inventory = new Inventory ();
 			var def = new DefenseStats (
 				          new AbilityScores (),
@@ -143,5 +146,47 @@ namespace RPG.Characters {
 			Assert.AreEqual (0, def.EquipedArmorBonus ());
 
 		}
+
+		[Test]
+		public void ModifiersCanBeAppliedToArmorClass() {
+			var def = new DefenseStats(
+				          new AbilityScores(),
+				          new SizeStats(),
+				          new Inventory()
+			          );
+			var ac = def.ArmorClass();
+			def.ProcessModifier(new MockMod());
+			Assert.AreEqual(ac + 1, def.ArmorClass());
+		}
+
+		[Test]
+		public void ModifiersCanBeAppliedToSavingsThrows() {
+			var def = new DefenseStats(
+				          new AbilityScores(),
+				          new SizeStats(),
+				          new Inventory()
+			          );
+			var will = def.WillSave();
+			var fort = def.FortitudeSave();
+			var reflex = def.ReflexSave();
+			def.ProcessModifier(new MockMod());
+			Assert.AreEqual(will + 1, def.WillSave());
+			Assert.AreEqual(fort + 1, def.FortitudeSave());
+			Assert.AreEqual(reflex + 1, def.ReflexSave());
+		}
+
+		class MockMod : IModifiesStats {
+			public IList<BasicStatModifier> Modifiers { get; set;  }
+
+			public MockMod() {
+				Modifiers = new List<BasicStatModifier>();
+				Modifiers.Add(new BasicStatModifier("Armor Class", 1, "Cause", "Dodge"));
+				Modifiers.Add(new BasicStatModifier("Will", 1, "Halfing Luck", "Trait"));
+				Modifiers.Add(new BasicStatModifier("Reflex", 1, "Halfing Luck", "Trait"));
+				Modifiers.Add(new BasicStatModifier("Fortitude", 1, "Halfing Luck", "Trait"));
+
+			}
+		}
+
 	}
 }

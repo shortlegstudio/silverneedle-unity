@@ -55,6 +55,16 @@
   description: >
     Halflings receive a +1 racial bonus on Savings Throws
     (Fortitude, Reflex, Will)
+  modifiers:
+    - stat: Will
+      modifier: 1
+      type: racial
+    - stat: Fortitude
+      modifier: 1
+      type: racial
+    - stat: Reflex
+      modifier: 1
+      type: racial
 - trait:
   name: Hatred vs Orcs and Goblins
   description: >

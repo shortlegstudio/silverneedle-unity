@@ -6,6 +6,7 @@ using System.Linq;
 using ShortLegStudio.Dice;
 using NUnit.Framework.Constraints;
 using ShortLegStudio.Enchilada;
+using ShortLegStudio.RPG;
 
 namespace RPG.Characters {
 
@@ -61,6 +62,18 @@ namespace RPG.Characters {
 
 			//Make sure the event was called
 			Assert.IsTrue (called);
+		}
+
+		[Test]
+		public void AddingATraitToWillSaveBoostsDefense() {
+			CharacterSheet sheet = new CharacterSheet(_testSkills);
+			var trait = new Trait();
+			trait.Modifiers.Add(
+				new BasicStatModifier("Will", 10, "Trait", "Cause")
+			);
+			var oldScore = sheet.Defense.WillSave();
+			sheet.AddTrait(trait);
+			Assert.AreEqual(oldScore + 10, sheet.Defense.WillSave());
 		}
 	}
 

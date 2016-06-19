@@ -67,7 +67,8 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 			SelectClass (character);
 			character.AddFeat (Feat.GetQualifyingFeats (character).ToList ().ChooseOne ());
 
-			levelUpGen.BringCharacterToLevel(character, UnityEngine.Random.Range (1, 21));
+			//levelUpGen.BringCharacterToLevel(character, UnityEngine.Random.Range (1, 21));
+			//levelUpGen.BringCharacterToLevel(character, 1);
 
 			//Assign Skill Points
 			skillGen.AssignSkillPointsRandomly(character);

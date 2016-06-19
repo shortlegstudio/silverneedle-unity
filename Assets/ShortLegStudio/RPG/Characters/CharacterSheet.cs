@@ -98,7 +98,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public void AddTrait(Trait trait, bool notify = true) {
 			Traits.Add (trait);
-			SkillRanks.ProcessModifier (trait);
+			ProcessStatModifier(trait);
 
 			if (notify) {
 				NotifyModified ();
@@ -107,7 +107,7 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public void AddFeat(Feat feat, bool notify = true) {
 			Feats.Add (feat);
-			SkillRanks.ProcessModifier (feat);
+			ProcessStatModifier(feat);
 
 			if (notify) {
 				NotifyModified ();
@@ -137,6 +137,12 @@ namespace ShortLegStudio.RPG.Characters {
 				args.Sheet = this;
 				Modified (this, args);
 			}
+		}
+
+		private void ProcessStatModifier(IModifiesStats modifier) {
+			SkillRanks.ProcessModifier (modifier);
+			Defense.ProcessModifier(modifier);
+
 		}
 	}
 
