@@ -7,6 +7,7 @@
 - trait:
   name: Darkvision
   description: See in the dark up to 60 feet.
+  tag: Sense
 - trait:
   name: Defensive Training (Dwarves)
   description: >
@@ -102,11 +103,37 @@
   description: >
     Dwarves receive a +2 racial bonus on saving throws against poison, spells,
     and spell-like abilities.
+  modifiers:
+    - stat: Fortitude
+      modifier: 2
+      condition: vs. Spell
+      type: racial
+    - stat: Reflex
+      modifier: 2
+      condition: vs. Spell
+      type: racial
+    - stat: Will
+      modifier: 2
+      condition: vs. Spell
+      type: racial
 - trait:
   name: Illusion Resistance
   description: >
     Gnomes receive a +2 racial saving throw bonus against illusion spells and
     effects.
+  modifiers:
+    - stat: Fortitude
+      modifier: 2
+      condition: vs. Illusions
+      type: racial
+    - stat: Reflex
+      modifier: 2
+      condition: vs. Illusions
+      type: racial
+    - stat: Will
+      modifier: 2
+      condition: vs. Illusions
+      type: racial
 - trait:
   name: Intimidating
   description: >
@@ -174,7 +201,7 @@
     - stat: Perception
       type: racial
       modifier: 2
-      condition: Examine unusual stonework
+      condition: Stonework
 - trait:
   name: Sure-Footed
   description: >
@@ -190,6 +217,3 @@
 - trait:
   name: Weapon Familiarity
   description: TODO - handle this case
-- trait:
-  name: Languages
-  description: Dwarven, Elvish, etc....

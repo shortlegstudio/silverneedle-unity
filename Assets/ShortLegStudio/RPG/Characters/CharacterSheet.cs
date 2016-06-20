@@ -142,6 +142,7 @@ namespace ShortLegStudio.RPG.Characters {
 		private void ProcessStatModifier(IModifiesStats modifier) {
 			SkillRanks.ProcessModifier (modifier);
 			Defense.ProcessModifier(modifier);
+			Offense.ProcessModifier(modifier);
 
 		}
 	}

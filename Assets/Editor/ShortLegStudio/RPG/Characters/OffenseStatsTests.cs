@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG;
@@ -48,5 +49,30 @@ namespace RPG.Characters {
 			Assert.AreEqual (18, smallStats.CombatManueverDefense ());
 		}
 
+		[Test]
+		public void ModifiersCanBeAppliedToCombatManeuverDefense() {
+			var mods = new MockMod();
+			var oldCMD = smallStats.CombatManueverDefense();
+			smallStats.ProcessModifier(mods);
+			Assert.AreEqual(oldCMD + 1, smallStats.CombatManueverDefense());
+		}
+
+		[Test]
+		public void ModifiersCanBeAppliedToCombatManeuverBonus() {
+			var mods = new MockMod();
+			var oldCMB = smallStats.CombatManueverBonus();
+			smallStats.ProcessModifier(mods);
+			Assert.AreEqual(oldCMB + 1, smallStats.CombatManueverBonus());
+		}
+
+		class MockMod : IModifiesStats {
+			public IList<BasicStatModifier> Modifiers { get; set;  }
+
+			public MockMod() {
+				Modifiers = new List<BasicStatModifier>();
+				Modifiers.Add(new BasicStatModifier("CMD", 1, "racial", "Trait"));
+				Modifiers.Add(new BasicStatModifier("CMB", 1, "racial", "Trait"));
+			}
+		}
 	}
 }

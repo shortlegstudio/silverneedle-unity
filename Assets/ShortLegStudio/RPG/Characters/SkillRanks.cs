@@ -41,8 +41,6 @@ namespace ShortLegStudio.RPG.Characters {
 				CharacterSkill sk;
 				if (_skills.TryGetValue (a.StatName, out sk)) {
 					sk.AddModifier (a);
-				} else {
-					ShortLog.ErrorFormat ("Skill: {0} was not found in the Skill Ranks and modifiers could not be applied.", a.StatName);
 				}
 			}
 		}

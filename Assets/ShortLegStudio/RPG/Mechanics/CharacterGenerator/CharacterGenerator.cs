@@ -62,7 +62,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 
 		public CharacterSheet GenerateRandomCharacter() {
 			var skillGen = new SkillPointGenerator ();
-			var levelUpGen = new LevelUpGenerator (new HitPointGenerator());
+			//var levelUpGen = new LevelUpGenerator (new HitPointGenerator());
 			var character = CreateLevel0 ();
 			SelectClass (character);
 			character.AddFeat (Feat.GetQualifyingFeats (character).ToList ().ChooseOne ());
