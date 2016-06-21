@@ -69,14 +69,14 @@ public class LinkTextToProperty : MonoBehaviour {
 		case "Charisma":
 			return string.Format("{0} ({1})", character.Abilities.GetScore(Property), character.Abilities.GetModifier(Property).ToModifierString());
 		case "WeaponOneType":
-			return character.Inventory.Weapons.ToList () [0].GetBasicType();
+			return character.Offense.Attacks().ToList () [0].Weapon.GetBasicType();
 		case "WeaponTwoType":
-			return character.Inventory.Weapons.ToList () [1].GetBasicType();
+			return character.Offense.Attacks().ToList () [1].Weapon.GetBasicType();
 		case "WeaponOneInfo":
-			return GetWeaponInfo(character, character.Inventory.Weapons.ToList () [0]);
+			return character.Offense.Attacks().ToList () [0].ToString();
 		case "WeaponTwoInfo":
-			return GetWeaponInfo(character, character.Inventory.Weapons.ToList () [1]);
-
+			return character.Offense.Attacks().ToList () [1].ToString();
+			
 		case "WillSave":
 			return character.Defense.WillSave ().ToModifierString ();
 		}

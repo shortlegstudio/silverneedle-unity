@@ -3,6 +3,7 @@ using UnityEditor;
 using System.Linq;
 using NUnit.Framework;
 using ShortLegStudio.Dice;
+using YamlDotNet.Serialization.NodeDeserializers;
 
 
 [TestFixture]
@@ -76,5 +77,19 @@ public class CupTests {
 		cup.AddDie (Die.d4());
 		cup.Modifier = 20;
 		Assert.GreaterOrEqual (cup.Roll (), 20);
+	}
+
+	[Test]
+	public void FormatsCupIntoADiceString() {
+		var cup = new Cup();
+		cup.AddDie(Die.d10());
+		Assert.AreEqual("1d10", cup.ToString());
+		cup.AddDie(Die.d10());
+		Assert.AreEqual("2d10", cup.ToString());
+		cup.Modifier = 5;
+		Assert.AreEqual("2d10+5", cup.ToString());
+		cup.AddDie(Die.d6());
+		Assert.AreEqual("2d10+1d6+5", cup.ToString());
+
 	}
 }
