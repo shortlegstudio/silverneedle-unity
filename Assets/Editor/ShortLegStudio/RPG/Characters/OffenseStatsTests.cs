@@ -86,7 +86,9 @@ namespace RPG.Characters {
 			Assert.IsNotNull(atk);
 			var diceRoll = atk.Damage;
 			Assert.AreEqual(3, diceRoll.Modifier);
-			Assert.AreEqual(DiceSides.d8, diceRoll.Dice.First().Sides);
+
+			//Should convert damage based on size
+			Assert.AreEqual(DiceSides.d6, diceRoll.Dice.First().Sides);
 			Assert.AreEqual(smallStats.MeleeAttackBonus(), atk.AttackBonus);
 		}
 
@@ -97,7 +99,7 @@ namespace RPG.Characters {
 			Assert.IsNotNull(atk);
 			var diceRoll = atk.Damage;
 			Assert.AreEqual(0, diceRoll.Modifier);
-			Assert.AreEqual(DiceSides.d6, diceRoll.Dice.First().Sides);
+			Assert.AreEqual(DiceSides.d4, diceRoll.Dice.First().Sides);
 			Assert.AreEqual(smallStats.RangeAttackBonus(), atk.AttackBonus);
 		}
 

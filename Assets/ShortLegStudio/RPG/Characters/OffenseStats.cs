@@ -66,7 +66,7 @@ namespace ShortLegStudio.RPG.Characters {
 				var atk = new AttackStatistic();
 				atk.Name = weapon.Name;
 				atk.Weapon = weapon;
-				atk.Damage = DiceStrings.ParseDice(weapon.Damage);
+				atk.Damage = DiceStrings.ParseDice(DamageTables.ConvertDamageBySize(weapon.Damage, Size.Size));
 				if (weapon.IsMelee) {
 					atk.Damage.Modifier = AbilityScores.GetModifier(AbilityScoreTypes.Strength);
 					atk.AttackBonus = MeleeAttackBonus();
