@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Xml.Linq;
 
 
 namespace ShortLegStudio.RPG.Characters {
@@ -62,6 +64,22 @@ namespace ShortLegStudio.RPG.Characters {
 
 		public string Name { 
 			get { return Skill.Name; }
+		}
+
+		public override string ToString() {
+			var sb = new StringBuilder();
+			sb.AppendFormat("{0} {1}", Name, Score().ToModifierString());
+
+			var mods = ConditionalModifiers().Select(
+				x => string.Format("{0} {1}", GetConditionalScore(x).ToModifierString(), x)
+			           );
+
+			if (mods.Count() > 0) {
+				sb.AppendFormat(" ({0})",
+					string.Join(",", mods.ToArray())
+				);
+			}
+			return sb.ToString();
 		}
 
 	}

@@ -86,21 +86,10 @@ public class LinkTextToProperty : MonoBehaviour {
 
 	private string MakeSkillList(CharacterSheet character) {
 		return string.Join(",", character.SkillRanks.GetRankedSkills().Select(
-			x => { return FormatSkillString(x); }
+			x => x.ToString()
 		).ToArray<string>());
 	}
 
-	private string FormatSkillString(CharacterSkill x) {
-		var result = string.Format("{0} {1}", x.Name, x.Score().ToModifierString());
-		if (x.ConditionalModifiers().Count() > 0) {
-			var mods = x.ConditionalModifiers().Select(
-				           condition => {
-					return string.Format("{0} {1}", condition, x.GetConditionalScore(condition).ToModifierString()); 
-				});
-			result += string.Format("({0})", string.Join(", ", mods.ToArray()));
-		}
-		return result;
-	}
 
 	private string MakeFeatList(CharacterSheet character) {
 		return string.Join (",",
@@ -115,7 +104,7 @@ public class LinkTextToProperty : MonoBehaviour {
 	private string GetSenses(CharacterSheet character) {
 		//TODO: Find lowlight/darkvision/blindness/etc...
 
-		return string.Format ("Perception {0}", character.SkillRanks.GetScore ("Perception").ToModifierString ());
+		return character.SkillRanks.GetSkill("Perception").ToString();
 		//return perception score
 	}
 

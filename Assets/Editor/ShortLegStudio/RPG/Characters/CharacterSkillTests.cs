@@ -129,6 +129,8 @@ namespace RPG.Characters {
 			Assert.AreEqual(1, charSkill.ConditionalModifiers().Count());
 			Assert.AreEqual(3, charSkill.GetConditionalScore("Celery"));
 			Assert.AreEqual(0, charSkill.Score());
+			Assert.AreEqual("Eat +0 (+3 Celery)", charSkill.ToString());
 		}
+
 	}
 }
