@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Xml.Linq;
+using System.Text;
+using ShortLegStudio.RPG.Characters; 	//TODO: Move ModifierString out of this namespace
 
 namespace ShortLegStudio.RPG {
 	public class BasicStat {
@@ -14,7 +16,6 @@ namespace ShortLegStudio.RPG {
 				return (int)_adjustments.Sum (x => x.Modifier);	
 			}
 		}
-
 
 		public event EventHandler<BasicStatModifiedEventArgs> Modified;
 
@@ -61,6 +62,26 @@ namespace ShortLegStudio.RPG {
 		public int GetConditionalScore(string cond) {
 			var conditions = conditionalModifiers.Where(x => x.Condition == cond);
 			return TotalValue + (int)conditions.Sum(x => x.Modifier);
+		}
+
+		public string ToString(string statName) {
+			var sb = new StringBuilder();
+			sb.AppendFormat("{0} {1}", statName, TotalValue.ToModifierString());
+
+			var mods = GetConditions().Select(
+				x => string.Format("{0} {1}", GetConditionalScore(x).ToModifierString(), x)
+			);
+
+			if (mods.Count() > 0) {
+				sb.AppendFormat(" ({0})",
+					string.Join(",", mods.ToArray())
+				);
+			}
+			return sb.ToString();
+		}
+
+		public override string ToString() {
+			return ToString("");
 		}
 
 		protected virtual void Refresh(int oldBase, int oldTotal) {

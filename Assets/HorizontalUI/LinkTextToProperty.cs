@@ -45,7 +45,7 @@ public class LinkTextToProperty : MonoBehaviour {
 		case "HitPoints":
 			return character.MaxHitPoints.ToString ();
 		case "Initiative":
-			return character.Initiative.TotalValue.ToModifierString();
+			return character.Initiative.ToString();
 		case "Languages":
 			return GetLanguageList (character);
 		case "MovementSpeed":
@@ -102,9 +102,9 @@ public class LinkTextToProperty : MonoBehaviour {
 	}
 
 	private string GetSenses(CharacterSheet character) {
-		//TODO: Find lowlight/darkvision/blindness/etc...
-
-		return character.SkillRanks.GetSkill("Perception").ToString();
+		var senses = character.GetSpecialAbilities("sense");
+		var str = string.Join(",", senses.ToArray());
+		return str + " ; " + character.SkillRanks.GetSkill("Perception").ToString();
 		//return perception score
 	}
 

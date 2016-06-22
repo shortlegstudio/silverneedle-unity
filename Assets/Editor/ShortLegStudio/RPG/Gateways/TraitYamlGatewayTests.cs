@@ -67,10 +67,16 @@ namespace RPG.Gateways {
 			Assert.AreEqual("Stoneworking", conditional.First().Condition);
 		}
 
+		[Test]
+		public void TraitsCanHaveTags() {
+			Assert.AreEqual("senses", darkvision.Tags.First());
+		}
+
 		private const string TraitYamlFile = @"
 - trait: 
   name: Darkvision
   description: See in the dark.
+  tags: senses
 - trait:
   name: Hardy
   description: Really tough

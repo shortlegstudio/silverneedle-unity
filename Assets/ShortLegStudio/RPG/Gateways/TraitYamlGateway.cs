@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using ShortLegStudio.Enchilada;
 using ShortLegStudio.RPG.Characters;
 using System.Collections.Generic;
@@ -29,7 +30,7 @@ namespace ShortLegStudio.RPG.Gateways {
 				trait.Name = traitNode.GetString ("name"); 
 				ShortLog.Debug ("Loading Trait: " + trait.Name);
 				trait.Description = traitNode.GetString ("description");
-
+				trait.Tags.Add(traitNode.GetCommaStringOptional("tags"));
 				//Get Any skill Modifiers if they exist
 				var modifiers = traitNode.GetNodeOptional("modifiers");
 				if (modifiers != null) {
@@ -38,6 +39,7 @@ namespace ShortLegStudio.RPG.Gateways {
 						trait.Modifiers.Add(m);
 					}
 				}
+
 
 				_traits.Add (trait);
 			}

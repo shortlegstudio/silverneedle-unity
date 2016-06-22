@@ -7,7 +7,7 @@
 - trait:
   name: Darkvision
   description: See in the dark up to 60 feet.
-  tag: Sense
+  tags: sense
 - trait:
   name: Defensive Training (Dwarves)
   description: >
@@ -31,6 +31,7 @@
   description: Half-Elves count as both elves and humans for any effect related to race.
 - trait:
   name: Elven Immunities
+  tags: immunity
   description: >
     Elves are immune to magic sleep effects and get a +2 racial saving throws
     bonus against enchantment spells and effects.
@@ -153,6 +154,7 @@
 - trait:
   name: Low-Light Vision
   description: Can see in low light like normal light.
+  tags: sense
 - trait:
   name: Multitalented
   description: >
@@ -180,16 +182,27 @@
 - trait:
   name: Slow Speed
   description: Speed of only 20 feet instead of 30 feet.
+  tags: move
 - trait:
   name: Slow and Steady
   description: >
     Dwarves have a base speed of 20 feet, but their speed is never modified
     by armor or encumberance.
+  tags: move
 - trait:
   name: Stability
   description: >
     Dwarves receive a +4 racial bonus to their Combat Maneuver Defensive when
     resisting a bull rush or trip attempt while standing on the ground.
+  modifiers:
+    - stat: CMD
+      modifier: 4
+      type: bonus
+      condition: vs. Bull Rush
+    - stat: CMD
+      modifier: 4
+      type: bonus
+      condition: vs. Trip
 - trait:
   name: Stonecunning
   description: >

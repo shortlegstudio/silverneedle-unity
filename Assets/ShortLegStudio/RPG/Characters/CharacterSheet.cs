@@ -139,11 +139,15 @@ namespace ShortLegStudio.RPG.Characters {
 			}
 		}
 
+		public IEnumerable<string> GetSpecialAbilities(string abilityTag) {
+			var list = Traits.Where(x => x.Tags.Contains(abilityTag)).Select(x => x.Name);
+			return list;
+		}
+
 		private void ProcessStatModifier(IModifiesStats modifier) {
 			SkillRanks.ProcessModifier (modifier);
 			Defense.ProcessModifier(modifier);
 			Offense.ProcessModifier(modifier);
-
 		}
 	}
 

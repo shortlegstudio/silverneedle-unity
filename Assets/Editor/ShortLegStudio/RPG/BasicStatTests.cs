@@ -90,5 +90,12 @@ namespace RPG {
 			Assert.AreEqual(13, stat.GetConditionalScore("vs. Thor"));
 		}
 			
+		[Test]
+		public void FormatNiceStringVersionOfStat() {
+			var stat = new BasicStat(20);
+			BasicStatModifier mod = new ConditionalStatModifier("vs. Thor", "Attack Bonus", 3, "bonus", "Food");
+			stat.AddModifier(mod);
+			Assert.AreEqual("Fight +20 (+23 vs. Thor)", stat.ToString("Fight"));
+		}
 	}
 }
