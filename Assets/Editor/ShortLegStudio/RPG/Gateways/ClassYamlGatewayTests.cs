@@ -113,6 +113,14 @@ namespace RPG.Gateways {
 			Assert.IsFalse (Wizard.IsFortitudeGoodSave);
 			Assert.IsTrue (Monk.IsReflexGoodSave);
 		}
+
+		[Test]
+		public void ClassesHaveWeaponProficiencies() {
+			Assert.IsTrue(Fighter.WeaponProficiencies.Contains("martial"));
+			Assert.IsTrue(Fighter.WeaponProficiencies.Contains("simple"));
+			Assert.IsTrue(Monk.WeaponProficiencies.Contains("monk"));
+			Assert.IsTrue(Wizard.WeaponProficiencies.Contains("dagger"));
+		}
 		private const string ClassYamlFile = @"--- 
 - class: 
   name: Fighter
@@ -128,6 +136,7 @@ namespace RPG.Gateways {
   reflex: 0.334
   will: 0.334
   armorproficiencies: light, medium, heavy
+  weaponproficiencies: simple, martial
 - class: 
   name: Monk
   skillpoints: 4
@@ -142,6 +151,7 @@ namespace RPG.Gateways {
   fortitude: 0.667
   reflex: 0.667
   will: 0.334
+  weaponproficiencies: simple, monk
 - class: 
   name: Wizard
   skillpoints: 4
@@ -155,6 +165,7 @@ namespace RPG.Gateways {
   reflex: 0.334
   fortitude: 0.334
   will: 0.667
+  weaponproficiencies: club, dagger, crossbow
 ...";	
 	}
 }

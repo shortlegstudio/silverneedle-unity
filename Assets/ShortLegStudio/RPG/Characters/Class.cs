@@ -20,6 +20,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public float ReflexSaveRate { get; set; }
 		public float WillSaveRate { get; set; }
 		public IList<string> ArmorProficiencies { get; set; }
+		public IList<string> WeaponProficiencies { get; set; }
 
 		public bool IsFortitudeGoodSave { 
 			get { return FortitudeSaveRate == GOOD_SAVE_RATE; }
@@ -34,6 +35,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public Class() {
 			ClassSkills = new List<string> ();
 			ArmorProficiencies = new List<string> ();
+			WeaponProficiencies = new List<string>();
 		}
 
 		public bool IsClassSkill(string name) {

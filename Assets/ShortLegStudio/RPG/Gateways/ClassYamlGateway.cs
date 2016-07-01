@@ -44,6 +44,9 @@ public class ClassYamlGateway : EntityGateway<Class> {
 				);
 			}
 
+			var weapons = node.GetCommaStringOptional("weaponproficiencies");
+			cls.WeaponProficiencies.Add(weapons);
+
 			//Get the Skills for this class
 			var skills = node.GetNode ("skills").Children();
 			foreach (var s in skills) {

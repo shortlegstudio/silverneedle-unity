@@ -18,6 +18,7 @@
   reflex: 0.334
   will: 0.334
   armorproficiencies: light, medium
+  weaponproficiencies: simple, martial
 - class:
   name: Bard
   skillpoints: 6
@@ -56,6 +57,7 @@
   reflex: 0.667
   will: 0.667
   armorproficiencies: light
+  weaponproficiencies: simple, longsword, rapier, sap, short sword, shortbow, whip
 - class:
   name: Cleric
   skillpoints: 2
@@ -79,6 +81,7 @@
   reflex: 0.334
   will: 0.667
   armorproficiencies: light, medium
+  weaponproficiencies: simple
 - class:
   name: Druid
   skillpoints: 4
@@ -102,6 +105,7 @@
   reflex: 0.334
   will: 0.667
   armorproficiencies: light, medium
+  weaponproficiencies: club, dagger, dart, quarterstaff, scimitar, scythe, sickle, shortspear, sling, spear
 - class:
   name: Fighter
   skillpoints: 2
@@ -122,6 +126,7 @@
   reflex: 0.334
   will: 0.334
   armorproficiencies: light, medium, heavy
+  weaponproficiencies: simple, martial
 - class:
   name: Monk
   skillpoints: 4
@@ -145,6 +150,7 @@
   fortitude: 0.667
   reflex: 0.667
   will: 0.667
+  weaponproficiencies: club, light crossbow, heavy crossbow, dagger, handaxe, javelin, kama, nunchaku, quarterstaff, sai, shortspear, short sword, shuriken, siangham, sling, spear
 - class:
   name: Paladin
   skillpoints: 2
@@ -165,6 +171,7 @@
   reflex: 0.334
   will: 0.667
   armorproficiencies: light, medium, heavy
+  weaponproficiencies: simple, martial
 - class:
   name: Ranger
   skillpoints: 6
@@ -190,6 +197,7 @@
   reflex: 0.667
   will: 0.334
   armorproficiencies: light, medium
+  weaponproficiencies: simple, martial
 - class:
   name: Rogue
   skillpoints: 8
@@ -221,6 +229,7 @@
   reflex: 0.667
   will: 0.334
   armorproficiencies: light
+  weaponproficiencies: simple, hand crossbow, rapier, sap, shortbow, short sword
 - class:
   name: Sorcerer
   skillpoints: 2
@@ -239,6 +248,7 @@
   fortitude: 0.334
   reflex: 0.334
   will: 0.667
+  weaponproficiencies: simple
 - class:
   name: Wizard
   skillpoints: 2
@@ -264,3 +274,4 @@
   fortitude: 0.334
   reflex: 0.334
   will: 0.667
+  weaponproficiencies: club, dagger, heavy crossbow, light crossbow, quarterstaff
