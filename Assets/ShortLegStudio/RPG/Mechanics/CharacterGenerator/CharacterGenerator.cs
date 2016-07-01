@@ -54,7 +54,8 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 		}
 
 		public CharacterSheet SelectClass(CharacterSheet character) {
-			character.SetClass (Class.GetClasses ().ChooseOne ());
+			var gw = new ClassYamlGateway();
+			character.SetClass (gw.All().ToList().ChooseOne ());
 			var hp = new HitPointGenerator ();
 			character.SetHitPoints (hp.RollHitPoints (character));
 			return character;

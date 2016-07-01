@@ -56,51 +56,8 @@ namespace ShortLegStudio.RPG.Characters {
 				ShortLog.Debug ("Not adding class skill as it already is there: " + name);
 		}
 
-		public static IList<Class> LoadFromYaml(YamlNodeWrapper yaml) {
-			var classes = new List<Class> ();
 
-			foreach (var node in yaml.Children()) {
-				var cls = new Class ();
-				cls.Name = node.GetString ("name"); 
-				ShortLog.Debug ("Loading Class: " + cls.Name);
-				cls.SkillPoints = node.GetInteger ("skillpoints");
-				cls.HitDice = DiceStrings.ParseSides (node.GetString ("hitdice"));
-				cls.BaseAttackBonusRate = node.GetFloat ("baseattackbonus");
-				cls.FortitudeSaveRate = node.GetFloat ("fortitude");
-				cls.ReflexSaveRate = node.GetFloat ("reflex");
-				cls.WillSaveRate = node.GetFloat ("will");
 
-				var armor = node.GetCommaStringOptional ("armorproficiencies");
-				foreach (var a in armor) {
-					cls.ArmorProficiencies.Add (
-						string.Format ("Armor Proficiency ({0})", a.Capitalize ())
-					);
-				}
-
-				//Get the Skills for this class
-				var skills = node.GetNode ("skills").Children();
-				foreach (var s in skills) {
-					cls.AddClassSkill (s.Value);
-				}
-
-				classes.Add (cls);
-			}
-
-			return classes;
-		}
-
-		public static IList<Class> GetClasses() {
-			if (_Classes == null) {
-				var yaml = FileHelper.OpenYaml (CLASS_DATA_FILE);
-				_Classes = LoadFromYaml (yaml);
-			}
-
-			return _Classes;
-		}
-
-		//Static Values
-		const string CLASS_DATA_FILE = "Data/classes.yml";
-		static IList<Class> _Classes;
 
 	}
 }

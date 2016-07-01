@@ -9,7 +9,7 @@ using ShortLegStudio.RPG.Gateways;
 namespace RPG.Gateways {
 
 	[TestFixture]
-	public class RacyYamlGatewayTests {
+	public class RaceYamlGatewayTests {
 		Race dwarf;
 		Race elf;
 		Race halfling;
@@ -17,7 +17,7 @@ namespace RPG.Gateways {
 
 		[SetUp]
 		public void SetUp() {
-			var repository = new RaceYamlGateway (SkillsYamlFile.ParseYaml());
+			var repository = new RaceYamlGateway (RaceYamlFile.ParseYaml());
 			var races = repository.All ();
 			dwarf = races.First (x => x.Name == "Dwarf");
 			elf = races.First (x => x.Name == "Elf");
@@ -94,7 +94,7 @@ namespace RPG.Gateways {
 			Assert.AreEqual (25, halfling.BaseMovementSpeed);
 		}
 
-		private const string SkillsYamlFile = @"--- 
+		private const string RaceYamlFile = @"--- 
 - race: 
   name: Dwarf
   abilities: 

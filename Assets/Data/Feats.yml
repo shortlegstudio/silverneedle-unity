@@ -443,6 +443,10 @@
 - feat:
   name: Great Fortitude
   description: You are resistant to poisons, diseases, and other maladies.
+  modifiers:
+    - stat: Fortitude
+      modifier: 2
+      type: bonus
 - feat:
   name: Greater Bull Rush
   tags: combat
@@ -648,6 +652,10 @@
   name: Improved Initiative
   description: Your quick reflexes allow you to react rapidly to danger.
   tags: combat
+  modifiers:
+    - stat: Initiative
+      modifier: 4
+      type: bonus
 - feat:
   name: Improved Iron Will
   description: Your clarity of thought allows you to resist mental attacks.
@@ -731,9 +739,17 @@
 - feat:
   name: Iron Will
   description: You are more resistant to mental effects.
+  modifiers:
+    - stat: Will
+      modifier: 2
+      type: bonus
 - feat:
   name: Lighting Reflexes
   description: You have faster reflexes than normal.
+  modifiers:
+    - stat: Reflex
+      modifier: 2
+      type: bonus
 - feat:
   name: Lighting Stance
   description: >

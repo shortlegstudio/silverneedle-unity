@@ -25,7 +25,6 @@
       1: Obscuring Mist
       2: Wind Wall
       3: Gaseous Form
-
 - class:
   name: Fighter
   weaponproficiencies: simple, martial
