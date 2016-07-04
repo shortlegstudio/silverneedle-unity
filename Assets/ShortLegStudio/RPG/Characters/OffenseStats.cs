@@ -7,6 +7,7 @@ namespace ShortLegStudio.RPG.Characters {
 	public class OffenseStats : IStatTracker {
 		const string CMD_STAT_NAME = "CMD";
 		const string CMB_STAT_NAME = "CMB";
+		public const int UNPROFICIENT_MODIFIER = -4;
 
 		public BasicStat BaseAttackBonus { get; private set; }
 		private AbilityScores AbilityScores { get; set; }
@@ -56,6 +57,10 @@ namespace ShortLegStudio.RPG.Characters {
 						break;
 				}
 			}
+		}
+
+		public void AddWeaponProficiencies(IEnumerable<string> prof) {
+
 		}
 
 		public IList<AttackStatistic> Attacks() {

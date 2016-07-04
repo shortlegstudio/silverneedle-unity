@@ -7,6 +7,7 @@ using ShortLegStudio.RPG;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Equipment;
 using ShortLegStudio.Dice;
+using System.Collections;
 
 namespace RPG.Characters {
 
@@ -21,6 +22,8 @@ namespace RPG.Characters {
 			abilities.SetScore (AbilityScoreTypes.Strength, 16);
 			abilities.SetScore (AbilityScoreTypes.Dexterity, 16);
 			var size = new SizeStats (CharacterSize.Small, 1,1);
+
+			var weaponprof = new string[] { "simple", "longsword", "shortbow" };
 			inventory = new Inventory();
 			smallStats = new OffenseStats (abilities, size, inventory);
 		}
@@ -103,6 +106,13 @@ namespace RPG.Characters {
 			Assert.AreEqual(smallStats.RangeAttackBonus(), atk.AttackBonus);
 		}
 
+		[Test]
+		public void AttacksWithoutProficiencyAreAtMinus4() {
+			inventory.AddItem(Nunchaku());
+			var atk = smallStats.Attacks().First();
+			Assert.IsNotNull(atk);
+			Assert.AreEqual(smallStats.MeleeAttackBonus() + OffenseStats.UNPROFICIENT_MODIFIER, atk.AttackBonus);
+		}
 
 
 		private Weapon Longsword() {
@@ -110,7 +120,11 @@ namespace RPG.Characters {
 		}
 
 		private Weapon ShortBow() {
-			return new Weapon("Short bow", 0, "1d6", DamageTypes.Piercing, 19, 2, 0, WeaponType.Ranged, WeaponGroup.Bows, WeaponTrainingLevel.Martial);
+			return new Weapon("Shortbow", 0, "1d6", DamageTypes.Piercing, 19, 2, 0, WeaponType.Ranged, WeaponGroup.Bows, WeaponTrainingLevel.Martial);
+		}
+
+		private Weapon Nunchaku() {
+			return new Weapon("Nunchaku", 0, "1d6", DamageTypes.Bludgeoning, 20, 2, 0, WeaponType.OneHanded, WeaponGroup.Monk, WeaponTrainingLevel.Exotic);
 		}
 
 		class MockMod : IModifiesStats {
