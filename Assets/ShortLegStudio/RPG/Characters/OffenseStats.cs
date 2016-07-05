@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ShortLegStudio.RPG.Equipment;
 using ShortLegStudio.Dice;
 
@@ -15,6 +16,7 @@ namespace ShortLegStudio.RPG.Characters {
 		private BasicStat CMD { get; set; }
 		private BasicStat CMB { get; set; }
 		private Inventory Inventory;
+		private IList<WeaponProficiency> weaponProficiencies;
 
 
 		public OffenseStats (AbilityScores scores, SizeStats size, Inventory inventory) {
@@ -24,6 +26,7 @@ namespace ShortLegStudio.RPG.Characters {
 			AbilityScores = scores;
 			Size = size;
 			Inventory = inventory;
+			weaponProficiencies = new List<WeaponProficiency>();
 		}
 
 		public int MeleeAttackBonus() {
@@ -60,7 +63,17 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public void AddWeaponProficiencies(IEnumerable<string> prof) {
+			foreach (var p in prof) {
+				AddWeaponProficiency(p);
+			}
+		}
 
+		public void AddWeaponProficiency(string prof) {
+			weaponProficiencies.Add(new WeaponProficiency(prof));
+		}
+
+		public bool IsProficient(Weapon wpn) {
+			return weaponProficiencies.Any(x => x.IsProficient(wpn));
 		}
 
 		public IList<AttackStatistic> Attacks() {
@@ -78,6 +91,10 @@ namespace ShortLegStudio.RPG.Characters {
 				}
 				else if (weapon.IsRanged) {
 					atk.AttackBonus = RangeAttackBonus();
+				}
+				//If not proficient, add a penalty to the attack bonus
+				if (!IsProficient(weapon)) {
+					atk.AttackBonus += UNPROFICIENT_MODIFIER;
 				}
 				attacks.Add(atk);
 			}

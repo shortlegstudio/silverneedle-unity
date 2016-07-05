@@ -36,6 +36,5 @@ namespace RPG.Characters {
 			wpn.Name = "Shortbow";
 			Assert.IsTrue(prof.IsProficient(wpn));
 		}
-
 	}
 }

@@ -85,6 +85,8 @@ namespace RPG.Characters {
 		[Test]
 		public void MeleeWeaponAttacksCalculateDamageBonuses() {
 			inventory.AddItem(Longsword());
+			smallStats.AddWeaponProficiency("martial");
+
 			var atk = smallStats.Attacks().First();
 			Assert.IsNotNull(atk);
 			var diceRoll = atk.Damage;
@@ -98,12 +100,25 @@ namespace RPG.Characters {
 		[Test]
 		public void RangeAttackBonusHaveAttackBonusButNotDamage() {
 			inventory.AddItem(ShortBow());
+			smallStats.AddWeaponProficiency("martial");
 			var atk = smallStats.Attacks().First();
 			Assert.IsNotNull(atk);
 			var diceRoll = atk.Damage;
 			Assert.AreEqual(0, diceRoll.Modifier);
 			Assert.AreEqual(DiceSides.d4, diceRoll.Dice.First().Sides);
 			Assert.AreEqual(smallStats.RangeAttackBonus(), atk.AttackBonus);
+		}
+
+		[Test]
+		public void CanAddWeaponProficiencies() {
+			smallStats.AddWeaponProficiency("Shortbow");
+			Assert.IsTrue(smallStats.IsProficient(ShortBow()));
+		}
+
+		[Test]
+		public void CanAddAnArrayOfWeaponProficiencies() {
+			smallStats.AddWeaponProficiencies(new string[] {"simple", "martial"});
+			Assert.IsTrue(smallStats.IsProficient(Longsword()));	
 		}
 
 		[Test]
