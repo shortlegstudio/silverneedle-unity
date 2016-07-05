@@ -65,6 +65,10 @@ namespace ShortLegStudio.RPG.Characters {
 			this.Class = cls;
 			Offense.BaseAttackBonus.SetValue (GetCurrentBaseAttackBonus ());
 
+			//Add Weapon Proficiencies
+			Offense.AddWeaponProficiencies(cls.WeaponProficiencies);
+
+			//Should be moved to the defense stats
 			//Handle Armor Proficiencies
 			foreach (var x in cls.ArmorProficiencies) {
 				AddFeat (Feat.GetFeat (x));

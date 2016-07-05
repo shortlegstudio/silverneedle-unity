@@ -7,6 +7,7 @@ using ShortLegStudio.Dice;
 using NUnit.Framework.Constraints;
 using ShortLegStudio.Enchilada;
 using ShortLegStudio.RPG;
+using ShortLegStudio.RPG.Equipment;
 
 namespace RPG.Characters {
 
@@ -43,6 +44,18 @@ namespace RPG.Characters {
 			Assert.AreEqual (1, sheet.Level);
 	    }
 
+		[Test]
+		public void AssigningClassUpdatesWeaponProficiencies() {
+			var sheet = new CharacterSheet(new List<Skill>());
+			var fighter = new Class();
+			fighter.WeaponProficiencies.Add("martial");
+			fighter.WeaponProficiencies.Add("simple");
+			sheet.SetClass(fighter);
+
+			var wpn = new Weapon();
+			wpn.Level = WeaponTrainingLevel.Martial;
+			Assert.IsTrue(sheet.Offense.IsProficient(wpn));
+		}
 
 
 		[Test]
