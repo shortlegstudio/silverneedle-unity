@@ -4,19 +4,20 @@ using ShortLegStudio.RPG.Gateways;
 using System.Linq;
 using ShortLegStudio.Enchilada;
 using ShortLegStudio.RPG.Characters;
+using ShortLegStudio.RPG.Equipment.Gateways;
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 	public class EquipMeleeAndRangedWeapon {
-		private EntityGateway<Weapon> WeaponGateway;
+		private IWeaponGateway WeaponGateway;
 
-		public EquipMeleeAndRangedWeapon(EntityGateway<Weapon> weapons) {
+		public EquipMeleeAndRangedWeapon(IWeaponGateway weapons) {
 			WeaponGateway = weapons;
 		}
 
 		
-		public void AssignWeapons(Inventory inv) {
-			var melee = WeaponGateway.All().Where(x => x.Type != WeaponType.Ranged).ToList();
-			var ranged = WeaponGateway.All().Where (x => x.Type == WeaponType.Ranged).ToList();
+		public void AssignWeapons(Inventory inv, IEnumerable<WeaponProficiency> proficiencies) {
+			var melee = WeaponGateway.FindByProficient(proficiencies).Where(x => x.Type != WeaponType.Ranged).ToList();
+			var ranged = WeaponGateway.FindByProficient(proficiencies).Where (x => x.Type == WeaponType.Ranged).ToList();
 
 			inv.AddItem (melee.ChooseOne ());
 			inv.AddItem (ranged.ChooseOne ());

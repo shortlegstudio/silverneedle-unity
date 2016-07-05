@@ -19,7 +19,6 @@ namespace ShortLegStudio {
 
 	public class YamlNodeWrapper {
 		public string BOOLEAN_TRUE = "yes";
-
 		public YamlNode Node { get; private set; }
 		private YamlSequenceNode _seqNode;
 		private YamlScalarNode _scalarNode;
@@ -89,7 +88,7 @@ namespace ShortLegStudio {
 
 		public YamlNodeWrapper GetNode(string key) {
 			try {
-				ShortLog.DebugFormat("Retrieving Node: {0}", key);
+				//ShortLog.DebugFormat("Retrieving Node: {0}", key);
 				var item = _mappingNode.Children [new YamlScalarNode(key)];
 				return new YamlNodeWrapper (item);
 			} catch {
@@ -100,7 +99,8 @@ namespace ShortLegStudio {
 
 		public YamlNodeWrapper GetNodeOptional(string key) {
 			try {
-				return GetNode (key);
+				var item = _mappingNode.Children [new YamlScalarNode(key)];
+				return new YamlNodeWrapper (item);
 			} catch(KeyNotFoundException) {
 				return null;
 			}

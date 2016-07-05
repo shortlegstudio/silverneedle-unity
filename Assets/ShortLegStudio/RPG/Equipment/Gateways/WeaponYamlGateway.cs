@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using ShortLegStudio.RPG.Equipment;
 using ShortLegStudio.Enchilada;
 using System.Collections.Generic;
+using ShortLegStudio.RPG.Characters;
 
 namespace ShortLegStudio.RPG.Equipment.Gateways {
-	public class WeaponYamlGateway : EntityGateway<Weapon> {
+	public class WeaponYamlGateway : IWeaponGateway {
 		const string WEAPON_YAML_FILE = "Data/weapons.yml";
 
 		private IList<Weapon> Weapons;
@@ -40,6 +42,10 @@ namespace ShortLegStudio.RPG.Equipment.Gateways {
 
 		public IEnumerable<Weapon> All() {
 			return Weapons;
+		}
+
+		public IEnumerable<Weapon> FindByProficient(IEnumerable<WeaponProficiency> proficiencies) {
+			return Weapons.Where(x => proficiencies.IsProficient(x));
 		}
 	}
 }

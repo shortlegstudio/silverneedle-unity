@@ -1,5 +1,7 @@
 ﻿using System;
 using ShortLegStudio.RPG.Equipment;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ShortLegStudio.RPG.Characters {
 	public class WeaponProficiency {
@@ -17,6 +19,12 @@ namespace ShortLegStudio.RPG.Characters {
 				return wpn.Level == TrainingLevel;
 			}
 			return string.Compare(wpn.Name, Name, true) == 0;
+		}
+	}
+
+	public static class WeaponProficiencyEnumerableExtensions {
+		public static bool IsProficient(this IEnumerable<WeaponProficiency> proficiencies, Weapon wpn) {
+			return proficiencies.Any(x => x.IsProficient(wpn));
 		}
 	}
 }

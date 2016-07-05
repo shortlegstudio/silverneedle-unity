@@ -15,7 +15,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 		private NameGenerator nameGenerator;
 
 		private IArmorGateway armorGateway;
-		private EntityGateway<Weapon> weaponGateway;
+		private IWeaponGateway weaponGateway;
 		private EntityGateway<Skill> skillGateway;
 		private EntityGateway<Class> classGateway;
 
@@ -76,7 +76,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 
 			//Get some gear!
 			var equip = new EquipMeleeAndRangedWeapon(weaponGateway);
-			equip.AssignWeapons(character.Inventory);
+			equip.AssignWeapons(character.Inventory, character.Offense.WeaponProficiencies);
 
 
 			var equipArmor = new PurchaseInitialArmor (armorGateway);

@@ -43,6 +43,16 @@ namespace RPG.Equipment.Gateways {
 			Assert.AreEqual (WeaponTrainingLevel.Simple, dagger.Level);
 		}
 
+		[Test]
+		public void CanSelectWeaponsBasedOnProficiencies() {
+			var repo = new WeaponYamlGateway(WeaponYamlFile.ParseYaml());
+			var prof = new WeaponProficiency("dagger");
+
+			var results = repo.FindByProficient(new WeaponProficiency[] { prof });
+			Assert.AreEqual(1, results.Count());
+			Assert.AreEqual("Dagger", results.First().Name);
+		}
+
 		private const string WeaponYamlFile = @"--- 
 - weapon: 
   name: Longsword

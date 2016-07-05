@@ -23,7 +23,6 @@ namespace RPG.Characters {
 			abilities.SetScore (AbilityScoreTypes.Dexterity, 16);
 			var size = new SizeStats (CharacterSize.Small, 1,1);
 
-			var weaponprof = new string[] { "simple", "longsword", "shortbow" };
 			inventory = new Inventory();
 			smallStats = new OffenseStats (abilities, size, inventory);
 		}
