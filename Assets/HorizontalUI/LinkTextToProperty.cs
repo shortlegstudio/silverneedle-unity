@@ -49,7 +49,7 @@ public class LinkTextToProperty : MonoBehaviour {
 		case "Languages":
 			return GetLanguageList (character);
 		case "MovementSpeed":
-			return string.Format ("{0} ft ({1} sq)", character.BaseMovementSpeed, character.BaseMovementSpeed / 5);
+			return string.Format ("{0} ft ({1} sq)", character.Movement.BaseMovement.TotalValue, character.Movement.BaseSquares);
 		case "Name":
 			return character.Name;
 		case "OtherGear":

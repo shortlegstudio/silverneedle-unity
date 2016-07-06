@@ -29,7 +29,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 
 		private void SetSpeedForRace(CharacterSheet sheet, Race race) {
 			//Update Speed
-			sheet.BaseMovementSpeed = race.BaseMovementSpeed;
+			sheet.Movement.SetBaseSpeed(race.BaseMovementSpeed);
 		}
 
 		private void SetTraitsForRace(CharacterSheet sheet, Race race) {

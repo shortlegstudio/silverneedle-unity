@@ -76,7 +76,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 
 			var assign = new RaceSelector(new TestRacesGateway(), new TestTraitGateway());
 			assign.SetRace(sheet, fastGuy);
-			Assert.AreEqual (45, sheet.BaseMovementSpeed);
+			Assert.AreEqual (45, sheet.Movement.BaseMovement.TotalValue);
 		}
 	}
 

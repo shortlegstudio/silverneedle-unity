@@ -35,7 +35,7 @@ namespace ShortLegStudio.RPG.Characters {
 		public int CurrentHitPoints { get; set; } 
 		public OffenseStats Offense { get; private set; }
 		public DefenseStats Defense { get; private set; }
-		public int BaseMovementSpeed { get; set; }
+		public MovementStats Movement { get; private set; }
 
 		public event EventHandler<CharacterSheetEventArgs> Modified;
 
@@ -46,6 +46,7 @@ namespace ShortLegStudio.RPG.Characters {
 			Initiative = new Initiative (Abilities);
 			Offense = new OffenseStats (Abilities, Size, Inventory);
 			Defense = new DefenseStats (Abilities, Size, Inventory);
+			Movement = new MovementStats();
 			Languages = new List<Language> ();
 
 			SkillRanks = new SkillRanks (skillList, Abilities);
