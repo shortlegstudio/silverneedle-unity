@@ -23,62 +23,66 @@ public class LinkTextToProperty : MonoBehaviour {
 
 	private string GetProperty(CharacterSheet character) {
 		switch (Property) {
-		case "AlignmentSizeType":
-			return string.Format ("{0} {1} humanoid({2})", character.Alignment.ShortString(), character.Size.Size, character.Race.Name);
-		case "ArmorClass":
-			return string.Format ("{0}, touch {1}, flat-footed {2}", 
-				character.Defense.ArmorClass(), 
-				character.Defense.TouchArmorClass(), 
-				character.Defense.FlatFootedArmorClass());
-		case "BaseAttackBonus":
-			return string.Format ("{0}", character.Offense.BaseAttackBonus.TotalValue.ToModifierString());
-		case "CMB":
-			return string.Format ("{0}", character.Offense.CombatManueverBonus().ToModifierString());
-		case "CMD":
-			return string.Format ("{0}", character.Offense.CombatManueverDefense());
-		case "Feats":
-			return MakeFeatList (character);
-		case "FortitudeSave":
-			return character.Defense.FortitudeSave ().ToModifierString ();
-		case "GenderRaceClass":
-			return string.Format ("{0} {1} {2} {3}", character.Gender, character.Race.Name, character.Class.Name, character.Level);
-		case "HitPoints":
-			return character.MaxHitPoints.ToString ();
-		case "Initiative":
-			return character.Initiative.ToString();
-		case "Languages":
-			return GetLanguageList (character);
-		case "MovementSpeed":
-			return string.Format ("{0} ft ({1} sq)", character.Movement.BaseMovement.TotalValue, character.Movement.BaseSquares);
-		case "Name":
-			return character.Name;
-		case "OtherGear":
-			return InventoryList (character.Inventory.All);
-		case "ReflexSave":
-			return character.Defense.ReflexSave ().ToModifierString ();
-		case "Senses":
-			return GetSenses (character);
-		case "SkillsList":
-			return MakeSkillList(character);
+			case "AlignmentSizeType":
+				return string.Format ("{0} {1} humanoid({2})", character.Alignment.ShortString(), character.Size.Size, character.Race.Name);
+			case "ArmorClass":
+				return string.Format ("{0}, touch {1}, flat-footed {2}", 
+					character.Defense.ArmorClass(), 
+					character.Defense.TouchArmorClass(), 
+					character.Defense.FlatFootedArmorClass());
+			case "BaseAttackBonus":
+				return string.Format ("{0}", character.Offense.BaseAttackBonus.TotalValue.ToModifierString());
+			case "CMB":
+				return string.Format ("{0}", character.Offense.CombatManueverBonus().ToModifierString());
+			case "CMD":
+				return string.Format ("{0}", character.Offense.CombatManueverDefense());
+			case "DefenseAbilities":
+				return string.Format("Defense!");
+			case "Feats":
+				return MakeFeatList (character);
+			case "FortitudeSave":
+				return character.Defense.FortitudeSave ().ToModifierString ();
+			case "GenderRaceClass":
+				return string.Format ("{0} {1} {2} {3}", character.Gender, character.Race.Name, character.Class.Name, character.Level);
+			case "HitPoints":
+				return character.MaxHitPoints.ToString ();
+			case "Initiative":
+				return character.Initiative.ToString();
+			case "Languages":
+				return GetLanguageList (character);
+			case "MovementSpeed":
+				return string.Format ("{0} ft ({1} sq)", character.Movement.BaseMovement.TotalValue, character.Movement.BaseSquares);
+			case "Name":
+				return character.Name;
+			case "OtherGear":
+				return InventoryList (character.Inventory.All);
+			case "Proficiencies":
+				return MakeProficiencyList(character);
+			case "ReflexSave":
+				return character.Defense.ReflexSave ().ToModifierString ();
+			case "Senses":
+				return GetSenses (character);
+			case "SkillsList":
+				return MakeSkillList(character);
 
-		case "Strength":
-		case "Dexterity":
-		case "Constitution":
-		case "Intelligence":
-		case "Wisdom":
-		case "Charisma":
-			return string.Format("{0} ({1})", character.Abilities.GetScore(Property), character.Abilities.GetModifier(Property).ToModifierString());
-		case "WeaponOneType":
-			return character.Offense.Attacks().ToList () [0].Weapon.GetBasicType();
-		case "WeaponTwoType":
-			return character.Offense.Attacks().ToList () [1].Weapon.GetBasicType();
-		case "WeaponOneInfo":
-			return character.Offense.Attacks().ToList () [0].ToString();
-		case "WeaponTwoInfo":
-			return character.Offense.Attacks().ToList () [1].ToString();
-			
-		case "WillSave":
-			return character.Defense.WillSave ().ToModifierString ();
+			case "Strength":
+			case "Dexterity":
+			case "Constitution":
+			case "Intelligence":
+			case "Wisdom":
+			case "Charisma":
+				return string.Format("{0} ({1})", character.Abilities.GetScore(Property), character.Abilities.GetModifier(Property).ToModifierString());
+			case "WeaponOneType":
+				return character.Offense.Attacks().ToList () [0].Weapon.GetBasicType();
+			case "WeaponTwoType":
+				return character.Offense.Attacks().ToList () [1].Weapon.GetBasicType();
+			case "WeaponOneInfo":
+				return character.Offense.Attacks().ToList () [0].ToString();
+			case "WeaponTwoInfo":
+				return character.Offense.Attacks().ToList () [1].ToString();
+				
+			case "WillSave":
+				return character.Defense.WillSave ().ToModifierString ();
 		}
 
 		return "NOT FOUND: " + Property;
@@ -124,6 +128,12 @@ public class LinkTextToProperty : MonoBehaviour {
 	private string InventoryList(IEnumerable<IEquipment> inv) {
 		return string.Join (", ", 
 			inv.Select (x => x.Name).ToArray()
+		);
+	}
+
+	private string MakeProficiencyList(CharacterSheet character) {
+		return string.Join(", ",
+			character.Offense.WeaponProficiencies.Select(x => x.Name).ToArray()
 		);
 	}
 }

@@ -175,6 +175,18 @@ namespace RPG.Characters {
 			Assert.AreEqual(reflex + 1, def.ReflexSave());
 		}
 
+		[Test]
+		public void CanAddArmorProficiencies() {
+			var def = new DefenseStats(
+				          new AbilityScores(),
+				          new SizeStats(),
+				          new Inventory()
+			          );
+			var prof = new ArmorProficiency("Light");
+			def.AddArmorProficiency(prof);
+			Assert.IsTrue(def.IsProficient(Leather()));
+		}
+
 		class MockMod : IModifiesStats {
 			public IList<BasicStatModifier> Modifiers { get; set;  }
 
@@ -186,6 +198,18 @@ namespace RPG.Characters {
 				Modifiers.Add(new BasicStatModifier("Fortitude", 1, "Halfing Luck", "Trait"));
 
 			}
+		}
+
+		private Armor Leather() {
+			return new Armor(
+				"Leather",
+				2,
+				10,
+				6,
+				0,
+				10,
+				ArmorType.Light
+			);
 		}
 
 	}

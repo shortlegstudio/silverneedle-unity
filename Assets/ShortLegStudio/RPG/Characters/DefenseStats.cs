@@ -2,6 +2,7 @@
 using System.Reflection;
 using ShortLegStudio.RPG.Equipment;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace ShortLegStudio.RPG.Characters {
 	
@@ -20,6 +21,8 @@ namespace ShortLegStudio.RPG.Characters {
 		private BasicStat Will { get; set; }
 		private Inventory Inventory { get; set; }
 		private BasicStat Armor { get; set; }
+		public IEnumerable<ArmorProficiency> ArmorProficiencies { get { return _armorProficiencies; } }
+		private List<ArmorProficiency> _armorProficiencies = new List<ArmorProficiency>();
 
 		public DefenseStats(AbilityScores abilityScores, SizeStats size, Inventory inv) {
 			Abilities = abilityScores;	
@@ -113,6 +116,14 @@ namespace ShortLegStudio.RPG.Characters {
 						break;
 				}
 			}
+		}
+
+		public void AddArmorProficiency(ArmorProficiency prof) {
+			_armorProficiencies.Add(prof);
+		}
+
+		public bool IsProficient(Armor armor) {
+			return ArmorProficiencies.IsProficient(armor);
 		}
 	}
 }

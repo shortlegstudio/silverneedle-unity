@@ -6,7 +6,7 @@
   armor_check_penalty: 0
   arcane_spell_failure_chance: 5
   weight: 10
-  armor_type: LightArmor
+  armor_type: Light
 - armor:
   name: Leather
   cost: 10gp
@@ -15,7 +15,7 @@
   armor_check_penalty: 0
   arcane_spell_failure_chance: 10
   weight: 15
-  armor_type: LightArmor
+  armor_type: Light
 - armor:
   name: Studded Leather
   cost: 25gp
@@ -24,7 +24,7 @@
   armor_check_penalty: -1
   arcane_spell_failure_chance: 15
   weight: 20
-  armor_type: LightArmor
+  armor_type: Light
 - armor:
   name: Chain Shirt
   cost: 100gp
@@ -33,7 +33,7 @@
   armor_check_penalty: -2
   arcane_spell_failure_chance: 20
   weight: 25
-  armor_type: LightArmor
+  armor_type: Light
 - armor:
   name: hide
   cost: 15gp
@@ -42,7 +42,7 @@
   armor_check_penalty: -3
   arcane_spell_failure_chance: 20
   weight: 25
-  armor_type: MediumArmor
+  armor_type: Medium
 - armor:
   name: Scale Mail
   cost: 50gp
@@ -51,7 +51,7 @@
   armor_check_penalty: -4
   arcane_spell_failure_chance: 25
   weight: 30
-  armor_type: MediumArmor
+  armor_type: Medium
 - armor:
   name: Chainmail
   cost: 150gp
@@ -60,7 +60,7 @@
   armor_check_penalty: -5
   arcane_spell_failure_chance: 30
   weight: 40
-  armor_type: MediumArmor
+  armor_type: Medium
 - armor:
   name: Breastplate
   cost: 200gp
@@ -69,7 +69,7 @@
   armor_check_penalty: -4
   arcane_spell_failure_chance: 25
   weight: 30
-  armor_type: MediumArmor
+  armor_type: Medium
 - armor:
   name: Splint Mail
   cost: 200gp
@@ -78,7 +78,7 @@
   armor_check_penalty: -7
   arcane_spell_failure_chance: 40
   weight: 45
-  armor_type: HeavyArmor
+  armor_type: Heavy
 - armor:
   name: Banded Mail
   cost: 250gp
@@ -87,7 +87,7 @@
   armor_check_penalty: -7
   arcane_spell_failure_chance: 35
   weight: 35
-  armor_type: HeavyArmor
+  armor_type: Heavy
 - armor:
   name: Half Plate
   cost: 600gp
@@ -96,7 +96,7 @@
   armor_check_penalty: -7
   arcane_spell_failure_chance: 40
   weight: 50
-  armor_type: HeavyArmor
+  armor_type: Heavy
 - armor:
   name: Full Plate
   cost: 1500gp
@@ -105,7 +105,7 @@
   armor_check_penalty: -6
   arcane_spell_failure_chance: 35
   weight: 50
-  armor_type: HeavyArmor
+  armor_type: Heavy
 - armor:
   name: Buckler
   cost: 5gp

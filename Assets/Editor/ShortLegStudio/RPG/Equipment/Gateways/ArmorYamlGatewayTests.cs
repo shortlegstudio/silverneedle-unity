@@ -70,19 +70,19 @@ namespace RPG.Equipment.Gateways {
 		[Test]
 		public void ArmorHasAType() {
 			var plate = gateway.GetByName ("Full Plate");
-			Assert.AreEqual (ArmorType.HeavyArmor, plate.ArmorType);
+			Assert.AreEqual (ArmorType.Heavy, plate.ArmorType);
 		}
 
 		[Test]
 		public void GetAllArmorsOfAType() {
-			var armors = gateway.FindByArmorType (ArmorType.HeavyArmor);
+			var armors = gateway.FindByArmorType (ArmorType.Heavy);
 			Assert.AreEqual (2, armors.Count ());
-			Assert.IsTrue (armors.All (x => x.ArmorType == ArmorType.HeavyArmor));
+			Assert.IsTrue (armors.All (x => x.ArmorType == ArmorType.Heavy));
 		}
 
 		[Test]
 		public void GetArmorsOfTypes() {
-			var armors = gateway.FindByArmorTypes (ArmorType.LightArmor, ArmorType.HeavyArmor);
+			var armors = gateway.FindByArmorTypes (ArmorType.Light, ArmorType.Heavy);
 			Assert.AreEqual (3, armors.Count ());
 		}
 
@@ -94,7 +94,7 @@ namespace RPG.Equipment.Gateways {
   maximum_dexterity_bonus: 6
   armor_check_penalty: 0
   arcane_spell_failure_chance: 10
-  armor_type: LightArmor
+  armor_type: Light
 - armor:
   name: Full Plate
   armor_class: 9
@@ -102,7 +102,7 @@ namespace RPG.Equipment.Gateways {
   maximum_dexterity_bonus: 1
   armor_check_penalty: -6
   arcane_spell_failure_chance: 35
-  armor_type: HeavyArmor
+  armor_type: Heavy
 - armor:
   name: Half Plate
   armor_class: 8
@@ -110,7 +110,7 @@ namespace RPG.Equipment.Gateways {
   maximum_dexterity_bonus: 0
   armor_check_penalty: -7
   arcane_spell_failure_chance: 40
-  armor_type: HeavyArmor
+  armor_type: Heavy
 ";
 	}
 }

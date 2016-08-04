@@ -15,9 +15,9 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
 
 		public void PurchaseArmorAndShield(Inventory inventory) {
 			var armor = _armors.FindByArmorTypes(
-				ArmorType.LightArmor,
-				ArmorType.MediumArmor,
-				ArmorType.HeavyArmor).ToList ().ChooseOne ();
+				ArmorType.Light,
+				ArmorType.Medium,
+				ArmorType.Heavy).ToList ().ChooseOne ();
 			inventory.EquipItem (armor);
 
 			var shield = _armors.FindByArmorType (ArmorType.Shield).ToList ().ChooseOne ();

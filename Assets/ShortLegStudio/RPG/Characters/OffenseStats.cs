@@ -73,7 +73,7 @@ namespace ShortLegStudio.RPG.Characters {
 		}
 
 		public bool IsProficient(Weapon wpn) {
-			return WeaponProficiencies.Any(x => x.IsProficient(wpn));
+			return WeaponProficiencies.IsProficient(wpn);
 		}
 
 		public IList<AttackStatistic> Attacks() {

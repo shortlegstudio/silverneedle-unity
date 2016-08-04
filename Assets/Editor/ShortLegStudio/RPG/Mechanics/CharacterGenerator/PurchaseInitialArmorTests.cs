@@ -34,7 +34,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 				shield.ArmorType = ArmorType.Shield;
 
 				var armor = new Armor();
-				armor.ArmorType = ArmorType.HeavyArmor;
+				armor.ArmorType = ArmorType.Heavy;
 				armors.Add(armor);
 				armors.Add(shield);
 			}

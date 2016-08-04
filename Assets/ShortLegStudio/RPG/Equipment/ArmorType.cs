@@ -3,9 +3,9 @@
 namespace ShortLegStudio.RPG.Equipment {
 	public enum ArmorType {
 		None,
-		LightArmor,
-		MediumArmor,
-		HeavyArmor,
+		Light,
+		Medium,
+		Heavy,
 		Shield
 	}
 }
