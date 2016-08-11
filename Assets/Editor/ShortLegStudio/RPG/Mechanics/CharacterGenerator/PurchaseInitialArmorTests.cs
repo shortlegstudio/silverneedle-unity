@@ -21,8 +21,8 @@ namespace RPG.Mechanics.CharacterGenerator {
 			equip.PurchaseArmorAndShield (inventory);
 
 
-			Assert.IsTrue (inventory.OfType<Armor> ().Any (x => x.ArmorType == ArmorType.Shield));
-			Assert.IsTrue (inventory.OfType<Armor> ().Any (x => x.ArmorType != ArmorType.Shield));
+			Assert.IsTrue (inventory.GearOfType<Armor> ().Any (x => x.ArmorType == ArmorType.Shield));
+			Assert.IsTrue (inventory.GearOfType<Armor> ().Any (x => x.ArmorType != ArmorType.Shield));
 		}
 
 		private class TestArmorGateway : IArmorGateway {

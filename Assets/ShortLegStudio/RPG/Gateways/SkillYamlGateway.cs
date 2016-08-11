@@ -1,45 +1,75 @@
-﻿using System;
-using System.Collections.Generic;
-using ShortLegStudio;
-using ShortLegStudio.RPG.Characters;
-using ShortLegStudio.Enchilada;
-using System.Collections;
+﻿//-----------------------------------------------------------------------
+// <copyright file="SkillYamlGateway.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Gateways {
-	public class SkillYamlGateway : EntityGateway<Skill>
-	{
-		const string SKILL_DATA_FILE = "Data/skills.yml";
-		IList<Skill> Skills; 
+namespace ShortLegStudio.RPG.Gateways
+{
+    using System;
+    using System.Collections.Generic;
+    using ShortLegStudio;
+    using ShortLegStudio.Enchilada;
+    using ShortLegStudio.RPG.Characters;
 
-		public SkillYamlGateway() {
-			LoadFromYaml (FileHelper.OpenYaml (SKILL_DATA_FILE));
-		}
+    /// <summary>
+    /// Skill yaml gateway provides access to Skills information via a YAML file
+    /// </summary>
+    public class SkillYamlGateway : IEntityGateway<Skill>
+    {
+        /// <summary>
+        /// The Skills Data File
+        /// </summary>
+        private const string SkillDataFile = "Data/skills.yml";
 
-		public SkillYamlGateway (YamlNodeWrapper yaml) { 
-			LoadFromYaml (yaml);
-		}
+        /// <summary>
+        /// The skills that have been loaded
+        /// </summary>
+        private IList<Skill> skills;
 
-		public IEnumerable<Skill> All() {
-			return Skills;
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.SkillYamlGateway"/> class.
+        /// </summary>
+        public SkillYamlGateway()
+        {
+            this.LoadFromYaml(FileHelper.OpenYaml(SkillDataFile));
+        }
 
-		private void LoadFromYaml(YamlNodeWrapper yaml) {
-			Skills = new List<Skill> ();
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.SkillYamlGateway"/> class.
+        /// </summary>
+        /// <param name="yaml">Yaml data to parse.</param>
+        public SkillYamlGateway(YamlNodeWrapper yaml)
+        { 
+            this.LoadFromYaml(yaml);
+        }
 
-			foreach (var skillNode in yaml.Children()) {
-				var skill = new Skill (
-					skillNode.GetString ("name"),
-					(AbilityScoreTypes) System.Enum.Parse(
-						typeof(AbilityScoreTypes), 
-						skillNode.GetString ("ability"), 
-						true),
-					skillNode.GetString ("trained") == "yes"
-				);
-				skill.Description = skillNode.GetString ("description");
-				Skills.Add (skill);
-			}
+        /// <summary>
+        /// Returns all the loaded skills
+        /// </summary>
+        /// <returns>Enumerable collection of the entities</returns>
+        public IEnumerable<Skill> All()
+        {
+            return this.skills;
+        }
 
-		}
-	}
+        /// <summary>
+        /// Loads from yaml.
+        /// </summary>
+        /// <param name="yaml">Yaml data to load from</param>
+        private void LoadFromYaml(YamlNodeWrapper yaml)
+        {
+            this.skills = new List<Skill>();
+
+            foreach (var skillNode in yaml.Children())
+            {
+                var skill = new Skill(
+                    skillNode.GetString("name"),
+                    AbilityScore.GetType(skillNode.GetString("ability")),
+                    skillNode.GetString("trained") == "yes",
+                    skillNode.GetString("description"));
+                this.skills.Add(skill);
+            }
+        }
+    }
 }
-

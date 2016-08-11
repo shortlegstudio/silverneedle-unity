@@ -1,24 +1,49 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using ShortLegStudio;
-using System.Configuration;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Trait.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Characters  {
-	public class Trait : IModifiesStats {
-		
-		public string Name { get; set; }
-		public string Description { get; set; }
-		public IList<BasicStatModifier> Modifiers { get; protected set; }
-		public IList<string> Tags { get; protected set; }
+namespace ShortLegStudio.RPG.Characters
+{
+    using System.Collections.Generic;
 
-		public Trait() {
-			Modifiers = new List<BasicStatModifier> ();
-			Tags = new List<string>();
-		}
+    /// <summary>
+    /// A trait is some basic innate attribute of the character. Usually positive
+    /// </summary>
+    public class Trait : IModifiesStats
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Trait"/> class.
+        /// </summary>
+        public Trait()
+        {
+            this.Modifiers = new List<BasicStatModifier>();
+            this.Tags = new List<string>();
+        }
 
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        public string Name { get; set; }
 
-	}
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>The description.</value>
+        public string Description { get; set; }
 
+        /// <summary>
+        /// Gets the modifiers for the stats that are to be modified.
+        /// </summary>
+        /// <value>The modifiers for stats effected by this class.</value>
+        public IList<BasicStatModifier> Modifiers { get; private set; }
 
+        /// <summary>
+        /// Gets the tags.
+        /// </summary>
+        /// <value>The tags.</value>
+        public IList<string> Tags { get; private set; }
+    }
 }

@@ -1,9 +1,19 @@
-﻿using System;
-
-namespace AssemblyCSharp
+﻿//-----------------------------------------------------------------------
+// <copyright file="IAttackModifier.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.RPG.Characters
 {
-	public interface IAttackModifier {
-		int GetModifier();
-	}
+    /// <summary>
+    /// Represents an attack modifier.
+    /// </summary>
+    public interface IAttackModifier
+    {
+        /// <summary>
+        /// Gets the modifier amount.
+        /// </summary>
+        /// <returns>The modifier amount.</returns>
+        int GetModifier();
+    }
 }
-

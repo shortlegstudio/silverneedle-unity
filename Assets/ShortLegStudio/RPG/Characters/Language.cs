@@ -1,21 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections;
-using System.Reflection;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Language.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.RPG.Characters
+{
+    using System.Collections.Generic;
 
-namespace ShortLegStudio.RPG.Characters {
-	public class Language {
-		
-		public string Name { get; set; }
-		public string Description { get; set; }
+    /// <summary>
+    /// Languages that a character can learn
+    /// </summary>
+    public class Language
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Language"/> class.
+        /// </summary>
+        /// <param name="name">Name of the language.</param>
+        /// <param name="desc">Description of the language.</param>
+        public Language(string name, string desc)
+        {
+            this.Name = name;
+            this.Description = desc;
+        }
 
-		public Language () { }
-		public Language(string name, string desc) {
-			Name = name;
-			Description = desc;
-		}
+        /// <summary>
+        /// Gets or sets the name of the language.
+        /// </summary>
+        /// <value>The language name.</value>
+        public string Name { get; set; }
 
-
-	}
+        /// <summary>
+        /// Gets or sets the description.
+        /// </summary>
+        /// <value>The description of the language.</value>
+        public string Description { get; set; }
+    }
 }
-

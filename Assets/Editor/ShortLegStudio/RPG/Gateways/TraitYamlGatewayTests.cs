@@ -43,13 +43,13 @@ namespace RPG.Gateways {
 			var modifiers = hardy.Modifiers;
 			Assert.AreEqual (2, modifiers.Count);
 			var skillAdj = modifiers.First ();
-			Assert.AreEqual ("Heal", skillAdj.StatName);
+			Assert.AreEqual ("Heal", skillAdj.StatisticName);
 			Assert.AreEqual ("racial", skillAdj.Type);
 			Assert.AreEqual ("Hardy (trait)", skillAdj.Reason);
 			Assert.AreEqual (2, skillAdj.Modifier);
 
 			var flyAdj = modifiers.Last ();
-			Assert.AreEqual ("Fly", flyAdj.StatName);
+			Assert.AreEqual ("Fly", flyAdj.StatisticName);
 			Assert.AreEqual ("racial", flyAdj.Type);
 			Assert.AreEqual (4, flyAdj.Modifier);
 		}

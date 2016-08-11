@@ -29,7 +29,7 @@ namespace RPG.Characters {
 			var sheet = new CharacterSheet (new List<Skill>());
 			var fighter = new Class ();
 			fighter.SkillPoints = 2;
-			sheet.Abilities.SetScore (AbilityScoreTypes.Intelligence, 14);
+			sheet.AbilityScores.SetScore (AbilityScoreTypes.Intelligence, 14);
 			sheet.Class = fighter;
 			Assert.AreEqual (4, sheet.GetSkillPointsPerLevel());
 		}

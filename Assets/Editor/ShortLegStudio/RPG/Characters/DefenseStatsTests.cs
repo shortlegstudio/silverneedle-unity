@@ -78,9 +78,9 @@ namespace RPG.Characters {
 		[Test]
 		public void LevelingUpAClassMarksGoodSaves() {
 			var fighter = new Class ();
-			fighter.WillSaveRate = Class.POOR_SAVE_RATE;
-			fighter.FortitudeSaveRate = Class.GOOD_SAVE_RATE;
-			fighter.ReflexSaveRate = Class.POOR_SAVE_RATE;
+			fighter.WillSaveRate = Class.PoorSaveRate;
+			fighter.FortitudeSaveRate = Class.GoodSaveRate;
+			fighter.ReflexSaveRate = Class.PoorSaveRate;
 
 			smallStats.LevelUpDefenseStats (fighter);
 
@@ -92,9 +92,9 @@ namespace RPG.Characters {
 		[Test]
 		public void LevelingUpMultipleTimesIncreasesTheSaveStats() {
 			var fighter = new Class ();
-			fighter.WillSaveRate = Class.POOR_SAVE_RATE;
-			fighter.FortitudeSaveRate = Class.GOOD_SAVE_RATE;
-			fighter.ReflexSaveRate = Class.POOR_SAVE_RATE;
+			fighter.WillSaveRate = Class.PoorSaveRate;
+			fighter.FortitudeSaveRate = Class.GoodSaveRate;
+			fighter.ReflexSaveRate = Class.PoorSaveRate;
 
 			smallStats.LevelUpDefenseStats (fighter);
 			smallStats.LevelUpDefenseStats (fighter);
@@ -122,9 +122,9 @@ namespace RPG.Characters {
 			var armor = new Armor ();
 			armor.ArmorClass = 10;
 
-			inventory.AddItem (armor);
+			inventory.AddGear (armor);
 			inventory.EquipItem (armor);
-			Assert.AreEqual (10, def.EquipedArmorBonus ());
+			Assert.AreEqual (10, def.EquippedArmorBonus ());
 			Assert.AreEqual (startAC + 10, def.ArmorClass());
 			Assert.AreEqual (startFlat + 10, def.FlatFootedArmorClass ());
 			Assert.AreEqual (startTouch, def.TouchArmorClass ());
@@ -141,9 +141,9 @@ namespace RPG.Characters {
 
 			var armor = new Armor ();
 			armor.ArmorClass = 12;
-			inv.AddItem (armor);
+			inv.AddGear (armor);
 
-			Assert.AreEqual (0, def.EquipedArmorBonus ());
+			Assert.AreEqual (0, def.EquippedArmorBonus ());
 
 		}
 

@@ -1,25 +1,71 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="BasicStatModifier.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.RPG
+{
+    /// <summary>
+    /// Basic stat modifier provides a method for tracking what modifiers to apply to various statistics
+    /// An example of a modifier might be a feat that provides a +1 dodge bonus to AC
+    /// </summary>
+    public class BasicStatModifier
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.BasicStatModifier"/> class.
+        /// </summary>
+        public BasicStatModifier()
+        {
+        }
 
-namespace ShortLegStudio.RPG {
-	public class BasicStatModifier {
-		public float Modifier { get; set; }
-		public string Reason { get; set; }
-		public string Type { get; set; }
-		public string StatName { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.BasicStatModifier"/> class.
+        /// </summary>
+        /// <param name="modifier">Modifier amount for the stat</param>
+        /// <param name="reason">Reason for this modifier</param>
+        public BasicStatModifier(float modifier, string reason)
+        {
+            this.Modifier = modifier;
+            this.Reason = reason;
+        }
 
-		public BasicStatModifier() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.BasicStatModifier"/> class.
+        /// </summary>
+        /// <param name="statisticName">Statistic name to modify</param>
+        /// <param name="modifier">Modifier amount</param>
+        /// <param name="type">Type of modifier (armor, shield, luck, morale, etc...)</param>
+        /// <param name="reason">Reason for modifier</param>
+        public BasicStatModifier(string statisticName, float modifier, string type, string reason)
+        {
+            this.Modifier = modifier;
+            this.StatisticName = statisticName;
+            this.Type = type;
+            this.Reason = reason;
+        }
 
-		public BasicStatModifier(float mod, string reas) {
-			Modifier = mod;
-			Reason = reas;
-		}
+        /// <summary>
+        /// Gets or sets the modifier.
+        /// </summary>
+        /// <value>The modifier amount for the statistic</value>
+        public float Modifier { get; set; }
 
-		public BasicStatModifier(string stat, float mod, string type, string reason) {
-			Modifier = mod;
-			StatName = stat;
-			Type = type;
-			Reason = reason;
-		}
-	}
+        /// <summary>
+        /// Gets or sets the reason.
+        /// </summary>
+        /// <value>The reason for the modifier.</value>
+        public string Reason { get; set; }
+
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        /// <value>The type of modifier this is.</value>
+        public string Type { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the statistic.
+        /// </summary>
+        /// <value>The name of the statistic.</value>
+        public string StatisticName { get; set; }
+    }
 }
-

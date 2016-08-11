@@ -1,47 +1,90 @@
-﻿using System;
-using UnityEngine;
-
+﻿//-----------------------------------------------------------------------
+// <copyright file="ShortLog.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 namespace ShortLegStudio
 {
-	public static class ShortLog {
-		private static bool _useConsole = false;
+    using System;
+    using UnityEngine;
 
-		static ShortLog () {
-			try {
-				UnityEngine.Debug.Log("Starting Logger");
-			} catch {
-				_useConsole = true;
-			}
+    /// <summary>
+    /// A wrapper class that provides management of logging output. 
+    /// During Unity Debug it should output to the console and during
+    /// unit tests it should output to the standard console
+    /// </summary>
+    public static class ShortLog
+    {
+        /// <summary>
+        /// Whether to use the System Console or not
+        /// </summary>
+        private static bool useSystemConsole = false;
 
-		}
+        /// <summary>
+        /// Initializes static members of the <see cref="ShortLegStudio.ShortLog"/> class.
+        /// </summary>
+        static ShortLog()
+        {
+            try
+            {
+                UnityEngine.Debug.Log("Starting Logger");
+            }
+            catch
+            {
+                useSystemConsole = true;
+            }
+        }
 
-		public static void Error(string message) {
-			if (_useConsole) {
-				Console.WriteLine ("ERROR: {0}", message);
-				return;
-			}
+        /// <summary>
+        /// Logs the specified error message
+        /// </summary>
+        /// <param name="message">Message to log to console</param>
+        public static void Error(string message)
+        {
+            if (useSystemConsole)
+            {
+                Console.WriteLine("ERROR: {0}", message);
+                return;
+            }
 
-			UnityEngine.Debug.LogError (message);
-		}
+            UnityEngine.Debug.LogError(message);
+        }
 
-		public static void ErrorFormat(string format, params string[] args) {
-			var s = string.Format (format, args);
-			Error (s);
-		}
+        /// <summary>
+        /// Logs an error string by formatting the string
+        /// </summary>
+        /// <param name="format">Standard format to string.</param>
+        /// <param name="args">Arguments that should be included in the formatted string.</param>
+        public static void ErrorFormat(string format, params string[] args)
+        {
+            var s = string.Format(format, args);
+            Error(s);
+        }
 
-		public static void Debug(string message) {
-			if (_useConsole) {
-				Console.WriteLine ("DEBUG: {0}", message);
-				return;
-			}
+        /// <summary>
+        /// Debug logs the specified message.
+        /// </summary>
+        /// <param name="message">Message to write to debug output.</param>
+        public static void Debug(string message)
+        {
+            if (useSystemConsole)
+            {
+                Console.WriteLine("DEBUG: {0}", message);
+                return;
+            }
 
-			UnityEngine.Debug.Log (message);
-		}
+            UnityEngine.Debug.Log(message);
+        }
 
-		public static void DebugFormat(string format, params string[] args) {
-			var s = string.Format (format, args);
-			Debug (s);
-		}
-	}
+        /// <summary>
+        /// Logs the debug output in standard formatted format
+        /// </summary>
+        /// <param name="format">Standard format to string</param>
+        /// <param name="args">Arguments to be included in the format</param>
+        public static void DebugFormat(string format, params string[] args)
+        {
+            var s = string.Format(format, args);
+            Debug(s);
+        }
+    }
 }
-

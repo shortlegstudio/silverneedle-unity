@@ -36,20 +36,20 @@ namespace RPG.Gateways {
 		[Test]
 		public void HumansCanChooseAbilityModifier() {
 			var mod = human.AbilityModifiers.First ();
-			Assert.IsTrue (mod.RacialChose);
+			Assert.IsTrue (mod.RacialModifier);
 			Assert.AreEqual (2, mod.Modifier);
 
 		}
 
 		[Test]
 		public void DwarvesHaveSpecificAbilitiesToModifier() {
-			var cons = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Constitution);
+			var cons = dwarf.AbilityModifiers.First (x => x.AbilityName == AbilityScoreTypes.Constitution);
 			Assert.AreEqual (2, cons.Modifier);
 
-			var wis = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Wisdom);
+            var wis = dwarf.AbilityModifiers.First (x => x.AbilityName == AbilityScoreTypes.Wisdom);
 			Assert.AreEqual (2, wis.Modifier);
 
-			var cha = dwarf.AbilityModifiers.First (x => x.ability == AbilityScoreTypes.Charisma);
+            var cha = dwarf.AbilityModifiers.First (x => x.AbilityName == AbilityScoreTypes.Charisma);
 			Assert.AreEqual (-2, cha.Modifier);
 		}
 

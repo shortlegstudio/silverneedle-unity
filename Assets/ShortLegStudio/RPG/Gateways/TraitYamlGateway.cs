@@ -1,49 +1,87 @@
-﻿using System;
-using System.Linq;
-using ShortLegStudio.Enchilada;
-using ShortLegStudio.RPG.Characters;
-using System.Collections.Generic;
+﻿//-----------------------------------------------------------------------
+// <copyright file="TraitYamlGateway.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Gateways {
-	public class TraitYamlGateway : EntityGateway<Trait> {
-		//Static Values
-		const string TRAIT_DATA_FILE = "Data/traits.yml";
-		private IList<Trait> _traits;
+namespace ShortLegStudio.RPG.Gateways
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using ShortLegStudio.Enchilada;
+    using ShortLegStudio.RPG.Characters;
 
-		public TraitYamlGateway() {
-			LoadFromYaml(FileHelper.OpenYaml(TRAIT_DATA_FILE));
-		}
+    /// <summary>
+    /// Trait yaml gateway provides access to traits in the yaml file
+    /// </summary>
+    public class TraitYamlGateway : IEntityGateway<Trait>
+    {
+        /// <summary>
+        /// The Trait Data File
+        /// </summary>
+        private const string TraitDataFile = "Data/traits.yml";
 
-		public TraitYamlGateway(YamlNodeWrapper yaml) {
-			LoadFromYaml(yaml);
-		}
+        /// <summary>
+        /// The traits available
+        /// </summary>
+        private IList<Trait> traits;
 
-		public System.Collections.Generic.IEnumerable<Trait> All() {
-			return _traits;
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.TraitYamlGateway"/> class.
+        /// </summary>
+        public TraitYamlGateway()
+        {
+            this.LoadFromYaml(FileHelper.OpenYaml(TraitDataFile));
+        }
 
-		private void LoadFromYaml(YamlNodeWrapper yaml) {
-			_traits = new List<Trait> ();
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.TraitYamlGateway"/> class.
+        /// </summary>
+        /// <param name="yaml">Yaml to parse.</param>
+        public TraitYamlGateway(YamlNodeWrapper yaml)
+        {
+            this.LoadFromYaml(yaml);
+        }
 
-			foreach (var traitNode in yaml.Children()) {
-				var trait = new Trait ();
-				trait.Name = traitNode.GetString ("name"); 
-				ShortLog.Debug ("Loading Trait: " + trait.Name);
-				trait.Description = traitNode.GetString ("description");
-				trait.Tags.Add(traitNode.GetCommaStringOptional("tags"));
-				//Get Any skill Modifiers if they exist
-				var modifiers = traitNode.GetNodeOptional("modifiers");
-				if (modifiers != null) {
-					var mods = ParseStatModifiersYaml.ParseYaml(modifiers, string.Format("{0} (trait)", trait.Name));
-					foreach (var m in mods) {
-						trait.Modifiers.Add(m);
-					}
-				}
+        /// <summary>
+        /// Should return all of the traits
+        /// </summary>
+        /// <returns>Enumerable collection of the entities</returns>
+        public System.Collections.Generic.IEnumerable<Trait> All()
+        {
+            return this.traits;
+        }
 
+        /// <summary>
+        /// Loads from yaml.
+        /// </summary>
+        /// <param name="yaml">Yaml node to load from</param>
+        private void LoadFromYaml(YamlNodeWrapper yaml)
+        {
+            this.traits = new List<Trait>();
 
-				_traits.Add (trait);
-			}
-		}
-	}
+            foreach (var traitNode in yaml.Children())
+            {
+                var trait = new Trait();
+                trait.Name = traitNode.GetString("name"); 
+                ShortLog.Debug("Loading Trait: " + trait.Name);
+                trait.Description = traitNode.GetString("description");
+                trait.Tags.Add(traitNode.GetCommaStringOptional("tags"));
+
+                // Get Any skill Modifiers if they exist
+                var modifiers = traitNode.GetNodeOptional("modifiers");
+                if (modifiers != null)
+                {
+                    var mods = ParseStatModifiersYaml.ParseYaml(modifiers, string.Format("{0} (trait)", trait.Name));
+                    foreach (var m in mods)
+                    {
+                        trait.Modifiers.Add(m);
+                    }
+                }
+
+                this.traits.Add(trait);
+            }
+        }
+    }
 }
-

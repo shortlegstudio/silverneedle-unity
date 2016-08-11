@@ -1,31 +1,67 @@
-﻿using System;
-using ShortLegStudio.RPG.Equipment;
-using System.Collections.Generic;
-using System.Linq;
+﻿//-----------------------------------------------------------------------
+// <copyright file="WeaponProficiency.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Characters {
-	public class WeaponProficiency {
-		public string Name { get; private set; }
-		private bool IsLevel;
-		private WeaponTrainingLevel TrainingLevel;
+namespace ShortLegStudio.RPG.Characters
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using Inflector;
+    using ShortLegStudio.RPG.Equipment;
 
-		public WeaponProficiency(string proficiency) {
-			Name = proficiency;
-			IsLevel = EnumHelpers.TryParse<WeaponTrainingLevel>(proficiency, true, out TrainingLevel);
-		}
+    /// <summary>
+    /// Weapon proficiency is the ability to use a weapon
+    /// </summary>
+    public class WeaponProficiency
+    {
+        /// <summary>
+        /// Whether this represents a whole training level of weaponry.
+        /// </summary>
+        private bool isLevel;
 
-		public bool IsProficient(Weapon wpn) {
-			if (IsLevel) {
-				return wpn.Level == TrainingLevel;
-			}
-			return string.Compare(wpn.Name, Name, true) == 0;
-		}
-	}
+        /// <summary>
+        /// The training level if this is for weapon levels
+        /// </summary>
+        private WeaponTrainingLevel trainingLevel;
 
-	public static class WeaponProficiencyEnumerableExtensions {
-		public static bool IsProficient(this IEnumerable<WeaponProficiency> proficiencies, Weapon wpn) {
-			return proficiencies.Any(x => x.IsProficient(wpn));
-		}
-	}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.WeaponProficiency"/> class.
+        /// </summary>
+        /// <param name="proficiency">Proficiency weapon to add</param>
+        public WeaponProficiency(string proficiency)
+        {
+            this.Name = Inflector.Humanize(proficiency);
+            this.isLevel = EnumHelpers.TryParse<WeaponTrainingLevel>(proficiency, true, out this.trainingLevel);
+
+            // Append a descriptive string so we know this is a group of weapons
+            if (this.isLevel)
+            {
+                this.Name += " weapons";
+            }
+        }
+
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
+        /// <value>The name.</value>
+        public string Name { get; private set; }
+
+        /// <summary>
+        /// Determines whether this instance is proficient the specified wpn.
+        /// </summary>
+        /// <returns><c>true</c> if this instance is proficient the specified wpn; otherwise, <c>false</c>.</returns>
+        /// <param name="weapon">Weapon to validate proficiency.</param>
+        public bool IsProficient(Weapon weapon)
+        {
+            if (this.isLevel)
+            {
+                return weapon.Level == this.trainingLevel;
+            }
+
+            return string.Compare(weapon.Name, this.Name, true) == 0;
+        }
+    }
 }
-

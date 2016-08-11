@@ -1,59 +1,108 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿//-----------------------------------------------------------------------
+// <copyright file="SkillRanks.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Characters {
-	public interface ISkillRanks {
-		int GetScore (string skill);
-		CharacterSkill GetSkill (string skill);
-		IEnumerable<CharacterSkill> GetSkills ();
-	}
+namespace ShortLegStudio.RPG.Characters
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-	public class SkillRanks : ISkillRanks, IStatTracker {
-		private IDictionary<string, CharacterSkill> _skills { get; set; }
+    /// <summary>
+    /// Skill ranks tracker for the character
+    /// </summary>
+    public class SkillRanks : ISkillRanks, IStatTracker
+    {
+        /// <summary>
+        /// The skills available
+        /// </summary>
+        private IDictionary<string, CharacterSkill> skills;
 
-		public SkillRanks (IEnumerable<Skill> skills, AbilityScores scores) {
-			_skills = new Dictionary<string, CharacterSkill> ();
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.SkillRanks"/> class.
+        /// </summary>
+        /// <param name="skillList">Skills available</param>
+        /// <param name="scores">Ability scores for a baseline.</param>
+        public SkillRanks(IEnumerable<Skill> skillList, AbilityScores scores)
+        {
+            this.skills = new Dictionary<string, CharacterSkill>();
 
-			FillSkills (skills, scores);
-		}
+            this.FillSkills(skillList, scores);
+        }
 
-		public int GetScore(string skill) {
-			return _skills [skill].Score();
-		}
+        /// <summary>
+        /// Gets the score in a skill.
+        /// </summary>
+        /// <returns>The score.</returns>
+        /// <param name="skill">Skill to lookup.</param>
+        public int GetScore(string skill)
+        {
+            return this.skills[skill].Score();
+        }
 
-		public CharacterSkill GetSkill(string skill) {
-			return _skills [skill];
-		}
+        /// <summary>
+        /// Gets the skill.
+        /// </summary>
+        /// <returns>The skill.</returns>
+        /// <param name="skill">Skill name to lookup.</param>
+        public CharacterSkill GetSkill(string skill)
+        {
+            return this.skills[skill];
+        }
 
-		public IEnumerable<CharacterSkill> GetSkills() {
-			return _skills.Values;
-		}
+        /// <summary>
+        /// Gets the skills.
+        /// </summary>
+        /// <returns>The skills.</returns>
+        public IEnumerable<CharacterSkill> GetSkills()
+        {
+            return this.skills.Values;
+        }
 
-		public IEnumerable<CharacterSkill> GetRankedSkills() {
-			return _skills.Values.Where (x => 
-				x.Ranks > 0
-			);
-		}
+        /// <summary>
+        /// Gets the ranked skills.
+        /// </summary>
+        /// <returns>The ranked skills.</returns>
+        public IEnumerable<CharacterSkill> GetRankedSkills()
+        {
+            return this.skills.Values.Where(
+                x => x.Ranks > 0);
+        }
 
-		public void ProcessModifier(IModifiesStats modifier) {
-			foreach (var a in modifier.Modifiers) {
-				CharacterSkill sk;
-				if (_skills.TryGetValue (a.StatName, out sk)) {
-					sk.AddModifier (a);
-				}
-			}
-		}
-			
-		private void FillSkills(IEnumerable<Skill> skills, AbilityScores scores) {
-			foreach (var s in skills) {
-				_skills.Add(s.Name, new CharacterSkill(
-					s,
-					scores.GetAbility(s.Ability),
-					false)
-				);
-			}
-		}
-	}
+        /// <summary>
+        /// The implementing class must handle modifiers to stats under its control
+        /// </summary>
+        /// <param name="modifier">Modifier for stats</param>
+        public void ProcessModifier(IModifiesStats modifier)
+        {
+            foreach (var a in modifier.Modifiers)
+            {
+                CharacterSkill sk;
+                if (this.skills.TryGetValue(a.StatisticName, out sk))
+                {
+                    sk.AddModifier(a);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fills the skills.
+        /// </summary>
+        /// <param name="skills">Skills available.</param>
+        /// <param name="scores">Scores to base skill ranks on.</param>
+        private void FillSkills(IEnumerable<Skill> skills, AbilityScores scores)
+        {
+            foreach (var s in skills)
+            {
+                this.skills.Add(
+                    s.Name, 
+                    new CharacterSkill(
+                        s,
+                        scores.GetAbility(s.Ability),
+                        false));
+            }
+        }
+    }
 }
-

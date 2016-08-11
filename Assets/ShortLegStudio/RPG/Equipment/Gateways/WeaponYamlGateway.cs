@@ -1,52 +1,91 @@
-﻿using System;
-using System.Linq;
-using ShortLegStudio.RPG.Equipment;
-using ShortLegStudio.Enchilada;
-using System.Collections.Generic;
-using ShortLegStudio.RPG.Characters;
+﻿//-----------------------------------------------------------------------
+// <copyright file="WeaponYamlGateway.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.RPG.Equipment.Gateways
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using ShortLegStudio.RPG.Characters;
+    using ShortLegStudio.RPG.Equipment;
 
-namespace ShortLegStudio.RPG.Equipment.Gateways {
-	public class WeaponYamlGateway : IWeaponGateway {
-		const string WEAPON_YAML_FILE = "Data/weapons.yml";
+    /// <summary>
+    /// Weapon yaml gateway.
+    /// </summary>
+    public class WeaponYamlGateway : IWeaponGateway
+    {
+        /// <summary>
+        /// The weapon yaml file.
+        /// </summary>
+        private const string WeaponYamlFile = "Data/weapons.yml";
 
-		private IList<Weapon> Weapons;
+        /// <summary>
+        /// The weapons.
+        /// </summary>
+        private IList<Weapon> weapons;
 
-		public WeaponYamlGateway()  { 
-			LoadFromYaml (FileHelper.OpenYaml (WEAPON_YAML_FILE));
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Equipment.Gateways.WeaponYamlGateway"/> class.
+        /// </summary>
+        public WeaponYamlGateway()
+        { 
+            this.LoadFromYaml(FileHelper.OpenYaml(WeaponYamlFile));
+        }
 
-		public WeaponYamlGateway (YamlNodeWrapper yamlData) { 
-			LoadFromYaml (yamlData);
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Equipment.Gateways.WeaponYamlGateway"/> class.
+        /// </summary>
+        /// <param name="yamlData">Yaml data.</param>
+        public WeaponYamlGateway(YamlNodeWrapper yamlData)
+        { 
+            this.LoadFromYaml(yamlData);
+        }
 
-		private void LoadFromYaml(YamlNodeWrapper yaml) {
-			Weapons = new List<Weapon> ();
+        /// <summary>
+        /// All this instance.
+        /// </summary>
+        /// <returns>All weapons loaded</returns>
+        public IEnumerable<Weapon> All()
+        {
+            return this.weapons;
+        }
 
-			foreach (var node in yaml.Children()) {
-				ShortLog.DebugFormat ("Loading Weapon: {0}", node.GetString ("name"));
-				var w = new Weapon (
-					node.GetString ("name"),
-					node.GetFloat ("weight"),
-					node.GetString ("damage"),
-					node.GetEnum<DamageTypes>("damage_type"),
-					node.GetIntegerOptional ("critical_threat"),
-					node.GetIntegerOptional ("critical_modifier"),
-					node.GetIntegerOptional ("range"),
-					node.GetEnum<WeaponType>("type"),
-					node.GetEnum<WeaponGroup>("group"),
-					node.GetEnum<WeaponTrainingLevel>("training_level")
-				);
-				Weapons.Add (w);
-			}
-		}
+        /// <summary>
+        /// Finds weapons by proficiencies.
+        /// </summary>
+        /// <returns>The by proficient.</returns>
+        /// <param name="proficiencies">Proficiencies to find by.</param>
+        public IEnumerable<Weapon> FindByProficient(IEnumerable<WeaponProficiency> proficiencies)
+        {
+            return this.weapons.Where(x => proficiencies.IsProficient(x));
+        }
 
-		public IEnumerable<Weapon> All() {
-			return Weapons;
-		}
+        /// <summary>
+        /// Loads from yaml.
+        /// </summary>
+        /// <param name="yaml">Yaml data to load.</param>
+        private void LoadFromYaml(YamlNodeWrapper yaml)
+        {
+            this.weapons = new List<Weapon>();
 
-		public IEnumerable<Weapon> FindByProficient(IEnumerable<WeaponProficiency> proficiencies) {
-			return Weapons.Where(x => proficiencies.IsProficient(x));
-		}
-	}
+            foreach (var node in yaml.Children())
+            {
+                ShortLog.DebugFormat("Loading Weapon: {0}", node.GetString("name"));
+                var w = new Weapon(
+                    node.GetString("name"),
+                    node.GetFloat("weight"),
+                    node.GetString("damage"),
+                    node.GetEnum<DamageTypes>("damage_type"),
+                    node.GetIntegerOptional("critical_threat"),
+                    node.GetIntegerOptional("critical_modifier"),
+                    node.GetIntegerOptional("range"),
+                    node.GetEnum<WeaponType>("type"),
+                    node.GetEnum<WeaponGroup>("group"),
+                    node.GetEnum<WeaponTrainingLevel>("training_level"));
+                this.weapons.Add(w);
+            }
+        }
+    }
 }
-

@@ -1,39 +1,105 @@
-﻿using System;
-using ShortLegStudio.RPG.Equipment;
-using System.Collections.Generic;
-using System.Linq;
-using System.ComponentModel;
-using UnityEditorInternal.VersionControl;
-using YamlDotNet.Core.Tokens;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Inventory.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.RPG.Characters
+{
+    using System.Collections.Generic;
+    using System.Linq;
+    using ShortLegStudio.RPG.Equipment;
 
-namespace ShortLegStudio.RPG.Characters {
-	public class Inventory {
-		public IEnumerable<IEquipment> All { get { return _inv; } }
-		public IEnumerable<Weapon> Weapons { get { return _inv.OfType<Weapon>(); } }
-		public IEnumerable<Armor> Armor { get { return _inv.OfType<Armor>(); } }
-		public IEnumerable<IEquipment> EquippedItems { get { return _equippedItems; } }
-		private IList<IEquipment> _inv;
-		private IList<IEquipment> _equippedItems;
+    /// <summary>
+    /// Inventory for a character. This holds all the gear and keeps track
+    /// of what they have equipped.
+    /// </summary>
+    public class Inventory
+    {
+        /// <summary>
+        /// The gear a character has
+        /// </summary>
+        private IList<IEquipment> gear;
 
-		public Inventory () {
-			_inv = new List<IEquipment> ();	
-			_equippedItems = new List<IEquipment> ();
-		}
+        /// <summary>
+        /// The equipped gear.
+        /// </summary>
+        private IList<IEquipment> equippedGear;
 
-		public void AddItem(IEquipment equip) {
-			if (!_inv.Contains (equip)) {
-				_inv.Add (equip);
-			}
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Inventory"/> class.
+        /// </summary>
+        public Inventory()
+        {
+            this.gear = new List<IEquipment>();  
+            this.equippedGear = new List<IEquipment>();
+        }
 
-		public void EquipItem(IEquipment item) {
-			AddItem (item);
-			_equippedItems.Add (item);
-		}
+        /// <summary>
+        /// Gets all of the gear
+        /// </summary>
+        /// <value>All of the equipment in inventory.</value>
+        public IEnumerable<IEquipment> All 
+        { 
+            get { return this.gear; } 
+        }
 
-		public IEnumerable<T> OfType<T>() {
-			return _inv.OfType<T> ();
-		}
-	}
+        /// <summary>
+        /// Gets all of the weapons 
+        /// </summary>
+        /// <value>The weapons.</value>
+        public IEnumerable<Weapon> Weapons 
+        { 
+            get { return this.gear.OfType<Weapon>(); } 
+        }
+
+        /// <summary>
+        /// Gets all of the armor
+        /// </summary>
+        /// <value>The armor.</value>
+        public IEnumerable<Armor> Armor 
+        { 
+            get { return this.gear.OfType<Armor>(); } 
+        }
+
+        /// <summary>
+        /// Gets the equipped items.
+        /// </summary>
+        /// <value>The equipped items.</value>
+        public IEnumerable<IEquipment> EquippedItems 
+        { 
+            get { return this.equippedGear; } 
+        }
+
+        /// <summary>
+        /// Adds the gear to the character.
+        /// </summary>
+        /// <param name="equip">Equipment to add.</param>
+        public void AddGear(IEquipment equip)
+        {
+            if (!this.gear.Contains(equip))
+            {
+                this.gear.Add(equip);
+            }
+        }
+
+        /// <summary>
+        /// Equips the item.
+        /// </summary>
+        /// <param name="item">Item to equip. Adds gear if not already added</param>
+        public void EquipItem(IEquipment item)
+        {
+            this.AddGear(item);
+            this.equippedGear.Add(item);
+        }
+
+        /// <summary>
+        /// Finds gear of specific type
+        /// </summary>
+        /// <returns>The type.</returns>
+        /// <typeparam name="T">The 1st type parameter.</typeparam>
+        public IEnumerable<T> GearOfType<T>()
+        {
+            return this.gear.OfType<T>();
+        }
+    }
 }
-

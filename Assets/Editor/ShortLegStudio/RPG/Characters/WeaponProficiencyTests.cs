@@ -36,5 +36,12 @@ namespace RPG.Characters {
 			wpn.Name = "Shortbow";
 			Assert.IsTrue(prof.IsProficient(wpn));
 		}
+
+        [Test]
+        public void NameLooksHumanReadable() {
+            var prof = new WeaponProficiency("simple");
+            Assert.AreEqual("Simple weapons", prof.Name);
+
+        }
 	}
 }

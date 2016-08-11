@@ -17,29 +17,29 @@ namespace RPG.Characters {
 			var prereqs = new Prerequisites (prereq);
 
 			Assert.AreEqual (4, prereqs.Count);
-			Assert.IsInstanceOf<AbilityPrerequisite> (prereqs.First ());
+            Assert.IsInstanceOf<Prerequisites.AbilityPrerequisite> (prereqs.First ());
 		}
 
 		[Test]
 		public void AlwaysQualifiedIfNoQualificationsNeeded() {
 			var pre = new Prerequisites ();
-			Assert.IsTrue(pre.Qualified(new CharacterSheet(new List<Skill>())));
+			Assert.IsTrue(pre.IsQualified(new CharacterSheet(new List<Skill>())));
 		}
 
 		[Test]
 		public void AbilityIsQualifiedIfExceedingScore() {
-			var pre = new AbilityPrerequisite ("Intelligence 13");
+            var pre = new Prerequisites.AbilityPrerequisite ("Intelligence 13");
 			var c = new CharacterSheet (new List<Skill>());
-			c.Abilities.SetScore (AbilityScoreTypes.Intelligence, 15);
-			Assert.IsTrue (pre.Qualified (c));
+			c.AbilityScores.SetScore (AbilityScoreTypes.Intelligence, 15);
+			Assert.IsTrue (pre.IsQualified (c));
 		}
 
 		[Test]
 		public void AbilityIsNotQualifiedIfNotExceedingScore() {
-			var pre = new AbilityPrerequisite ("Intelligence 13");
+            var pre = new Prerequisites.AbilityPrerequisite ("Intelligence 13");
 			var c = new CharacterSheet (new List<Skill>());
-			c.Abilities.SetScore (AbilityScoreTypes.Intelligence, 11);
-			Assert.IsFalse (pre.Qualified (c));
+			c.AbilityScores.SetScore (AbilityScoreTypes.Intelligence, 11);
+			Assert.IsFalse (pre.IsQualified (c));
 		}
 
 

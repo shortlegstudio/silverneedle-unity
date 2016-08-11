@@ -57,7 +57,7 @@ namespace RPG {
 			var mod = new ConditionalStatModifier("vs. Giants", "Skill", 5, "bonus", "Feat");
 			stat.AddModifier(mod);
 			Assert.AreEqual(10, stat.TotalValue);
-			Assert.AreEqual(15, stat.GetConditionalScore("vs. Giants"));
+			Assert.AreEqual(15, stat.GetConditionalValue("vs. Giants"));
 			Assert.AreEqual(1, stat.GetConditions().Count());
 			Assert.AreEqual("vs. Giants", stat.GetConditions().First());
 		}
@@ -87,7 +87,7 @@ namespace RPG {
 			stat.AddModifier(mod);
 			Assert.AreEqual(1, stat.GetConditions().Count());
 			Assert.AreEqual(10, stat.TotalValue);
-			Assert.AreEqual(13, stat.GetConditionalScore("vs. Thor"));
+			Assert.AreEqual(13, stat.GetConditionalValue("vs. Thor"));
 		}
 			
 		[Test]

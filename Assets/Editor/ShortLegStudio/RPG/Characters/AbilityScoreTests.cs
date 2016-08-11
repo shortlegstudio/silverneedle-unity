@@ -47,7 +47,7 @@ namespace RPG.Characters {
 		public void YouCanAddAnAdjustmentToAdjustTheTotals() {
 			var score = new AbilityScore (AbilityScoreTypes.Strength, 15);
 			var adj = new AbilityScoreAdjustment ();
-			adj.ability = AbilityScoreTypes.Strength;
+			adj.AbilityName = AbilityScoreTypes.Strength;
 			adj.Modifier = 2;
 
 			score.AddModifier (adj);

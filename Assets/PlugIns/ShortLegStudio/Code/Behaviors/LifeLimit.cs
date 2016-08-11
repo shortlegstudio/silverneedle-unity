@@ -1,15 +1,29 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿//-----------------------------------------------------------------------
+// <copyright file="LifeLimit.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.Behaviors
+{
+    using UnityEngine;
 
+    /// <summary>
+    /// Destroy an object after some amount of time
+    /// </summary>
+    public class LifeLimit : MonoBehaviour
+    {
+        /// <summary>
+        /// How long until the object is destroyed
+        /// </summary>
+        [SerializeField]
+        private float killTime;
 
-/// <summary>
-/// Destroy an object after some amount of time
-/// </summary>
-public class LifeLimit : MonoBehaviour {
-	public float killTime;
-
-	// Use this for initialization
-	void Start () {
-		Destroy (this.gameObject, killTime);
-	}
+        /// <summary>
+        /// Start this instance.
+        /// </summary>
+        private void Start()
+        {
+            GameObject.Destroy(this.gameObject, this.killTime);
+        }
+    }
 }

@@ -14,7 +14,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 		public void SetUp() {
 			character = new CharacterSheet (new List<Skill>());
 			var abGen = new AverageAbilityScoreGenerator ();
-			abGen.AssignAbilities (character.Abilities);
+			abGen.AssignAbilities (character.AbilityScores);
 			var cls = new Class ();
 			character.SetClass (cls);
 		}
@@ -45,7 +45,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 
 			//At least one ability should be greater than 10 now
 			Assert.IsTrue (
-				character.Abilities.GetAbilities().Any (x => x.TotalValue > 10)
+				character.AbilityScores.Abilities.Any (x => x.TotalValue > 10)
 			);
 		}
 	}

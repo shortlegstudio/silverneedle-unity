@@ -9,8 +9,8 @@ using System.Linq;
 public class DiceTests {
 
 	private void ValidateAllSides(Die die) {
-		var results = new bool[die.SideCount()];
-		for (var counter = 0; counter < 1000 * die.SideCount(); counter++) {
+		var results = new bool[die.SideCount];
+		for (var counter = 0; counter < 1000 * die.SideCount; counter++) {
 			var roll = die.Roll ();
 			results [roll - 1] = true;
 			if (results.All (x => x)) {
@@ -23,66 +23,66 @@ public class DiceTests {
     [Test]
     public void D4ReturnsAllSideValues()
     {
-		ValidateAllSides (Die.d4());
+		ValidateAllSides (Die.D4());
 		Assert.Pass ();
     }
 
 	[Test]
 	public void D6ReturnsAllSideValues()
 	{
-		ValidateAllSides (Die.d6());
+		ValidateAllSides (Die.D6());
 		Assert.Pass ();
 	}
 
 	[Test]
 	public void D8ReturnsAllSideValues()
 	{
-		ValidateAllSides (Die.d8());
+		ValidateAllSides (Die.D8());
 		Assert.Pass ();
 	}
 
 	[Test]
 	public void D10ReturnsAllSideValues()
 	{
-		ValidateAllSides (Die.d10());
+		ValidateAllSides (Die.D10());
 		Assert.Pass ();
 	}
 
 	[Test]
 	public void D12ReturnsAllSideValues()
 	{
-		ValidateAllSides (Die.d12());
+		ValidateAllSides (Die.D12());
 		Assert.Pass ();
 	}
 
 	[Test]
 	public void D20ReturnsAllSideValues()
 	{
-		ValidateAllSides (Die.d20());
+		ValidateAllSides (Die.D20());
 		Assert.Pass ();
 	}
 
 	[Test]
 	public void D100ReturnsAllSideValues()
 	{
-		ValidateAllSides (Die.d100());
+		ValidateAllSides (Die.D100());
 		Assert.Pass ();
 	}
 
 	[Test]
 	public void GetProperSidesOfDefaultDie() {
-		Assert.AreEqual (DiceSides.d4, Die.d4 ().Sides);
-		Assert.AreEqual (DiceSides.d6, Die.d6 ().Sides);
-		Assert.AreEqual (DiceSides.d8, Die.d8 ().Sides);
-		Assert.AreEqual (DiceSides.d10, Die.d10 ().Sides);
-		Assert.AreEqual (DiceSides.d12, Die.d12 ().Sides);
-		Assert.AreEqual (DiceSides.d20, Die.d20 ().Sides);
-		Assert.AreEqual (DiceSides.d100, Die.d100 ().Sides);
+		Assert.AreEqual (DiceSides.d4, Die.D4 ().Sides);
+		Assert.AreEqual (DiceSides.d6, Die.D6 ().Sides);
+		Assert.AreEqual (DiceSides.d8, Die.D8 ().Sides);
+		Assert.AreEqual (DiceSides.d10, Die.D10 ().Sides);
+		Assert.AreEqual (DiceSides.d12, Die.D12 ().Sides);
+		Assert.AreEqual (DiceSides.d20, Die.D20 ().Sides);
+		Assert.AreEqual (DiceSides.d100, Die.D100 ().Sides);
 	}
 
 	[Test]
 	public void ToStringReturnsALogicalVersionOfDie() {
-		var d4 = Die.d4 ();
+		var d4 = Die.D4 ();
 		var result = d4.Roll ();
 		var expectedString = string.Format ("[Die: Sides={0}, LastRoll={1}]", d4.Sides, result);
 		Assert.AreEqual (expectedString, d4.ToString ());
@@ -90,8 +90,8 @@ public class DiceTests {
 
 	[Test]
 	public void TwoDifferentDiceWithTheSameSidesAndRollAreEqual() {
-		var dieOne = Die.d8 ();
-		var dieTwo = Die.d8 ();
+		var dieOne = Die.D8 ();
+		var dieTwo = Die.D8 ();
 
 		Assert.AreEqual (dieOne, dieTwo);
 	}
@@ -99,6 +99,6 @@ public class DiceTests {
 	[Test]
 	public void CreateAnArrayOfDiceByPassingANumberIntoTheHelperMethod() {
 		var diceArray = Die.GetDice (DiceSides.d12, 4);
-		Assert.AreEqual (new Die[] { Die.d12 (), Die.d12 (), Die.d12 (), Die.d12 () }, diceArray);
+		Assert.AreEqual (new Die[] { Die.D12 (), Die.D12 (), Die.D12 (), Die.D12 () }, diceArray);
 	}
 }

@@ -40,13 +40,13 @@ namespace RPG.Characters {
 			var modifiers = Acrobatic.Modifiers;
 			Assert.AreEqual (2, modifiers.Count);
 			var skillAdj = modifiers.First ();
-			Assert.AreEqual ("Acrobatics", skillAdj.StatName);
+			Assert.AreEqual ("Acrobatics", skillAdj.StatisticName);
 			Assert.AreEqual("bonus", skillAdj.Type);
 			Assert.AreEqual ("Acrobatic (feat)", skillAdj.Reason);
 			Assert.AreEqual (2, skillAdj.Modifier);
 
 			var flyAdj = modifiers.Last ();
-			Assert.AreEqual ("Fly", flyAdj.StatName);
+			Assert.AreEqual ("Fly", flyAdj.StatisticName);
 			Assert.AreEqual("bonus", skillAdj.Type);
 			Assert.AreEqual ("Acrobatic (feat)", skillAdj.Reason);
 			Assert.AreEqual (4, flyAdj.Modifier);
@@ -55,8 +55,8 @@ namespace RPG.Characters {
 		[Test]
 		public void FeatsCanHaveAbilityPrerequisites() {
 			var prereq = CombatExpertise.Prerequisites;
-			var abilityCheck = prereq.First () as AbilityPrerequisite;
-			Assert.IsInstanceOf<AbilityPrerequisite> (abilityCheck);
+			var abilityCheck = prereq.First () as Prerequisites.AbilityPrerequisite;
+            Assert.IsInstanceOf<Prerequisites.AbilityPrerequisite> (abilityCheck);
 			Assert.AreEqual (AbilityScoreTypes.Intelligence, abilityCheck.Ability);
 			Assert.AreEqual (13, abilityCheck.Minimum);
 		}
@@ -82,11 +82,11 @@ namespace RPG.Characters {
 		[Test]
 		public void FeatsKnowWhetherYouQualify() {
 			var smartCharacter = new CharacterSheet (new List<Skill>());
-			smartCharacter.Abilities.SetScore (AbilityScoreTypes.Intelligence, 15);
+			smartCharacter.AbilityScores.SetScore (AbilityScoreTypes.Intelligence, 15);
 			var dumbCharacter = new CharacterSheet (new List<Skill>());
-			dumbCharacter.Abilities.SetScore (AbilityScoreTypes.Intelligence, 5);
-			Assert.IsTrue (CombatExpertise.Qualified (smartCharacter));
-			Assert.IsFalse (CombatExpertise.Qualified (dumbCharacter));
+			dumbCharacter.AbilityScores.SetScore (AbilityScoreTypes.Intelligence, 5);
+			Assert.IsTrue (CombatExpertise.IsQualified (smartCharacter));
+			Assert.IsFalse (CombatExpertise.IsQualified (dumbCharacter));
 		}
 
 		[Test]

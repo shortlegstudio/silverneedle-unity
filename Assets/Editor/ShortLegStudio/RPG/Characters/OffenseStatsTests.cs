@@ -75,7 +75,7 @@ namespace RPG.Characters {
 		[Test]
 		public void ContainsAListOfAllWeaponsAvailableAndTheirStats() {
 			var longsword = Longsword();
-			inventory.AddItem(longsword);
+			inventory.AddGear(longsword);
 			Assert.AreEqual(1, smallStats.Attacks().Count);
 			Assert.AreEqual("Longsword", smallStats.Attacks().First().Name);
 			Assert.AreEqual(longsword, smallStats.Attacks().First().Weapon);
@@ -83,7 +83,7 @@ namespace RPG.Characters {
 
 		[Test]
 		public void MeleeWeaponAttacksCalculateDamageBonuses() {
-			inventory.AddItem(Longsword());
+			inventory.AddGear(Longsword());
 			smallStats.AddWeaponProficiency("martial");
 
 			var atk = smallStats.Attacks().First();
@@ -98,7 +98,7 @@ namespace RPG.Characters {
 
 		[Test]
 		public void RangeAttackBonusHaveAttackBonusButNotDamage() {
-			inventory.AddItem(ShortBow());
+			inventory.AddGear(ShortBow());
 			smallStats.AddWeaponProficiency("martial");
 			var atk = smallStats.Attacks().First();
 			Assert.IsNotNull(atk);
@@ -122,10 +122,10 @@ namespace RPG.Characters {
 
 		[Test]
 		public void AttacksWithoutProficiencyAreAtMinus4() {
-			inventory.AddItem(Nunchaku());
+			inventory.AddGear(Nunchaku());
 			var atk = smallStats.Attacks().First();
 			Assert.IsNotNull(atk);
-			Assert.AreEqual(smallStats.MeleeAttackBonus() + OffenseStats.UNPROFICIENT_MODIFIER, atk.AttackBonus);
+			Assert.AreEqual(smallStats.MeleeAttackBonus() + OffenseStats.UnproficientWeaponModifier, atk.AttackBonus);
 		}
 
 

@@ -1,11 +1,29 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿//-----------------------------------------------------------------------
+// <copyright file="Rotate.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.Behaviors
+{
+    using UnityEngine;
 
-public class Rotate : MonoBehaviour {
-	public Vector3 rotateSpeed = Vector3.zero;
+    /// <summary>
+    /// Rotates a game object
+    /// </summary>
+    public class Rotate : MonoBehaviour
+    {
+        /// <summary>
+        /// The rotate speed.
+        /// </summary>
+        [SerializeField]
+        private Vector3 rotateSpeed = Vector3.zero;
 
-	// Update is called once per frame
-	void Update () {
-		this.transform.Rotate (rotateSpeed * Time.deltaTime);
-	}
+        /// <summary>
+        /// Update this instance.
+        /// </summary>
+        private void Update()
+        {
+            this.transform.Rotate(this.rotateSpeed * Time.deltaTime);
+        }
+    }
 }

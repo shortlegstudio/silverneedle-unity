@@ -12,18 +12,20 @@ using UnityEngine;
 
 namespace ShortLegStudio
 {
-	public static class ViewportHelpers
-	{
-		public static Vector3 GetBottomLeftBoundary(Vector3 position) {
-			float distance = position.z - Camera.main.transform.position.z;
-			return Camera.main.ViewportToWorldPoint(new Vector3(0,0, distance));
-		}
+    public static class ViewportHelpers
+    {
+        public static Vector3 GetBottomLeftBoundary(Vector3 position)
+        {
+            float distance = position.z - Camera.main.transform.position.z;
+            return Camera.main.ViewportToWorldPoint(new Vector3(0, 0, distance));
+        }
 
-		public static Vector3 GetTopRightBoundary(Vector3 position) {
-			float distance = position.z - Camera.main.transform.position.z;
-			return Camera.main.ViewportToWorldPoint (new Vector3 (1, 1, distance));
-		}
+        public static Vector3 GetTopRightBoundary(Vector3 position)
+        {
+            float distance = position.z - Camera.main.transform.position.z;
+            return Camera.main.ViewportToWorldPoint(new Vector3(1, 1, distance));
+        }
 
-	}
+    }
 }
 

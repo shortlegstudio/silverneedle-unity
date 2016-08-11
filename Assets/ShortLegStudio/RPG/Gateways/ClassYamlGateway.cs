@@ -1,61 +1,99 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-using ShortLegStudio.Enchilada;
-using ShortLegStudio.RPG.Characters;
-using ShortLegStudio;
-using ShortLegStudio.Dice;
-using YamlDotNet.RepresentationModel;
+﻿//-----------------------------------------------------------------------
+// <copyright file="ClassYamlGateway.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.RPG.Gateways
+{
+    using System.Collections.Generic;
+    using ShortLegStudio;
+    using ShortLegStudio.Dice;
+    using ShortLegStudio.Enchilada;
+    using ShortLegStudio.RPG.Characters;
 
-public class ClassYamlGateway : EntityGateway<Class> {
-	//Static Values
-	const string CLASS_DATA_FILE = "Data/classes.yml";
-	private IList<Class> _Classes;
+    /// <summary>
+    /// Class yaml gateway.
+    /// </summary>
+    public class ClassYamlGateway : IEntityGateway<Class>
+    {
+        /// <summary>
+        /// The yaml file holding class data
+        /// </summary>
+        private const string ClassDataFile = "Data/classes.yml";
 
-	public ClassYamlGateway(YamlNodeWrapper yaml) {
-		_Classes = LoadFromYaml(yaml);
-	}
+        /// <summary>
+        /// The classes that are loaded
+        /// </summary>
+        private IList<Class> classes;
 
-	public ClassYamlGateway() {
-		_Classes = LoadFromYaml(FileHelper.OpenYaml(CLASS_DATA_FILE));
-	}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.ClassYamlGateway"/> class.
+        /// </summary>
+        /// <param name="yaml">Yaml data.</param>
+        public ClassYamlGateway(YamlNodeWrapper yaml)
+        {
+            this.classes = LoadFromYaml(yaml);
+        }
 
-	public IEnumerable<Class> All() {
-		return _Classes;
-	}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.ClassYamlGateway"/> class.
+        /// </summary>
+        public ClassYamlGateway()
+        {
+            this.classes = LoadFromYaml(FileHelper.OpenYaml(ClassDataFile));
+        }
 
-	private static IList<Class> LoadFromYaml(YamlNodeWrapper yaml) {
-		var classes = new List<Class> ();
+        /// <summary>
+        /// Should return all of the classes
+        /// </summary>
+        /// <returns>Enumerable collection of the classes</returns>
+        public IEnumerable<Class> All()
+        {
+            return this.classes;
+        }
 
-		foreach (var node in yaml.Children()) {
-			var cls = new Class ();
-			cls.Name = node.GetString ("name"); 
-			ShortLog.Debug ("Loading Class: " + cls.Name);
-			cls.SkillPoints = node.GetInteger ("skillpoints");
-			cls.HitDice = DiceStrings.ParseSides (node.GetString ("hitdice"));
-			cls.BaseAttackBonusRate = node.GetFloat ("baseattackbonus");
-			cls.FortitudeSaveRate = node.GetFloat ("fortitude");
-			cls.ReflexSaveRate = node.GetFloat ("reflex");
-			cls.WillSaveRate = node.GetFloat ("will");
+        /// <summary>
+        /// Loads from yaml.
+        /// </summary>
+        /// <returns>The from yaml.</returns>
+        /// <param name="yaml">Yaml data to load from.</param>
+        private static IList<Class> LoadFromYaml(YamlNodeWrapper yaml)
+        {
+            var classes = new List<Class>();
 
-			var armor = node.GetCommaStringOptional ("armorproficiencies");
-			foreach (var a in armor) {
-				cls.ArmorProficiencies.Add (
-					string.Format ("Armor Proficiency ({0})", a.Capitalize ())
-				);
-			}
+            foreach (var node in yaml.Children())
+            {
+                var cls = new Class();
+                cls.Name = node.GetString("name"); 
+                ShortLog.Debug("Loading Class: " + cls.Name);
+                cls.SkillPoints = node.GetInteger("skillpoints");
+                cls.HitDice = DiceStrings.ParseSides(node.GetString("hitdice"));
+                cls.BaseAttackBonusRate = node.GetFloat("baseattackbonus");
+                cls.FortitudeSaveRate = node.GetFloat("fortitude");
+                cls.ReflexSaveRate = node.GetFloat("reflex");
+                cls.WillSaveRate = node.GetFloat("will");
 
-			var weapons = node.GetCommaStringOptional("weaponproficiencies");
-			cls.WeaponProficiencies.Add(weapons);
+                var armor = node.GetCommaStringOptional("armorproficiencies");
+                foreach (var a in armor)
+                {
+                    cls.ArmorProficiencies.Add(
+                        string.Format("Armor Proficiency ({0})", a.Capitalize()));
+                }
 
-			//Get the Skills for this class
-			var skills = node.GetNode ("skills").Children();
-			foreach (var s in skills) {
-				cls.AddClassSkill (s.Value);
-			}
+                var weapons = node.GetCommaStringOptional("weaponproficiencies");
+                cls.WeaponProficiencies.Add(weapons);
 
-			classes.Add (cls);
-		}
+                // Get the Skills for this class
+                var skills = node.GetNode("skills").Children();
+                foreach (var s in skills)
+                {
+                    cls.AddClassSkill(s.Value);
+                }
 
-		return classes;
-	}
+                classes.Add(cls);
+            }
+
+            return classes;
+        }
+    }
 }

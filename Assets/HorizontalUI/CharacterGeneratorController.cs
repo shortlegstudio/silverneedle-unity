@@ -1,34 +1,67 @@
-﻿using UnityEngine;
-using System.Collections;
-using ShortLegStudio.RPG.Characters;
-using System;
-using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
-using ShortLegStudio.RPG.Gateways;
-using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
+﻿//-----------------------------------------------------------------------
+// <copyright file="CharacterGeneratorController.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.SilverNeedle 
+{
+    using System;
+    using ShortLegStudio.RPG.Characters;
+    using ShortLegStudio.RPG.Gateways;
+    using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
+    using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
+    using UnityEngine;
 
-public class CharacterGeneratorController : MonoBehaviour {
-	public CharacterSheet Character;
-	public event EventHandler Generated;
-	private CharacterGenerator generator;
+    /// <summary>
+    /// Manages the interaction of generating new characters
+    /// </summary>
+    public class CharacterGeneratorController : MonoBehaviour
+    {
+        /// <summary>
+        /// The character genetator mechanic
+        /// </summary>
+        private CharacterGenerator generator;
 
+        /// <summary>
+        /// Occurs when a character is generated.
+        /// </summary>
+        public event EventHandler Generated;
 
-	//TODO: IoC Container will be essential as this gets more complicated
-	void Start() {
-		generator = new CharacterGenerator (
-			new RandomAbilityScoreGenerator(),
-			new LanguageSelector(new LanguageYamlGateway()),
-			new RaceSelector(new RaceYamlGateway(), new TraitYamlGateway()),
-			new NameGenerator()
-		);
-	}
+        /// <summary>
+        /// Gets the character currently being generatred
+        /// </summary>
+        public CharacterSheet Character { get; private set; }
 
-	public void GenerateCharacter() {
-		Character = generator.GenerateRandomCharacter ();
-		OnGenerate ();
-	}
+        /// <summary>
+        /// Generates the character.
+        /// </summary>
+        public void GenerateCharacter()
+        {
+            this.Character = this.generator.GenerateRandomCharacter();
+            this.OnGenerated();
+        }
 
-	private void OnGenerate() {
-		if (Generated != null)
-			Generated (this, new EventArgs ());
-	}
+        /// <summary>
+        /// Start this instance.
+        /// </summary>
+        private void Start()
+        {
+            this.generator = new CharacterGenerator(
+                new StandardAbilityScoreGenerator(),
+                new LanguageSelector(new LanguageYamlGateway()),
+                new RaceSelector(new RaceYamlGateway(), new TraitYamlGateway()),
+                new NameGenerator());
+        }
+
+        /// <summary>
+        /// Raises the generated event.
+        /// </summary>
+        private void OnGenerated()
+        {
+            if (this.Generated != null)
+            {
+                this.Generated(this, new EventArgs());
+            }
+        }
+    }
 }

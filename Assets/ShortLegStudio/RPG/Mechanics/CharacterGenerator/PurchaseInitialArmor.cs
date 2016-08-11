@@ -1,28 +1,51 @@
-﻿using System;
-using System.Linq;
-using ShortLegStudio;
-using ShortLegStudio.RPG.Equipment.Gateways;
-using ShortLegStudio.RPG.Characters;
-using ShortLegStudio.RPG.Equipment;
+﻿//-----------------------------------------------------------------------
+// <copyright file="PurchaseInitialArmor.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
-	public class PurchaseInitialArmor {
-		private IArmorGateway _armors;
+namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
+{
+    using System;
+    using System.Linq;
+    using ShortLegStudio.RPG.Characters;
+    using ShortLegStudio.RPG.Equipment;
+    using ShortLegStudio.RPG.Equipment.Gateways;
 
-		public PurchaseInitialArmor (IArmorGateway armorRepo) {
-			_armors = armorRepo;
-		}
+    /// <summary>
+    /// Purchase initial armor for a character
+    /// </summary>
+    public class PurchaseInitialArmor
+    {
+        /// <summary>
+        /// The armors available
+        /// </summary>
+        private IArmorGateway armors;
 
-		public void PurchaseArmorAndShield(Inventory inventory) {
-			var armor = _armors.FindByArmorTypes(
-				ArmorType.Light,
-				ArmorType.Medium,
-				ArmorType.Heavy).ToList ().ChooseOne ();
-			inventory.EquipItem (armor);
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="ShortLegStudio.RPG.Mechanics.CharacterGenerator.PurchaseInitialArmor"/> class.
+        /// </summary>
+        /// <param name="armorRepo">Armor gateway to load from.</param>
+        public PurchaseInitialArmor(IArmorGateway armorRepo)
+        {
+            this.armors = armorRepo;
+        }
 
-			var shield = _armors.FindByArmorType (ArmorType.Shield).ToList ().ChooseOne ();
-			inventory.EquipItem (shield);
-		}
-	}
+        /// <summary>
+        /// Purchases the armor and shield.
+        /// </summary>
+        /// <param name="inventory">Inventory to assign to</param>
+        public void PurchaseArmorAndShield(Inventory inventory)
+        {
+            var armor = this.armors.FindByArmorTypes(
+                            ArmorType.Light,
+                            ArmorType.Medium,
+                            ArmorType.Heavy).ToList().ChooseOne();
+            inventory.EquipItem(armor);
+
+            var shield = this.armors.FindByArmorType(ArmorType.Shield).ToList().ChooseOne();
+            inventory.EquipItem(shield);
+        }
+    }
 }
-

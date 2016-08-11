@@ -80,7 +80,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 		}
 	}
 
-	class TestRacesGateway : EntityGateway<Race> {
+	class TestRacesGateway : IEntityGateway<Race> {
 		public List<Race> Races = new List<Race>();
 
 		public IEnumerable<Race> All() {
@@ -88,7 +88,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 		}
 	}
 
-	class TestTraitGateway : EntityGateway<Trait> {
+	class TestTraitGateway : IEntityGateway<Trait> {
 		public List<Trait> Traits = new List<Trait>();
 
 		public IEnumerable<Trait> All() {

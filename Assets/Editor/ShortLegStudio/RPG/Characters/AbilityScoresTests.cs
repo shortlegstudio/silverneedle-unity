@@ -52,13 +52,13 @@ namespace RPG.Characters {
 		public void YouCanCopyOneSetOfAbilityScoresToAnother() {
 			var abilityScores = new AbilityScores ();
 			var copyFrom = new AbilityScores ();
-			foreach (var e in copyFrom.GetAbilities()) {
+			foreach (var e in copyFrom.Abilities) {
 				e.SetValue (15);
 			}
 
 			abilityScores.Copy (copyFrom);
 
-			foreach (var e in abilityScores.GetAbilities()) {
+			foreach (var e in abilityScores.Abilities) {
 				Assert.AreEqual (e.TotalValue, copyFrom.GetScore (e.Name));
 			}
 		}

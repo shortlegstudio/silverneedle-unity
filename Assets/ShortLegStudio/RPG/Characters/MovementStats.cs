@@ -1,27 +1,71 @@
-﻿using System;
+﻿//-----------------------------------------------------------------------
+// <copyright file="MovementStats.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.RPG.Characters
+{
+    using System;
 
-namespace ShortLegStudio.RPG.Characters {
-	public class MovementStats : IStatTracker {
-		const int SQUARE_SIZE = 5;
+    /// <summary>
+    /// Handles movement stats like how to work with armor or flying etc...
+    /// </summary>
+    public class MovementStats : IStatTracker
+    {
+        /// <summary>
+        /// The size of a square
+        /// </summary>
+        private const int SquareSize = 5;
 
-		public MovementStats() : this(30) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.MovementStats"/> class.
+        /// Defaults to 30' speed
+        /// </summary>
+        public MovementStats()
+            : this(30)
+        {
+        }
 
-		public MovementStats(int baseSpeed) {
-			BaseMovement = new BasicStat(baseSpeed);
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.MovementStats"/> class.
+        /// </summary>
+        /// <param name="baseSpeed">Base speed for the character.</param>
+        public MovementStats(int baseSpeed)
+        {
+            this.BaseMovement = new BasicStat(baseSpeed);
+        }
 
-		public int BaseSquares { 
-			get { return BaseMovement.TotalValue / SQUARE_SIZE; }
-		}
+        /// <summary>
+        /// Gets the base movement.
+        /// </summary>
+        /// <value>The base movement.</value>
+        public BasicStat BaseMovement { get; private set; }
 
-		public BasicStat BaseMovement { get; private set; }
-		public void ProcessModifier(IModifiesStats modifier) {
-			throw new NotImplementedException();
-		}
+        /// <summary>
+        /// Gets the base movement in squares
+        /// </summary>
+        /// <value>The base movement in squares.</value>
+        public int BaseSquares
+        { 
+            get { return this.BaseMovement.TotalValue / SquareSize; }
+        }
 
-		public void SetBaseSpeed(int spd) {
-			BaseMovement.SetValue(spd);
-		}
-	}
+        /// <summary>
+        /// The implementing class must handle modifiers to stats under its control
+        /// </summary>
+        /// <param name="modifier">Modifier for stats</param>
+        public void ProcessModifier(IModifiesStats modifier)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Sets the base speed.
+        /// </summary>
+        /// <param name="speed">Base speed of the character.</param>
+        public void SetBaseSpeed(int speed)
+        {
+            this.BaseMovement.SetValue(speed);
+        }
+    }
 }
-

@@ -13,18 +13,18 @@ public class CupTests {
     public void AnyTypeOfDieMayBeAddedToTheCup()
     {
 		var cup = new Cup ();
-		cup.AddDie (Die.d4());
-		cup.AddDie (Die.d10());
-		cup.AddDie (Die.d6());
+		cup.AddDie (Die.D4());
+		cup.AddDie (Die.D10());
+		cup.AddDie (Die.D6());
 
-		Assert.AreEqual (new Die[] { Die.d4 (), Die.d10 (), Die.d6 () }, cup.Dice);
+		Assert.AreEqual (new Die[] { Die.D4 (), Die.D10 (), Die.D6 () }, cup.Dice);
     }
 
 	[Test]
 	public void ItRollsAllTheDiceWhenRollingTheCup() {
 		var cup = new Cup ();
-		cup.AddDie (Die.d6());
-		cup.AddDie (Die.d6());
+		cup.AddDie (Die.D6());
+		cup.AddDie (Die.D6());
 		cup.Roll ();
 		Assert.IsTrue(cup.Dice.All(x => x.LastRoll > 0));
 	}
@@ -32,8 +32,8 @@ public class CupTests {
 	[Test]
 	public void ResultIsTheSumOfAllDiceRolled() {
 		var cup = new Cup ();
-		cup.AddDie (Die.d6 ());
-		cup.AddDie (Die.d6 ());
+		cup.AddDie (Die.D6 ());
+		cup.AddDie (Die.D6 ());
 		var result = cup.Roll ();
 		Assert.AreEqual(result, cup.Dice.Sum(x => x.LastRoll));
 	}
@@ -44,13 +44,13 @@ public class CupTests {
 		cup.AddDice (
 			Die.GetDice(DiceSides.d6, 4)
 		);
-		Assert.AreEqual (new Die[] { Die.d6 (), Die.d6 (), Die.d6 (), Die.d6 () }, cup.Dice);
+		Assert.AreEqual (new Die[] { Die.D6 (), Die.D6 (), Die.D6 (), Die.D6 () }, cup.Dice);
 	}
 
 	[Test]
 	public void CupCanBeCreatedWithArrayOfDice() {
 		var cup = new Cup (Die.GetDice (DiceSides.d6, 4));
-		Assert.AreEqual (new Die[] { Die.d6 (), Die.d6 (), Die.d6 (), Die.d6 () }, cup.Dice);
+		Assert.AreEqual (new Die[] { Die.D6 (), Die.D6 (), Die.D6 (), Die.D6 () }, cup.Dice);
 	}
 
 	[Test]
@@ -74,7 +74,7 @@ public class CupTests {
 	[Test]
 	public void CupCanHaveABaseValueForTheRoll() {
 		var cup = new Cup ();
-		cup.AddDie (Die.d4());
+		cup.AddDie (Die.D4());
 		cup.Modifier = 20;
 		Assert.GreaterOrEqual (cup.Roll (), 20);
 	}
@@ -82,13 +82,13 @@ public class CupTests {
 	[Test]
 	public void FormatsCupIntoADiceString() {
 		var cup = new Cup();
-		cup.AddDie(Die.d10());
+		cup.AddDie(Die.D10());
 		Assert.AreEqual("1d10", cup.ToString());
-		cup.AddDie(Die.d10());
+		cup.AddDie(Die.D10());
 		Assert.AreEqual("2d10", cup.ToString());
 		cup.Modifier = 5;
 		Assert.AreEqual("2d10+5", cup.ToString());
-		cup.AddDie(Die.d6());
+		cup.AddDie(Die.D6());
 		Assert.AreEqual("2d10+1d6+5", cup.ToString());
 
 	}

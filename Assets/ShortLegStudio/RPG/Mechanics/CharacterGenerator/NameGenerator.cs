@@ -1,65 +1,107 @@
-﻿using ShortLegStudio;
+﻿//-----------------------------------------------------------------------
+// <copyright file="NameGenerator.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
-	public class NameGenerator {
-		public string CreateFullName() {
-			return string.Format ("{0} {1}", CreateFirstName (), CreateLastName ());
-		}
+namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
+{
+    /// <summary>
+    /// Name generator makes random names
+    /// </summary>
+    public class NameGenerator
+    {
+        /// <summary>
+        /// Creates the full name.
+        /// </summary>
+        /// <returns>The full name.</returns>
+        public string CreateFullName()
+        {
+            return string.Format("{0} {1}", this.CreateFirstName(), this.CreateLastName());
+        }
 
+        /// <summary>
+        /// Builds the name from syllables.
+        /// </summary>
+        /// <returns>The name from syllables.</returns>
+        /// <param name="syllables">Syllables to choose from.</param>
+        /// <param name="count">Count of syllables.</param>
+        public string BuildNameFromSyllables(string[] syllables, int count)
+        {
+            string name = string.Empty;
 
-		public string BuildNameFromSyllables(string[] syllables, int count) {
-			string name = "";
+            for (var i = 0; i < count; i++)
+            {
+                name += syllables.ChooseOne();
+            }
 
-			for (var i = 0; i < count; i++) {
-				name += syllables.ChooseOne ();	
-			}
-			return name.Capitalize ();
-		}
+            return name.Capitalize();
+        }
 
-		public string CreateFirstName() {
-			return BuildNameFromSyllables (GetFirstNameSyllables (), Randomly.Range (1, 5));
-		}
+        /// <summary>
+        /// Creates the first name.
+        /// </summary>
+        /// <returns>The first name.</returns>
+        public string CreateFirstName()
+        {
+            return this.BuildNameFromSyllables(this.GetFirstNameSyllables(), Randomly.Range(1, 5));
+        }
 
-		public string CreateLastName() {
-			return BuildNameFromSyllables (GetLastNameSyllables (), Randomly.Range (1, 5));
-		}
+        /// <summary>
+        /// Creates the last name.
+        /// </summary>
+        /// <returns>The last name.</returns>
+        public string CreateLastName()
+        {
+            return this.BuildNameFromSyllables(this.GetLastNameSyllables(), Randomly.Range(1, 5));
+        }
 
-		public string[] GetFirstNameSyllables() {
-			return new string[] {
-				"li",
-				"pe",
-				"le",
-				"la",
-				"hi",
-				"wi",
-				"ha",
-				"hai",
-				"'i",
-				"na",
-				"ne",
-				"hei",
-				"lei"
-			};
-		}
+        /// <summary>
+        /// Gets the first name syllables.
+        /// </summary>
+        /// <returns>The first name syllables.</returns>
+        private string[] GetFirstNameSyllables()
+        {
+            return new string[]
+            {
+                "li",
+                "pe",
+                "le",
+                "la",
+                "hi",
+                "wi",
+                "ha",
+                "hai",
+                "'i",
+                "na",
+                "ne",
+                "hei",
+                "lei"
+            };
+        }
 
-		public string[] GetLastNameSyllables() {
-			return new string[] {
-				"li",
-				"pe",
-				"le",
-				"la",
-				"hi",
-				"wi",
-				"ha",
-				"hai",
-				"'i",
-				"na",
-				"ne",
-				"hei",
-				"lei"
-			};
-		}
-	}
-
-
+        /// <summary>
+        /// Gets the last name syllables.
+        /// </summary>
+        /// <returns>The last name syllables.</returns>
+        private string[] GetLastNameSyllables()
+        {
+            return new string[]
+            {
+                "li",
+                "pe",
+                "le",
+                "la",
+                "hi",
+                "wi",
+                "ha",
+                "hai",
+                "'i",
+                "na",
+                "ne",
+                "hei",
+                "lei"
+            };
+        }
+    }
 }

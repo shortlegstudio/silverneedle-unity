@@ -8,12 +8,12 @@ namespace RPG.Mechanics.CharacterGenerator.Abilities {
 	public class AbilityScoreRollerTests {
 		[Test]
 		public void CharactersCanRollSomeStats() {
-			var roller = new RandomAbilityScoreGenerator ();
+			var roller = new StandardAbilityScoreGenerator ();
 			var abilities = new AbilityScores ();
 			roller.AssignAbilities (abilities);
 
 			//Values should be between 3 and 18 for all abilities
-			foreach (var a in abilities.GetAbilities()) {
+			foreach (var a in abilities.Abilities) {
 				Assert.GreaterOrEqual (a.TotalValue, 3);
 				Assert.LessOrEqual (a.TotalValue, 18);
 			}

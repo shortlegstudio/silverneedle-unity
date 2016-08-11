@@ -1,91 +1,153 @@
-﻿using System.Linq;
-using ShortLegStudio.RPG.Characters;
-using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
-using ShortLegStudio.RPG.Equipment.Gateways;
-using ShortLegStudio.RPG.Gateways;
-using ShortLegStudio.Enchilada;
-using System.Collections.Generic;
-using ShortLegStudio.RPG.Equipment;
+﻿//-----------------------------------------------------------------------
+// <copyright file="CharacterGenerator.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
+{
+    // TODO: This class design is kind of all over the place. Is it trying to do everything or is it driven by an outside source?
+    using System.Collections.Generic;
+    using System.Linq;
+    using ShortLegStudio.Enchilada;
+    using ShortLegStudio.RPG.Characters;
+    using ShortLegStudio.RPG.Equipment;
+    using ShortLegStudio.RPG.Equipment.Gateways;
+    using ShortLegStudio.RPG.Gateways;
+    using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
 
-namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator {
-	public class CharacterGenerator {
-		private IAbilityScoreGenerator abilityGenerator;
-		private LanguageSelector languageSelector;
-		private RaceSelector raceSelector;
-		private NameGenerator nameGenerator;
+    /// <summary>
+    /// Character generator generates a new character. By specifying different generators different character
+    /// creation schemes are possible
+    /// </summary>
+    public class CharacterGenerator
+    {
+        /// <summary>
+        /// The ability generator handles the ability score creation
+        /// </summary>
+        private IAbilityScoreGenerator abilityGenerator;
 
-		private IArmorGateway armorGateway;
-		private IWeaponGateway weaponGateway;
-		private EntityGateway<Skill> skillGateway;
-		private EntityGateway<Class> classGateway;
+        /// <summary>
+        /// The language selector selects what languages the character can speak
+        /// </summary>
+        private LanguageSelector languageSelector;
 
-		public CharacterGenerator(
-			IAbilityScoreGenerator abilities,
-			LanguageSelector langs,
-			RaceSelector races,
-			NameGenerator names) {
-			abilityGenerator = abilities;
-			languageSelector = langs;
-			raceSelector = races;
-			nameGenerator = names;
+        /// <summary>
+        /// The race selector chooses which race the character will be
+        /// </summary>
+        private RaceSelector raceSelector;
 
-			armorGateway = new ArmorYamlGateway();
-			weaponGateway = new WeaponYamlGateway();
-			skillGateway = new SkillYamlGateway();
-		}
+        /// <summary>
+        /// The name generator selects the name for the character
+        /// </summary>
+        private NameGenerator nameGenerator;
 
+        /// <summary>
+        /// The armor gateway provides access to all armor
+        /// </summary>
+        private IArmorGateway armorGateway;
 
-		public CharacterSheet CreateLevel0() {
-			var character = new CharacterSheet (skillGateway.All());
+        /// <summary>
+        /// The weapon gateway provides access to all weapons
+        /// </summary>
+        private IWeaponGateway weaponGateway;
 
-			character.Name = nameGenerator.CreateFullName ();
-			character.Gender = EnumHelpers.ChooseOne<Gender> ();
-			character.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
-			abilityGenerator.AssignAbilities (character.Abilities);
-			raceSelector.ChooseRace(character);
+        /// <summary>
+        /// The skill gateway provides access to all skills
+        /// </summary>
+        private IEntityGateway<Skill> skillGateway;
 
-			character.Languages.Add (
-				languageSelector.PickLanguage (
-					character.Race, 
-					character.Abilities.GetModifier (AbilityScoreTypes.Intelligence)
-				)
-			);
-			return character;
-		}
+        /// <summary>
+        /// The class gateway provides access to classes
+        /// </summary>
+        private IEntityGateway<Class> classGateway;
 
-		public CharacterSheet SelectClass(CharacterSheet character) {
-			var gw = new ClassYamlGateway();
-			character.SetClass (gw.All().ToList().ChooseOne ());
-			var hp = new HitPointGenerator ();
-			character.SetHitPoints (hp.RollHitPoints (character));
-			return character;
-		}
+        /// <summary>
+        /// Initializes a new instance of the
+        /// <see cref="ShortLegStudio.RPG.Mechanics.CharacterGenerator.CharacterGenerator"/> class.
+        /// </summary>
+        /// <param name="abilities">Ability score generator to use.</param>
+        /// <param name="langs">Language selector to use.</param>
+        /// <param name="races">Race selector to use.</param>
+        /// <param name="names">Name selector to use.</param>
+        public CharacterGenerator(
+            IAbilityScoreGenerator abilities,
+            LanguageSelector langs,
+            RaceSelector races,
+            NameGenerator names)
+        {
+            this.abilityGenerator = abilities;
+            this.languageSelector = langs;
+            this.raceSelector = races;
+            this.nameGenerator = names;
 
-		public CharacterSheet GenerateRandomCharacter() {
-			var skillGen = new SkillPointGenerator ();
-			//var levelUpGen = new LevelUpGenerator (new HitPointGenerator());
-			var character = CreateLevel0 ();
-			SelectClass (character);
-			character.AddFeat (Feat.GetQualifyingFeats (character).ToList ().ChooseOne ());
+            this.armorGateway = new ArmorYamlGateway();
+            this.weaponGateway = new WeaponYamlGateway();
+            this.skillGateway = new SkillYamlGateway();
+            this.classGateway = new ClassYamlGateway();
+        }
 
-			//levelUpGen.BringCharacterToLevel(character, UnityEngine.Random.Range (1, 21));
-			//levelUpGen.BringCharacterToLevel(character, 1);
+        /// <summary>
+        /// Creates a Level 0 character. A level 0 character has no class but has the basic attributes selected
+        /// Think of this as a young character before identifying their professions
+        /// </summary>
+        /// <returns>The level0.</returns>
+        public CharacterSheet CreateLevel0()
+        {
+            var character = new CharacterSheet(this.skillGateway.All());
 
-			//Assign Skill Points
-			skillGen.AssignSkillPointsRandomly(character);
+            character.Name = this.nameGenerator.CreateFullName();
+            character.Gender = EnumHelpers.ChooseOne<Gender>();
+            character.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
+            this.abilityGenerator.AssignAbilities(character.AbilityScores);
+            this.raceSelector.ChooseRace(character);
 
-			//Get some gear!
-			var equip = new EquipMeleeAndRangedWeapon(weaponGateway);
-			equip.AssignWeapons(character.Inventory, character.Offense.WeaponProficiencies);
+            character.Languages.Add(
+                this.languageSelector.PickLanguages(
+                    character.Race, 
+                    character.AbilityScores.GetModifier(AbilityScoreTypes.Intelligence)));
+            return character;
+        }
 
+        /// <summary>
+        /// Selects the class for the character
+        /// </summary>
+        /// <returns>The class that was selected.</returns>
+        /// <param name="character">Character to assign class to.</param>
+        public CharacterSheet SelectClass(CharacterSheet character)
+        {
+            character.SetClass(this.classGateway.All().ToList().ChooseOne());
+            var hp = new HitPointGenerator();
+            character.SetHitPoints(hp.RollHitPoints(character));
+            return character;
+        }
 
-			var equipArmor = new PurchaseInitialArmor (armorGateway);
-			equipArmor.PurchaseArmorAndShield (character.Inventory);
+        /// <summary>
+        /// Generates the random character.
+        /// </summary>
+        /// <returns>The random character.</returns>
+        public CharacterSheet GenerateRandomCharacter()
+        {
+            var skillGen = new SkillPointGenerator();
 
-			return character;
-		}
+            var character = this.CreateLevel0();
+            this.SelectClass(character);
+            character.AddFeat(Feat.GetQualifyingFeats(character).ToList().ChooseOne());
 
-	}
+            // var levelUpGen = new LevelUpGenerator (new HitPointGenerator());
+            // levelUpGen.BringCharacterToLevel(character, UnityEngine.Random.Range (1, 21));
+            // levelUpGen.BringCharacterToLevel(character, 1);
 
+            // Assign Skill Points
+            skillGen.AssignSkillPointsRandomly(character);
+
+            // Get some gear!
+            var equip = new EquipMeleeAndRangedWeapon(this.weaponGateway);
+            equip.AssignWeapons(character.Inventory, character.Offense.WeaponProficiencies);
+
+            var equipArmor = new PurchaseInitialArmor(this.armorGateway);
+            equipArmor.PurchaseArmorAndShield(character.Inventory);
+
+            return character;
+        }
+    }
 }
-

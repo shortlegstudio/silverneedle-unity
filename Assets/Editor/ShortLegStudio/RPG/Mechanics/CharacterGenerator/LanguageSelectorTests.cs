@@ -16,7 +16,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 			race.KnownLanguages.Add ("Elvish");
 			race.KnownLanguages.Add ("Giant");
 			var subject = new LanguageSelector (new LanguageTestRepo());
-			var res = subject.PickLanguage (race, 0);
+			var res = subject.PickLanguages (race, 0);
 			Assert.AreEqual (2, res.Count ());
 			Assert.IsTrue (res.Any (x => x.Name == "Elvish"));
 			Assert.IsTrue (res.Any (x => x.Name == "Giant"));
@@ -32,7 +32,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 
 			//Pick two bonus Language -> This should always return all the above
 			for (int i = 0; i < 1000; i++) {
-				var res = subject.PickLanguage (race, 2);
+				var res = subject.PickLanguages (race, 2);
 				Assert.AreEqual (3, res.Count ());
 				Assert.IsTrue (res.Any (x => x.Name == "Elvish"));
 				Assert.IsTrue (res.Any (x => x.Name == "Giant"));
@@ -50,7 +50,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 
 			//Pick two bonus Language -> This should always return all the above
 			for (int i = 0; i < 1000; i++) {
-				var res = subject.PickLanguage (race, 6);
+				var res = subject.PickLanguages (race, 6);
 				Assert.AreEqual (3, res.Count ());
 				Assert.IsTrue (res.Any (x => x.Name == "Elvish"));
 				Assert.IsTrue (res.Any (x => x.Name == "Giant"));
@@ -58,7 +58,7 @@ namespace RPG.Mechanics.CharacterGenerator {
 			}
 		}
 
-		private class LanguageTestRepo : EntityGateway<Language> {
+		private class LanguageTestRepo : IEntityGateway<Language> {
 			public IEnumerable<Language> All() {
 				var languages = new List<Language> ();
 				languages.Add (new Language ("Elvish", "Foo"));

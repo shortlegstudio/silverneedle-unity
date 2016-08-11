@@ -1,162 +1,322 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using ShortLegStudio;
-using ShortLegStudio.RPG.Gateways;
+﻿//-----------------------------------------------------------------------
+// <copyright file="CharacterSheet.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.RPG.Characters
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using ShortLegStudio;
+    using ShortLegStudio.RPG.Gateways;
 
+    /// <summary>
+    /// A character sheet is the object that ties everything together.
+    /// </summary>
+    /// <remarks>This should only delegate to proper objects to perform actions. There should not be specific rule logic here</remarks>
+    public class CharacterSheet
+    {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.CharacterSheet"/> class.
+        /// </summary>
+        /// <param name="skillList">Skill list of available skills</param>
+        public CharacterSheet(IEnumerable<Skill> skillList)
+        {
+            // TODO: Figure out if skillList is a logical dependency for the character sheet
+            this.AbilityScores = new AbilityScores();
+            this.Size = new SizeStats();
+            this.Inventory = new Inventory();
+            this.Initiative = new Initiative(this.AbilityScores);
+            this.Offense = new OffenseStats(this.AbilityScores, this.Size, this.Inventory);
+            this.Defense = new DefenseStats(this.AbilityScores, this.Size, this.Inventory);
+            this.Movement = new MovementStats();
+            this.Languages = new List<Language>();
 
-namespace ShortLegStudio.RPG.Characters {
-	public class CharacterSheet {
-		// Basic Stats
-		public string Name { get; set; }
-		public CharacterAlignment Alignment { get; set; }
-		public Gender Gender { get; set; }
-		public SizeStats Size { get; set; }
+            this.SkillRanks = new SkillRanks(skillList, this.AbilityScores);
+            this.SkillRanks.ProcessModifier(this.Size);
 
-		//Race and Class
-		public Race Race { get; protected set; }
-		public Class Class { get; set; }
+            this.Traits = new List<Trait>();
+            this.Feats = new List<Feat>();
 
-		//Levels and Experience
-		public int Level { get; private set; }
-		public int XP { get; private set; }
+            this.Level = 1;
+        }
 
-		//Abilities
-		public AbilityScores Abilities { get; private set; }
-		public SkillRanks SkillRanks { get; private set; }
-		public IList<Trait> Traits { get; private set; }
-		public IList<Feat> Feats { get; private set; }
-		public Initiative Initiative { get; private set; }
-		public Inventory Inventory { get; private set; }
-		public IList<Language> Languages { get; private set; }
+        /// <summary>
+        /// Occurs when modified.
+        /// </summary>
+        public event EventHandler<CharacterSheetEventArgs> Modified;
 
-		//Combat Related
-		public int MaxHitPoints { get; set; }
-		public int CurrentHitPoints { get; set; } 
-		public OffenseStats Offense { get; private set; }
-		public DefenseStats Defense { get; private set; }
-		public MovementStats Movement { get; private set; }
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>The name of the character.</value>
+        public string Name { get; set; }
 
-		public event EventHandler<CharacterSheetEventArgs> Modified;
+        /// <summary>
+        /// Gets or sets the alignment.
+        /// </summary>
+        /// <value>The character's alignment.</value>
+        public CharacterAlignment Alignment { get; set; }
 
-		public CharacterSheet(IEnumerable<Skill> skillList) {
-			Abilities = new AbilityScores ();
-			Size = new SizeStats ();
-			Inventory = new Inventory ();
-			Initiative = new Initiative (Abilities);
-			Offense = new OffenseStats (Abilities, Size, Inventory);
-			Defense = new DefenseStats (Abilities, Size, Inventory);
-			Movement = new MovementStats();
-			Languages = new List<Language> ();
+        /// <summary>
+        /// Gets or sets the gender.
+        /// </summary>
+        /// <value>The character's gender.</value>
+        public Gender Gender { get; set; }
 
-			SkillRanks = new SkillRanks (skillList, Abilities);
-			SkillRanks.ProcessModifier(Size);
+        /// <summary>
+        /// Gets or sets the size.
+        /// </summary>
+        /// <value>The character's size information.</value>
+        public SizeStats Size { get; set; }
 
-			Traits = new List<Trait> ();
-			Feats = new List<Feat> ();
+        /// <summary>
+        /// Gets or sets the race.
+        /// </summary>
+        /// <value>The character's race.</value>
+        public Race Race { get; protected set; }
 
-			Level = 1;
-		}
+        /// <summary>
+        /// Gets or sets the class. TODO: Handle multiclassing
+        /// </summary>
+        /// <value>The character's class.</value>
+        public Class Class { get; set; }
 
-		/// <summary>
-		/// Sets this character to Level 1 in specified class
-		/// </summary>
-		/// <param name="cls">Cls.</param>
-		public void SetClass(Class cls) {
-			this.Class = cls;
-			Offense.BaseAttackBonus.SetValue (GetCurrentBaseAttackBonus ());
+        /// <summary>
+        /// Gets the level.
+        /// </summary>
+        /// <value>The character's level.</value>
+        public int Level { get; private set; }
 
-			//Add Weapon Proficiencies
-			Offense.AddWeaponProficiencies(cls.WeaponProficiencies);
+        /// <summary>
+        /// Gets the ability scores
+        /// </summary>
+        /// <value>The character's ability scores.</value>
+        public AbilityScores AbilityScores { get; private set; }
 
-			//Should be moved to the defense stats
-			//Handle Armor Proficiencies
-			foreach (var x in cls.ArmorProficiencies) {
-				AddFeat (Feat.GetFeat (x));
-			}
+        /// <summary>
+        /// Gets the skill ranks.
+        /// </summary>
+        /// <value>The character's skill ranks.</value>
+        public SkillRanks SkillRanks { get; private set; }
 
-			Defense.LevelUpDefenseStats (cls);
-		}
+        /// <summary>
+        /// Gets the traits.
+        /// </summary>
+        /// <value>The character's traits.</value>
+        public IList<Trait> Traits { get; private set; }
 
-		private int GetCurrentBaseAttackBonus() {
-			return (int)Class.BaseAttackBonusRate * Level;
-		}
+        /// <summary>
+        /// Gets the feats.
+        /// </summary>
+        /// <value>The character's feats.</value>
+        public IList<Feat> Feats { get; private set; }
 
-		private int GetSaveValue(float saveRate, int modifier) {
-			var val = modifier;
-			if (saveRate == 0.667f)
-				val = 2;
+        /// <summary>
+        /// Gets the initiative modifier.
+        /// </summary>
+        /// <value>The characters initiative modifier.</value>
+        public Initiative Initiative { get; private set; }
 
-			val += (int)(saveRate * Level);
-			return (int)val;
-		}
+        /// <summary>
+        /// Gets the inventory.
+        /// </summary>
+        /// <value>The character's inventory.</value>
+        public Inventory Inventory { get; private set; }
 
-		public void SetRace(Race race) {
-			Race = race;
+        /// <summary>
+        /// Gets the languages.
+        /// </summary>
+        /// <value>The character's languages.</value>
+        public IList<Language> Languages { get; private set; }
 
+        /// <summary>
+        /// Gets or sets the max hit points.
+        /// </summary>
+        /// <value>The character's maximum hit points.</value>
+        public int MaxHitPoints { get; set; }
 
-		}
+        /// <summary>
+        /// Gets or sets the current hit points.
+        /// </summary>
+        /// <value>The character's current hit points.</value>
+        public int CurrentHitPoints { get; set; }
 
-		public void SetLevel(int level) {
-			Level = level;
-		}
+        /// <summary>
+        /// Gets the offense stats.
+        /// </summary>
+        /// <value>The character's offensive abilities.</value>
+        public OffenseStats Offense { get; private set; }
 
-		public void AddTrait(Trait trait, bool notify = true) {
-			Traits.Add (trait);
-			ProcessStatModifier(trait);
+        /// <summary>
+        /// Gets the defense stats.
+        /// </summary>
+        /// <value>The character's defense abilities.</value>
+        public DefenseStats Defense { get; private set; }
 
-			if (notify) {
-				NotifyModified ();
-			}
-		}
+        /// <summary>
+        /// Gets the movement speeds.
+        /// </summary>
+        /// <value>The characters movement abilities.</value>
+        public MovementStats Movement { get; private set; }
 
-		public void AddFeat(Feat feat, bool notify = true) {
-			Feats.Add (feat);
-			ProcessStatModifier(feat);
+        /// <summary>
+        /// Sets this character to Level 1 in specified class
+        /// </summary>
+        /// <param name="cls">Class of the character</param>
+        public void SetClass(Class cls)
+        {
+            // TODO: Offense and defense have very different behaviors
+            this.Class = cls;
+            this.Offense.BaseAttackBonus.SetValue(this.CalculateCurrentBaseAttackBonus());
 
-			if (notify) {
-				NotifyModified ();
-			}
-		}
+            // Add Weapon Proficiencies
+            this.Offense.AddWeaponProficiencies(cls.WeaponProficiencies);
 
-		public CharacterSkill GetSkill(Skill skill) {
-			return SkillRanks.GetSkill (skill.Name);
-		}
+            // TODO: Move to defense stats and don't use feats
+            foreach (var x in cls.ArmorProficiencies)
+            {
+                this.AddFeat(Feat.GetFeat(x));
+            }
 
-		public int GetSkillValue(string name) {
-			return SkillRanks.GetScore (name);
-		}
+            this.Defense.LevelUpDefenseStats(cls);
+        }
 
-		public int GetSkillPointsPerLevel() {
-			return Class.SkillPoints + Abilities.GetModifier (AbilityScoreTypes.Intelligence);
-		}
+        /// <summary>
+        /// Sets the race.
+        /// </summary>
+        /// <param name="race">The race for the character.</param>
+        public void SetRace(Race race)
+        {
+            Race = race;
+        }
 
-		public void SetHitPoints(int hp) {
-			MaxHitPoints = hp;
-			CurrentHitPoints = hp;
-		}
+        /// <summary>
+        /// Sets the level of the character
+        /// </summary>
+        /// <param name="level">Character's level</param>
+        public void SetLevel(int level)
+        {
+            this.Level = level;
+        }
 
-		public void NotifyModified() {
-			if (Modified != null) { 
-				var args = new CharacterSheetEventArgs ();
-				args.Sheet = this;
-				Modified (this, args);
-			}
-		}
+        /// <summary>
+        /// Adds a trait to the chraacter
+        /// </summary>
+        /// <param name="trait">Trait to add.</param>
+        /// <param name="notify">If set to <c>true</c> notify.</param>
+        public void AddTrait(Trait trait, bool notify = true)
+        {
+            this.Traits.Add(trait);
+            this.ProcessStatModifier(trait);
 
-		public IEnumerable<string> GetSpecialAbilities(string abilityTag) {
-			var list = Traits.Where(x => x.Tags.Contains(abilityTag)).Select(x => x.Name);
-			return list;
-		}
+            if (notify)
+            {
+                this.OnModified();
+            }
+        }
 
-		private void ProcessStatModifier(IModifiesStats modifier) {
-			SkillRanks.ProcessModifier (modifier);
-			Defense.ProcessModifier(modifier);
-			Offense.ProcessModifier(modifier);
-		}
-	}
+        /// <summary>
+        /// Adds a feat to the character.
+        /// </summary>
+        /// <param name="feat">Feat to add.</param>
+        /// <param name="notify">If set to <c>true</c> notify.</param>
+        public void AddFeat(Feat feat, bool notify = true)
+        {
+            this.Feats.Add(feat);
 
-	public class CharacterSheetEventArgs : EventArgs {
-		public CharacterSheet Sheet { get; set; }
-	}
+            // TODO: This is very similar to traits but slightly different. Should be able to standardize the behavior
+            this.ProcessStatModifier(feat);
+
+            if (notify)
+            {
+                this.OnModified();
+            }
+        }
+
+        /// <summary>
+        /// Gets a character skill.
+        /// </summary>
+        /// <returns>The character's ability with the skill found.</returns>
+        /// <param name="skill">Skill to lookup.</param>
+        public CharacterSkill GetSkill(Skill skill)
+        {
+            return SkillRanks.GetSkill(skill.Name);
+        }
+
+        /// <summary>
+        /// Gets the skill value. 
+        /// </summary>
+        /// <returns>The skill numeric value.</returns>
+        /// <param name="name">Name of skill to find.</param>
+        public int GetSkillValue(string name)
+        {
+            return SkillRanks.GetScore(name);
+        }
+
+        /// <summary>
+        /// Gets the skill points per level. 
+        /// </summary>
+        /// <returns>The skill points per level.</returns>
+        public int GetSkillPointsPerLevel()
+        {
+            return Class.SkillPoints + AbilityScores.GetModifier(AbilityScoreTypes.Intelligence);
+        }
+
+        /// <summary>
+        /// Sets the hit points for the character. Sets both maximum and current
+        /// </summary>
+        /// <param name="hitPoints">new max and current hit points</param>
+        public void SetHitPoints(int hitPoints)
+        {
+            this.MaxHitPoints = hitPoints;
+            this.CurrentHitPoints = hitPoints;
+        }
+
+        /// <summary>
+        /// Raises the modified event. TODO: Should be private
+        /// </summary>
+        public void OnModified()
+        {
+            if (this.Modified != null)
+            { 
+                var args = new CharacterSheetEventArgs();
+                args.Sheet = this;
+                this.Modified(this, args);
+            }
+        }
+
+        /// <summary>
+        /// Gets the special abilities.
+        /// </summary>
+        /// <returns>The special abilities.</returns>
+        /// <param name="abilityTag">Ability tag to lookup for special abilities.</param>
+        public IEnumerable<string> GetSpecialAbilities(string abilityTag)
+        {
+            var list = this.Traits.Where(x => x.Tags.Contains(abilityTag)).Select(x => x.Name);
+            return list;
+        }
+
+        /// <summary>
+        /// Processes the stat modifier. This takes anything that modifies stats and relays it to interested classes that might want to monitor for it
+        /// TODO: Better mechanism would be a call back whenever a stat modifier is sent to the character sheet
+        /// </summary>
+        /// <param name="modifier">Modifier that can change stats.</param>
+        private void ProcessStatModifier(IModifiesStats modifier)
+        {
+            SkillRanks.ProcessModifier(modifier);
+            this.Defense.ProcessModifier(modifier);
+            this.Offense.ProcessModifier(modifier);
+        }
+
+        /// <summary>
+        /// Gets the current base attack bonus. TODO: This should move to OffenseStats or to a mechanic
+        /// </summary>
+        /// <returns>The current base attack bonus.</returns>
+        private int CalculateCurrentBaseAttackBonus()
+        {
+            return (int)Class.BaseAttackBonusRate * this.Level;
+        }
+    }
 }

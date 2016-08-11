@@ -1,20 +1,44 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿//-----------------------------------------------------------------------
+// <copyright file="MoveStraight.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.Behaviors
+{
+    using UnityEngine;
 
-/// <summary>
-/// Simple script that moves straight line along some direction
-/// </summary>
-public class MoveStraight : MonoBehaviour {
-	public Vector3 moveDirection;
-	public float moveSpeed;
+    /// <summary>
+    /// Simple script that moves straight line along some direction
+    /// </summary>
+    public class MoveStraight : MonoBehaviour
+    {
+        /// <summary>
+        /// The move direction.
+        /// </summary>
+        [SerializeField]
+        private Vector3 moveDirection;
 
-	void Start() {
-		float angle = Mathf.Atan2(moveDirection.x, moveDirection.y) * Mathf.Rad2Deg;
-		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-	}
+        /// <summary>
+        /// The move speed.
+        /// </summary>
+        [SerializeField]
+        private float moveSpeed;
 
-	// Update is called once per frame
-	void FixedUpdate () {
-		transform.position += moveDirection * moveSpeed * Time.deltaTime;
-	}
+        /// <summary>
+        /// Start this instance.
+        /// </summary>
+        private void Start()
+        {
+            float angle = Mathf.Atan2(this.moveDirection.x, this.moveDirection.y) * Mathf.Rad2Deg;
+            this.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
+
+        /// <summary>
+        /// Called each physic update
+        /// </summary>
+        private void FixedUpdate()
+        {
+            this.transform.position += this.moveDirection * this.moveSpeed * Time.deltaTime;
+        }
+    }
 }

@@ -1,59 +1,109 @@
-﻿using System;
-using ShortLegStudio.Enchilada;
-using ShortLegStudio.RPG.Equipment;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
+﻿//-----------------------------------------------------------------------
+// <copyright file="ArmorYamlGateway.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio.RPG.Equipment.Gateways
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using ShortLegStudio.RPG.Equipment;
 
-namespace ShortLegStudio.RPG.Equipment.Gateways {
-	public class ArmorYamlGateway : IArmorGateway {
-		const string ARMOR_YAML_FILE = "Data/Armors.yml";
-		private IList<Armor> _armors;
+    /// <summary>
+    /// Armor yaml gateway.
+    /// </summary>
+    public class ArmorYamlGateway : IArmorGateway
+    {
+        /// <summary>
+        /// The armor yaml file.
+        /// </summary>
+        private const string ArmorYamlFile = "Data/Armors.yml";
 
-		public ArmorYamlGateway() {
-			LoadFromYaml (FileHelper.OpenYaml (ARMOR_YAML_FILE));
-		}
+        /// <summary>
+        /// The armors that are loaded.
+        /// </summary>
+        private IList<Armor> armors;
 
-		public ArmorYamlGateway (YamlNodeWrapper yaml) {
-			LoadFromYaml (yaml);
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Equipment.Gateways.ArmorYamlGateway"/> class.
+        /// </summary>
+        public ArmorYamlGateway()
+        {
+            this.LoadFromYaml(FileHelper.OpenYaml(ArmorYamlFile));
+        }
 
-		public System.Collections.Generic.IEnumerable<Armor> All () {
-			return _armors;
-		}
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Equipment.Gateways.ArmorYamlGateway"/> class.
+        /// </summary>
+        /// <param name="yaml">Yaml to parse</param>
+        public ArmorYamlGateway(YamlNodeWrapper yaml)
+        {
+            this.LoadFromYaml(yaml);
+        }
 
-		public Armor GetByName(string name) {
-			return _armors.FirstOrDefault (x => x.Name == name);
-		}
+        /// <summary>
+        /// All the armors loaded
+        /// </summary>
+        /// <returns>All armors</returns>
+        public IEnumerable<Armor> All()
+        {
+            return this.armors;
+        }
 
-		public IEnumerable<Armor> FindByArmorType(ArmorType type) {
-			return _armors.Where(x => x.ArmorType == type);
-		}
+        /// <summary>
+        /// Gets the name of the by.
+        /// </summary>
+        /// <returns>The by name.</returns>
+        /// <param name="name">Name of the armor to find.</param>
+        public Armor GetByName(string name)
+        {
+            return this.armors.FirstOrDefault(x => x.Name == name);
+        }
 
-		public IEnumerable<Armor> FindByArmorTypes(params ArmorType[] types) {
-			return _armors.Where (
-				x => types.Contains (x.ArmorType)
-			);
-		}
+        /// <summary>
+        /// Finds the type of the by armor.
+        /// </summary>
+        /// <returns>The armor by type.</returns>
+        /// <param name="type">Type of armor.</param>
+        public IEnumerable<Armor> FindByArmorType(ArmorType type)
+        {
+            return this.armors.Where(x => x.ArmorType == type);
+        }
 
-		private void LoadFromYaml(YamlNodeWrapper yaml) {
-			_armors = new List<Armor> ();
+        /// <summary>
+        /// Finds the by armor types.
+        /// </summary>
+        /// <returns>The armors matching types.</returns>
+        /// <param name="types">Types of armor.</param>
+        public IEnumerable<Armor> FindByArmorTypes(params ArmorType[] types)
+        {
+            return this.armors.Where(
+                x => types.Contains(x.ArmorType));
+        }
 
-			foreach (var node in yaml.Children()) {
-				ShortLog.DebugFormat ("Loading Armor: {0}", node.GetString ("name"));
-				var armor = new Armor (
-					node.GetString("name"),
-					node.GetInteger("armor_class"),
-					node.GetFloat("weight"),
-					node.GetInteger("maximum_dexterity_bonus"),
-					node.GetInteger("armor_check_penalty"),
-					node.GetInteger("arcane_spell_failure_chance"),
-					node.GetEnum<ArmorType>("armor_type")
-				);
+        /// <summary>
+        /// Loads from yaml.
+        /// </summary>
+        /// <param name="yaml">Yaml to parse.</param>
+        private void LoadFromYaml(YamlNodeWrapper yaml)
+        {
+            this.armors = new List<Armor>();
 
-				_armors.Add (armor);
-			}
-		}
-	}
+            foreach (var node in yaml.Children())
+            {
+                ShortLog.DebugFormat("Loading Armor: {0}", node.GetString("name"));
+                var armor = new Armor(
+                    node.GetString("name"),
+                    node.GetInteger("armor_class"),
+                    node.GetFloat("weight"),
+                    node.GetInteger("maximum_dexterity_bonus"),
+                    node.GetInteger("armor_check_penalty"),
+                    node.GetInteger("arcane_spell_failure_chance"),
+                    node.GetEnum<ArmorType>("armor_type"));
+
+                this.armors.Add(armor);
+            }
+        }
+    }
 }
-

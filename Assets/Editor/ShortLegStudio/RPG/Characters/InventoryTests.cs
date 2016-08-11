@@ -15,8 +15,8 @@ namespace RPG.Characters {
 			var inv = new Inventory ();
 			var wpn1 = new Weapon ();
 			var gear = new PieceOfJunk ();
-			inv.AddItem (wpn1);
-			inv.AddItem (gear);
+			inv.AddGear (wpn1);
+			inv.AddGear (gear);
 
 			Assert.AreEqual (wpn1, inv.Weapons.First ());
 		}
@@ -25,7 +25,7 @@ namespace RPG.Characters {
 		public void InventoryWillReturnCurrentArmor() {
 			var inv = new Inventory ();
 			var armor = new Armor ();
-			inv.AddItem (armor);
+			inv.AddGear (armor);
 
 			Assert.AreEqual (armor, inv.Armor.First());
 		}
@@ -35,8 +35,8 @@ namespace RPG.Characters {
 			var inv = new Inventory ();
 			var armor = new Armor ();
 			var armor2 = new Armor ();
-			inv.AddItem (armor);
-			inv.AddItem (armor2);
+			inv.AddGear (armor);
+			inv.AddGear (armor2);
 			inv.EquipItem (armor);
 
 			Assert.AreEqual (1, inv.EquippedItems.Count());
@@ -49,11 +49,11 @@ namespace RPG.Characters {
 			var armor = new Armor ();
 			var junk = new PieceOfJunk ();
 			var wpn = new Weapon ();
-			inv.AddItem (armor);
-			inv.AddItem (junk);
-			inv.AddItem (wpn);
+			inv.AddGear (armor);
+			inv.AddGear (junk);
+			inv.AddGear (wpn);
 
-			Assert.AreEqual (junk, inv.OfType<PieceOfJunk> ().First());
+			Assert.AreEqual (junk, inv.GearOfType<PieceOfJunk> ().First());
 		}
 
 		[Test]
@@ -68,8 +68,8 @@ namespace RPG.Characters {
 		public void AddingTheSameItemTwiceDoesNotDuplicate() {
 			var inv = new Inventory ();
 			var j = new PieceOfJunk ();
-			inv.AddItem (j);
-			inv.AddItem (j);
+			inv.AddGear (j);
+			inv.AddGear (j);
 			Assert.AreEqual (1, inv.All.Count ());
 		}
 

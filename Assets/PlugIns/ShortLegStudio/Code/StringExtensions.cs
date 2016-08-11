@@ -1,14 +1,25 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿//-----------------------------------------------------------------------
+// <copyright file="StringExtensions.cs" company="Short Leg Studio, LLC">
+//     Copyright (c) Short Leg Studio, LLC. All rights reserved.
+// </copyright>
+//-----------------------------------------------------------------------
+namespace ShortLegStudio
+{
+    using Inflector;
 
-namespace ShortLegStudio {
-	public static class StringExtensions {
-		public static string Capitalize(this string source) {
-			if (string.IsNullOrEmpty (source)) {
-				return source;
-			}
-
-			return char.ToUpper (source [0]) + source.Substring (1);
-		}
-	}
+    /// <summary>
+    /// Extension methods for calling inflector
+    /// </summary>
+    public static class StringExtensions
+    {
+        /// <summary>
+        /// Capitalize the specified string.
+        /// </summary>
+        /// <param name="source">Source string to capitalize</param>
+        /// <returns>Returns the capitalized string</returns>
+        public static string Capitalize(this string source)
+        {
+            return Inflector.Capitalize(source);
+        }
+    }
 }
