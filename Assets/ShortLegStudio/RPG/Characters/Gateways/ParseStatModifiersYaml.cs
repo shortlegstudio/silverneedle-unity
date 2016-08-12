@@ -3,7 +3,7 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace ShortLegStudio.RPG.Gateways
+namespace ShortLegStudio.RPG.Characters.Gateways
 {
     using System.Collections.Generic;
 

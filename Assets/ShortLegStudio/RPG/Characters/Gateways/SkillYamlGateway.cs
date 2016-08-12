@@ -4,7 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Gateways
+namespace ShortLegStudio.RPG.Characters.Gateways
 {
     using System;
     using System.Collections.Generic;

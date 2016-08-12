@@ -2,11 +2,11 @@
 using NUnit.Framework;
 using System.Linq;
 using ShortLegStudio;
-using ShortLegStudio.RPG.Gateways;
+using ShortLegStudio.RPG.Characters.Gateways;
 using ShortLegStudio.RPG.Characters;
 
 
-namespace RPG.Gateways {
+namespace RPG.Characters.Gateways {
 
 	[TestFixture]
 	public class SkillYamlGatewayTests {

@@ -12,7 +12,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
     using ShortLegStudio.RPG.Characters;
     using ShortLegStudio.RPG.Equipment;
     using ShortLegStudio.RPG.Equipment.Gateways;
-    using ShortLegStudio.RPG.Gateways;
+    using ShortLegStudio.RPG.Characters.Gateways;
     using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
 
     /// <summary>

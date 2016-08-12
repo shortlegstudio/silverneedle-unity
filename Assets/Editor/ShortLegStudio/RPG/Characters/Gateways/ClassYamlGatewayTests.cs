@@ -3,11 +3,11 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio;
 using System.IO;
 using System.Linq;
-using ShortLegStudio.RPG.Gateways;
+using ShortLegStudio.RPG.Characters.Gateways;
 using ShortLegStudio.Dice;
 
 
-namespace RPG.Gateways {
+namespace RPG.Characters.Gateways {
 	[TestFixture]
 	public class ClassYamlGatewayTests {
 		ClassYamlGateway gateway;
