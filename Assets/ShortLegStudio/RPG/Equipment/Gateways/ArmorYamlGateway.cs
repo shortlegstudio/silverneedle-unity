@@ -8,6 +8,7 @@ namespace ShortLegStudio.RPG.Equipment.Gateways
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ShortLegStudio.RPG.Characters;
     using ShortLegStudio.RPG.Equipment;
 
     /// <summary>
@@ -80,6 +81,17 @@ namespace ShortLegStudio.RPG.Equipment.Gateways
         {
             return this.armors.Where(
                 x => types.Contains(x.ArmorType));
+        }
+
+        /// <summary>
+        /// Finds armors by proficiency.
+        /// </summary>
+        /// <returns>Armors that are valid for proficiency</returns>
+        /// <param name="proficiencies">The proficiencies to search by.</param>
+        public IEnumerable<Armor> FindByProficiency(IEnumerable<ShortLegStudio.RPG.Characters.ArmorProficiency> proficiencies)
+        {
+            return this.armors.Where(
+                x => proficiencies.IsProficient(x));
         }
 
         /// <summary>

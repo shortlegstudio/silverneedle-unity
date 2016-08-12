@@ -9,86 +9,111 @@ using ShortLegStudio.Enchilada;
 using ShortLegStudio.RPG;
 using ShortLegStudio.RPG.Equipment;
 
-namespace RPG.Characters {
+namespace RPG.Characters
+{
 
-	[TestFixture]
-	public class CharacterSheetTests {
-		CharacterSheet character;
-		List<Skill> _testSkills;
+    [TestFixture]
+    public class CharacterSheetTests
+    {
+        CharacterSheet character;
+        List<Skill> _testSkills;
 
-		[SetUp]
-		public void SetUp() {
-			_testSkills = new List<Skill> ();
-			_testSkills.Add (new Skill("Climb", AbilityScoreTypes.Strength, false));
-			_testSkills.Add (new Skill ("Disable Device", AbilityScoreTypes.Dexterity, true));
-			_testSkills.Add (new Skill ("Spellcraft", AbilityScoreTypes.Intelligence, true));
-		}
+        [SetUp]
+        public void SetUp()
+        {
+            _testSkills = new List<Skill>();
+            _testSkills.Add(new Skill("Climb", AbilityScoreTypes.Strength, false));
+            _testSkills.Add(new Skill("Disable Device", AbilityScoreTypes.Dexterity, true));
+            _testSkills.Add(new Skill("Spellcraft", AbilityScoreTypes.Intelligence, true));
+        }
 
-		[Test]
-		public void CalculatesSkillPointsBasedOnClassAndIntelligence() {
-			var sheet = new CharacterSheet (new List<Skill>());
-			var fighter = new Class ();
-			fighter.SkillPoints = 2;
-			sheet.AbilityScores.SetScore (AbilityScoreTypes.Intelligence, 14);
-			sheet.Class = fighter;
-			Assert.AreEqual (4, sheet.GetSkillPointsPerLevel());
-		}
+        [Test]
+        public void CalculatesSkillPointsBasedOnClassAndIntelligence()
+        {
+            var sheet = new CharacterSheet(new List<Skill>());
+            var fighter = new Class();
+            fighter.SkillPoints = 2;
+            sheet.AbilityScores.SetScore(AbilityScoreTypes.Intelligence, 14);
+            sheet.Class = fighter;
+            Assert.AreEqual(4, sheet.GetSkillPointsPerLevel());
+        }
 
-	    [Test]
-	    public void CharactersHaveVitalStats() {
-			var sheet = new CharacterSheet (_testSkills);
-			sheet.Name = "Foobar";
-			sheet.Alignment = CharacterAlignment.LawfulGood;
-			Assert.AreEqual ("Foobar", sheet.Name);
-			Assert.AreEqual (CharacterAlignment.LawfulGood, sheet.Alignment);
-			Assert.AreEqual (1, sheet.Level);
-	    }
+        [Test]
+        public void CharactersHaveVitalStats()
+        {
+            var sheet = new CharacterSheet(_testSkills);
+            sheet.Name = "Foobar";
+            sheet.Alignment = CharacterAlignment.LawfulGood;
+            Assert.AreEqual("Foobar", sheet.Name);
+            Assert.AreEqual(CharacterAlignment.LawfulGood, sheet.Alignment);
+            Assert.AreEqual(1, sheet.Level);
+        }
 
-		[Test]
-		public void AssigningClassUpdatesWeaponProficiencies() {
-			var sheet = new CharacterSheet(new List<Skill>());
-			var fighter = new Class();
-			fighter.WeaponProficiencies.Add("martial");
-			fighter.WeaponProficiencies.Add("simple");
-			sheet.SetClass(fighter);
+        [Test]
+        public void AssigningClassUpdatesWeaponProficiencies()
+        {
+            var sheet = new CharacterSheet(new List<Skill>());
+            var fighter = new Class();
+            fighter.WeaponProficiencies.Add("martial");
+            fighter.WeaponProficiencies.Add("simple");
+            sheet.SetClass(fighter);
 
-			var wpn = new Weapon();
-			wpn.Level = WeaponTrainingLevel.Martial;
-			Assert.IsTrue(sheet.Offense.IsProficient(wpn));
-		}
+            var wpn = new Weapon();
+            wpn.Level = WeaponTrainingLevel.Martial;
+            Assert.IsTrue(sheet.Offense.IsProficient(wpn));
+        }
+
+        [Test]
+        public void AssigningClassUpdatesArmorProficiencies()
+        {
+            var sheet = new CharacterSheet(new List<Skill>());
+            var fighter = new Class();
+            fighter.ArmorProficiencies.Add("Light");
+            fighter.ArmorProficiencies.Add("Medium");
+            fighter.ArmorProficiencies.Add("Heavy");
+            fighter.ArmorProficiencies.Add("Shields");
+            sheet.SetClass(fighter);
+
+            Armor armor = new Armor();
+            armor.ArmorType = ArmorType.Heavy;
+            Assert.IsTrue(sheet.Defense.IsProficient(armor));
+        }
 
 
-		[Test]
-		public void AddTraitTriggersModifiedEvent() {
-			bool called = false;
+        [Test]
+        public void AddTraitTriggersModifiedEvent()
+        {
+            bool called = false;
 
-			CharacterSheet sheet = new CharacterSheet (_testSkills);
-			sheet.Modified += (object sender, CharacterSheetEventArgs e) => {
-				called = true;
-			};
+            CharacterSheet sheet = new CharacterSheet(_testSkills);
+            sheet.Modified += (object sender, CharacterSheetEventArgs e) =>
+            {
+                called = true;
+            };
 
-			//Set up the trait
-			var trait = new Trait ();
-			trait.Name = "Elfy";
+            //Set up the trait
+            var trait = new Trait();
+            trait.Name = "Elfy";
 
-			sheet.AddTrait(trait, true);
+            sheet.AddTrait(trait, true);
 
-			//Make sure the event was called
-			Assert.IsTrue (called);
-		}
+            //Make sure the event was called
+            Assert.IsTrue(called);
+        }
 
-		[Test]
-		public void AddingATraitToWillSaveBoostsDefense() {
-			CharacterSheet sheet = new CharacterSheet(_testSkills);
-			var trait = new Trait();
-			trait.Modifiers.Add(
-				new BasicStatModifier("Will", 10, "Trait", "Cause")
-			);
-			var oldScore = sheet.Defense.WillSave();
-			sheet.AddTrait(trait);
-			Assert.AreEqual(oldScore + 10, sheet.Defense.WillSave());
-		}
-	}
+        [Test]
+        public void AddingATraitToWillSaveBoostsDefense()
+        {
+            CharacterSheet sheet = new CharacterSheet(_testSkills);
+            var trait = new Trait();
+            trait.Modifiers.Add(
+                new BasicStatModifier("Will", 10, "Trait", "Cause")
+            );
+            var oldScore = sheet.Defense.WillSave();
+            sheet.AddTrait(trait);
+            Assert.AreEqual(oldScore + 10, sheet.Defense.WillSave());
+        }
+    }
 
 
 }

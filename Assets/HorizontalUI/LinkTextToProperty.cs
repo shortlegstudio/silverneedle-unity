@@ -216,10 +216,15 @@ namespace ShortLegStudio.SilverNeedle
         /// <param name="character">Character to fetch proficiencies from</param>
         private string GetProficiencyList(CharacterSheet character)
         {
-            // TODO: Add armor proficiencies
-            return string.Join(
+            var proficiencies = string.Join(
                 ", ",
                 character.Offense.WeaponProficiencies.Select(x => x.Name).ToArray());
+
+            proficiencies += string.Join(
+                ", ",
+                character.Defense.ArmorProficiencies.Select(x => x.Name).ToArray());
+
+            return proficiencies;
         }
     }
 }

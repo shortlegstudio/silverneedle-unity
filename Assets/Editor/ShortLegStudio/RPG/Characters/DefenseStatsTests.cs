@@ -176,16 +176,25 @@ namespace RPG.Characters {
 		}
 
 		[Test]
-		public void CanAddArmorProficiencies() {
+		public void CanAddArmorProficiency() {
 			var def = new DefenseStats(
 				          new AbilityScores(),
 				          new SizeStats(),
 				          new Inventory()
 			          );
-			var prof = new ArmorProficiency("Light");
-			def.AddArmorProficiency(prof);
+			def.AddArmorProficiency("Light");
 			Assert.IsTrue(def.IsProficient(Leather()));
 		}
+
+        [Test]
+        public void CanAddArmorProficiencies() {
+            var def = new DefenseStats(
+                          new AbilityScores(),
+                          new SizeStats(),
+                          new Inventory());
+            def.AddArmorProficiencies(new string[] { "Light", "Heavy" });
+            Assert.IsTrue(def.IsProficient(Leather()));
+        }
 
 		class MockMod : IModifiesStats {
 			public IList<BasicStatModifier> Modifiers { get; set;  }

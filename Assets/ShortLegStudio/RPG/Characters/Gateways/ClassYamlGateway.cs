@@ -27,7 +27,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
         private IList<Class> classes;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.ClassYamlGateway"/> class.
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Gateways.ClassYamlGateway"/> class.
         /// </summary>
         /// <param name="yaml">Yaml data.</param>
         public ClassYamlGateway(YamlNodeWrapper yaml)
@@ -36,7 +36,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.ClassYamlGateway"/> class.
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Gateways.ClassYamlGateway"/> class.
         /// </summary>
         public ClassYamlGateway()
         {
@@ -74,11 +74,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
                 cls.WillSaveRate = node.GetFloat("will");
 
                 var armor = node.GetCommaStringOptional("armorproficiencies");
-                foreach (var a in armor)
-                {
-                    cls.ArmorProficiencies.Add(
-                        string.Format("Armor Proficiency ({0})", a.Capitalize()));
-                }
+                cls.ArmorProficiencies.Add(armor);
 
                 var weapons = node.GetCommaStringOptional("weaponproficiencies");
                 cls.WeaponProficiencies.Add(weapons);

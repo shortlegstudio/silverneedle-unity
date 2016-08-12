@@ -267,12 +267,23 @@ namespace ShortLegStudio.RPG.Characters
         }
 
         /// <summary>
+        /// Adds the armor proficiencies.
+        /// </summary>
+        /// <param name="proficiencies">Proficiencies to add.</param>
+        public void AddArmorProficiencies(IEnumerable<string> proficiencies) {
+            foreach (var a in proficiencies)
+            {
+                AddArmorProficiency(a);
+            }
+        }
+
+        /// <summary>
         /// Adds an armor proficiency to the defense stats
         /// </summary>
         /// <param name="prof">Proficiency to add.</param>
-        public void AddArmorProficiency(ArmorProficiency prof)
+        public void AddArmorProficiency(string prof)
         {
-            this.armorProficiencies.Add(prof);
+            this.armorProficiencies.Add(new ArmorProficiency(prof));
         }
 
         /// <summary>

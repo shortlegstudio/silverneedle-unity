@@ -26,7 +26,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
         private IList<Language> languages;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.LanguageYamlGateway"/> class.
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Gateways.LanguageYamlGateway"/> class.
         /// </summary>
         public LanguageYamlGateway()
         {
@@ -34,7 +34,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.LanguageYamlGateway"/> class.
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Gateways.LanguageYamlGateway"/> class.
         /// </summary>
         /// <param name="yaml">Yaml node to parse for languages</param>
         public LanguageYamlGateway(YamlNodeWrapper yaml)

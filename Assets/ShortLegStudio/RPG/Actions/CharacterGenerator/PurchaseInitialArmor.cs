@@ -7,6 +7,7 @@
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using ShortLegStudio.RPG.Characters;
     using ShortLegStudio.RPG.Equipment;
@@ -36,16 +37,27 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
         /// Purchases the armor and shield.
         /// </summary>
         /// <param name="inventory">Inventory to assign to</param>
-        public void PurchaseArmorAndShield(Inventory inventory)
+        public void PurchaseArmorAndShield(Inventory inventory, IEnumerable<ArmorProficiency> proficiencies)
         {
-            var armor = this.armors.FindByArmorTypes(
-                            ArmorType.Light,
-                            ArmorType.Medium,
-                            ArmorType.Heavy).ToList().ChooseOne();
-            inventory.EquipItem(armor);
+            var armors = this.armors.FindByArmorTypes(
+                             ArmorType.None,
+                             ArmorType.Light,
+                             ArmorType.Medium,
+                             ArmorType.Heavy).
+                WhereProficient(proficiencies).ToList();
 
-            var shield = this.armors.FindByArmorType(ArmorType.Shield).ToList().ChooseOne();
-            inventory.EquipItem(shield);
+            if (armors.Count() > 0)
+            {
+                inventory.EquipItem(armors.ChooseOne());
+            }
+
+            var shield = this.armors.FindByArmorType(ArmorType.Shield).
+                WhereProficient(proficiencies).ToList();
+                
+            if (shield.Count() > 0)
+            {
+                inventory.EquipItem(shield.ChooseOne());
+            }
         }
     }
 }

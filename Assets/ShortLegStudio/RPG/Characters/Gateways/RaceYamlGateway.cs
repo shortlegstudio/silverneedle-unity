@@ -28,7 +28,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
         private IList<Race> races;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.RaceYamlGateway"/> class.
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Gateways.RaceYamlGateway"/> class.
         /// </summary>
         public RaceYamlGateway()
         {
@@ -36,7 +36,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.RaceYamlGateway"/> class.
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Gateways.RaceYamlGateway"/> class.
         /// </summary>
         /// <param name="yaml">Yaml data.</param>
         public RaceYamlGateway(YamlNodeWrapper yaml)

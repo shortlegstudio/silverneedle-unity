@@ -28,7 +28,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
         private IList<Skill> skills;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.SkillYamlGateway"/> class.
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Gateways.SkillYamlGateway"/> class.
         /// </summary>
         public SkillYamlGateway()
         {
@@ -36,7 +36,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.SkillYamlGateway"/> class.
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Gateways.SkillYamlGateway"/> class.
         /// </summary>
         /// <param name="yaml">Yaml data to parse.</param>
         public SkillYamlGateway(YamlNodeWrapper yaml)

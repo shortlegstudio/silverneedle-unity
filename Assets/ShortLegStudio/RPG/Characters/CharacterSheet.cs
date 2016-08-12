@@ -174,11 +174,8 @@ namespace ShortLegStudio.RPG.Characters
             // Add Weapon Proficiencies
             this.Offense.AddWeaponProficiencies(cls.WeaponProficiencies);
 
-            // TODO: Move to defense stats and don't use feats
-            foreach (var x in cls.ArmorProficiencies)
-            {
-                this.AddFeat(Feat.GetFeat(x));
-            }
+            // Add Armor Proficiencies
+            this.Defense.AddArmorProficiencies(cls.ArmorProficiencies);
 
             this.Defense.LevelUpDefenseStats(cls);
         }

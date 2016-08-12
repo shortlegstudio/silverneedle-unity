@@ -10,9 +10,9 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
     using System.Linq;
     using ShortLegStudio.Enchilada;
     using ShortLegStudio.RPG.Characters;
+    using ShortLegStudio.RPG.Characters.Gateways;
     using ShortLegStudio.RPG.Equipment;
     using ShortLegStudio.RPG.Equipment.Gateways;
-    using ShortLegStudio.RPG.Characters.Gateways;
     using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
 
     /// <summary>
@@ -145,7 +145,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
             equip.AssignWeapons(character.Inventory, character.Offense.WeaponProficiencies);
 
             var equipArmor = new PurchaseInitialArmor(this.armorGateway);
-            equipArmor.PurchaseArmorAndShield(character.Inventory);
+            equipArmor.PurchaseArmorAndShield(character.Inventory, character.Defense.ArmorProficiencies);
 
             return character;
         }

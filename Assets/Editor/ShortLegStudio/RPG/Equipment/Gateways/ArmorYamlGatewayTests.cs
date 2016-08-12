@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 using NUnit.Framework;
 using ShortLegStudio.RPG.Equipment;
 using ShortLegStudio.RPG.Equipment.Gateways;
 using ShortLegStudio;
-using System.Runtime.InteropServices;
+using ShortLegStudio.RPG.Characters;
 
 
 namespace RPG.Equipment.Gateways {
@@ -86,6 +87,13 @@ namespace RPG.Equipment.Gateways {
 			Assert.AreEqual (3, armors.Count ());
 		}
 
+        [Test]
+        public void GetArmorsByProficiencies() {
+            var proficiencies = new List<ArmorProficiency>();
+            proficiencies.Add(new ArmorProficiency("Light"));
+            var armors = gateway.FindByProficiency(proficiencies);
+            Assert.AreEqual(1, armors.Count());
+        }
 		const string ArmorYamlFile = @"
 - armor:
   name: Leather Armor

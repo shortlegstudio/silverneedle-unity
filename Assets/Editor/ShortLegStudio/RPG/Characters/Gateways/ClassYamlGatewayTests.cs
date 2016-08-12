@@ -96,9 +96,9 @@ namespace RPG.Characters.Gateways {
 
 		[Test]
 		public void ClassHaveArmorProficiencies() {
-			Assert.IsTrue (Fighter.ArmorProficiencies.Contains ("Armor Proficiency (Heavy)"));
-			Assert.IsTrue (Fighter.ArmorProficiencies.Contains ("Armor Proficiency (Medium)"));
-			Assert.IsTrue (Fighter.ArmorProficiencies.Contains ("Armor Proficiency (Light)"));
+			Assert.IsTrue (Fighter.ArmorProficiencies.Contains ("heavy"));
+			Assert.IsTrue (Fighter.ArmorProficiencies.Contains ("medium"));
+            Assert.IsTrue (Fighter.ArmorProficiencies.Contains ("light"));
 			Assert.IsTrue (Monk.ArmorProficiencies.Count == 0 );
 			Assert.IsTrue (Wizard.ArmorProficiencies.Count == 0);
 

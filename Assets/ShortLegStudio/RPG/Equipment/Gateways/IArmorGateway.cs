@@ -6,6 +6,7 @@
 namespace ShortLegStudio.RPG.Equipment.Gateways
 {
     using System.Collections.Generic;
+    using ShortLegStudio.RPG.Characters;
 
     /// <summary>
     /// Armor gateway provides access to armor data
@@ -38,5 +39,12 @@ namespace ShortLegStudio.RPG.Equipment.Gateways
         /// <returns>The armors matching types.</returns>
         /// <param name="types">Types of armor.</param>
         IEnumerable<Armor> FindByArmorTypes(params ArmorType[] types);
+
+        /// <summary>
+        /// Finds armors by proficiency.
+        /// </summary>
+        /// <returns>Armors that are valid for proficiency</returns>
+        /// <param name="proficiencies">The proficiencies to search by.</param>
+        IEnumerable<Armor> FindByProficiency(IEnumerable<ArmorProficiency> proficiencies);
     }
 }

@@ -67,7 +67,6 @@ namespace ShortLegStudio.RPG.Equipment
                     return largeDamageTable[index];
             }
 
-            // Get Index for medium damage
             throw new NotImplementedException(string.Format("Character Size: {0} has not been implemented in damage tables.", size));
         }
     }

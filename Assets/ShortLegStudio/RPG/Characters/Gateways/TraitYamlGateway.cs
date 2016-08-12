@@ -28,7 +28,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
         private IList<Trait> traits;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.TraitYamlGateway"/> class.
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Gateways.TraitYamlGateway"/> class.
         /// </summary>
         public TraitYamlGateway()
         {
@@ -36,7 +36,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Gateways.TraitYamlGateway"/> class.
+        /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Gateways.TraitYamlGateway"/> class.
         /// </summary>
         /// <param name="yaml">Yaml to parse.</param>
         public TraitYamlGateway(YamlNodeWrapper yaml)

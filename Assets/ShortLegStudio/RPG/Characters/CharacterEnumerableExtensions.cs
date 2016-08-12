@@ -36,5 +36,16 @@ namespace ShortLegStudio.RPG.Characters
         {
             return proficiencies.Any(x => x.IsProficient(weapon));
         }
+
+        /// <summary>
+        /// Fetches all armors that character is proficient in
+        /// </summary>
+        /// <returns>The proficient armors.</returns>
+        /// <param name="armor">Armor list.</param>
+        /// <param name="proficiencies">Proficiency list.</param>
+        public static IEnumerable<Armor> WhereProficient(this IEnumerable<Armor> armor, IEnumerable<ArmorProficiency> proficiencies)
+        {
+            return armor.Where(x => proficiencies.IsProficient(x));
+        }
     }
 }

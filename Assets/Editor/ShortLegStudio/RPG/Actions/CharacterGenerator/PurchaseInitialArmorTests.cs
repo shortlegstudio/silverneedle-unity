@@ -18,12 +18,36 @@ namespace RPG.Mechanics.CharacterGenerator {
 		public void EquipWithArmorAndShield () {
 			var equip = new PurchaseInitialArmor(new TestArmorGateway());
 			var inventory = new Inventory ();
-			equip.PurchaseArmorAndShield (inventory);
-
+            var armorProficiencies = new List<ArmorProficiency>();
+            armorProficiencies.Add(new ArmorProficiency("Heavy"));
+            armorProficiencies.Add(new ArmorProficiency("Shield"));
+			equip.PurchaseArmorAndShield (inventory, armorProficiencies);
 
 			Assert.IsTrue (inventory.GearOfType<Armor> ().Any (x => x.ArmorType == ArmorType.Shield));
 			Assert.IsTrue (inventory.GearOfType<Armor> ().Any (x => x.ArmorType != ArmorType.Shield));
 		}
+
+        [Test]
+        public void DoesNotEquipShieldIfNotProficient()
+        {
+            var equip = new PurchaseInitialArmor(new TestArmorGateway());
+            var inventory = new Inventory();
+            var armorProficiencies = new List<ArmorProficiency>();
+            armorProficiencies.Add(new ArmorProficiency("Heavy"));
+            equip.PurchaseArmorAndShield(inventory, armorProficiencies);
+            Assert.IsTrue(inventory.GearOfType<Armor>().Count() > 0);
+            Assert.IsFalse(inventory.GearOfType<Armor>().Any(x => x.ArmorType == ArmorType.Shield));
+        }
+
+        [Test]
+        public void DoesNotEquipArmorIfNotProficient()
+        {
+            var equip = new PurchaseInitialArmor(new TestArmorGateway());
+            var inventory = new Inventory();
+            var armorProficiencies = new List<ArmorProficiency>();
+            equip.PurchaseArmorAndShield(inventory, armorProficiencies);
+            Assert.IsTrue(inventory.GearOfType<Armor>().Count() == 0);
+        }
 
 		private class TestArmorGateway : IArmorGateway {
 			List<Armor> armors;
@@ -58,6 +82,10 @@ namespace RPG.Mechanics.CharacterGenerator {
 				return armors.Where (x => types.Contains (x.ArmorType));
 			}
 
+            public IEnumerable<Armor> FindByProficiency(IEnumerable<ArmorProficiency> proficiencies)
+            {
+                return armors.Where(x => proficiencies.IsProficient(x));
+            }
 		}
 	}
 }
