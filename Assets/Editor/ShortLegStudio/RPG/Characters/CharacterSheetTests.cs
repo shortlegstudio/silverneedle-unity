@@ -109,9 +109,9 @@ namespace RPG.Characters
             trait.Modifiers.Add(
                 new BasicStatModifier("Will", 10, "Trait", "Cause")
             );
-            var oldScore = sheet.Defense.WillSave();
+            var oldScore = sheet.Defense.WillSave.TotalValue;
             sheet.AddTrait(trait);
-            Assert.AreEqual(oldScore + 10, sheet.Defense.WillSave());
+            Assert.AreEqual(oldScore + 10, sheet.Defense.WillSave.TotalValue);
         }
     }
 

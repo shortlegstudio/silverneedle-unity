@@ -84,7 +84,7 @@ namespace ShortLegStudio.SilverNeedle
                 case "Feats":
                     return this.MakeFeatList(character);
                 case "FortitudeSave":
-                    return character.Defense.FortitudeSave().ToString();
+                    return character.Defense.FortitudeSave.ToString();
                 case "GenderRaceClass":
                     return string.Format("{0} {1} {2} {3}", character.Gender, character.Race.Name, character.Class.Name, character.Level);
                 case "HitPoints":
@@ -102,7 +102,7 @@ namespace ShortLegStudio.SilverNeedle
                 case "Proficiencies":
                     return this.GetProficiencyList(character);
                 case "ReflexSave":
-                    return character.Defense.ReflexSave().ToString();
+                    return character.Defense.ReflexSave.ToString();
                 case "Senses":
                     return this.GetSenses(character);
                 case "SkillsList":
@@ -126,7 +126,7 @@ namespace ShortLegStudio.SilverNeedle
                 case "WeaponTwoInfo":
                     return character.Offense.Attacks().ToList()[1].ToString();
                 case "WillSave":
-                    return character.Defense.WillSave().ToString();
+                    return character.Defense.WillSave.ToString();
             }
 
             return "NOT FOUND: " + this.property;

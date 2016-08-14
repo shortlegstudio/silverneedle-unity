@@ -40,30 +40,30 @@ namespace RPG.Characters {
 
 		[Test]
 		public void ReflexSavingThrowIsBasedOnDexterity() {
-			Assert.AreEqual (3, smallStats.ReflexSave());
+			Assert.AreEqual (3, smallStats.ReflexSave.TotalValue);
 		}
 
 		[Test]
 		public void FortitudeSavingThrowIsBasedOnConstitution() {
-			Assert.AreEqual (-1, smallStats.FortitudeSave ());
+			Assert.AreEqual (-1, smallStats.FortitudeSave.TotalValue);
 		}
 
 		[Test]
 		public void WillSavingThrowIsBasedOnWisdom() {
-			Assert.AreEqual (1, smallStats.WillSave ());
+			Assert.AreEqual (1, smallStats.WillSave.TotalValue);
 		}
 
 		[Test]
 		public void MarkingASaveGoodGivesItAPlus2Bonus() {
-			Assert.AreEqual (3, smallStats.ReflexSave ());
+			Assert.AreEqual (3, smallStats.ReflexSave.TotalValue);
 			smallStats.SetReflexGoodSave ();
-			Assert.AreEqual (5, smallStats.ReflexSave ());
+			Assert.AreEqual (5, smallStats.ReflexSave.TotalValue);
 
 			smallStats.SetFortitudeGoodSave ();
-			Assert.AreEqual (1, smallStats.FortitudeSave ());
+			Assert.AreEqual (1, smallStats.FortitudeSave.TotalValue);
 
 			smallStats.SetWillGoodSave ();
-			Assert.AreEqual (3, smallStats.WillSave ());
+			Assert.AreEqual (3, smallStats.WillSave.TotalValue);
 		}
 
 		[Test]
@@ -72,7 +72,7 @@ namespace RPG.Characters {
 			smallStats.SetReflexGoodSave ();
 			smallStats.SetReflexGoodSave ();
 
-			Assert.AreEqual (5, smallStats.ReflexSave ());
+			Assert.AreEqual (5, smallStats.ReflexSave.TotalValue);
 		}
 
 		[Test]
@@ -84,9 +84,9 @@ namespace RPG.Characters {
 
 			smallStats.LevelUpDefenseStats (fighter);
 
-			Assert.AreEqual (1, smallStats.FortitudeSave ());
-			Assert.AreEqual (3, smallStats.ReflexSave ());
-			Assert.AreEqual (1, smallStats.WillSave ());
+			Assert.AreEqual (1, smallStats.FortitudeSave.TotalValue);
+			Assert.AreEqual (3, smallStats.ReflexSave.TotalValue);
+			Assert.AreEqual (1, smallStats.WillSave.TotalValue);
 		}
 
 		[Test]
@@ -100,9 +100,9 @@ namespace RPG.Characters {
 			smallStats.LevelUpDefenseStats (fighter);
 			smallStats.LevelUpDefenseStats (fighter);
 
-			Assert.AreEqual (3, smallStats.FortitudeSave ());
-			Assert.AreEqual (4, smallStats.ReflexSave ());
-			Assert.AreEqual (2, smallStats.WillSave ());
+			Assert.AreEqual (3, smallStats.FortitudeSave.TotalValue);
+			Assert.AreEqual (4, smallStats.ReflexSave.TotalValue);
+			Assert.AreEqual (2, smallStats.WillSave.TotalValue);
 		}
 
 
@@ -166,13 +166,13 @@ namespace RPG.Characters {
 				          new SizeStats(),
 				          new Inventory()
 			          );
-			var will = def.WillSave();
-			var fort = def.FortitudeSave();
-			var reflex = def.ReflexSave();
+			var will = def.WillSave.TotalValue;
+			var fort = def.FortitudeSave.TotalValue;
+			var reflex = def.ReflexSave.TotalValue;
 			def.ProcessModifier(new MockMod());
-			Assert.AreEqual(will + 1, def.WillSave());
-			Assert.AreEqual(fort + 1, def.FortitudeSave());
-			Assert.AreEqual(reflex + 1, def.ReflexSave());
+			Assert.AreEqual(will + 1, def.WillSave.TotalValue);
+			Assert.AreEqual(fort + 1, def.FortitudeSave.TotalValue);
+			Assert.AreEqual(reflex + 1, def.ReflexSave.TotalValue);
 		}
 
 		[Test]

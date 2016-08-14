@@ -198,27 +198,27 @@ namespace ShortLegStudio.RPG.Characters
         /// Gets the fortitude save
         /// </summary>
         /// <returns>The fortitude save.</returns>
-        public int FortitudeSave()
+        public BasicStat FortitudeSave
         {
-            return this.fortitudeSave.TotalValue;
+            get { return this.fortitudeSave; }
         }
 
         /// <summary>
         /// Gets the reflexs save.
         /// </summary>
         /// <returns>The reflex save.</returns>
-        public int ReflexSave()
+        public BasicStat ReflexSave
         {
-            return this.reflexSave.TotalValue;
+            get { return this.reflexSave; }
         }
 
         /// <summary>
         /// Gets the will save.
         /// </summary>
         /// <returns>The will save.</returns>
-        public int WillSave()
+        public BasicStat WillSave
         {
-            return this.willSave.TotalValue;
+            get { return this.willSave; }
         }
 
         /// <summary>
