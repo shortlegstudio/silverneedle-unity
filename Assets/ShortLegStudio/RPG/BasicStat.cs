@@ -92,7 +92,7 @@ namespace ShortLegStudio.RPG
         { 
             get
             { 
-                return (int)MathHelpers.Floor(this.statModifiers.Sum(x => x.Modifier)); 
+                return this.statModifiers.Sum(x => x.Modifier).FloorToInt(); 
             }
         }
 

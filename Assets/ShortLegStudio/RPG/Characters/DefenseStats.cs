@@ -3,7 +3,6 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-using System.Linq.Expressions;
 
 namespace ShortLegStudio.RPG.Characters
 {
@@ -128,6 +127,33 @@ namespace ShortLegStudio.RPG.Characters
         }
 
         /// <summary>
+        /// Gets the fortitude save
+        /// </summary>
+        /// <returns>The fortitude save.</returns>
+        public BasicStat FortitudeSave
+        {
+            get { return this.fortitudeSave; }
+        }
+
+        /// <summary>
+        /// Gets the reflexs save.
+        /// </summary>
+        /// <returns>The reflex save.</returns>
+        public BasicStat ReflexSave
+        {
+            get { return this.reflexSave; }
+        }
+
+        /// <summary>
+        /// Gets the will save.
+        /// </summary>
+        /// <returns>The will save.</returns>
+        public BasicStat WillSave
+        {
+            get { return this.willSave; }
+        }
+
+        /// <summary>
         /// Get the equipped armor bonus.
         /// </summary>
         /// <returns>The armor bonus.</returns>
@@ -193,34 +219,7 @@ namespace ShortLegStudio.RPG.Characters
         {
             this.willSave.SetValue(GoodSaveBaseValue);
         }
-
-        /// <summary>
-        /// Gets the fortitude save
-        /// </summary>
-        /// <returns>The fortitude save.</returns>
-        public BasicStat FortitudeSave
-        {
-            get { return this.fortitudeSave; }
-        }
-
-        /// <summary>
-        /// Gets the reflexs save.
-        /// </summary>
-        /// <returns>The reflex save.</returns>
-        public BasicStat ReflexSave
-        {
-            get { return this.reflexSave; }
-        }
-
-        /// <summary>
-        /// Gets the will save.
-        /// </summary>
-        /// <returns>The will save.</returns>
-        public BasicStat WillSave
-        {
-            get { return this.willSave; }
-        }
-
+            
         /// <summary>
         /// Levels up defense stats.
         /// </summary>
