@@ -48,24 +48,24 @@ namespace ShortLegStudio.RPG
         /// Gets or sets the modifier.
         /// </summary>
         /// <value>The modifier amount for the statistic</value>
-        public float Modifier { get; set; }
+        public virtual float Modifier { get; set; }
 
         /// <summary>
         /// Gets or sets the reason.
         /// </summary>
         /// <value>The reason for the modifier.</value>
-        public string Reason { get; set; }
+        public virtual string Reason { get; set; }
 
         /// <summary>
         /// Gets or sets the type.
         /// </summary>
         /// <value>The type of modifier this is.</value>
-        public string Type { get; set; }
+        public virtual string Type { get; set; }
 
         /// <summary>
         /// Gets or sets the name of the statistic.
         /// </summary>
         /// <value>The name of the statistic.</value>
-        public string StatisticName { get; set; }
+        public virtual string StatisticName { get; set; }
     }
 }

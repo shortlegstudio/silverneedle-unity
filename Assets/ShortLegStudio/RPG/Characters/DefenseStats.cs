@@ -3,6 +3,7 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+using System.Linq.Expressions;
 
 namespace ShortLegStudio.RPG.Characters
 {
@@ -100,18 +101,28 @@ namespace ShortLegStudio.RPG.Characters
         {
             this.abilities = abilityScores; 
             this.size = size;
-            this.fortitudeSave = new BasicStat();
-            this.reflexSave = new BasicStat();
-            this.willSave = new BasicStat();
-            this.armor = new BasicStat(BaseArmorClass);
             this.inventory = inv;
+
+            this.fortitudeSave = new BasicStat();
+            this.fortitudeSave.AddModifier(
+                new AbilityStatModifier(abilityScores.GetAbility(AbilityScoreTypes.Constitution)));
+            
+            this.reflexSave = new BasicStat();
+            this.reflexSave.AddModifier(
+                new AbilityStatModifier(abilityScores.GetAbility(AbilityScoreTypes.Dexterity)));
+            
+            this.willSave = new BasicStat();
+            this.willSave.AddModifier(
+                new AbilityStatModifier(abilityScores.GetAbility(AbilityScoreTypes.Wisdom)));
+            
+            this.armor = new BasicStat(BaseArmorClass);
         }
 
         /// <summary>
         /// Gets the armor proficiencies.
         /// </summary>
         /// <value>The armor proficiencies.</value>
-        public IEnumerable<ArmorProficiency> ArmorProficiencies 
+        public IEnumerable<ArmorProficiency> ArmorProficiencies
         { 
             get { return this.armorProficiencies; } 
         }
@@ -189,7 +200,7 @@ namespace ShortLegStudio.RPG.Characters
         /// <returns>The fortitude save.</returns>
         public int FortitudeSave()
         {
-            return this.fortitudeSave.TotalValue + this.abilities.GetModifier(AbilityScoreTypes.Constitution);
+            return this.fortitudeSave.TotalValue;
         }
 
         /// <summary>
@@ -198,7 +209,7 @@ namespace ShortLegStudio.RPG.Characters
         /// <returns>The reflex save.</returns>
         public int ReflexSave()
         {
-            return this.reflexSave.TotalValue + this.abilities.GetModifier(AbilityScoreTypes.Dexterity);
+            return this.reflexSave.TotalValue;
         }
 
         /// <summary>
@@ -207,7 +218,7 @@ namespace ShortLegStudio.RPG.Characters
         /// <returns>The will save.</returns>
         public int WillSave()
         {
-            return this.willSave.TotalValue + this.abilities.GetModifier(AbilityScoreTypes.Wisdom);
+            return this.willSave.TotalValue;
         }
 
         /// <summary>
@@ -270,10 +281,11 @@ namespace ShortLegStudio.RPG.Characters
         /// Adds the armor proficiencies.
         /// </summary>
         /// <param name="proficiencies">Proficiencies to add.</param>
-        public void AddArmorProficiencies(IEnumerable<string> proficiencies) {
+        public void AddArmorProficiencies(IEnumerable<string> proficiencies)
+        {
             foreach (var a in proficiencies)
             {
-                AddArmorProficiency(a);
+                this.AddArmorProficiency(a);
             }
         }
 

@@ -97,5 +97,14 @@ namespace RPG {
 			stat.AddModifier(mod);
 			Assert.AreEqual("Fight +20 (+23 vs. Thor)", stat.ToString("Fight"));
 		}
+
+        [Test]
+        public void AlwaysRoundDownStats() {
+            var stat = new BasicStat(2);
+            stat.AddModifier(new BasicStatModifier(-1, "Food"));
+            stat.AddModifier(new BasicStatModifier(0.667f, "Because"));
+            Assert.AreEqual(-1, stat.SumBasicModifiers);
+            Assert.AreEqual(1, stat.TotalValue);
+        }
 	}
 }
