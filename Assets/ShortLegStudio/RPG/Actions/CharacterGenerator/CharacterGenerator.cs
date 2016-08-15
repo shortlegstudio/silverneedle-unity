@@ -3,6 +3,9 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+using ShortLegStudio.RPG.Actions.NamingThings;
+
+
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
 {
     // TODO: This class design is kind of all over the place. Is it trying to do everything or is it driven by an outside source?
@@ -39,7 +42,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
         /// <summary>
         /// The name generator selects the name for the character
         /// </summary>
-        private NameGenerator nameGenerator;
+        private INameCharacter nameGenerator;
 
         /// <summary>
         /// The armor gateway provides access to all armor
@@ -73,7 +76,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
             IAbilityScoreGenerator abilities,
             LanguageSelector langs,
             RaceSelector races,
-            NameGenerator names)
+            INameCharacter names)
         {
             this.abilityGenerator = abilities;
             this.languageSelector = langs;

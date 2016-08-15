@@ -154,6 +154,24 @@ namespace ShortLegStudio
         }
 
         /// <summary>
+        /// Translates a key that contains commma separated values into a string array
+        /// Throws exception if node is not found
+        /// </summary>
+        /// <returns>The string array split and trimmed around commas. 
+        /// Returns an empty array if key is not found </returns>
+        /// <param name="key">Key to the comma delimited string</param>
+        public string[] GetCommaString(string key)
+        {
+            var val = this.GetString(key);
+            if (val != null)
+            {
+                return Regex.Split(val, "[\\n ,]+");
+            }
+
+            return new string[] { };
+        }
+
+        /// <summary>
         /// Gets a boolean value from the YAML document. 
         /// Boolean must match "yes" to be true
         /// </summary>
@@ -202,13 +220,14 @@ namespace ShortLegStudio
 
         /// <summary>
         /// Gets an enum value from the YAML node. Throws exception if not found
+        /// Ignores Case
         /// </summary>
         /// <returns>The enum value parsed out</returns>
         /// <param name="key">Key to lookup in YAML node</param>
         /// <typeparam name="T">The enum type to parse</typeparam>
         public T GetEnum<T>(string key)
         {
-            return (T)Enum.Parse(typeof(T), this.GetStringOptional(key));
+            return (T)Enum.Parse(typeof(T), this.GetStringOptional(key), true);
         }
 
         /// <summary>

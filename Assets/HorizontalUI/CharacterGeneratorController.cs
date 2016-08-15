@@ -3,9 +3,13 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+using ShortLegStudio.RPG.Names.Gateways;
+
+
 namespace ShortLegStudio.SilverNeedle 
 {
     using System;
+    using ShortLegStudio.RPG.Actions.NamingThings;
     using ShortLegStudio.RPG.Characters;
     using ShortLegStudio.RPG.Characters.Gateways;
     using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
@@ -50,7 +54,7 @@ namespace ShortLegStudio.SilverNeedle
                 new StandardAbilityScoreGenerator(),
                 new LanguageSelector(new LanguageYamlGateway()),
                 new RaceSelector(new RaceYamlGateway(), new TraitYamlGateway()),
-                new NameGenerator());
+                new NameCharacter(new CharacterNamesYamlGateway()));
         }
 
         /// <summary>

@@ -4,12 +4,12 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
+namespace ShortLegStudio.RPG.Actions.NamingThings
 {
     /// <summary>
     /// Name generator makes random names
     /// </summary>
-    public class NameGenerator
+    public class RandomSyllableNameGenerator : INameCharacter
     {
         /// <summary>
         /// Creates the full name.
