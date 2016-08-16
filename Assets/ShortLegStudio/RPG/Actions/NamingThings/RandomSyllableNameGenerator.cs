@@ -3,6 +3,7 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+using ShortLegStudio.RPG.Characters;
 
 namespace ShortLegStudio.RPG.Actions.NamingThings
 {
@@ -18,6 +19,11 @@ namespace ShortLegStudio.RPG.Actions.NamingThings
         public string CreateFullName()
         {
             return string.Format("{0} {1}", this.CreateFirstName(), this.CreateLastName());
+        }
+
+        public string CreateFullName(Gender gender, string race)
+        {
+            return CreateFullName();
         }
 
         /// <summary>

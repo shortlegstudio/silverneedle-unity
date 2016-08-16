@@ -4,6 +4,7 @@
 // // </copyright>
 // //-----------------------------------------------------------------------
 using ShortLegStudio.RPG.Names.Gateways;
+using ShortLegStudio.RPG.Characters;
 
 namespace ShortLegStudio.RPG.Actions.NamingThings
 {
@@ -18,11 +19,10 @@ namespace ShortLegStudio.RPG.Actions.NamingThings
             this.namesGateway = namesGateway;    
         }
 
-        public string CreateFullName()
+        public string CreateFullName(Gender gender, string race)
         {
-            // Choose a first name 
-            var firstName = namesGateway.GetFirstNames().ChooseOne();
-            var lastName = namesGateway.GetLastNames().ChooseOne();
+            var firstName = namesGateway.GetFirstNames(gender, race).ChooseOne();
+            var lastName = namesGateway.GetLastNames(race).ChooseOne();
 
             return string.Format("{0} {1}", firstName, lastName);
         }

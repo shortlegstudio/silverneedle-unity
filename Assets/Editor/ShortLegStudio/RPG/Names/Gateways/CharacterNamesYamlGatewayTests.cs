@@ -3,6 +3,7 @@ using System.Linq;
 using ShortLegStudio.RPG;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Names.Gateways;
+using ShortLegStudio.RPG.Characters;
 
 namespace RPG.Names.Gateways {
 	[TestFixture]
@@ -36,6 +37,26 @@ namespace RPG.Names.Gateways {
             Assert.IsTrue(names.Contains("Fondu"));
         }
 
+        [Test]
+        public void CanFilterNamesBasedOnRaceAndGender()
+        {
+            var gateway = new CharacterNamesYamlGateway(CharacterNamesYamlFile.ParseYaml());
+            var names = gateway.GetFirstNames(Gender.Female, "human");
+            Assert.AreEqual(0, names.Count());
+            names = gateway.GetFirstNames(Gender.Female, "dwarf");
+            Assert.IsTrue(names.Contains("Sheila"));
+            Assert.IsFalse(names.Contains("Steve"));
+        }
+
+        [Test]
+        public void CanFilterLastNamesBasedOnRace()
+        {
+            var gateway = new CharacterNamesYamlGateway(CharacterNamesYamlFile.ParseYaml());
+            var names = gateway.GetLastNames("human");
+            Assert.IsTrue(names.Contains("Stookum"));
+            Assert.IsFalse(names.Contains("Roofus"));
+        }
+
         const string CharacterNamesYamlFile = @"
 - gender: male
   race: human
@@ -49,6 +70,16 @@ namespace RPG.Names.Gateways {
   names: |
     Smith, Johnson, Fondu
     ,,Hookum,Stookum,
+- gender: female
+  race: dwarf
+  category: first
+  names: |
+    Arletta, Sheila, Sara
+- gender: any
+  race: dwarf
+  category: last
+  names: |
+    Rockhammer, Biggut, Roofus
 ";
 	}
 }

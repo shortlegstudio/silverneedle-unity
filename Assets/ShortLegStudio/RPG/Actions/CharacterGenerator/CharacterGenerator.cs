@@ -98,7 +98,6 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
         {
             var character = new CharacterSheet(this.skillGateway.All());
 
-            character.Name = this.nameGenerator.CreateFullName();
             character.Gender = EnumHelpers.ChooseOne<Gender>();
             character.Alignment = EnumHelpers.ChooseOne<CharacterAlignment>();
             this.abilityGenerator.AssignAbilities(character.AbilityScores);
@@ -108,6 +107,10 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
                 this.languageSelector.PickLanguages(
                     character.Race, 
                     character.AbilityScores.GetModifier(AbilityScoreTypes.Intelligence)));
+
+            // Names come last
+            character.Name = this.nameGenerator.CreateFullName(character.Gender, character.Race.Name);
+
             return character;
         }
 

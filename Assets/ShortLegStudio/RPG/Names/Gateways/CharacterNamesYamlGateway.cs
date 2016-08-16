@@ -3,14 +3,13 @@
 // //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // // </copyright>
 // //-----------------------------------------------------------------------
-using System.Collections;
-using System.Xml.Linq;
 
 namespace ShortLegStudio.RPG.Names.Gateways
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ShortLegStudio.RPG.Characters;
 
     public class CharacterNamesYamlGateway : ICharacterNamesGateway
     {
@@ -28,7 +27,7 @@ namespace ShortLegStudio.RPG.Names.Gateways
             LoadFromYaml(yamlData);
         }
 
-        public System.Collections.Generic.IList<string> GetFirstNames()
+        public IList<string> GetFirstNames()
         {
             return namesDatabase
                 .Where(x => x.Type == NameTypes.First)
@@ -36,7 +35,19 @@ namespace ShortLegStudio.RPG.Names.Gateways
                 .ToList();
         }
 
-        public System.Collections.Generic.IList<string> GetLastNames()
+        public IList<string> GetFirstNames(Gender gender, string race)
+        {
+            var genderString = gender.ToString();
+
+            return namesDatabase
+                .Where(x => x.Type == NameTypes.First && 
+                    MatchRace(race, x) && 
+                    MatchGender(genderString, x))
+                .SelectMany(x => x.Names)
+                .ToList();
+        }
+
+        public IList<string> GetLastNames()
         {
             return namesDatabase
                 .Where(x => x.Type == NameTypes.Last)
@@ -44,6 +55,25 @@ namespace ShortLegStudio.RPG.Names.Gateways
                 .ToList();
         }
 
+        public IList<string> GetLastNames(string race)
+        {
+            return namesDatabase
+                .Where(x => x.Type == NameTypes.Last &&
+                    MatchRace(race, x))
+                .SelectMany(x => x.Names)
+                .ToList();
+        }
+
+        private bool MatchGender(string gender, NameInformation names)
+        {
+            return string.Equals(names.Gender, "any", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(names.Gender, gender, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private bool MatchRace(string race, NameInformation names)
+        {
+            return string.Equals(race, names.Race, StringComparison.OrdinalIgnoreCase);
+        }
 
         private void LoadFromYaml(YamlNodeWrapper yamlData)
         {

@@ -4,6 +4,7 @@
 // // </copyright>
 // //-----------------------------------------------------------------------
 using ShortLegStudio.RPG.Names.Gateways;
+using ShortLegStudio.RPG.Characters;
 
 namespace ShortLegStudio.RPG.Actions.NamingThings
 {
@@ -11,7 +12,7 @@ namespace ShortLegStudio.RPG.Actions.NamingThings
 
 	public interface INameCharacter
 	{
-        string CreateFullName();
+        string CreateFullName(Gender gender, string race);
 	}
 
 }

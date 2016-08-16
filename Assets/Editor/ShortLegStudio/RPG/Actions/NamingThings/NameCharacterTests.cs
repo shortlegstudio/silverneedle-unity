@@ -6,14 +6,15 @@ using System.Collections.Generic;
 using ShortLegStudio.Enchilada;
 using ShortLegStudio.RPG.Actions.NamingThings;
 using ShortLegStudio.RPG.Names.Gateways;
+using System;
 
 
 namespace RPG.Actions.NamingThings {
 
 	[TestFixture]
-	public class NameCharacterTests {
+    public class NameCharacterTests {
         [Test]
-        public void UtilizingAGatewayOfNamesItWillSelectAFirstAndLastName() 
+        public void AllowConfiguringWhatKindOfNameToGet() 
         {
             // Set up test with a name
             var nameGateway = new TestNamesGateway();
@@ -21,15 +22,8 @@ namespace RPG.Actions.NamingThings {
 
             nameGateway.FirstName = "John";
             nameGateway.LastName = "Smith";
-            Assert.AreEqual("John Smith", namer.CreateFullName());
-
-            // Make a different name
-            nameGateway.FirstName = "Alexi";
-            nameGateway.LastName = "Johnson";
-
-            Assert.AreEqual("Alexi Johnson", namer.CreateFullName());
+            Assert.AreEqual("(Male-Orc)John OrcSmith", namer.CreateFullName(Gender.Male, "Orc"));
         }
-
 
         private class TestNamesGateway : ICharacterNamesGateway 
         {
@@ -41,10 +35,21 @@ namespace RPG.Actions.NamingThings {
                 return new List<string>(new string[] { FirstName });
             }
 
+            public IList<string> GetFirstNames(Gender gender, string race)
+            {
+                return new List<string>(new string[] { string.Format("({0}-{1}){2}", gender, race, FirstName) });
+            }
+
+
             public IList<string> GetLastNames() 
             {
                 return new List<string>(new string[] { LastName });
             }
+
+            public IList<string> GetLastNames(string race) 
+            {
+                return new List<string>(new string[] { race + LastName });
+            } 
         }
 	}
 }
