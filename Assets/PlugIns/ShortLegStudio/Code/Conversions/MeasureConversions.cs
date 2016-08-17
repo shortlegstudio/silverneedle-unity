@@ -36,5 +36,21 @@ namespace ShortLegStudio.Conversions
             var ft = val / 12;
             return string.Format("{0}' {1}\"", ft, mod);
         }
+
+        public static string ToInchesAndFeet(this int val) 
+        {
+            return InchesToFeetString(val);
+        }
+
+        public static string ToInchesAndFeet(this float val)
+        {
+            return InchesToFeetString(val);
+        }
+
+        public static string ToPoundsString(this int value)
+        {
+            return string.Format("{0} lbs", value);
+        }
+
     }
 }

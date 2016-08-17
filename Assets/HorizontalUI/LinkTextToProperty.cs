@@ -3,6 +3,9 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+using ShortLegStudio.Conversions;
+
+
 namespace ShortLegStudio.SilverNeedle
 {
     using System;
@@ -87,6 +90,8 @@ namespace ShortLegStudio.SilverNeedle
                     return character.Defense.FortitudeSave.ToString();
                 case "GenderRaceClass":
                     return string.Format("{0} {1} {2} {3}", character.Gender, character.Race.Name, character.Class.Name, character.Level);
+                case "Height":
+                    return character.Size.Height.ToInchesAndFeet();
                 case "HitPoints":
                     return character.MaxHitPoints.ToString();
                 case "Initiative":
@@ -125,6 +130,8 @@ namespace ShortLegStudio.SilverNeedle
                     return character.Offense.Attacks().ToList()[0].ToString();
                 case "WeaponTwoInfo":
                     return character.Offense.Attacks().ToList()[1].ToString();
+                case "Weight":
+                    return character.Size.Weight.ToPoundsString();
                 case "WillSave":
                     return character.Defense.WillSave.ToString();
             }

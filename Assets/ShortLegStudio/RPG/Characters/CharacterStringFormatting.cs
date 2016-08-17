@@ -59,5 +59,6 @@ namespace ShortLegStudio.RPG.Characters
 
             return value.ToString();
         }
-    }
+
+   }
 }
