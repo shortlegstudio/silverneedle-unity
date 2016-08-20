@@ -4,6 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using ShortLegStudio.RPG.Actions.NamingThings;
+using ShortLegStudio.RPG.Actions.CharacterGenerator;
 
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
@@ -64,6 +65,9 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
         /// </summary>
         private IEntityGateway<Class> classGateway;
 
+        private IRaceMaturityGateway maturityGateway;
+       
+
         /// <summary>
         /// Initializes a new instance of the
         /// <see cref="ShortLegStudio.RPG.Mechanics.CharacterGenerator.CharacterGenerator"/> class.
@@ -87,6 +91,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
             this.weaponGateway = new WeaponYamlGateway();
             this.skillGateway = new SkillYamlGateway();
             this.classGateway = new ClassYamlGateway();
+            this.maturityGateway = new RaceMaturityYamlGateway();
         }
 
         /// <summary>
@@ -108,6 +113,9 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
                     character.Race, 
                     character.AbilityScores.GetModifier(AbilityScoreTypes.Intelligence)));
 
+            // Assign Age to adult
+            character.Age = maturityGateway.Get(character.Race).Adulthood;
+
             // Names come last
             character.Name = this.nameGenerator.CreateFullName(character.Gender, character.Race.Name);
 
@@ -124,6 +132,10 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
             character.SetClass(this.classGateway.All().ToList().ChooseOne());
             var hp = new HitPointGenerator();
             character.SetHitPoints(hp.RollHitPoints(character));
+
+            // Assign Age based on class
+            var assignAge = new AssignAge();
+            character.Age = assignAge.RandomAge(character.Class.ClassDevelopmentAge, maturityGateway.Get(character.Race));
             return character;
         }
 

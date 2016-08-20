@@ -72,6 +72,7 @@ namespace ShortLegStudio.RPG.Characters.Gateways
                 cls.FortitudeSaveRate = node.GetFloat("fortitude");
                 cls.ReflexSaveRate = node.GetFloat("reflex");
                 cls.WillSaveRate = node.GetFloat("will");
+                cls.ClassDevelopmentAge = node.GetEnum<ClassDevelopmentAge>("developedage");
 
                 var armor = node.GetCommaStringOptional("armorproficiencies");
                 cls.ArmorProficiencies.Add(armor);

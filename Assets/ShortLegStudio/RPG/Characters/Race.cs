@@ -78,5 +78,7 @@ namespace ShortLegStudio.RPG.Characters
         /// </summary>
         /// <value>The base movement speed.</value>
         public int BaseMovementSpeed { get; set; }
+
+        public Maturity Maturity { get; set; }
     }
 }

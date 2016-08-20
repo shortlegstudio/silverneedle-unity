@@ -121,6 +121,13 @@ namespace RPG.Characters.Gateways {
 			Assert.IsTrue(Monk.WeaponProficiencies.Contains("monk"));
 			Assert.IsTrue(Wizard.WeaponProficiencies.Contains("dagger"));
 		}
+
+        [Test]
+        public void ClassesDefineHowLongTrainingTakes() 
+        {
+            Assert.AreEqual(ClassDevelopmentAge.Trained, Fighter.ClassDevelopmentAge);
+            Assert.AreEqual(ClassDevelopmentAge.Studied, Wizard.ClassDevelopmentAge);
+        }
 		private const string ClassYamlFile = @"--- 
 - class: 
   name: Fighter
@@ -137,6 +144,7 @@ namespace RPG.Characters.Gateways {
   will: 0.334
   armorproficiencies: light, medium, heavy
   weaponproficiencies: simple, martial
+  developedage: Trained
 - class: 
   name: Monk
   skillpoints: 4
@@ -152,6 +160,7 @@ namespace RPG.Characters.Gateways {
   reflex: 0.667
   will: 0.334
   weaponproficiencies: simple, monk
+  developedage: Studied
 - class: 
   name: Wizard
   skillpoints: 4
@@ -166,6 +175,7 @@ namespace RPG.Characters.Gateways {
   fortitude: 0.334
   will: 0.667
   weaponproficiencies: club, dagger, crossbow
+  developedage: Studied
 ...";	
 	}
 }

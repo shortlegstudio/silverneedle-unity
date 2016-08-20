@@ -53,6 +53,8 @@ namespace ShortLegStudio.RPG.Characters
         /// <value>The name of the character.</value>
         public string Name { get; set; }
 
+        public int Age { get; set; }
+
         /// <summary>
         /// Gets or sets the alignment.
         /// </summary>

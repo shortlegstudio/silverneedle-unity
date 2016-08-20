@@ -99,6 +99,8 @@ namespace ShortLegStudio.RPG.Characters
         /// <value>The weapon proficiencies.</value>
         public IList<string> WeaponProficiencies { get; set; }
 
+        public ClassDevelopmentAge ClassDevelopmentAge { get; set; }
+
         /// <summary>
         /// Gets a value indicating whether this class has a good fortitude save.
         /// </summary>

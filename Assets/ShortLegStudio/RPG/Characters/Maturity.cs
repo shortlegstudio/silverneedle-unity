@@ -14,6 +14,7 @@ namespace ShortLegStudio.RPG.Characters
         {
         }
 
+        public string Name { get; set; }
         public int Adulthood { get; set; }
         public Cup Young { get; set; }
         public Cup Trained { get; set; }

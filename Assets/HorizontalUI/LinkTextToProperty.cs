@@ -68,6 +68,8 @@ namespace ShortLegStudio.SilverNeedle
             // TODO: This really is a kind of different mapping and could really be placed around the character module itself. Nothing here is Unity Specific
             switch (this.property)
             {
+                case "Age":
+                    return character.Age.ToString();
                 case "AlignmentSizeType":
                     return string.Format("{0} {1} humanoid({2})", character.Alignment.ShortString(), character.Size.Size, character.Race.Name);
                 case "ArmorClass":
