@@ -86,12 +86,18 @@ namespace ShortLegStudio.SilverNeedle
                     return string.Format("{0}", character.Offense.CombatManueverDefense());
                 case "DefenseAbilities":
                     return string.Format("Defense!");
+                case "Eyes":
+                    return character.FacialDescription.EyeColor.ToString();
+                case "Facial Hair":
+                    return character.FacialDescription.FacialHair.ToString();
                 case "Feats":
                     return this.MakeFeatList(character);
                 case "FortitudeSave":
                     return character.Defense.FortitudeSave.ToString();
                 case "GenderRaceClass":
                     return string.Format("{0} {1} {2} {3}", character.Gender, character.Race.Name, character.Class.Name, character.Level);
+                case "Hair":
+                    return string.Format("{0} {1}", character.FacialDescription.HairColor, character.FacialDescription.HairStyle);
                 case "Height":
                     return character.Size.Height.ToInchesAndFeet();
                 case "HitPoints":

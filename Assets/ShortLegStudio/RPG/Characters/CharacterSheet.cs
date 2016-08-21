@@ -3,6 +3,9 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+using ShortLegStudio.RPG.Characters.Appearance;
+
+
 namespace ShortLegStudio.RPG.Characters
 {
     using System;
@@ -162,6 +165,8 @@ namespace ShortLegStudio.RPG.Characters
         /// </summary>
         /// <value>The characters movement abilities.</value>
         public MovementStats Movement { get; private set; }
+
+        public FacialDescription FacialDescription { get; set; }
 
         /// <summary>
         /// Sets this character to Level 1 in specified class

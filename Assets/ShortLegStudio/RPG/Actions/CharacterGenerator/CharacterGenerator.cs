@@ -5,6 +5,7 @@
 //-----------------------------------------------------------------------
 using ShortLegStudio.RPG.Actions.NamingThings;
 using ShortLegStudio.RPG.Actions.CharacterGenerator;
+using ShortLegStudio.RPG.Actions.CharacterGenerator.Appearance;
 
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
@@ -115,6 +116,10 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
 
             // Assign Age to adult
             character.Age = maturityGateway.Get(character.Race).Adulthood;
+
+            //Generate a facial description
+            var facials = new CreateFacialFeatures();
+            character.FacialDescription = facials.CreateFace(character.Gender);
 
             // Names come last
             character.Name = this.nameGenerator.CreateFullName(character.Gender, character.Race.Name);
