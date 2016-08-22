@@ -6,6 +6,7 @@
 using ShortLegStudio.RPG.Actions.NamingThings;
 using ShortLegStudio.RPG.Actions.CharacterGenerator;
 using ShortLegStudio.RPG.Actions.CharacterGenerator.Appearance;
+using ShortLegStudio.RPG.Characters.Background;
 
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
@@ -123,6 +124,8 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
 
             // Names come last
             character.Name = this.nameGenerator.CreateFullName(character.Gender, character.Race.Name);
+            var familyHistory = new FamilyHistoryCreator(this.nameGenerator);
+            character.FamilyTree = familyHistory.CreateFamilyTree(character.Race.Name);
 
             return character;
         }

@@ -4,6 +4,7 @@
 // </copyright>
 //-----------------------------------------------------------------------
 using ShortLegStudio.RPG.Characters.Appearance;
+using ShortLegStudio.RPG.Characters.Background;
 
 
 namespace ShortLegStudio.RPG.Characters
@@ -167,6 +168,8 @@ namespace ShortLegStudio.RPG.Characters
         public MovementStats Movement { get; private set; }
 
         public FacialDescription FacialDescription { get; set; }
+
+        public FamilyTree FamilyTree { get; set; }
 
         /// <summary>
         /// Sets this character to Level 1 in specified class
