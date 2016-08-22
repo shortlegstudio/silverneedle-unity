@@ -7,6 +7,8 @@ using ShortLegStudio.RPG.Actions.NamingThings;
 using ShortLegStudio.RPG.Actions.CharacterGenerator;
 using ShortLegStudio.RPG.Actions.CharacterGenerator.Appearance;
 using ShortLegStudio.RPG.Characters.Background;
+using ShortLegStudio.RPG.Actions.CharacterGenerator.Background;
+using ShortLegStudio.RPG.Characters.Background.Gateways;
 
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
@@ -124,8 +126,8 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
 
             // Names come last
             character.Name = this.nameGenerator.CreateFullName(character.Gender, character.Race.Name);
-            var familyHistory = new FamilyHistoryCreator(this.nameGenerator);
-            character.FamilyTree = familyHistory.CreateFamilyTree(character.Race.Name);
+
+            character.History = GenerateHistory(character);
 
             return character;
         }
@@ -174,6 +176,22 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
             equipArmor.PurchaseArmorAndShield(character.Inventory, character.Defense.ArmorProficiencies);
 
             return character;
+        }
+
+
+        private History GenerateHistory(CharacterSheet character)
+        {
+            var history = new History();
+
+            //Homeland
+            var homelandSelector = new HomelandSelector(new HomelandYamlGateway());
+            history.Homeland = homelandSelector.SelectHomelandByRace(character.Race.Name);
+
+            // Family
+            var familyHistory = new FamilyHistoryCreator(this.nameGenerator);
+            history.FamilyTree = familyHistory.CreateFamilyTree(character.Race.Name);
+
+            return history;
         }
     }
 }

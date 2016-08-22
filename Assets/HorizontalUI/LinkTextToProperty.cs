@@ -91,7 +91,7 @@ namespace ShortLegStudio.SilverNeedle
                 case "Facial Hair":
                     return character.FacialDescription.FacialHair.ToString();
                 case "Father":
-                    return character.FamilyTree.Father;
+                    return character.History.FamilyTree.Father;
                 case "Feats":
                     return this.MakeFeatList(character);
                 case "FortitudeSave":
@@ -104,12 +104,14 @@ namespace ShortLegStudio.SilverNeedle
                     return character.Size.Height.ToInchesAndFeet();
                 case "HitPoints":
                     return character.MaxHitPoints.ToString();
+                case "Homeland":
+                    return character.History.Homeland.Location;
                 case "Initiative":
                     return character.Initiative.ToString();
                 case "Languages":
                     return this.GetLanguageList(character);
                 case "Mother":
-                    return character.FamilyTree.Mother;
+                    return character.History.FamilyTree.Mother;
                 case "MovementSpeed":
                     return string.Format("{0} ft ({1} sq)", character.Movement.BaseMovement.TotalValue, character.Movement.BaseSquares);
                 case "Name":

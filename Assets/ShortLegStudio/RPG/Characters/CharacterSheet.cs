@@ -36,6 +36,8 @@ namespace ShortLegStudio.RPG.Characters
             this.Defense = new DefenseStats(this.AbilityScores, this.Size, this.Inventory);
             this.Movement = new MovementStats();
             this.Languages = new List<Language>();
+            this.History = new History();
+           
 
             this.SkillRanks = new SkillRanks(skillList, this.AbilityScores);
             this.SkillRanks.ProcessModifier(this.Size);
@@ -169,7 +171,7 @@ namespace ShortLegStudio.RPG.Characters
 
         public FacialDescription FacialDescription { get; set; }
 
-        public FamilyTree FamilyTree { get; set; }
+        public History History { get; set; }
 
         /// <summary>
         /// Sets this character to Level 1 in specified class

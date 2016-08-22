@@ -9,7 +9,7 @@ using ShortLegStudio.RPG.Characters.Background;
 using ShortLegStudio.RPG.Actions.NamingThings;
 
 
-namespace RPG.Characters.Background 
+namespace RPG.Actions.CharacterGenerator.Background 
 {
     [TestFixture]
     public class FamilyHistoryCreatorTests
