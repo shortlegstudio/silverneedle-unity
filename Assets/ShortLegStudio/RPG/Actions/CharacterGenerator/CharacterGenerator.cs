@@ -196,6 +196,10 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
             var familyHistory = new FamilyHistoryCreator(this.nameGenerator);
             history.FamilyTree = familyHistory.CreateFamilyTree(character.Race.Name);
 
+            // Drawback
+            var drawback = new CharacterDrawbackSelector(new DrawbackYamlGateway());
+            history.Drawback = drawback.SelectDrawback();
+
             return history;
         }
     }

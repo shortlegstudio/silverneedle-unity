@@ -1,22 +1,23 @@
 ﻿// //-----------------------------------------------------------------------
-// // <copyright file="History.cs" company="Short Leg Studio, LLC">
+// // <copyright file="Drawback.cs" company="Short Leg Studio, LLC">
 // //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // // </copyright>
 // //-----------------------------------------------------------------------
 using System;
+using System.Collections.Generic;
 
 namespace ShortLegStudio.RPG.Characters.Background
 {
-    public class History
+    public class Drawback
     {
-        public History()
+        public Drawback()
         {
+            Traits = new List<string>();
         }
 
-        public Homeland Homeland { get; set; }
-        public FamilyTree FamilyTree { get; set; }
-        public ClassOrigin ClassOriginStory { get; set; }
-        public Drawback Drawback { get; set; }
+        public string Name { get; set; }
+        public int Weighting { get; set; }
+        public IList<string> Traits { get; set; }
     }
 }
 

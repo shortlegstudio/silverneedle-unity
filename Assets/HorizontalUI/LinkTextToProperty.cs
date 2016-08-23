@@ -88,6 +88,8 @@ namespace ShortLegStudio.SilverNeedle
                     return string.Format("{0}", character.Offense.CombatManueverDefense());
                 case "DefenseAbilities":
                     return string.Format("Defense!");
+                case "Drawback":
+                    return character.History.Drawback.Name;
                 case "Eyes":
                     return character.FacialDescription.EyeColor.ToString();
                 case "Facial Hair":
