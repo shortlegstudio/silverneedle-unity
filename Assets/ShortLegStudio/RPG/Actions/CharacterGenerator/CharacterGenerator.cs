@@ -146,6 +146,11 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
             // Assign Age based on class
             var assignAge = new AssignAge();
             character.Age = assignAge.RandomAge(character.Class.ClassDevelopmentAge, maturityGateway.Get(character.Race));
+
+            // Figure out how this class came about
+            var classOrigin = new ClassOriginStoryCreator(new ClassOriginYamlGateway());
+            character.History.ClassOriginStory = classOrigin.CreateStory(character.Class.Name);
+
             return character;
         }
 

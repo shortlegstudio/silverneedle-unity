@@ -29,7 +29,7 @@ namespace ShortLegStudio.RPG.Characters.Background.Gateways
         public WeightedOptionTable<Homeland> GetRacialOptions(string race)
         {
             var table = new WeightedOptionTable<Homeland>();
-            var options = homelands.Where(x => string.Compare(x.Race, race, true) == 0);
+            var options = homelands.Where(x => string.Equals(x.Race, race, StringComparison.OrdinalIgnoreCase));
             foreach (var opt in options)
             {
                 table.AddEntry(opt, opt.Weighting);

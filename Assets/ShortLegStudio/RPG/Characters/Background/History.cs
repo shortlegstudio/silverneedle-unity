@@ -15,6 +15,7 @@ namespace ShortLegStudio.RPG.Characters.Background
 
         public Homeland Homeland { get; set; }
         public FamilyTree FamilyTree { get; set; }
+        public ClassOrigin ClassOriginStory { get; set; }
     }
 }
 

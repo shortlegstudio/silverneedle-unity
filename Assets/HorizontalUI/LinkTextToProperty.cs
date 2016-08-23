@@ -80,6 +80,8 @@ namespace ShortLegStudio.SilverNeedle
                         character.Defense.FlatFootedArmorClass());
                 case "BaseAttackBonus":
                     return string.Format("{0}", character.Offense.BaseAttackBonus.TotalValue.ToModifierString());
+                case "ClassOrigin":
+                    return character.History.ClassOriginStory.Name;
                 case "CMB":
                     return string.Format("{0}", character.Offense.CombatManueverBonus().ToModifierString());
                 case "CMD":
