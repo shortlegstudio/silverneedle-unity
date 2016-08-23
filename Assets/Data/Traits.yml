@@ -35,6 +35,22 @@
   description: >
     Elves are immune to magic sleep effects and get a +2 racial saving throws
     bonus against enchantment spells and effects.
+  special:
+    - type: Immunity
+      condition: vs. magical sleep
+  modifiers:
+    - stat: Will
+      modifier: 2
+      type: racial
+      condition: enchantment spells
+    - stat: Fortitude
+      modifier: 2
+      type: racial
+      condition: enchantment spells
+    - stat: Reflex
+      modifier: 2
+      type: racial
+      condition: enchantment spells
 - trait:
   name: Elven Magic
   description: >

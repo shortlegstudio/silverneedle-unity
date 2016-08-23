@@ -84,6 +84,9 @@ namespace ShortLegStudio.RPG.Characters
         /// <value>The modifiers for stats effected by this class.</value>
         public IList<BasicStatModifier> Modifiers { get; private set; }
 
+
+        public IList<SpecialAbility> SpecialAbilities { get; private set; }
+
         /// <summary>
         /// Gets or sets the stealth adj.
         /// </summary>

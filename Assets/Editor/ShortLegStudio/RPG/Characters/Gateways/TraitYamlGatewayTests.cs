@@ -72,11 +72,22 @@ namespace RPG.Characters.Gateways {
 			Assert.AreEqual("senses", darkvision.Tags.First());
 		}
 
+        [Test]
+        public void CanMarkSpecialAbilitiesAsWell()
+        {
+            Assert.Greater(darkvision.SpecialAbilities.Count, 0);
+            Assert.AreEqual("Sight", darkvision.SpecialAbilities.First().Type);
+            Assert.AreEqual("In Dark", darkvision.SpecialAbilities.First().Condition);
+        }
+
 		private const string TraitYamlFile = @"
 - trait: 
   name: Darkvision
   description: See in the dark.
   tags: senses
+  special:
+    - type: Sight
+      condition: In Dark
 - trait:
   name: Hardy
   description: Really tough

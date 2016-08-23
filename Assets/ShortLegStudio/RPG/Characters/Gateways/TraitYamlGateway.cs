@@ -80,6 +80,19 @@ namespace ShortLegStudio.RPG.Characters.Gateways
                     }
                 }
 
+                // Get any special abilities
+                var abilities = traitNode.GetNodeOptional("special");
+                if (abilities != null)
+                {
+                    foreach (var spec in abilities.Children())
+                    {
+                        var specialAbility = new SpecialAbility(
+                                                 spec.GetString("condition"),
+                                                 spec.GetString("type"));
+                        trait.SpecialAbilities.Add(specialAbility);
+                    }
+                }
+
                 this.traits.Add(trait);
             }
         }

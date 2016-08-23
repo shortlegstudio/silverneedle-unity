@@ -32,6 +32,7 @@ namespace ShortLegStudio.RPG.Characters
         public Feat()
         {
             this.Modifiers = new List<BasicStatModifier>();
+            this.SpecialAbilities = new List<SpecialAbility>();
             this.Prerequisites = new Prerequisites();
             this.Tags = new List<string>();
         }
@@ -53,6 +54,8 @@ namespace ShortLegStudio.RPG.Characters
         /// </summary>
         /// <value>The modifiers for stats effected by this feat.</value>
         public IList<BasicStatModifier> Modifiers { get; private set; }
+
+        public IList<SpecialAbility> SpecialAbilities { get; private set; }
 
         /// <summary>
         /// Gets the prerequisites.

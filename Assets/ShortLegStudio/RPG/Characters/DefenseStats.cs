@@ -6,6 +6,7 @@
 
 namespace ShortLegStudio.RPG.Characters
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using ShortLegStudio.RPG.Equipment;
@@ -44,6 +45,8 @@ namespace ShortLegStudio.RPG.Characters
         /// The name of the fortitude save stat.
         /// </summary>
         private const string FortitudeSaveStatName = "Fortitude";
+
+        private const string ImmunitiesName = "Immunity";
 
         /// <summary>
         /// The ability scores to base defense stats off of
@@ -90,6 +93,8 @@ namespace ShortLegStudio.RPG.Characters
         /// <value>The armor of the character.</value>
         private BasicStat armor;
 
+        private IList<SpecialAbility> specialAbilities;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.DefenseStats"/> class.
         /// </summary>
@@ -115,6 +120,8 @@ namespace ShortLegStudio.RPG.Characters
                 new AbilityStatModifier(abilityScores.GetAbility(AbilityScoreTypes.Wisdom)));
             
             this.armor = new BasicStat(BaseArmorClass);
+
+            this.specialAbilities = new List<SpecialAbility>();
         }
 
         /// <summary>
@@ -151,6 +158,11 @@ namespace ShortLegStudio.RPG.Characters
         public BasicStat WillSave
         {
             get { return this.willSave; }
+        }
+
+        public IEnumerable<SpecialAbility> Immunities
+        {
+            get { return specialAbilities.Where(x => string.Equals(x.Type, ImmunitiesName, StringComparison.OrdinalIgnoreCase)); }
         }
 
         /// <summary>
@@ -271,6 +283,17 @@ namespace ShortLegStudio.RPG.Characters
                         break;
                     case WillSaveStatName:
                         this.willSave.AddModifier(s);
+                        break;
+                }
+            }
+
+            // Grab any special abilities that are relevant
+            foreach (var ability in modifier.SpecialAbilities)
+            {
+                switch (ability.Type)
+                {
+                    case ImmunitiesName:
+                        this.specialAbilities.Add(ability);
                         break;
                 }
             }

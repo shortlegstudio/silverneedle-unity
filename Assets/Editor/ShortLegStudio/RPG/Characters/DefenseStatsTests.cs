@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG;
@@ -196,11 +197,24 @@ namespace RPG.Characters {
             Assert.IsTrue(def.IsProficient(Leather()));
         }
 
+        [Test]
+        public void CanTrackImmunities() {
+            var def = new DefenseStats(
+                          new AbilityScores(),
+                          new SizeStats(),
+                          new Inventory());
+            var immune = new ImmunityModifier();
+            def.ProcessModifier(immune);
+            Assert.AreEqual("vs. Fire", def.Immunities.First().Condition);
+        }
+
 		class MockMod : IModifiesStats {
 			public IList<BasicStatModifier> Modifiers { get; set;  }
+            public IList<SpecialAbility> SpecialAbilities { get; set; }
 
 			public MockMod() {
 				Modifiers = new List<BasicStatModifier>();
+                SpecialAbilities = new List<SpecialAbility>();
 				Modifiers.Add(new BasicStatModifier("Armor Class", 1, "Cause", "Dodge"));
 				Modifiers.Add(new BasicStatModifier("Will", 1, "Halfing Luck", "Trait"));
 				Modifiers.Add(new BasicStatModifier("Reflex", 1, "Halfing Luck", "Trait"));
@@ -208,6 +222,19 @@ namespace RPG.Characters {
 
 			}
 		}
+
+        class ImmunityModifier : IModifiesStats {
+            public IList<SpecialAbility> SpecialAbilities { get; set; }
+            public IList<BasicStatModifier> Modifiers { get; set;  }
+
+            public ImmunityModifier() 
+            {
+                SpecialAbilities = new List<SpecialAbility>();
+                SpecialAbilities.Add(new SpecialAbility("vs. Fire", "Immunity"));
+
+                Modifiers = new List<BasicStatModifier>();
+            }
+        }
 
 		private Armor Leather() {
 			return new Armor(

@@ -3,6 +3,7 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
+
 namespace ShortLegStudio.RPG.Characters
 {
     using System.Collections.Generic;
@@ -17,5 +18,7 @@ namespace ShortLegStudio.RPG.Characters
         /// </summary>
         /// <value>The modifiers for stats effected by this class.</value>
         IList<BasicStatModifier> Modifiers { get; }
+
+        IList<SpecialAbility> SpecialAbilities { get; }
     }
 }

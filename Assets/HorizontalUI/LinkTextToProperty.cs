@@ -110,6 +110,8 @@ namespace ShortLegStudio.SilverNeedle
                     return character.MaxHitPoints.ToString();
                 case "Homeland":
                     return character.History.Homeland.Location;
+                case "Immunities":
+                    return this.GetImmunitiesList(character.Defense);
                 case "Initiative":
                     return character.Initiative.ToString();
                 case "Languages":
@@ -250,6 +252,12 @@ namespace ShortLegStudio.SilverNeedle
                 character.Defense.ArmorProficiencies.Select(x => x.Name).ToArray());
 
             return proficiencies;
+        }
+
+        private string GetImmunitiesList(DefenseStats defense)
+        {
+            var list = defense.Immunities.Select(x => x.Condition).ToArray();
+            return string.Join(", ", list);
         }
     }
 }

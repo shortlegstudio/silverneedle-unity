@@ -19,6 +19,7 @@ namespace ShortLegStudio.RPG.Characters
         public Trait()
         {
             this.Modifiers = new List<BasicStatModifier>();
+            this.SpecialAbilities = new List<SpecialAbility>();
             this.Tags = new List<string>();
         }
 
@@ -45,5 +46,8 @@ namespace ShortLegStudio.RPG.Characters
         /// </summary>
         /// <value>The tags.</value>
         public IList<string> Tags { get; private set; }
+
+
+        public IList<SpecialAbility> SpecialAbilities { get; private set; }
     }
 }
