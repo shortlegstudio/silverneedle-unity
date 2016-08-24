@@ -18,7 +18,5 @@ namespace ShortLegStudio.RPG.Characters
         /// </summary>
         /// <value>The modifiers for stats effected by this class.</value>
         IList<BasicStatModifier> Modifiers { get; }
-
-        IList<SpecialAbility> SpecialAbilities { get; }
     }
 }

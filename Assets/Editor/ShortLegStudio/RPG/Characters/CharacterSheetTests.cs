@@ -113,6 +113,17 @@ namespace RPG.Characters
             sheet.AddTrait(trait);
             Assert.AreEqual(oldScore + 10, sheet.Defense.WillSave.TotalValue);
         }
+
+        [Test]
+        public void AddingATraitWillTriggerAddingImmunities()
+        {
+            CharacterSheet sheet = new CharacterSheet(_testSkills);
+            var trait = new Trait();
+            trait.SpecialAbilities.Add(
+                new SpecialAbility("vs. Spells", "Immunity"));
+            sheet.AddTrait(trait);
+            Assert.Greater(sheet.Defense.Immunities.Count(), 0);
+        }
     }
 
 

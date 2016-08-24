@@ -58,13 +58,11 @@ namespace RPG.Characters {
 
 		class MockMod : IModifiesStats {
 			public IList<BasicStatModifier> Modifiers { get; set;  }
-            public IList<SpecialAbility> SpecialAbilities { get; set; }
 
 			public MockMod() {
 				Modifiers = new List<BasicStatModifier>();
 				Modifiers.Add(new BasicStatModifier("Climb", 3, "Cause", "Climb"));
-                SpecialAbilities = new List<SpecialAbility>();
-			}
+            }
 		}
 	}
 }

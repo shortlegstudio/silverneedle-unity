@@ -204,35 +204,30 @@ namespace RPG.Characters {
                           new SizeStats(),
                           new Inventory());
             var immune = new ImmunityModifier();
-            def.ProcessModifier(immune);
+            def.ProcessSpecialAbilities(immune);
+
             Assert.AreEqual("vs. Fire", def.Immunities.First().Condition);
         }
 
 		class MockMod : IModifiesStats {
 			public IList<BasicStatModifier> Modifiers { get; set;  }
-            public IList<SpecialAbility> SpecialAbilities { get; set; }
 
 			public MockMod() {
 				Modifiers = new List<BasicStatModifier>();
-                SpecialAbilities = new List<SpecialAbility>();
-				Modifiers.Add(new BasicStatModifier("Armor Class", 1, "Cause", "Dodge"));
+            	Modifiers.Add(new BasicStatModifier("Armor Class", 1, "Cause", "Dodge"));
 				Modifiers.Add(new BasicStatModifier("Will", 1, "Halfing Luck", "Trait"));
 				Modifiers.Add(new BasicStatModifier("Reflex", 1, "Halfing Luck", "Trait"));
 				Modifiers.Add(new BasicStatModifier("Fortitude", 1, "Halfing Luck", "Trait"));
-
 			}
 		}
 
-        class ImmunityModifier : IModifiesStats {
+        class ImmunityModifier : IProvidesSpecialAbilities {
             public IList<SpecialAbility> SpecialAbilities { get; set; }
-            public IList<BasicStatModifier> Modifiers { get; set;  }
 
             public ImmunityModifier() 
             {
                 SpecialAbilities = new List<SpecialAbility>();
                 SpecialAbilities.Add(new SpecialAbility("vs. Fire", "Immunity"));
-
-                Modifiers = new List<BasicStatModifier>();
             }
         }
 

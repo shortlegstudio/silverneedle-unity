@@ -287,8 +287,13 @@ namespace ShortLegStudio.RPG.Characters
                 }
             }
 
+
+        }
+
+        public void ProcessSpecialAbilities(IProvidesSpecialAbilities abilities)
+        {
             // Grab any special abilities that are relevant
-            foreach (var ability in modifier.SpecialAbilities)
+            foreach (var ability in abilities.SpecialAbilities)
             {
                 switch (ability.Type)
                 {

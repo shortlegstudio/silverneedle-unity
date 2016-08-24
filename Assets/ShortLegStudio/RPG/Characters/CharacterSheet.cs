@@ -219,6 +219,7 @@ namespace ShortLegStudio.RPG.Characters
         {
             this.Traits.Add(trait);
             this.ProcessStatModifier(trait);
+            this.ProcessSpecialAbilities(trait);
 
             if (notify)
             {
@@ -317,6 +318,11 @@ namespace ShortLegStudio.RPG.Characters
             SkillRanks.ProcessModifier(modifier);
             this.Defense.ProcessModifier(modifier);
             this.Offense.ProcessModifier(modifier);
+        }
+
+        private void ProcessSpecialAbilities(IProvidesSpecialAbilities abilities)
+        {
+            this.Defense.ProcessSpecialAbilities(abilities);
         }
 
         /// <summary>

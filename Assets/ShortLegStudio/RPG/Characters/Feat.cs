@@ -14,7 +14,7 @@ namespace ShortLegStudio.RPG.Characters
     /// Represents a feat ability for a character that allows it to perform
     /// special and advanced abilities
     /// </summary>
-    public class Feat : IModifiesStats
+    public class Feat : IModifiesStats, IProvidesSpecialAbilities
     {
         /// <summary>
         /// The trait data file.

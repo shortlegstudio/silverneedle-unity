@@ -143,7 +143,6 @@ namespace RPG.Characters {
 
 		class MockMod : IModifiesStats {
 			public IList<BasicStatModifier> Modifiers { get; set;  }
-            public IList<SpecialAbility> SpecialAbilities { get; set; }
 
 			public MockMod() {
 				Modifiers = new List<BasicStatModifier>();

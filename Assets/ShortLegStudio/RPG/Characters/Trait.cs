@@ -11,7 +11,7 @@ namespace ShortLegStudio.RPG.Characters
     /// <summary>
     /// A trait is some basic innate attribute of the character. Usually positive
     /// </summary>
-    public class Trait : IModifiesStats
+    public class Trait : IModifiesStats, IProvidesSpecialAbilities
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.Trait"/> class.
