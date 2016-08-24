@@ -33,6 +33,8 @@ namespace ShortLegStudio.RPG.Characters
         /// </summary>
         private const string CombatManeuverBonusStatName = "CMB";
 
+        private const string OffensiveAbilitiesName = "Offensive";
+
         /// <summary>
         /// Gets or sets the CombatManeuverDefense.
         /// </summary>
@@ -47,6 +49,8 @@ namespace ShortLegStudio.RPG.Characters
         /// The inventory for the character.
         /// </summary>
         private Inventory inventory;
+
+        private List<SpecialAbility> offensiveAbilities;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ShortLegStudio.RPG.Characters.OffenseStats"/> class.
@@ -63,6 +67,7 @@ namespace ShortLegStudio.RPG.Characters
             this.Size = size;
             this.inventory = inventory;
             this.WeaponProficiencies = new List<WeaponProficiency>();
+            this.offensiveAbilities = new List<SpecialAbility>();
         }
 
         /// <summary>
@@ -76,6 +81,14 @@ namespace ShortLegStudio.RPG.Characters
         /// </summary>
         /// <value>The base attack bonus.</value>
         public BasicStat BaseAttackBonus { get; private set; }
+
+        public IEnumerable<SpecialAbility> OffensiveAbilities
+        {
+            get
+            {
+                return offensiveAbilities;
+            }
+        }
 
         /// <summary>
         /// Gets or sets the ability scores.
@@ -155,6 +168,20 @@ namespace ShortLegStudio.RPG.Characters
                 }
             }
         }
+
+        public void ProcessSpecialAbilities(IProvidesSpecialAbilities abilities)
+        {
+            foreach (var ability in abilities.SpecialAbilities)
+            {
+                switch (ability.Type)
+                {
+                    case OffensiveAbilitiesName:
+                        offensiveAbilities.Add(ability);
+                        break;
+                }
+            }
+        }
+
 
         /// <summary>
         /// Adds a weapon proficiencies.

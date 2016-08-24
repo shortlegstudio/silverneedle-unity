@@ -128,6 +128,13 @@ namespace RPG.Characters {
 			Assert.AreEqual(smallStats.MeleeAttackBonus() + OffenseStats.UnproficientWeaponModifier, atk.AttackBonus);
 		}
 
+        [Test]
+        public void TracksSpecialAttackAbilities()
+        {
+            var special = new SpecialAttacks();
+            smallStats.ProcessSpecialAbilities(special);
+            Assert.Greater(smallStats.OffensiveAbilities.Count(), 0);
+        }
 
 		private Weapon Longsword() {
 			return new Weapon("Longsword", 0, "1d8", DamageTypes.Slashing, 19, 2, 0, WeaponType.OneHanded, WeaponGroup.HeavyBlades, WeaponTrainingLevel.Martial);
@@ -150,5 +157,16 @@ namespace RPG.Characters {
 				Modifiers.Add(new BasicStatModifier("CMB", 1, "racial", "Trait"));
 			}
 		}
+
+        class SpecialAttacks : IProvidesSpecialAbilities 
+        {
+            public IList<SpecialAbility> SpecialAbilities { get; set; }
+
+            public SpecialAttacks() {
+                SpecialAbilities = new List<SpecialAbility>();
+                SpecialAbilities.Add(new SpecialAbility("Sneak Attack 1d6", "Offensive"));
+
+            }
+        }
 	}
 }

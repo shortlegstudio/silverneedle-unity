@@ -8,6 +8,9 @@
   name: Darkvision
   description: See in the dark up to 60 feet.
   tags: sense
+  special:
+    - type: Sight
+      condition: Darkvision
 - trait:
   name: Defensive Training (Dwarves)
   description: >
@@ -171,6 +174,9 @@
   name: Low-Light Vision
   description: Can see in low light like normal light.
   tags: sense
+  special:
+    - type: Sight
+      condition: Low-Light Vision
 - trait:
   name: Multitalented
   description: >

@@ -44,6 +44,7 @@ namespace ShortLegStudio.RPG.Characters
 
             this.Traits = new List<Trait>();
             this.Feats = new List<Feat>();
+            this.SpecialQualities = new SpecialQualities();
 
             this.Level = 1;
         }
@@ -173,6 +174,8 @@ namespace ShortLegStudio.RPG.Characters
 
         public History History { get; set; }
 
+        public SpecialQualities SpecialQualities { get; private set; }
+
         /// <summary>
         /// Sets this character to Level 1 in specified class
         /// </summary>
@@ -238,6 +241,7 @@ namespace ShortLegStudio.RPG.Characters
 
             // TODO: This is very similar to traits but slightly different. Should be able to standardize the behavior
             this.ProcessStatModifier(feat);
+            this.ProcessSpecialAbilities(feat);
 
             if (notify)
             {
@@ -296,18 +300,7 @@ namespace ShortLegStudio.RPG.Characters
                 this.Modified(this, args);
             }
         }
-
-        /// <summary>
-        /// Gets the special abilities.
-        /// </summary>
-        /// <returns>The special abilities.</returns>
-        /// <param name="abilityTag">Ability tag to lookup for special abilities.</param>
-        public IEnumerable<string> GetSpecialAbilities(string abilityTag)
-        {
-            var list = this.Traits.Where(x => x.Tags.Contains(abilityTag)).Select(x => x.Name);
-            return list;
-        }
-
+            
         /// <summary>
         /// Processes the stat modifier. This takes anything that modifies stats and relays it to interested classes that might want to monitor for it
         /// TODO: Better mechanism would be a call back whenever a stat modifier is sent to the character sheet
@@ -323,6 +316,8 @@ namespace ShortLegStudio.RPG.Characters
         private void ProcessSpecialAbilities(IProvidesSpecialAbilities abilities)
         {
             this.Defense.ProcessSpecialAbilities(abilities);
+            this.Offense.ProcessSpecialAbilities(abilities);
+            this.SpecialQualities.ProcessSpecialAbilities(abilities);
         }
 
         /// <summary>

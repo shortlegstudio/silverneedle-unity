@@ -124,6 +124,28 @@ namespace RPG.Characters
             sheet.AddTrait(trait);
             Assert.Greater(sheet.Defense.Immunities.Count(), 0);
         }
+
+        [Test]
+        public void AddingAFeatCouldAddOffensiveAbilities() 
+        {
+            CharacterSheet sheet = new CharacterSheet(_testSkills);
+            var feat = new Feat();
+            feat.SpecialAbilities.Add(
+                new SpecialAbility("Sneak Attack 1d6", "Offensive"));
+            sheet.AddFeat(feat);
+            Assert.Greater(sheet.Offense.OffensiveAbilities.Count(), 0);
+        }
+
+        [Test]
+        public void AddingTraitsCouldAddSpecialQualities()
+        {
+            CharacterSheet sheet = new CharacterSheet(_testSkills);
+            var trait = new Trait();
+            trait.SpecialAbilities.Add(
+                new SpecialAbility("vs. Spells", "Ability"));
+            sheet.AddTrait(trait);
+            Assert.Greater(sheet.SpecialQualities.SpecialAbilities.Count(), 0);
+        }
     }
 
 

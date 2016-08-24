@@ -122,6 +122,8 @@ namespace ShortLegStudio.SilverNeedle
                     return string.Format("{0} ft ({1} sq)", character.Movement.BaseMovement.TotalValue, character.Movement.BaseSquares);
                 case "Name":
                     return character.Name;
+                case "OffensiveAbilities":
+                    return GetSpecialAbilityList(character.Offense.OffensiveAbilities);
                 case "OtherGear":
                     return this.GetInventoryList(character.Inventory.All);
                 case "Proficiencies":
@@ -132,6 +134,8 @@ namespace ShortLegStudio.SilverNeedle
                     return this.GetSenses(character);
                 case "SkillsList":
                     return this.MakeSkillList(character);
+                case "SpecialQualities":
+                    return GetSpecialAbilityList(character.SpecialQualities.SpecialAbilities);
                 case "Strength":
                 case "Dexterity":
                 case "Constitution":
@@ -190,8 +194,8 @@ namespace ShortLegStudio.SilverNeedle
         /// <param name="character">Character to fetch senses</param>
         private string GetSenses(CharacterSheet character)
         {
-            var senses = character.GetSpecialAbilities("sense");
-            var str = string.Join(",", senses.ToArray());
+            var senses = character.SpecialQualities.SightAbilities.Select(x => x.Condition).ToArray();
+            var str = string.Join(",", senses);
             return str + " ; " + character.SkillRanks.GetSkill("Perception").ToString();
         }
 
