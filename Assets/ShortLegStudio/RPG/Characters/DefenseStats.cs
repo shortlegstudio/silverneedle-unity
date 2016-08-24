@@ -48,6 +48,8 @@ namespace ShortLegStudio.RPG.Characters
 
         private const string ImmunitiesName = "Immunity";
 
+        private const string DefensiveAbilitiesName = "Defensive";
+
         /// <summary>
         /// The ability scores to base defense stats off of
         /// </summary>
@@ -162,7 +164,15 @@ namespace ShortLegStudio.RPG.Characters
 
         public IEnumerable<SpecialAbility> Immunities
         {
-            get { return specialAbilities.Where(x => string.Equals(x.Type, ImmunitiesName, StringComparison.OrdinalIgnoreCase)); }
+            get { return specialAbilities.Where(x => string.Equals(x.Type, ImmunitiesName)); }
+        }
+
+        public IEnumerable<SpecialAbility> DefensiveAbilities
+        {
+            get
+            {
+                return specialAbilities.Where(x => string.Equals(x.Type, DefensiveAbilitiesName));
+            }
         }
 
         /// <summary>
@@ -298,8 +308,10 @@ namespace ShortLegStudio.RPG.Characters
                 switch (ability.Type)
                 {
                     case ImmunitiesName:
+                    case DefensiveAbilitiesName:
                         this.specialAbilities.Add(ability);
                         break;
+                    
                 }
             }
         }

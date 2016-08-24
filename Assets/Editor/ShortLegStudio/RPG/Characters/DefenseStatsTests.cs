@@ -198,7 +198,7 @@ namespace RPG.Characters {
         }
 
         [Test]
-        public void CanTrackImmunities() {
+        public void CanTrackImmunitiesAndOtherSpecialAbilites() {
             var def = new DefenseStats(
                           new AbilityScores(),
                           new SizeStats(),
@@ -207,6 +207,7 @@ namespace RPG.Characters {
             def.ProcessSpecialAbilities(immune);
 
             Assert.AreEqual("vs. Fire", def.Immunities.First().Condition);
+            Assert.AreEqual("Evasion", def.DefensiveAbilities.First().Condition);
         }
 
 		class MockMod : IModifiesStats {
@@ -228,6 +229,7 @@ namespace RPG.Characters {
             {
                 SpecialAbilities = new List<SpecialAbility>();
                 SpecialAbilities.Add(new SpecialAbility("vs. Fire", "Immunity"));
+                SpecialAbilities.Add(new SpecialAbility("Evasion", "Defensive"));
             }
         }
 

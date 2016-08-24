@@ -86,8 +86,8 @@ namespace ShortLegStudio.SilverNeedle
                     return string.Format("{0}", character.Offense.CombatManueverBonus().ToModifierString());
                 case "CMD":
                     return string.Format("{0}", character.Offense.CombatManueverDefense());
-                case "DefenseAbilities":
-                    return string.Format("Defense!");
+                case "DefensiveAbilities":
+                    return this.GetSpecialAbilityList(character.Defense.DefensiveAbilities);
                 case "Drawback":
                     return character.History.Drawback.Name;
                 case "Eyes":
@@ -111,7 +111,7 @@ namespace ShortLegStudio.SilverNeedle
                 case "Homeland":
                     return character.History.Homeland.Location;
                 case "Immunities":
-                    return this.GetImmunitiesList(character.Defense);
+                    return this.GetSpecialAbilityList(character.Defense.Immunities);
                 case "Initiative":
                     return character.Initiative.ToString();
                 case "Languages":
@@ -254,9 +254,9 @@ namespace ShortLegStudio.SilverNeedle
             return proficiencies;
         }
 
-        private string GetImmunitiesList(DefenseStats defense)
+        private string GetSpecialAbilityList(IEnumerable<SpecialAbility> specialAbilities)
         {
-            var list = defense.Immunities.Select(x => x.Condition).ToArray();
+            var list = specialAbilities.Select(x => x.Condition).ToArray();
             return string.Join(", ", list);
         }
     }
