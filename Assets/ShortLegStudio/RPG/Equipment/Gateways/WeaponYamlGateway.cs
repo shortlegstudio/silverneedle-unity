@@ -10,6 +10,7 @@ namespace ShortLegStudio.RPG.Equipment.Gateways
     using System.Linq;
     using ShortLegStudio.RPG.Characters;
     using ShortLegStudio.RPG.Equipment;
+    using ShortLegStudio.Yaml;
 
     /// <summary>
     /// Weapon yaml gateway.

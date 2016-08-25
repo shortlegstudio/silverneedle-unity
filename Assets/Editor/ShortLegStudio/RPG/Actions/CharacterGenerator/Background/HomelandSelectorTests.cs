@@ -6,7 +6,6 @@
 using System;
 using NUnit.Framework;
 using ShortLegStudio.RPG.Characters.Background;
-using ShortLegStudio.RPG.Characters.Background.Gateways;
 using System.Collections.Generic;
 
 

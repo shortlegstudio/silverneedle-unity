@@ -3,7 +3,7 @@ using NUnit.Framework;
 using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.Dice;
 using System.Linq;
-using ShortLegStudio.Enchilada;
+using ShortLegStudio;
 using System.Collections.Generic;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 using ShortLegStudio.RPG.Actions.CharacterGenerator;

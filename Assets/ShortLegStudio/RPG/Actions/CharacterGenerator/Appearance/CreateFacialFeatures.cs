@@ -9,6 +9,8 @@ using ShortLegStudio.RPG.Characters.Appearance;
 
 namespace ShortLegStudio.RPG.Actions.CharacterGenerator.Appearance
 {
+    using ShortLegStudio;
+
     public class CreateFacialFeatures
     {
         public CreateFacialFeatures()

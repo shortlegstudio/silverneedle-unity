@@ -8,7 +8,6 @@ using ShortLegStudio.RPG.Actions.CharacterGenerator;
 using ShortLegStudio.RPG.Actions.CharacterGenerator.Appearance;
 using ShortLegStudio.RPG.Characters.Background;
 using ShortLegStudio.RPG.Actions.CharacterGenerator.Background;
-using ShortLegStudio.RPG.Characters.Background.Gateways;
 
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
@@ -16,9 +15,8 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
     // TODO: This class design is kind of all over the place. Is it trying to do everything or is it driven by an outside source?
     using System.Collections.Generic;
     using System.Linq;
-    using ShortLegStudio.Enchilada;
+    using ShortLegStudio;
     using ShortLegStudio.RPG.Characters;
-    using ShortLegStudio.RPG.Characters.Gateways;
     using ShortLegStudio.RPG.Equipment;
     using ShortLegStudio.RPG.Equipment.Gateways;
     using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;

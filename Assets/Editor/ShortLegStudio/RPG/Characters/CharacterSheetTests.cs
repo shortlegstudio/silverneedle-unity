@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using ShortLegStudio.Dice;
 using NUnit.Framework.Constraints;
-using ShortLegStudio.Enchilada;
+using ShortLegStudio;
 using ShortLegStudio.RPG;
 using ShortLegStudio.RPG.Equipment;
 

@@ -4,13 +4,14 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Characters.Gateways
+namespace ShortLegStudio.RPG.Characters
 {
     using System;
     using System.Collections.Generic;
     using ShortLegStudio.Dice;
-    using ShortLegStudio.Enchilada;
+    using ShortLegStudio;
     using ShortLegStudio.RPG.Characters;
+    using ShortLegStudio.Yaml;
 
     /// <summary>
     /// Race yaml gateway.

@@ -9,6 +9,7 @@ using ShortLegStudio.RPG.Characters;
 namespace ShortLegStudio.RPG.Actions.NamingThings
 {
     using System;
+    using ShortLegStudio;
 
     public class NameCharacter : INameCharacter
     {

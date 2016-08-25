@@ -5,6 +5,8 @@
 //-----------------------------------------------------------------------
 namespace ShortLegStudio.Dice
 {
+    using ShortLegStudio;
+
     /// <summary>
     /// A die represents a random whole number range
     /// </summary>

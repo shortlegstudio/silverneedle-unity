@@ -5,7 +5,6 @@
 // //-----------------------------------------------------------------------
 using System;
 using ShortLegStudio.RPG.Characters.Background;
-using ShortLegStudio.RPG.Characters.Background.Gateways;
 
 namespace ShortLegStudio.RPG.Actions.CharacterGenerator.Background
 {

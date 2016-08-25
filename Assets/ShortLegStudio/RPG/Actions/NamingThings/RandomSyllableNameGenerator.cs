@@ -7,6 +7,8 @@ using ShortLegStudio.RPG.Characters;
 
 namespace ShortLegStudio.RPG.Actions.NamingThings
 {
+    using ShortLegStudio;
+
     /// <summary>
     /// Name generator makes random names
     /// </summary>

@@ -4,13 +4,13 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Characters.Gateways
+namespace ShortLegStudio.RPG.Characters
 {
     using System;
     using System.Collections.Generic;
     using ShortLegStudio;
-    using ShortLegStudio.Enchilada;
     using ShortLegStudio.RPG.Characters;
+    using ShortLegStudio.Yaml;
 
     /// <summary>
     /// Skill yaml gateway provides access to Skills information via a YAML file

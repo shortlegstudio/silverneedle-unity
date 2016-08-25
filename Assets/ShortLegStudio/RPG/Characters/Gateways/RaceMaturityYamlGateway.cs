@@ -4,15 +4,15 @@
 // // </copyright>
 // //-----------------------------------------------------------------------
 using System;
-using ShortLegStudio.Enchilada;
+using ShortLegStudio;
 using System.Collections.Generic;
 using ShortLegStudio.Dice;
 using System.Linq;
+using ShortLegStudio.Yaml;
 
 
 
-
-namespace ShortLegStudio.RPG.Characters.Gateways
+namespace ShortLegStudio.RPG.Characters
 {
     public class RaceMaturityYamlGateway : IRaceMaturityGateway
     {

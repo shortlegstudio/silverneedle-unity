@@ -6,7 +6,7 @@ using ShortLegStudio.RPG.Equipment;
 using ShortLegStudio.RPG.Equipment.Gateways;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
-
+using ShortLegStudio.Yaml;
 
 namespace RPG.Equipment.Gateways {
 	[TestFixture]

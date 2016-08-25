@@ -5,8 +5,9 @@
 // //-----------------------------------------------------------------------
 using NUnit.Framework;
 using ShortLegStudio;
-using ShortLegStudio.RPG.Characters.Background.Gateways;
+using ShortLegStudio.RPG.Characters.Background;
 using System.Linq;
+using ShortLegStudio.Yaml;
 
 namespace RPG.Characters.Background.Gateways
 {

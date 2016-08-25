@@ -3,7 +3,7 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 using System.Linq;
 using System.Collections.Generic;
-using ShortLegStudio.Enchilada;
+using ShortLegStudio;
 
 
 namespace RPG.Mechanics.CharacterGenerator {

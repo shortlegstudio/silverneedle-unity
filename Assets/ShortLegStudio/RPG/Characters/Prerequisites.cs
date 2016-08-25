@@ -9,6 +9,8 @@ namespace ShortLegStudio.RPG.Characters
     using System.Collections.Generic;
     using System.Linq;
     using ShortLegStudio;
+    using ShortLegStudio.Yaml;
+
 
     /// <summary>
     /// Prerequisites needed to be able to use a feat

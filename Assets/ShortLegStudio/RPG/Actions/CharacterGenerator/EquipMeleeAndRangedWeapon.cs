@@ -8,6 +8,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
 {
     using System.Collections.Generic;
     using System.Linq;
+    using ShortLegStudio;
     using ShortLegStudio.RPG.Characters;
     using ShortLegStudio.RPG.Equipment;
     using ShortLegStudio.RPG.Equipment.Gateways;

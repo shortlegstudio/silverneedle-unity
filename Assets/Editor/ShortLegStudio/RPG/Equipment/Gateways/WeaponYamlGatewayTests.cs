@@ -5,7 +5,7 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio.RPG.Equipment;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Equipment.Gateways;
-
+using ShortLegStudio.Yaml;
 
 namespace RPG.Equipment.Gateways {
 

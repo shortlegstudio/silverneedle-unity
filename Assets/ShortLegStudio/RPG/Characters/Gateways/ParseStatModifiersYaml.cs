@@ -3,9 +3,10 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace ShortLegStudio.RPG.Characters.Gateways
+namespace ShortLegStudio.RPG.Characters
 {
     using System.Collections.Generic;
+    using ShortLegStudio.Yaml;
 
     /// <summary>
     /// Parse stat modifiers yaml.

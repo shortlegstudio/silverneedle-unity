@@ -5,9 +5,10 @@
 // //-----------------------------------------------------------------------
 using System;
 using ShortLegStudio.RPG.Actions.NamingThings;
-using ShortLegStudio.RPG.Names.Gateways;
+using ShortLegStudio.RPG.Characters;
+using ShortLegStudio.RPG.Characters.Background;
 
-namespace ShortLegStudio.RPG.Characters.Background
+namespace ShortLegStudio.RPG.Actions.CharacterGenerator.Background
 {
     public class FamilyHistoryCreator
     {

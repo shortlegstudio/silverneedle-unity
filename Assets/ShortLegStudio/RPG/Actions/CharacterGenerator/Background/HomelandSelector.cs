@@ -4,11 +4,9 @@
 // // </copyright>
 // //-----------------------------------------------------------------------
 using System;
-using ShortLegStudio.RPG.Characters.Background.Gateways;
 using ShortLegStudio.RPG.Characters.Background;
 using System.Linq;
 using UnityEngine;
-using ShortLegStudio.RPG.Utility;
 
 namespace ShortLegStudio.RPG.Actions.CharacterGenerator.Background
 {

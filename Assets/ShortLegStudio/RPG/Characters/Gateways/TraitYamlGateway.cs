@@ -4,13 +4,14 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ShortLegStudio.RPG.Characters.Gateways
+namespace ShortLegStudio.RPG.Characters
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ShortLegStudio.Enchilada;
+    using ShortLegStudio;
     using ShortLegStudio.RPG.Characters;
+    using ShortLegStudio.Yaml;
 
     /// <summary>
     /// Trait yaml gateway provides access to traits in the yaml file

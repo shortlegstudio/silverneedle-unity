@@ -5,9 +5,8 @@
 // //-----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using ShortLegStudio.RPG.Utility;
 
-namespace ShortLegStudio.RPG.Characters.Background.Gateways
+namespace ShortLegStudio.RPG.Characters.Background
 {
     public interface IHomelandGateway
     {

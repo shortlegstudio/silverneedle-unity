@@ -9,7 +9,7 @@ namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ShortLegStudio.Enchilada;
+    using ShortLegStudio;
     using ShortLegStudio.RPG.Characters;
 
     /// <summary>

@@ -4,7 +4,7 @@
 // // </copyright>
 // //-----------------------------------------------------------------------
 using System;
-using ShortLegStudio.Enchilada;
+using ShortLegStudio;
 using System.Collections.Generic;
 using ShortLegStudio.Dice;
 using System.Linq;
@@ -12,7 +12,7 @@ using System.Linq;
 
 
 
-namespace ShortLegStudio.RPG.Characters.Gateways
+namespace ShortLegStudio.RPG.Characters
 {
 	public interface IRaceMaturityGateway
 	{

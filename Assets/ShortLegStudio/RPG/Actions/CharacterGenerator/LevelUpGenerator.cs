@@ -6,6 +6,7 @@
 
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
 {
+    using ShortLegStudio;
     using ShortLegStudio.RPG.Characters;
 
     /// <summary>

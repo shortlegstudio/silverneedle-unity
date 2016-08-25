@@ -3,12 +3,13 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-namespace ShortLegStudio.RPG.Characters.Gateways
+namespace ShortLegStudio.RPG.Characters
 {
     using System;
     using System.Collections.Generic;
-    using ShortLegStudio.Enchilada;
+    using ShortLegStudio;
     using ShortLegStudio.RPG.Characters;
+    using ShortLegStudio.Yaml;
 
     /// <summary>
     /// Language yaml gateway.

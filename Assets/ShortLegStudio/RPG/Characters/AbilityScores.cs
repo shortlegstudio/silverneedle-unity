@@ -7,6 +7,7 @@ namespace ShortLegStudio.RPG.Characters
 {
     using System;
     using System.Collections.Generic;
+    using ShortLegStudio;
 
     /// <summary>
     /// A container that manages all the ability scores for a character

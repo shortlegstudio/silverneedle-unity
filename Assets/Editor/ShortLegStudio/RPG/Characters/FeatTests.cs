@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Characters;
+using ShortLegStudio.Yaml;
 
 namespace RPG.Characters {
 

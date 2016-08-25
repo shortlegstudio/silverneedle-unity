@@ -9,6 +9,7 @@ namespace ShortLegStudio.RPG.Characters
     using System.Linq;
     using System.Text.RegularExpressions;
     using ShortLegStudio;
+    using ShortLegStudio.Yaml;
 
     /// <summary>
     /// Represents a feat ability for a character that allows it to perform

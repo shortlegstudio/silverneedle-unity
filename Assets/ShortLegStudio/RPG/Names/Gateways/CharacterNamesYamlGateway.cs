@@ -10,6 +10,7 @@ namespace ShortLegStudio.RPG.Names.Gateways
     using System.Collections.Generic;
     using System.Linq;
     using ShortLegStudio.RPG.Characters;
+    using ShortLegStudio.Yaml;
 
     public class CharacterNamesYamlGateway : ICharacterNamesGateway
     {

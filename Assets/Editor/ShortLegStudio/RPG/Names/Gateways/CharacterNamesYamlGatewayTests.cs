@@ -4,6 +4,7 @@ using ShortLegStudio.RPG;
 using ShortLegStudio;
 using ShortLegStudio.RPG.Names.Gateways;
 using ShortLegStudio.RPG.Characters;
+using ShortLegStudio.Yaml;
 
 namespace RPG.Names.Gateways {
 	[TestFixture]

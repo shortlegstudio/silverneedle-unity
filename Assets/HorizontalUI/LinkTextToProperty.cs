@@ -3,8 +3,6 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-using ShortLegStudio.Conversions;
-
 
 namespace ShortLegStudio.SilverNeedle
 {

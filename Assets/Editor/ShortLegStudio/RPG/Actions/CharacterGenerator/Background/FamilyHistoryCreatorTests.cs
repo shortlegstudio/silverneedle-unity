@@ -5,7 +5,7 @@
 // //-----------------------------------------------------------------------
 using System;
 using NUnit.Framework;
-using ShortLegStudio.RPG.Characters.Background;
+using ShortLegStudio.RPG.Actions.CharacterGenerator.Background;
 using ShortLegStudio.RPG.Actions.NamingThings;
 
 

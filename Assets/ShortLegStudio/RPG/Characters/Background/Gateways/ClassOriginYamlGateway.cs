@@ -5,11 +5,13 @@
 // //-----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using ShortLegStudio.RPG.Utility;
 using System.Linq;
+using ShortLegStudio.Yaml;
 
-namespace ShortLegStudio.RPG.Characters.Background.Gateways
+namespace ShortLegStudio.RPG.Characters.Background
 {
+    using ShortLegStudio;
+
     public class ClassOriginYamlGateway : IClassOriginYamlGateway
     {
         private const string ClassOriginYamlDataFile = "Data/classorigins.yml";

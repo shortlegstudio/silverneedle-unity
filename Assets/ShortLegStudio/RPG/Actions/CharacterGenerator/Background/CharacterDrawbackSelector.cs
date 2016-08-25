@@ -4,10 +4,9 @@
 // // </copyright>
 // //-----------------------------------------------------------------------
 using System;
-using ShortLegStudio.RPG.Characters.Background.Gateways;
 using ShortLegStudio.RPG.Characters.Background;
 
-namespace ShortLegStudio.RPG.Characters.Background
+namespace ShortLegStudio.RPG.Actions.CharacterGenerator.Background
 {
     public class CharacterDrawbackSelector
     {

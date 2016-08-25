@@ -2,9 +2,8 @@
 using NUnit.Framework;
 using System.Linq;
 using ShortLegStudio;
-using ShortLegStudio.RPG.Characters.Gateways;
 using ShortLegStudio.RPG.Characters;
-
+using ShortLegStudio.Yaml;
 
 namespace RPG.Characters.Gateways {
 

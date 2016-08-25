@@ -4,6 +4,7 @@ using System.IO;
 using ShortLegStudio;
 using System.Linq;
 using System.Collections.Generic;
+using ShortLegStudio.Yaml;
 
 namespace RPG.Characters {
 

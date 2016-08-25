@@ -13,7 +13,7 @@ namespace ShortLegStudio.RPG.Characters
     using System.Collections.Generic;
     using System.Linq;
     using ShortLegStudio;
-    using ShortLegStudio.RPG.Characters.Gateways;
+    using ShortLegStudio.RPG.Characters;
 
     /// <summary>
     /// A character sheet is the object that ties everything together.

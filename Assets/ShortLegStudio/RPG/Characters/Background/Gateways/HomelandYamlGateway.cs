@@ -4,12 +4,13 @@
 // // </copyright>
 // //-----------------------------------------------------------------------
 using System;
-using ShortLegStudio.RPG.Characters.Gateways;
+using ShortLegStudio.RPG.Characters;
 using System.Collections.Generic;
 using System.Linq;
-using ShortLegStudio.RPG.Utility;
+using ShortLegStudio;
+using ShortLegStudio.Yaml;
 
-namespace ShortLegStudio.RPG.Characters.Background.Gateways
+namespace ShortLegStudio.RPG.Characters.Background
 {
     public class HomelandYamlGateway : IHomelandGateway
     {

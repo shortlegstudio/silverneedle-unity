@@ -4,7 +4,7 @@ using NUnit.Framework;
 using ShortLegStudio;
 using ShortLegStudio.RPG;
 using ShortLegStudio.RPG.Characters;
-using ShortLegStudio.RPG.Characters.Gateways;
+using ShortLegStudio.Yaml;
 
 namespace RPG.Characters.Gateways {
 	[TestFixture]

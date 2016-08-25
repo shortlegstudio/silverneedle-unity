@@ -3,8 +3,7 @@ using ShortLegStudio.RPG.Characters;
 using ShortLegStudio;
 using System.IO;
 using System.Linq;
-using ShortLegStudio.RPG.Characters.Gateways;
-
+using ShortLegStudio.Yaml;
 
 namespace RPG.Characters.Gateways {
 

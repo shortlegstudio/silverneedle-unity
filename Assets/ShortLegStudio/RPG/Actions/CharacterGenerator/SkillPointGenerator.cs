@@ -7,6 +7,7 @@
 namespace ShortLegStudio.RPG.Mechanics.CharacterGenerator
 {
     using System.Linq;
+    using ShortLegStudio;
     using ShortLegStudio.RPG.Characters;
 
     /// <summary>

@@ -6,7 +6,7 @@ using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
 using System.Linq;
 using System.Collections.Generic;
 using ShortLegStudio.RPG.Equipment;
-using ShortLegStudio.Enchilada;
+using ShortLegStudio;
 using ShortLegStudio.RPG.Equipment.Gateways;
 
 

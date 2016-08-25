@@ -11,7 +11,6 @@ namespace ShortLegStudio.SilverNeedle
     using System;
     using ShortLegStudio.RPG.Actions.NamingThings;
     using ShortLegStudio.RPG.Characters;
-    using ShortLegStudio.RPG.Characters.Gateways;
     using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
     using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
     using UnityEngine;
