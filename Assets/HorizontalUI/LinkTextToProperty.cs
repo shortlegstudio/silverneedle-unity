@@ -4,13 +4,13 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace ShortLegStudio.SilverNeedle
+namespace SilverNeedle
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using ShortLegStudio.RPG.Characters;
-    using ShortLegStudio.RPG.Equipment;
+    using SilverNeedle.Characters;
+    using SilverNeedle.Equipment;
     using UnityEngine;
     using UnityEngine.UI;
 

@@ -3,16 +3,16 @@
 //     Copyright (c) Short Leg Studio, LLC. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
-using ShortLegStudio.RPG.Names.Gateways;
+using SilverNeedle.Names.Gateways;
 
 
-namespace ShortLegStudio.SilverNeedle 
+namespace SilverNeedle
 {
     using System;
-    using ShortLegStudio.RPG.Actions.NamingThings;
-    using ShortLegStudio.RPG.Characters;
-    using ShortLegStudio.RPG.Mechanics.CharacterGenerator;
-    using ShortLegStudio.RPG.Mechanics.CharacterGenerator.Abilities;
+    using Actions.NamingThings;
+    using Characters;
+    using Mechanics.CharacterGenerator;
+    using Mechanics.CharacterGenerator.Abilities;
     using UnityEngine;
 
     /// <summary>
